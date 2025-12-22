@@ -1,0 +1,1 @@
+execute as @a[tag=test] at @s run summon zombie ^ ^ ^3
