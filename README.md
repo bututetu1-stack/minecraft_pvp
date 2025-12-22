@@ -1,4 +1,4 @@
-うんちうんちうんち
-おっぱい
-tin commit
-ちんちんinit
+# うんちうんちうんち
+# おっぱい
+# tin commit
+# ちんちんinit
