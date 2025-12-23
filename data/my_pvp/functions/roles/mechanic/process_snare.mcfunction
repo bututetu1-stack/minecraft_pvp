@@ -7,23 +7,22 @@ execute unless entity @s[nbt={OnGround:1b}] run return 0
 # --- 以下、着地後の処理 ---
 execute if entity @p[tag=mechanic,distance=..300] run tag @s add can_process
 
-# アイテム補充
-execute if entity @s[tag=can_process] run give @p[tag=mechanic,distance=..300,limit=1,sort=nearest] minecraft:compass{display:{Name:'{"text":"重力スネア","italic":false,"color":"light_purple"}',Lore:['{"text":"設置コスト: 6 SCRAP","color":"gray"}']}} 1
+# 【変更】LoreにCT表記を追加
+execute if entity @s[tag=can_process] run give @p[tag=mechanic,distance=..300,limit=1,sort=nearest] minecraft:compass{display:{Name:'{"text":"重力スネア","italic":false,"color":"light_purple"}',Lore:['{"text":"Cost: 6 SCRAP","color":"gray"}','{"text":"CoolDown: 15s","color":"aqua"}']}} 1
 
 # --- 状態チェック ---
 tag @a remove is_ready
 tag @a remove on_cd
 tag @a remove no_money
 
-# A. CT中 (cd_snare)
+# A. CT中
 execute if entity @s[tag=can_process] as @p[tag=mechanic,distance=..300,limit=1,sort=nearest,scores={cd_snare=1..}] run tag @s add on_cd
-# B. OK (コスト6以上)
+# B. OK
 execute if entity @s[tag=can_process] as @p[tag=mechanic,distance=..300,limit=1,sort=nearest,scores={cd_snare=0,scrap=6..}] run tag @s add is_ready
 # C. 金欠
 execute if entity @s[tag=can_process] as @p[tag=mechanic,distance=..300,limit=1,sort=nearest,scores={cd_snare=0,scrap=..5}] run tag @s add no_money
 
 # --- 分岐実行 ---
-# 成功（CT 300 = 15秒）
 execute if entity @s[tag=can_process] as @p[tag=is_ready] run scoreboard players set @s cd_snare 300
 execute if entity @s[tag=can_process] as @p[tag=is_ready] run function my_pvp:roles/mechanic/spawn_snare
 
