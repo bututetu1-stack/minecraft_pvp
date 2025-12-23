@@ -12,10 +12,11 @@ scoreboard objectives add player_id dummy "PlayerID"
 scoreboard objectives add temp dummy
 scoreboard objectives add scrap dummy "スクラップ"
 
+# 【追加】クールダウン管理用
+scoreboard objectives add cooldown dummy "射撃CT"
+scoreboard objectives add place_cd dummy "設置CT"
+
 # --- 4. 初期値セット ---
 scoreboard players set #GLOBAL match_state 0
-# IDを1から始めるための準備
 scoreboard players set #NEXT_ID player_id 1
-
-#計算用定数
 scoreboard players set #100 temp 100
