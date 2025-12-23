@@ -1,8 +1,21 @@
-# 1. スコアボードをサイドバーに表示（デバッグ用）
+# 1. スコアボード表示
 scoreboard objectives setdisplay sidebar points
 
-# 2. 試合状態が「1（試合中）」の時だけ、ゲームのメインロジックを実行
+# 2. 試合進行
 execute if score #GLOBAL match_state matches 1 run function my_pvp:main/game_logic
-
-# 試合中(match_state=1)なら、タイマーを毎チック 1 ずつ増やす（超重要！）
 execute if score #GLOBAL match_state matches 1 run scoreboard players add #GLOBAL match_timer 1
+
+# --- 【追加】ポイント計算（常時更新） ---
+# ポイント = (キル数 * 10) - (デス数 * 5)
+# ※ #POINT_KILL, #POINT_DEATH は setup で設定済み
+execute as @a run scoreboard players operation @s points = @s kills
+execute as @a run scoreboard players operation @s points *= #POINT_KILL temp
+execute as @a run scoreboard players operation @s points -= @s deaths
+execute as @a run scoreboard players operation @s points -= @s deaths
+execute as @a run scoreboard players operation @s points -= @s deaths
+execute as @a run scoreboard players operation @s points -= @s deaths
+execute as @a run scoreboard players operation @s points -= @s deaths
+
+# --- 【追加】試合終了判定 ---
+# 5分 (6000 tick) 経過したら game_end を実行
+execute if score #GLOBAL match_timer matches 6000.. run function my_pvp:system/game_end
