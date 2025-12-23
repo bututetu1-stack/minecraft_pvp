@@ -12,11 +12,18 @@ scoreboard objectives add player_id dummy "PlayerID"
 scoreboard objectives add temp dummy
 scoreboard objectives add scrap dummy "スクラップ"
 
-# 【変更】クールダウン管理用（種別ごとに分離）
+# クールダウン管理用
 scoreboard objectives add cooldown dummy "射撃CT"
 scoreboard objectives add cd_turret dummy "タレットCT"
 scoreboard objectives add cd_mine dummy "地雷CT"
 scoreboard objectives add cd_launcher dummy "ランチャーCT"
+# 【追加】スネアCT
+scoreboard objectives add cd_snare dummy "スネアCT"
+
+# ガジェット耐久値
+scoreboard objectives add gadget_hp dummy "耐久値"
+# 【追加】ガジェット稼働時間（スネアの寿命用）
+scoreboard objectives add gadget_life dummy "稼働時間"
 
 # --- 4. 初期値セット ---
 scoreboard players set #GLOBAL match_state 0
