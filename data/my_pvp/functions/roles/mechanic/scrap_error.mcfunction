@@ -1,6 +1,5 @@
-# アクションバーに赤い文字で警告を表示
-title @s actionbar {"text":"⚠ スクラップが足りません！","color":"red","bold":true}
+# チャット欄に赤文字で警告を送る（1回だけ表示される）
+tellraw @s [{"text":"[System] ","color":"gray"},{"text":"⚠ スクラップが足りません！","color":"red","bold":true}]
 
-# 鈍いエラー音 (音ブロックの「バス」を低ピッチで再生)
-# 最後の「0.6」がピストン音より低く、失敗した感じの重い音になります
+# 鈍い音を鳴らす
 playsound minecraft:block.note_block.bass ambient @s ~ ~ ~ 1 0.6
