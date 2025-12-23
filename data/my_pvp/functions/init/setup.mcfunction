@@ -18,4 +18,4 @@ scoreboard players set #GLOBAL match_state 0
 scoreboard players set #NEXT_ID player_id 1
 
 #計算用定数
-scoreboard players set #100 dummy 100
+scoreboard players set #100 temp 100
