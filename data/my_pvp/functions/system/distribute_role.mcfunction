@@ -1,11 +1,14 @@
-# 1. 山札からランダムに1枚選ぶ
-# 自分(@s)にタグ付けをするため、選んだカード(@e)を一時的にマークします
+# 1. 抽選
 tag @e[tag=role_card] remove selected_card
 tag @e[tag=role_card,limit=1,sort=random] add selected_card
 
-# 2. 選んだカードの種類を見て、自分に役職を割り当てる
+# 2. 割り当て
 execute if entity @e[tag=selected_card,tag=card_mechanic] run function my_pvp:roles/mechanic/assign
+# ソルジャー分岐を削除、忍者を追加
+execute if entity @e[tag=selected_card,tag=card_ninja] run function my_pvp:roles/ninja/assign
 
+# 3. 保険 (デフォルト: 忍者)
+execute unless entity @s[tag=role_assigned] run function my_pvp:roles/ninja/assign
 
-# 4. 引いたカードを破り捨てる（重複防止）
+# 4. 破棄
 kill @e[tag=selected_card]
