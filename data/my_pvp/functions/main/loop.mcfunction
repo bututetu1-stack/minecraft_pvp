@@ -10,11 +10,9 @@ execute if score #GLOBAL match_state matches 1 run scoreboard players add #GLOBA
 # ※ #POINT_KILL, #POINT_DEATH は setup で設定済み
 execute as @a run scoreboard players operation @s points = @s kills
 execute as @a run scoreboard players operation @s points *= #POINT_KILL temp
-execute as @a run scoreboard players operation @s points -= @s deaths
-execute as @a run scoreboard players operation @s points -= @s deaths
-execute as @a run scoreboard players operation @s points -= @s deaths
-execute as @a run scoreboard players operation @s points -= @s deaths
-execute as @a run scoreboard players operation @s points -= @s deaths
+execute as @a run scoreboard players operation @s temp = @s deaths
+execute as @a run scoreboard players operation @s temp *= #POINT_DEATH temp
+execute as @a run scoreboard players operation @s points -= @s temp
 
 # --- 【追加】試合終了判定 ---
 # 5分 (6000 tick) 経過したら game_end を実行
