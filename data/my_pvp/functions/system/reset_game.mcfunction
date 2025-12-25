@@ -19,6 +19,12 @@ clear @a
 # エフェクトクリア
 effect clear @a
 
+# 役職タグリセット
+tag @a remove role_assigned
+tag @a remove mechanic
+tag @a remove ninja
+tag @a remove target_candidate
+
 # 【修正】攻撃力を標準(1.0)に戻す
 # attributeコマンドは複数対象にとれないため、execute as @a run ... の形にします
 execute as @a run attribute @s minecraft:generic.attack_damage base set 1
