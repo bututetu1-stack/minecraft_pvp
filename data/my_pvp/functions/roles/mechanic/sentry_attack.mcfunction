@@ -1,39 +1,34 @@
-# 1. ターゲット選定
+# 1. CTチェック
+execute if score @s cooldown matches 1.. run scoreboard players remove @s cooldown 1
+execute if score @s cooldown matches 1.. run return 0
+
+# 2. ターゲット選定
+scoreboard players operation #TEMP player_id = @s player_id
 tag @a remove sentry_target
-# 範囲10マス以内のプレイヤーを候補にする
-execute at @s as @a[distance=..10] run tag @s add sentry_scan_candidate
 
-# 設置者(自分)はターゲットから除外
-execute at @s as @a[tag=sentry_scan_candidate] if score @s player_id = @e[tag=sentry,distance=..0.1,limit=1] player_id run tag @s remove sentry_scan_candidate
+execute as @a[distance=..15] unless score @s player_id = #TEMP player_id run tag @s add sentry_target_candidate
+tag @a[tag=sentry_target_candidate,sort=nearest,limit=1] add sentry_target
+tag @a remove sentry_target_candidate
 
-# 残った候補の中で、一番近い1人をターゲットにする
-execute at @s as @p[tag=sentry_scan_candidate] run tag @s add sentry_target
+# ターゲット不在なら終了
+execute unless entity @a[tag=sentry_target] run return 0
 
+# 3. 発射処理
+# タレットを敵の方に向ける
+execute at @s run tp @s ~ ~ ~ facing entity @p[tag=sentry_target] eyes
 
-# 2. 攻撃実行（ターゲットがいる場合のみ）
+# 発射音
+playsound minecraft:entity.arrow.shoot master @a ~ ~ ~ 1 1.5
 
-# --- 演出 ---
-# 【修正】faceコマンドではなく、tpコマンドのfacing機能を使って向きを変えます
-execute if entity @p[tag=sentry_target] run tp @s ~ ~ ~ facing entity @p[tag=sentry_target] eyes
+# --- 【変更】弾丸(矢)の生成 ---
+# 1. 矢を召喚 (NoGravity:1b で重力無視、pickup:0b で拾えない)
+summon arrow ~ ~1.5 ~ {Tags:["turret_shot"],NoGravity:1b,pickup:0b,damage:0.0d,life:0}
 
-execute if entity @p[tag=sentry_target] run playsound minecraft:entity.iron_golem.damage master @a ~ ~ ~ 1 2.0
-execute if entity @p[tag=sentry_target] run particle minecraft:crit ~ ~1.5 ~ 0.2 0.2 0.2 0.5 10
-execute if entity @p[tag=sentry_target] at @p[tag=sentry_target] run particle minecraft:explosion ~ ~1 ~ 0 0 0 0 1
+# 2. 矢の持ち主IDを設定 (キルログ用)
+execute as @e[tag=turret_shot,limit=1,sort=nearest] run scoreboard players operation @s player_id = #TEMP player_id
 
-# --- ダメージ処理（持ち主判定） ---
-# 今攻撃しようとしているタレットに目印タグをつける
-tag @s add current_shooter
+# 3. 矢の向きをタレットと同じにする
+data modify entity @e[tag=turret_shot,limit=1,sort=nearest] Rotation set from entity @s Rotation
 
-# 「IDが一致するプレイヤー(@s)」として実行し、ターゲットにダメージを与える
-execute if entity @p[tag=sentry_target] as @a if score @s player_id = @e[tag=current_shooter,limit=1] player_id run damage @p[tag=sentry_target] 4 minecraft:arrow by @s
-
-# 目印タグを消す
-tag @s remove current_shooter
-
-# --- クールダウン設定 (15tick = 0.75秒) ---
-execute if entity @p[tag=sentry_target] as @e[tag=sentry,distance=..0.1,limit=1] run scoreboard players set @s cooldown 15
-
-
-# 3. 後始末
-tag @a remove sentry_scan_candidate
-tag @a remove sentry_target
+# 4. CT再設定 (少し短くしてもいいかもしれません)
+scoreboard players set @s cooldown 20

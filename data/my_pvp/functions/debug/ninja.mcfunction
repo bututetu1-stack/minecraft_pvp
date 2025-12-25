@@ -1,4 +1,5 @@
-# 1. 既存の役職タグを消す (重複防止)
+# 1. 既存のアイテムと役職タグを消す
+clear @s
 tag @s remove mechanic
 tag @s remove ninja
 tag @s remove role_assigned

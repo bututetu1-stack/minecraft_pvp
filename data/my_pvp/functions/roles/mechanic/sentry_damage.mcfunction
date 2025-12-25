@@ -1,24 +1,25 @@
-# 1. 攻撃データをリセット（連続検知防止）
-data remove entity @s interaction
+# 左クリック情報の削除（連打防止）
+data remove entity @s attack
 
-# 2. HP減少処理
-# 近くの本体を探し、HPを1減らす
-execute at @s as @e[tag=sentry,distance=..0.5,limit=1] run scoreboard players remove @s gadget_hp 1
+# --- 1. 解体判定 (レンチを持っているか？) ---
+# 攻撃者(attacker)が「レンチ」を持っているかチェック
+execute on attacker if entity @s[nbt={SelectedItem:{tag:{is_wrench:1b}}}] run function my_pvp:roles/mechanic/recycle
+execute on attacker if entity @s[nbt={SelectedItem:{tag:{is_wrench:1b}}}] run return 0
 
-# 3. ヒット演出（金属音）
+# --- 2. 通常ダメージ処理 (レンチ以外) ---
+# ヒット音
 playsound minecraft:block.anvil.land ambient @a ~ ~ ~ 0.5 1.5
 particle minecraft:crit ~ ~1 ~ 0.3 0.5 0.3 0.1 5
 
-# 4. 破壊判定
-# HPが0以下になった本体を探して破壊フラグを立てる
-execute at @s as @e[tag=sentry,distance=..0.5,limit=1,scores={gadget_hp=..0}] run tag @s add broken_sentry
+# 本体(Visual)を探してHPを減らす
+scoreboard players operation #TEMP player_id = @s player_id
+execute at @s as @e[tag=gadget_visual,distance=..1] if score @s player_id = #TEMP player_id run scoreboard players remove @s gadget_hp 1
 
-# --- 破壊実行 ---
-# 爆発エフェクトと音
-execute at @e[tag=broken_sentry] run particle minecraft:explosion_emitter ~ ~1 ~ 0 0 0 0 1
-execute at @e[tag=broken_sentry] run playsound minecraft:entity.generic.explode ambient @a ~ ~ ~ 1 1
+# 破壊判定 (HP <= 0)
+execute as @e[tag=gadget_visual,scores={gadget_hp=..0}] run tag @s add broken
+execute at @e[tag=broken] run particle minecraft:explosion_emitter ~ ~1 ~ 0 0 0 0 1
+execute at @e[tag=broken] run playsound minecraft:entity.generic.explode ambient @a ~ ~ ~ 1 1
 
-# 本体を消去
-kill @e[tag=broken_sentry]
-# 近くの当たり判定(@s)も道連れに消去
-execute if entity @e[tag=broken_sentry] run kill @s
+# 片付け
+kill @e[tag=broken]
+execute if entity @e[tag=broken] run kill @s

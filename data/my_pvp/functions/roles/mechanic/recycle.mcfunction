@@ -1,12 +1,14 @@
-# スクラップを返却
-scoreboard players add @p scrap 2
+# 実行者: Hitbox (@s)
 
-# 演出：煙と解体音
-particle minecraft:cloud ~ ~0.5 ~ 0.3 0.3 0.3 0.05 10
-playsound minecraft:block.iron_door.close ambient @p ~ ~ ~ 0.5 1.5
+# 1. スクラップ返却 (殴った本人へ)
+execute if entity @a[tag=current_attacker] run scoreboard players add @a[tag=current_attacker,limit=1] scrap 2
 
-# ガジェット本体(@s)を消去
+# 2. 演出 (キンッ！)
+# 爆破エフェクトは削除し、高めの金属音だけにします
+playsound minecraft:block.anvil.land ambient @a ~ ~ ~ 0.8 2.0
+
+# 3. 本体(Visual)の削除
+execute at @s run kill @e[tag=gadget_visual,distance=..1,limit=1]
+
+# 4. 自分(Hitbox)の削除
 kill @s
-
-# 【追加】近くのHitboxも消去
-kill @e[tag=gadget_hitbox,distance=..0.5,limit=1]
