@@ -168,8 +168,8 @@ git switch -c "接頭辞/issue番号-内容-内容"
 
 例：
 ```bash
-git switch -c "feat/12-add-samurai-role"
-git switch -c "fix/34-mechanic-turret-bug"
+git switch -c "feat/issue12-add-samurai-role"
+git switch -c "fix/issue34-mechanic-turret-bug"
 ```
 
 #### 3️⃣ さぎょさぎょ
@@ -215,7 +215,7 @@ git push origin ブランチ名
 
 例：
 ```bash
-git push origin feat/12-add-samurai-role
+git push origin feat/issue12-add-samurai-role
 ```
 
 #### 8️⃣ Pull Request（プルリク）
