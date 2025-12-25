@@ -14,5 +14,4 @@ execute as @e[tag=gadget_hitbox] at @s run function my_pvp:roles/mechanic/gadget
 execute as @e[tag=shadow_hitbox] at @s run function my_pvp:roles/ninja/shadow_tick
 
 # --- 【追加】タレットの弾丸処理 ---
-# 飛んでいる弾丸(tag=turret_shot)があれば、動かす
 execute as @e[tag=turret_shot] at @s run function my_pvp:roles/mechanic/turret_shot_tick

@@ -13,8 +13,13 @@ playsound minecraft:entity.generic.explode ambient @a ~ ~ ~ 1 1
 tag @a remove owner_temp
 execute as @a if score @s player_id = #TEMP player_id run tag @s add owner_temp
 
-# ダメージ処理 (execute as を使って単一対象問題を回避)
-execute as @a[tag=stepping_enemy] run damage @s 8 minecraft:explosion by @p[tag=owner_temp]
-execute as @a[distance=2.01..5] run damage @s 4 minecraft:explosion by @p[tag=owner_temp]
+# ダメージ処理
+# パターンA: 所有者がいる
+execute if entity @a[tag=owner_temp] as @a[tag=stepping_enemy] run damage @s 8 minecraft:explosion by @p[tag=owner_temp]
+execute if entity @a[tag=owner_temp] as @a[distance=2.01..5] run damage @s 4 minecraft:explosion by @p[tag=owner_temp]
+
+# パターンB: 所有者がいない (追加)
+execute unless entity @a[tag=owner_temp] as @a[tag=stepping_enemy] run damage @s 8 minecraft:explosion
+execute unless entity @a[tag=owner_temp] as @a[distance=2.01..5] run damage @s 4 minecraft:explosion
 
 kill @s

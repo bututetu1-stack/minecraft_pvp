@@ -18,5 +18,7 @@ scoreboard players remove @s[scores={cd_snare=1..}] cd_snare 1
 # 4. レンチ操作検知 (Interactionエンティティ)
 # 右クリック(interaction)検知
 execute as @e[tag=gadget_hitbox,distance=..4] if data entity @s interaction run function my_pvp:roles/mechanic/wrench_click
+
 # 左クリック(attack)検知
-execute as @e[tag=sentry_hitbox,distance=..4] if data entity @s attack run function my_pvp:roles/mechanic/sentry_damage
+# 【修正】ここにあった sentry_damage の呼び出しを削除します
+# （gadget_tic -> hitbox_attack で一括処理されるため）
