@@ -38,3 +38,9 @@ scoreboard players set #100 temp 100
 
 scoreboard players set #POINT_KILL temp 10
 scoreboard players set #POINT_DEATH temp 5
+
+# --- 【新規】アイテムドロップ検知用 ---
+scoreboard objectives add drop_sword dropped:iron_sword "忍刀ドロップ"
+scoreboard objectives add drop_dye dropped:black_dye "影縫いドロップ"
+scoreboard objectives add drop_coal dropped:charcoal "煙玉ドロップ"
+scoreboard objectives add drop_rod dropped:carrot_on_a_stick "杖ドロップ"

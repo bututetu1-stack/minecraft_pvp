@@ -1,18 +1,32 @@
-# 1. 試合リセット処理
+# 1. 試合リセット処理（ここで全データが消去される）
 function my_pvp:system/reset_game
 
-# 2. プレイヤーID割り振り（ここを修正）
-# スコアが「1以上」ではない人（0の人、またはスコア自体がない人）全員にIDを配る
-execute as @a unless score @s player_id matches 1.. run function my_pvp:system/assign_new_id
+# --- 【重要】消えてしまった計算用定数を再設定 ---
+# reset * temp でこれらも消えてしまうため、ここで値を戻します
+scoreboard players set #POINT_KILL temp 10
+scoreboard players set #POINT_DEATH temp 5
+scoreboard players set #100 temp 100
 
-# 3. 役職配布プロセス
+# --- スコアの初期化 ---
+# 全員を 0 にセットして計算可能にする
+scoreboard players set @a kills 0
+scoreboard players set @a deaths 0
+scoreboard players set @a points 0
+
+# 2. IDの完全リセットと再割り振り
+# グローバルカウンターを 1 に戻す
+scoreboard players set #NEXT_ID player_id 1
+
+# 全プレイヤーの現在のIDを消去
+scoreboard players reset @a player_id
+
+# 全員に新しいIDを(1から順に)割り振る
+execute as @a run function my_pvp:system/assign_new_id
+
+
+# 3. 役職抽選プロセス
 function my_pvp:system/init_role_deck
 function my_pvp:system/distribute_loop
 
-# 4. 試合開始フラグON
-scoreboard players set #GLOBAL match_state 1
-scoreboard players set #GLOBAL match_timer 0
-
-# 5. アナウンス
-title @a title {"text":"GAME START!","color":"red","bold":true}
-playsound minecraft:entity.ender_dragon.growl master @a ~ ~ ~ 1 1
+# 4. 4秒後(80tick)に、試合開始の合図を出す
+schedule function my_pvp:system/start_sequence 4s replace

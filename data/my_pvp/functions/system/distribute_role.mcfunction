@@ -9,8 +9,5 @@ execute if entity @e[tag=selected_card,tag=card_mechanic] run function my_pvp:ro
 # 忍者のカードだった場合
 execute if entity @e[tag=selected_card,tag=card_ninja] run function my_pvp:roles/ninja/assign
 
-# 3. 予備：もし何らかの理由で選ばれなかった場合、忍者を割り当てる
-execute unless entity @s[tag=role_assigned] run function my_pvp:roles/ninja/assign
-
-# 4. 使用済みカードの破棄
+# 3. 使用済みカードの破棄
 kill @e[tag=selected_card]

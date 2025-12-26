@@ -17,7 +17,7 @@ tag @s remove can_process
 execute if entity @p[tag=current_caster,distance=..300] run tag @s add can_process
 
 # 【追加】アイテムを即座に補充 (常に手元に残るようにする)
-execute if entity @s[tag=can_process] as @p[tag=current_caster] run give @s minecraft:piston{is_gadget:1b,gadget_type:3b,display:{Name:'{"text":"インパクト・ランチャー","italic":false,"color":"gray"}',Lore:['{"text":"Cost: 3 SCRAP","color":"gray"}','{"text":"CoolDown: 5s","color":"aqua"}']}} 1
+execute if entity @s[tag=can_process] as @p[tag=current_caster] run give @s minecraft:piston{is_gadget:1b,gadget_type:3b,display:{Name:'{"text":"インパクト・ランチャー","italic":false,"color":"gray"}',Lore:['{"text":"Cost: 3 SCRAP","color":"gray"}','{"text":"CT: 5s","color":"aqua"}']}} 1
 
 # --- 5. 状態チェックとタグ付け ---
 tag @a remove is_ready

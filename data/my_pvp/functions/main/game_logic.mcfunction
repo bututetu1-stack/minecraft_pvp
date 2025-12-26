@@ -1,9 +1,14 @@
 # --- 1. プレイヤーの処理 ---
-execute as @a[tag=mechanic] run function my_pvp:roles/mechanic/mechanic_main
-execute as @a[tag=ninja] run function my_pvp:roles/ninja/ninja_main
+# at @s を入れて、自身の位置を基準にする
+execute as @a[tag=mechanic] at @s run function my_pvp:roles/mechanic/mechanic_main
+execute as @a[tag=ninja] at @s run function my_pvp:roles/ninja/ninja_main
 
-# --- 2. アイテム検知 ---
+# --- 2. アイテム処理（常時監視） ---
+# 機械工: 古いアイテムスキャン
 execute as @e[type=item] at @s run function my_pvp:roles/mechanic/scan_items
+
+# 【追加】忍者: アイテムスキャン (機械工と方式を統一)
+# handle_drops, projectile_check は廃止し、こちらに統合します
 execute as @e[type=item] at @s run function my_pvp:roles/ninja/scan_items
 
 # --- 3. ガジェットの処理 ---
@@ -13,5 +18,5 @@ execute as @e[tag=gadget_hitbox] at @s run function my_pvp:roles/mechanic/gadget
 # --- 4. 忍者の身代わり処理 ---
 execute as @e[tag=shadow_hitbox] at @s run function my_pvp:roles/ninja/shadow_tick
 
-# --- 【追加】タレットの弾丸処理 ---
+# --- 5. タレットの弾丸処理 ---
 execute as @e[tag=turret_shot] at @s run function my_pvp:roles/mechanic/turret_shot_tick

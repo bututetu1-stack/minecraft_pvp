@@ -1,13 +1,19 @@
-# 1. CT設定 (アイテム配布は use_mark で完了しているため不要)
-scoreboard players set @s cd_ninja_mark 60
+# 実行者(@s) = 落ちている黒染料アイテム
 
-# 2. 身代わり設置ロジックの起動
-# 呼び出し元(アイテムがあった場所)にマーカーを立てて実行
-tag @e[type=item,nbt={Item:{id:"minecraft:black_dye"}},sort=nearest,limit=1] add temp_mark_origin
-execute at @e[tag=temp_mark_origin] run summon marker ~ ~ ~ {Tags:["temp_shadow_loc"]}
+# 1. 設置場所の決定
+# アイテムの座標にマーカーを出す
+summon marker ~ ~ ~ {Tags:["temp_shadow_loc"]}
 
-execute at @e[tag=temp_shadow_loc,limit=1] run function my_pvp:roles/ninja/place_shadow_logic
+# 2. 所有者を特定 (向きの同期のため)
+# アイテムに記録されたIDを持つ忍者を一時的に特定する
+scoreboard players operation #TEMP player_id = @s player_id
+tag @a remove current_caster
+execute as @a[tag=ninja] if score @s player_id = #TEMP player_id run tag @s add current_caster
 
-# 掃除
+# 3. 設置ロジックの呼び出し
+# マーカーの位置で実行
+execute at @e[tag=temp_shadow_loc,limit=1] as @p[tag=current_caster] run function my_pvp:roles/ninja/place_shadow_logic
+
+# 4. アイテム消去 & 掃除
 kill @e[tag=temp_shadow_loc]
-tag @e remove temp_mark_origin
+# kill @s は削除（親関数 process_mark で消すため）

@@ -1,19 +1,20 @@
-# 1. タグ付け (これがないと何も始まりません)
+# 1. タグ付け
 tag @s add mechanic
 tag @s add role_assigned
 
-# 2. アナウンス
-# 表示時間を設定 (フェードイン0.5秒, 表示3.5秒, フェードアウト1秒)
-title @s times 10 70 20
-title @s title {"text":"YOU ARE MECHANIC","color":"gold","bold":true}
-title @s subtitle {"text":"ガジェットを駆使して戦場を支配せよ","color":"yellow"}
+# 2. チャットで通知
+tellraw @s [{"text":"[System] ","color":"gray"},{"text":"あなたは ","color":"white"},{"text":"『機械工』","color":"gold","bold":true},{"text":" です！","color":"white"}]
 
-# 3. 基礎攻撃力を0にする
-# 万が一エラーが出ても進行するように、アイテム配布の前に置きます
+# 3. 攻撃能力の無効化
+# 基礎攻撃力を0にする
 attribute @s minecraft:generic.attack_damage base set 0
 
+# 弱体化Lv255を付与して、ダメージを完全に0にする
+effect give @s minecraft:weakness infinite 255 true
+
 # 4. アイテム配布
-function my_pvp:system/give_mechanic_items
+# 【削除】試合開始時に配るため、ここでは実行しません
+# function my_pvp:system/give_mechanic_items
 
 # 5. 効果音
 playsound minecraft:block.anvil.use master @s ~ ~ ~ 1 1

@@ -1,19 +1,26 @@
-# 全員のスコアをリセット
-scoreboard players reset @a kills
-scoreboard players reset @a deaths
-scoreboard players reset @a points
-scoreboard players reset @a scrap
-# クールダウン系リセット
-scoreboard players reset @a cd_turret
-scoreboard players reset @a cd_mine
-scoreboard players reset @a cd_launcher
-scoreboard players reset @a cd_snare
-# 忍者用CTリセット
-scoreboard players reset @a cd_ninja_mark
-scoreboard players reset @a cd_ninja_swap
-scoreboard players reset @a cd_ninja_smoke
+# --- 全員のスコアを完全リセット ---
+# @a (オンラインのみ) ではなく * (全データ) を指定することで、
+# サーバーにいないプレイヤーの記録も消します
+scoreboard players reset * kills
+scoreboard players reset * deaths
+scoreboard players reset * points
+scoreboard players reset * scrap
 
-# インベントリクリア
+# クールダウン系リセット
+scoreboard players reset * cd_turret
+scoreboard players reset * cd_mine
+scoreboard players reset * cd_launcher
+scoreboard players reset * cd_snare
+# 忍者用CTリセット
+scoreboard players reset * cd_ninja_mark
+scoreboard players reset * cd_ninja_swap
+scoreboard players reset * cd_ninja_smoke
+
+# システム用IDなどもリセット
+scoreboard players reset * player_id
+scoreboard players reset * temp
+
+# インベントリクリア (@a: オンラインのみ)
 clear @a
 
 # エフェクトクリア
@@ -25,12 +32,25 @@ tag @a remove mechanic
 tag @a remove ninja
 tag @a remove target_candidate
 
+# --- 計算用の一時タグを全消去 ---
+tag @a remove owner_temp
+tag @a remove stepping_enemy
+tag @a remove sentry_target
+tag @a remove potential_target
+tag @a remove shot_hit
+tag @a remove launcher_target
+tag @a remove current_caster
+tag @a remove current_attacker
+tag @a remove item_recipient
+
+tag @a remove is_ready
+tag @a remove on_cd
+tag @a remove no_money
+
 # 攻撃力を標準(1.0)に戻す
 execute as @a run attribute @s minecraft:generic.attack_damage base set 1
 
-# --- 【重要】ドロップ防止処理 ---
-# killする前に、ガジェットや身代わりの装備・アイテム情報を空っぽにします。
-# これにより、破壊時にアイテムがばら撒かれるのを防ぎます。
+# --- ドロップ防止処理 ---
 execute as @e[tag=gadget_visual] run data merge entity @s {HandItems:[{},{}],ArmorItems:[{},{},{},{}]}
 execute as @e[tag=ninja_shadow] run data merge entity @s {HandItems:[{},{}],ArmorItems:[{},{},{},{}]}
 execute as @e[tag=launcher] run data merge entity @s {ArmorItems:[{},{},{},{}]}
@@ -42,9 +62,7 @@ kill @e[tag=role_card]
 kill @e[tag=ninja_shadow]
 kill @e[tag=shadow_hitbox]
 
-# --- 【修正】残留アイテムの完全消去 ---
-# 指定して消すのではなく、この時点で落ちている全てのアイテムを消去します。
-# 試合開始前なので、誤って必要なアイテムを消す心配はありません。
+# 残留アイテムの完全消去
 kill @e[type=item]
 
 # タイマーリセット

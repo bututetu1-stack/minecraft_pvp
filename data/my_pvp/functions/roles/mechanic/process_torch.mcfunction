@@ -11,7 +11,7 @@ execute as @a[tag=mechanic] if score @s player_id = #TEMP player_id run tag @s a
 execute if entity @p[tag=current_caster,distance=..300] run tag @s add can_process
 
 # 【追加】アイテムを即座に補充 (常に手元に残るようにする)
-execute if entity @s[tag=can_process] as @p[tag=current_caster] run give @s minecraft:redstone_torch{is_gadget:1b,gadget_type:1b,display:{Name:'{"text":"マイクロタレット","italic":false,"color":"gold"}',Lore:['{"text":"Cost: 5 SCRAP","color":"gray"}','{"text":"CoolDown: 5s","color":"aqua"}']}} 1
+execute if entity @s[tag=can_process] as @p[tag=current_caster] run give @s minecraft:redstone_torch{is_gadget:1b,gadget_type:1b,display:{Name:'{"text":"マイクロタレット","italic":false,"color":"gold"}',Lore:['{"text":"Cost: 5 SCRAP","color":"gray"}','{"text":"CT: 5s","color":"aqua"}']}} 1
 
 # --- 4. 状態チェックとタグ付け ---
 tag @a remove is_ready
