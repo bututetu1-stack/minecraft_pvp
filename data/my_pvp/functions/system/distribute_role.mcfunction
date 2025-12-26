@@ -1,14 +1,13 @@
-# 1. 抽選
-tag @e[tag=role_card] remove selected_card
+# 1. 山札からランダムに1枚カードを選ぶ
+tag @e[tag=selected_card] remove selected_card
 tag @e[tag=role_card,limit=1,sort=random] add selected_card
 
-# 2. 割り当て
+# 2. 選ばれたカード(@e[tag=selected_card])に対応する役職を割り当てる
+# 機械工のカードだった場合
 execute if entity @e[tag=selected_card,tag=card_mechanic] run function my_pvp:roles/mechanic/assign
-# ソルジャー分岐を削除、忍者を追加
+
+# 忍者のカードだった場合
 execute if entity @e[tag=selected_card,tag=card_ninja] run function my_pvp:roles/ninja/assign
 
-# 3. 保険 (デフォルト: 忍者)
-execute unless entity @s[tag=role_assigned] run function my_pvp:roles/ninja/assign
-
-# 4. 破棄
+# 3. 使用済みカードの破棄
 kill @e[tag=selected_card]

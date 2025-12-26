@@ -1,39 +1,46 @@
-# 1. ターゲット選定
+# 1. CTチェック
+execute if score @s cooldown matches 1.. run scoreboard players remove @s cooldown 1
+execute if score @s cooldown matches 1.. run return 0
+
+# 2. ターゲット選定 (対プレイヤー)
+# 念のため開始時に全解除
 tag @a remove sentry_target
-# 範囲10マス以内のプレイヤーを候補にする
-execute at @s as @a[distance=..10] run tag @s add sentry_scan_candidate
+tag @a remove potential_target
 
-# 設置者(自分)はターゲットから除外
-execute at @s as @a[tag=sentry_scan_candidate] if score @s player_id = @e[tag=sentry,distance=..0.1,limit=1] player_id run tag @s remove sentry_scan_candidate
+# 自身のIDを取得
+scoreboard players operation #TEMP player_id = @s player_id
 
-# 残った候補の中で、一番近い1人をターゲットにする
-execute at @s as @p[tag=sentry_scan_candidate] run tag @s add sentry_target
+# 範囲内のプレイヤー(スペクテイター除く)を候補にする
+tag @a[distance=..15,gamemode=!spectator] add potential_target
 
+# 所有者(自分と同じIDを持つプレイヤー)を候補から除外
+execute as @a[tag=potential_target] if score @s player_id = #TEMP player_id run tag @s remove potential_target
 
-# 2. 攻撃実行（ターゲットがいる場合のみ）
+# 最寄りの候補を1人選択
+tag @a[tag=potential_target,sort=nearest,limit=1] add sentry_target
 
-# --- 演出 ---
-# 【修正】faceコマンドではなく、tpコマンドのfacing機能を使って向きを変えます
-execute if entity @p[tag=sentry_target] run tp @s ~ ~ ~ facing entity @p[tag=sentry_target] eyes
+# ターゲットがいなければ終了
+execute unless entity @a[tag=sentry_target] run return 0
 
-execute if entity @p[tag=sentry_target] run playsound minecraft:entity.iron_golem.damage master @a ~ ~ ~ 1 2.0
-execute if entity @p[tag=sentry_target] run particle minecraft:crit ~ ~1.5 ~ 0.2 0.2 0.2 0.5 10
-execute if entity @p[tag=sentry_target] at @p[tag=sentry_target] run particle minecraft:explosion ~ ~1 ~ 0 0 0 0 1
+# 3. 発射処理
+# タレット本体を敵に向ける
+execute at @s run tp @s ~ ~ ~ facing entity @a[tag=sentry_target,limit=1] eyes
 
-# --- ダメージ処理（持ち主判定） ---
-# 今攻撃しようとしているタレットに目印タグをつける
-tag @s add current_shooter
+# 効果音
+playsound minecraft:entity.arrow.shoot master @a ~ ~ ~ 1 1.5
 
-# 「IDが一致するプレイヤー(@s)」として実行し、ターゲットにダメージを与える
-execute if entity @p[tag=sentry_target] as @a if score @s player_id = @e[tag=current_shooter,limit=1] player_id run damage @p[tag=sentry_target] 4 minecraft:arrow by @s
+# --- 弾丸の生成 (透明マーカー) ---
+execute at @s run summon marker ^ ^1.5 ^1.2 {Tags:["turret_shot"]}
 
-# 目印タグを消す
-tag @s remove current_shooter
+# 弾丸をターゲットに向ける
+execute as @e[tag=turret_shot,limit=1,sort=nearest] at @s run tp @s ~ ~ ~ facing entity @a[tag=sentry_target,limit=1] eyes
 
-# --- クールダウン設定 (15tick = 0.75秒) ---
-execute if entity @p[tag=sentry_target] as @e[tag=sentry,distance=..0.1,limit=1] run scoreboard players set @s cooldown 15
+# IDのコピー (ダメージ判定用)
+execute as @e[tag=turret_shot,limit=1,sort=nearest] run scoreboard players operation @s player_id = #TEMP player_id
 
-
-# 3. 後始末
-tag @a remove sentry_scan_candidate
+# 4. 後始末
 tag @a remove sentry_target
+tag @a remove potential_target
+
+# CT再設定
+scoreboard players set @s cooldown 20
