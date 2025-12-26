@@ -11,7 +11,9 @@ execute as @a[tag=mechanic] run title @s subtitle {"text":"ガジェットを駆
 execute as @a[tag=ninja] run title @s subtitle {"text":"神速の移動と変わり身の術","color":"gray"}
 
 # 音とログ
-playsound minecraft:entity.ender_dragon.growl master @a ~ ~ ~ 1 1
+# 【修正】実行位置がスポーン地点になるのを防ぐため、各プレイヤーの位置(at @s)で再生させる
+execute as @a at @s run playsound minecraft:entity.ender_dragon.growl master @s ~ ~ ~ 1 1
+
 tellraw @a [{"text":"[System] ","color":"gray"},{"text":"試合開始！","color":"green"}]
 
 # --- 3. アイテム配布 (ここで一斉に武装) ---
