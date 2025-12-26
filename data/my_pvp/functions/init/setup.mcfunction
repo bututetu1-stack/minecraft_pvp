@@ -17,7 +17,7 @@ scoreboard objectives add cd_mine dummy "地雷CT"
 scoreboard objectives add cd_launcher dummy "ランチャーCT"
 scoreboard objectives add cd_snare dummy "スネアCT"
 
-# 【追加】忍者用クールダウン
+# 忍者用クールダウン
 scoreboard objectives add cd_ninja_mark dummy "影縫いCT"
 scoreboard objectives add cd_ninja_swap dummy "変わり身CT"
 scoreboard objectives add cd_ninja_smoke dummy "煙玉CT"
@@ -26,7 +26,7 @@ scoreboard objectives add cd_ninja_smoke dummy "煙玉CT"
 scoreboard objectives add gadget_hp dummy "耐久値"
 scoreboard objectives add gadget_life dummy "稼働時間"
 
-# 【追加】忍者用システムスコア
+# 忍者用システムスコア
 # 右クリック検知 & 設置スロット管理
 scoreboard objectives add click_skill minecraft.used:minecraft.carrot_on_a_stick "スキル使用"
 scoreboard objectives add slot_cycle dummy "設置スロット"
@@ -39,8 +39,18 @@ scoreboard players set #100 temp 100
 scoreboard players set #POINT_KILL temp 10
 scoreboard players set #POINT_DEATH temp 5
 
-# --- 【新規】アイテムドロップ検知用 ---
+# --- アイテムドロップ検知用 ---
 scoreboard objectives add drop_sword dropped:iron_sword "忍刀ドロップ"
 scoreboard objectives add drop_dye dropped:black_dye "影縫いドロップ"
 scoreboard objectives add drop_coal dropped:charcoal "煙玉ドロップ"
 scoreboard objectives add drop_rod dropped:carrot_on_a_stick "杖ドロップ"
+
+# --- 【追加】ワールド初期設定 ---
+# 落下ダメージ無効
+gamerule fallDamage false
+
+# 難易度ピースフル (敵モブが湧かなくなる)
+difficulty peaceful
+
+# HP自然回復の停止 (空腹ゲージが満タンでも回復しない)
+gamerule naturalRegeneration false
