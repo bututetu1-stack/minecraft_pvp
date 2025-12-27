@@ -9,6 +9,7 @@ scoreboard objectives add match_state dummy "試合状態"
 scoreboard objectives add player_id dummy "PlayerID"
 scoreboard objectives add temp dummy
 scoreboard objectives add scrap dummy "スクラップ"
+scoreboard objectives add regen_timer dummy "回復タイマー"
 
 # --- クールダウン ---
 #機械工用クールダウン
@@ -25,6 +26,12 @@ scoreboard objectives add cd_ninja_smoke dummy "煙玉CT"
 
 #スカウト用クールダウン
 scoreboard objectives add cd_wire dummy "ワイヤーCT"
+
+# タンク用クールダウン
+scoreboard objectives add cd_tank_crash dummy "クラッシュCT"
+
+# タンク用スキル検知 (歪んだキノコ付きの棒)
+scoreboard objectives add click_tank minecraft.used:minecraft.warped_fungus_on_a_stick "タンクスキル"
 
 # ガジェット耐久・寿命
 scoreboard objectives add gadget_hp dummy "耐久値"

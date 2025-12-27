@@ -9,10 +9,11 @@ execute if entity @e[tag=selected_card,tag=card_mechanic] run function my_pvp:ro
 # 忍者のカードだった場合
 execute if entity @e[tag=selected_card,tag=card_ninja] run function my_pvp:roles/ninja/assign
 
-# ▼▼▼ 追加 ▼▼▼
 # スカウトのカードだった場合
 execute if entity @e[tag=selected_card,tag=card_scout] run function my_pvp:roles/scout/assign
-# ▲▲▲ 追加ここまで ▲▲▲
+
+# タンクのカードだった場合
+execute if entity @e[tag=selected_card,tag=card_tank] run function my_pvp:roles/tank/assign
 
 # 3. 使用済みカードの破棄
 kill @e[tag=selected_card]
