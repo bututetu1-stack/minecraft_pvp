@@ -7,5 +7,10 @@ tag @s remove role_assigned
 # 2. 忍者に任命する
 function my_pvp:roles/ninja/assign
 
+# ▼▼▼ 追加 ▼▼▼
+# デバッグ用：即座にアイテムを配布
+function my_pvp:system/give_ninja_items
+# ▲▲▲ 追加ここまで ▲▲▲
+
 # 3. テスト用アナウンス
 tellraw @s [{"text":"[Debug] ","color":"gray"},{"text":"忍者に変更しました","color":"dark_purple"}]

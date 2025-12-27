@@ -38,6 +38,10 @@ kill @e[type=item]
 clear @a
 effect clear @a
 
+# 体力と満腹度を全回復
+effect give @a minecraft:instant_health 1 100 true
+effect give @a minecraft:saturation 1 255 true
+
 # 全員に対して個別に実行することでエラーを回避
 execute as @a run attribute @s minecraft:generic.attack_damage base set 1
 
