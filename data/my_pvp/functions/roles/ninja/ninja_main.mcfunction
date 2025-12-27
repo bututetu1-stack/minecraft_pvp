@@ -1,5 +1,6 @@
 # 1. パッシブ: 移動速度上昇
 effect give @s minecraft:speed 1 1 true
+function my_pvp:roles/ninja/wall_run
 
 # 2. UI表示
 title @s actionbar [{"text":"NINJA STATUS","color":"dark_purple"}]
