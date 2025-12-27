@@ -11,6 +11,7 @@ scoreboard objectives add temp dummy
 scoreboard objectives add scrap dummy "スクラップ"
 
 # --- クールダウン ---
+#機械工用クールダウン
 scoreboard objectives add cooldown dummy "射撃CT"
 scoreboard objectives add cd_turret dummy "タレットCT"
 scoreboard objectives add cd_mine dummy "地雷CT"
@@ -22,6 +23,9 @@ scoreboard objectives add cd_ninja_mark dummy "影縫いCT"
 scoreboard objectives add cd_ninja_swap dummy "変わり身CT"
 scoreboard objectives add cd_ninja_smoke dummy "煙玉CT"
 
+#スカウト用クールダウン
+scoreboard objectives add cd_wire dummy "ワイヤーCT"
+
 # ガジェット耐久・寿命
 scoreboard objectives add gadget_hp dummy "耐久値"
 scoreboard objectives add gadget_life dummy "稼働時間"
@@ -30,6 +34,10 @@ scoreboard objectives add gadget_life dummy "稼働時間"
 # 右クリック検知 & 設置スロット管理
 scoreboard objectives add click_skill minecraft.used:minecraft.carrot_on_a_stick "スキル使用"
 scoreboard objectives add slot_cycle dummy "設置スロット"
+
+#スカウトシステムスコア
+# サウンド間隔制御用
+scoreboard objectives add sound_ticker dummy
 
 # --- 初期値セット ---
 scoreboard players set #GLOBAL match_state 0
@@ -48,6 +56,7 @@ scoreboard objectives add drop_rod dropped:carrot_on_a_stick "杖ドロップ"
 # --- 【追加】ワールド初期設定 ---
 # 落下ダメージ無効
 gamerule fallDamage false
+gamerule drowningDamage false
 
 # 難易度ピースフル (敵モブが湧かなくなる)
 difficulty peaceful

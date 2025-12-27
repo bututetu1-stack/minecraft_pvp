@@ -11,8 +11,8 @@ execute as @e[type=item,nbt={Item:{id:"minecraft:black_dye"}}] at @s run functio
 # 煙玉 (木炭)
 execute as @e[type=item,nbt={Item:{id:"minecraft:charcoal"}}] at @s run function my_pvp:roles/ninja/process_smoke
 
-# 忍刀 (即時回収)
-execute as @e[type=item,nbt={Item:{id:"minecraft:iron_sword"}}] at @s run function my_pvp:roles/ninja/process_sword
+# 忍刀
+execute as @e[type=item,nbt={Item:{tag:{ninja_sword:1b}}}] at @s run function my_pvp:roles/ninja/process_sword
 
 # 変わり身の杖 (即時回収)
 execute as @e[type=item,nbt={Item:{id:"minecraft:carrot_on_a_stick"}}] at @s run function my_pvp:roles/ninja/process_rod

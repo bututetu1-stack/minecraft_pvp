@@ -34,6 +34,7 @@ effect give @a minecraft:saturation 1 255 true
 tag @a remove role_assigned
 tag @a remove mechanic
 tag @a remove ninja
+tag @a remove scout
 tag @a remove target_candidate
 
 # --- 計算用の一時タグを全消去 ---
