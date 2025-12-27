@@ -26,10 +26,15 @@ clear @a
 # エフェクトクリア
 effect clear @a
 
+# 試合開始の瞬間にHPと満腹度をMAXにする
+effect give @a minecraft:instant_health 1 100 true
+effect give @a minecraft:saturation 1 255 true
+
 # 役職タグリセット
 tag @a remove role_assigned
 tag @a remove mechanic
 tag @a remove ninja
+tag @a remove scout
 tag @a remove target_candidate
 
 # --- 計算用の一時タグを全消去 ---

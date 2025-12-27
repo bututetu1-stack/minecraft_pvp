@@ -2,6 +2,7 @@
 clear @s
 tag @s remove mechanic
 tag @s remove ninja
+tag @s remove scout
 tag @s remove role_assigned
 
 # 2. 忍者に任命する
