@@ -1,0 +1,11 @@
+clear @s
+tag @s remove mechanic
+tag @s remove ninja
+tag @s remove scout
+tag @s remove tank
+tag @s remove role_assigned
+execute unless score @s player_id matches 1.. run function my_pvp:system/assign_new_id
+
+function my_pvp:roles/tank/assign
+function my_pvp:system/give_tank_items
+tellraw @s [{"text":"[Debug] ","color":"gray"},{"text":"タンクに変更しました","color":"dark_green"}]

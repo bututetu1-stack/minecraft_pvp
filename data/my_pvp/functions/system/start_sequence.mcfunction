@@ -9,10 +9,9 @@ title @a title {"text":"GAME START!","color":"red","bold":true}
 # 役職ごとのサブタイトル
 execute as @a[tag=mechanic] run title @s subtitle {"text":"ガジェットを駆使して戦場を支配せよ","color":"yellow"}
 execute as @a[tag=ninja] run title @s subtitle {"text":"神速の移動と変わり身の術","color":"gray"}
-
-# ▼▼▼ 追加: スカウトのサブタイトル ▼▼▼
 execute as @a[tag=scout] run title @s subtitle {"text":"ワイヤーを操り、戦場を縦横無尽に駆け巡れ","color":"aqua"}
-# ▲▲▲ 追加ここまで ▲▲▲
+execute as @a[tag=tank] run title @s subtitle {"text":"歩く要塞となり、戦場を蹂躙せよ","color":"dark_green"}
+
 
 # 音とログ
 # 【修正】実行位置がスポーン地点になるのを防ぐため、各プレイヤーの位置(at @s)で再生させる
@@ -23,7 +22,5 @@ tellraw @a [{"text":"[System] ","color":"gray"},{"text":"試合開始！","color
 # --- 3. アイテム配布 (ここで一斉に武装) ---
 execute as @a[tag=mechanic] run function my_pvp:system/give_mechanic_items
 execute as @a[tag=ninja] run function my_pvp:system/give_ninja_items
-
-# ▼▼▼ 追加: スカウトのアイテム配布 ▼▼▼
 execute as @a[tag=scout] run function my_pvp:system/give_scout_items
-# ▲▲▲ 追加ここまで ▲▲▲
+execute as @a[tag=tank] run function my_pvp:system/give_tank_items

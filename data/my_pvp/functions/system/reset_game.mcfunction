@@ -15,6 +15,10 @@ scoreboard players reset * cd_snare
 scoreboard players reset * cd_ninja_mark
 scoreboard players reset * cd_ninja_swap
 scoreboard players reset * cd_ninja_smoke
+# タンク用リセット
+scoreboard players reset * cd_tank_crash
+execute as @a run attribute @s minecraft:generic.max_health base set 20
+execute as @a run attribute @s minecraft:generic.knockback_resistance base set 0
 
 # システム用IDなどもリセット
 scoreboard players reset * player_id
@@ -35,6 +39,7 @@ tag @a remove role_assigned
 tag @a remove mechanic
 tag @a remove ninja
 tag @a remove scout
+tag @a remove tank
 tag @a remove target_candidate
 
 # --- 計算用の一時タグを全消去 ---

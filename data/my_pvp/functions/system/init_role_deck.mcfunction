@@ -6,3 +6,6 @@ summon marker ~ ~ ~ {Tags:["role_card","card_ninja"]}
 
 # スカウトのくじ
 summon marker ~ ~ ~ {Tags:["role_card","card_scout"]}
+
+# タンクのくじ
+summon marker ~ ~ ~ {Tags:["role_card","card_tank"]}
