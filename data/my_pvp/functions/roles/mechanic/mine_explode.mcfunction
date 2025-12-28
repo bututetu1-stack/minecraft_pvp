@@ -35,13 +35,5 @@ execute as @a[tag=mine_victim] run damage @s 8 minecraft:explosion by @p[tag=own
 # 距離判定で除外したいが、簡易的に victim かつ stepping_enemy でない人に適用
 execute as @a[tag=mine_victim,tag=!stepping_enemy] run damage @s 4 minecraft:explosion by @p[tag=owner_temp,limit=1]
 
-
-# 【修正】手動ポイント加算を無効化
-# by指定により標準機能でカウントされるため、重複を防ぐためにコメントアウトします。
-# もしポイントが入らない場合は、ここを戻してください。
-# execute as @a[tag=mine_victim,tag=!dead_processing] store result score #TARGET_HP temp run data get entity @s Health 100
-# execute as @a[tag=mine_victim,tag=!dead_processing] if score #TARGET_HP temp matches ..0 as @p[tag=owner_temp,limit=1] run scoreboard players add @s kills 1
-# execute as @a[tag=mine_victim] if score #TARGET_HP temp matches ..0 run tag @s add dead_processing
-
 # 6. 本体消去
 kill @s

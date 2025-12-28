@@ -1,5 +1,5 @@
-# スクラップを5消費
-scoreboard players remove @s scrap 5
+# スクラップを4消費 (5 -> 4)
+scoreboard players remove @s scrap 4
 
 # 本体召喚（透明）
 summon armor_stand ~ ~ ~ {Tags:["gadget","mine"],Health:5f,Small:1b,Invisible:1b,Marker:1b,ArmorItems:[{},{},{},{}]}

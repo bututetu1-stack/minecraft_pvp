@@ -6,6 +6,13 @@ scoreboard players operation @s temp = #GLOBAL match_timer
 scoreboard players operation @s temp %= #100 temp
 execute if score @s temp matches 0 if score #GLOBAL match_timer matches 1.. run scoreboard players add @s scrap 1
 
+# --- 【追加】キル時スクラップ獲得 (+30) ---
+# バーサーカー同様、killsスコアの変動を検知して報酬を与えます
+execute unless score @s last_kills = @s kills run scoreboard players add @s scrap 30
+execute unless score @s last_kills = @s kills run playsound minecraft:entity.experience_orb.pickup master @s ~ ~ ~ 1 2
+# 検知用スコアを更新
+execute unless score @s last_kills = @s kills run scoreboard players operation @s last_kills = @s kills
+
 # スクラップ上限(100)
 execute if score @s scrap matches 101.. run scoreboard players set @s scrap 100
 

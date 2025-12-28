@@ -8,9 +8,11 @@ execute if entity @p[tag=current_caster,distance=..300] run tag @s add can_proce
 tag @a remove is_ready
 tag @a remove on_cd
 tag @a remove no_money
+
+# 【修正】コスト判定 8 -> 7
 execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_turret=1..}] run tag @s add on_cd
-execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_turret=0,scrap=8..}] run tag @s add is_ready
-execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_turret=0,scrap=..7}] run tag @s add no_money
+execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_turret=0,scrap=7..}] run tag @s add is_ready
+execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_turret=0,scrap=..6}] run tag @s add no_money
 
 # --- 5. 実行処理 ---
 # 成功時
@@ -21,9 +23,9 @@ execute if entity @s[tag=can_process] as @p[tag=is_ready] run function my_pvp:ro
 execute if entity @s[tag=can_process] as @p[tag=on_cd] run function my_pvp:roles/mechanic/cd_error
 execute if entity @s[tag=can_process] as @p[tag=no_money] run function my_pvp:roles/mechanic/scrap_error
 
-# 【修正】Slot 0 に強制返却
-execute if entity @s[tag=can_process] as @p[tag=on_cd] run item replace entity @s container.0 with minecraft:redstone_torch{is_gadget:1b,gadget_type:1b,display:{Name:'{"text":"マイクロタレット","italic":false,"color":"gold"}',Lore:['{"text":"Cost: 8 SCRAP","color":"gray"}','{"text":"CT: 5s","color":"aqua"}']}} 1
-execute if entity @s[tag=can_process] as @p[tag=no_money] run item replace entity @s container.0 with minecraft:redstone_torch{is_gadget:1b,gadget_type:1b,display:{Name:'{"text":"マイクロタレット","italic":false,"color":"gold"}',Lore:['{"text":"Cost: 8 SCRAP","color":"gray"}','{"text":"CT: 5s","color":"aqua"}']}} 1
+# 【修正】Slot 0 に強制返却 (Cost表示 8 -> 7)
+execute if entity @s[tag=can_process] as @p[tag=on_cd] run item replace entity @s container.0 with minecraft:redstone_torch{is_gadget:1b,gadget_type:1b,display:{Name:'{"text":"マイクロタレット","italic":false,"color":"gold"}',Lore:['{"text":"Cost: 7 SCRAP","color":"gray"}','{"text":"CT: 5s","color":"aqua"}']}} 1
+execute if entity @s[tag=can_process] as @p[tag=no_money] run item replace entity @s container.0 with minecraft:redstone_torch{is_gadget:1b,gadget_type:1b,display:{Name:'{"text":"マイクロタレット","italic":false,"color":"gold"}',Lore:['{"text":"Cost: 7 SCRAP","color":"gray"}','{"text":"CT: 5s","color":"aqua"}']}} 1
 
 # アイテム消去
 execute if entity @s[tag=can_process] run kill @s

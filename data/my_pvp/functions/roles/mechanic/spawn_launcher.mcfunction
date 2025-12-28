@@ -1,5 +1,5 @@
-# スクラップを6消費
-scoreboard players remove @s scrap 6
+# スクラップを5消費 (6 -> 5)
+scoreboard players remove @s scrap 5
 
 # CT設定
 scoreboard players set @s cd_launcher 100
