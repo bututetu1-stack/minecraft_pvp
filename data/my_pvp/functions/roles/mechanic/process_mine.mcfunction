@@ -7,9 +7,6 @@ execute unless entity @s[nbt={OnGround:1b}] run return 0
 # --- 以下、着地後の処理 ---
 execute if entity @p[tag=mechanic,distance=..300] run tag @s add can_process
 
-# 【変更】LoreにCT表記を追加
-execute if entity @s[tag=can_process] run give @p[tag=mechanic,distance=..300,limit=1,sort=nearest] minecraft:iron_trapdoor{display:{Name:'{"text":"地雷","italic":false,"color":"gray"}',Lore:['{"text":"Cost: 2 SCRAP","color":"gray"}','{"text":"CT: 3s","color":"aqua"}']}} 1
-
 # --- 状態チェックと実行 ---
 tag @a remove is_ready
 tag @a remove on_cd

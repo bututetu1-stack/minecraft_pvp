@@ -1,5 +1,5 @@
 # --- 1. 攻撃者の完全特定 (UUID照合) ---
-# 【修正】attack[0] ではなく attack.player[...] が正しい記述です
+# attack.player[...] からUUIDを取得
 execute store result score #TARGET_UUID_0 temp run data get entity @s attack.player[0]
 execute store result score #TARGET_UUID_1 temp run data get entity @s attack.player[1]
 execute store result score #TARGET_UUID_2 temp run data get entity @s attack.player[2]
@@ -10,7 +10,6 @@ data remove entity @s attack
 
 # 全プレイヤーを検索し、上記IDと一致する人にタグ(current_attacker)をつける
 tag @a remove current_attacker
-# 【重要】check_uuid 関数が存在しないとエラーになるので、必ず作成してください
 execute as @a run function my_pvp:roles/mechanic/check_uuid
 
 
@@ -36,6 +35,14 @@ execute as @e[tag=gadget_visual,scores={gadget_hp=..0}] run tag @s add broken
 execute at @e[tag=broken] run particle minecraft:explosion_emitter ~ ~1 ~ 0 0 0 0 1
 execute at @e[tag=broken] run playsound minecraft:entity.generic.explode ambient @a ~ ~ ~ 1 1
 
-# 片付け
+# --- 修正: 削除順序の変更 ---
+# 【重要】brokenが存在する場合のみID取得と削除を行うように変更
+# これがないと、壊れていないのに直前のID(#TEMP)を使って自分を消してしまいます
+execute if entity @e[tag=broken] run scoreboard players operation #TEMP player_id = @e[tag=broken,limit=1] player_id
+execute if entity @e[tag=broken] as @e[tag=gadget_hitbox] if score @s player_id = #TEMP player_id run kill @s
+
+# その後にVisualを消す
 kill @e[tag=broken]
-execute if entity @e[tag=broken] run kill @s
+
+# 念の為の自己消去 (Hitbox視点: Visualが見つからなければ消える)
+execute unless entity @e[tag=gadget_visual,distance=..2,limit=1] run kill @s

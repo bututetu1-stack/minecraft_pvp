@@ -9,10 +9,11 @@ execute as @e[tag=wire_anchor,limit=1,sort=nearest] run scoreboard players opera
 execute as @a[tag=scout] if score @s player_id = #TEMP player_id run tag @s add is_grappling
 
 # 4. 音と演出
-# 着弾音
+# 着弾音 (これは全員に聞こえてOK)
 playsound minecraft:item.crossbow.hit master @a ~ ~ ~ 1 2
-# 【追加】ワイヤー移動音 (1回だけ再生)
-playsound minecraft:item.elytra.flying master @a ~ ~ ~ 1 2
+
+# 【修正】ワイヤー移動音 (自分のみ @s に聞こえるように変更)
+playsound minecraft:item.elytra.flying master @s ~ ~ ~ 1 2
 
 particle minecraft:crit ~ ~ ~ 0.5 0.5 0.5 0.1 20
 

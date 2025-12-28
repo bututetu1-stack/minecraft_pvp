@@ -6,7 +6,9 @@ title @a title {"text":"GAME SET!","color":"red","bold":true}
 title @a subtitle {"text":"お疲れ様でした！","color":"yellow"}
 
 # 3. 効果音
-playsound minecraft:ui.toast.challenge_complete master @a ~ ~ ~ 1 1
+# 【修正】実行場所を各プレイヤーの位置(at @s)に変更
+# これにより、原点から離れていても自分の場所で音が鳴るため確実に聞こえます
+execute as @a at @s run playsound minecraft:ui.toast.challenge_complete master @s ~ ~ ~ 1 1
 
 # 4. 勝者発表（チャット欄）
 # スコアが残っている状態で実行
@@ -44,6 +46,3 @@ effect give @a minecraft:saturation 1 255 true
 
 # 全員に対して個別に実行することでエラーを回避
 execute as @a run attribute @s minecraft:generic.attack_damage base set 1
-
-# これで「結果が表示されたまま、平和なロビー状態」になります。
-# 次回 game_start 時に reset_game が呼ばれ、幽霊データも含めて全て綺麗に消えます。

@@ -7,9 +7,6 @@ execute unless entity @s[nbt={OnGround:1b}] run return 0
 # --- 以下、着地後の処理 ---
 execute if entity @p[tag=mechanic,distance=..300] run tag @s add can_process
 
-# 【変更】LoreにCT表記を追加
-execute if entity @s[tag=can_process] run give @p[tag=mechanic,distance=..300,limit=1,sort=nearest] minecraft:compass{display:{Name:'{"text":"重力スネア","italic":false,"color":"light_purple"}',Lore:['{"text":"Cost: 6 SCRAP","color":"gray"}','{"text":"CT: 15s","color":"aqua"}']}} 1
-
 # --- 状態チェック ---
 tag @a remove is_ready
 tag @a remove on_cd

@@ -9,10 +9,12 @@ particle minecraft:witch ~ ~0.5 ~ 0.5 0.5 0.5 0 2
 tag @s add processing_snare
 scoreboard players operation #TEMP player_id = @s player_id
 
-# 【復旧】吸い寄せ対象を @a に戻しました
-execute as @a[distance=..8] unless score @s player_id = #TEMP player_id at @s facing entity @e[tag=processing_snare,limit=1] feet run tp @s ^ ^ ^0.25
+# 【修正】吸い寄せ力を 0.12 に設定
+# Slowness Lv3の歩行速度(約0.118)とほぼ拮抗させます。
+# これにより「歩けばその場で耐えられるが、外には進めない」強度になります。
+execute as @a[distance=..8] unless score @s player_id = #TEMP player_id at @s facing entity @e[tag=processing_snare,limit=1] feet run tp @s ^ ^ ^0.08
 
-# 鈍足付与
+# 鈍足付与 (Slowness 1 2 = Level 3 [-45%速度])
 execute as @a[distance=..8] unless score @s player_id = #TEMP player_id run effect give @s minecraft:slowness 1 2 true
 
 tag @s remove processing_snare
