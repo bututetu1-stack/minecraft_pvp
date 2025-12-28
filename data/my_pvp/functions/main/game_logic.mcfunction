@@ -5,7 +5,10 @@ execute as @a[tag=ninja] at @s run function my_pvp:roles/ninja/ninja_main
 execute as @a[tag=scout] at @s run function my_pvp:roles/scout/scout_main
 execute as @a[tag=tank] at @s run function my_pvp:roles/tank/tank_main
 
-# --- 【修正】空腹度回復 (Saturation) ---
+# バーサーカーのメイン処理
+execute as @a[tag=berserker] at @s run function my_pvp:roles/berserker/berserker_main
+
+# --- 空腹度回復 (Saturation) ---
 # Normal難易度になったため、常時満腹にして餓死を防ぐ
 effect give @a minecraft:saturation 1 20 true
 
@@ -23,6 +26,9 @@ execute as @e[type=item] at @s run function my_pvp:roles/mechanic/scan_items
 execute as @e[type=item] at @s run function my_pvp:roles/ninja/scan_items
 execute as @e[type=item] at @s run function my_pvp:roles/scout/scan_items
 execute as @e[type=item] at @s run function my_pvp:roles/tank/scan_items
+
+# バーサーカーのアイテムスキャン
+execute as @e[type=item] at @s run function my_pvp:roles/berserker/scan_items
 
 # --- 3. ガジェットの処理 ---
 execute as @e[tag=gadget] at @s run function my_pvp:roles/mechanic/gadget_tic
@@ -50,4 +56,11 @@ execute as @a run scoreboard players operation @s points -= @s temp
 # --- 試合終了判定 ---
 execute if score #GLOBAL match_state matches 1 if score #GLOBAL match_timer matches 6000.. run function my_pvp:system/game_end
 
-execute as @a[tag=tank] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/tank/assign
+# --- リスポーン時のステータス復旧 ---
+
+# タンク (HP 40)
+execute as @a[tag=tank] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/tank/apply_status
+
+# 【修正】バーサーカー (HP 30)
+# assign ではなく apply_status を呼ぶように変更
+execute as @a[tag=berserker] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:30.0d}]}] run function my_pvp:roles/berserker/apply_status

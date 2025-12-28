@@ -41,6 +41,9 @@ scoreboard objectives add cd_ber_jump dummy "ジャンプCT"
 scoreboard objectives add click_ber_raid minecraft.used:minecraft.iron_axe "レイド発動"
 scoreboard objectives add click_ber_jump minecraft.used:minecraft.feather "ジャンプ発動"
 
+# 【追加】キル検知用（回復処理に使用）
+scoreboard objectives add last_kills dummy "前回のキル数"
+
 # ガジェット耐久・寿命
 scoreboard objectives add gadget_hp dummy "耐久値"
 scoreboard objectives add gadget_life dummy "稼働時間"

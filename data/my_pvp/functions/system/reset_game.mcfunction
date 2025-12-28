@@ -17,6 +17,12 @@ scoreboard players reset * cd_ninja_swap
 scoreboard players reset * cd_ninja_smoke
 # タンク用リセット
 scoreboard players reset * cd_tank_crash
+
+# 【追加】バーサーカー用CTリセット
+scoreboard players reset * cd_ber_raid
+scoreboard players reset * cd_ber_jump
+scoreboard players reset * last_kills
+
 execute as @a run attribute @s minecraft:generic.max_health base set 20
 execute as @a run attribute @s minecraft:generic.knockback_resistance base set 0
 
@@ -40,6 +46,8 @@ tag @a remove mechanic
 tag @a remove ninja
 tag @a remove scout
 tag @a remove tank
+# 【追加】バーサーカーのタグ削除
+tag @a remove berserker
 tag @a remove target_candidate
 
 # --- 計算用の一時タグを全消去 ---

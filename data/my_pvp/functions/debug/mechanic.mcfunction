@@ -4,6 +4,7 @@ tag @s remove mechanic
 tag @s remove ninja
 tag @s remove scout
 tag @s remove tank
+tag @s remove berserker
 tag @s remove role_assigned
 
 # 2. 機械工に任命する
