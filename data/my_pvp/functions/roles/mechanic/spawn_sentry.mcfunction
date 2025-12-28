@@ -17,9 +17,9 @@ execute store result score #SENTRY_COUNT temp if entity @e[tag=my_sentry_temp]
 # 4. 5個以上あるなら、最も古い1つを削除
 execute if score #SENTRY_COUNT temp matches 5.. run tag @e[tag=my_sentry_temp,limit=1] add sentry_to_delete
 
-# 削除対象(Visual)と同じIDを持つHitboxを探して削除
-execute if entity @e[tag=sentry_to_delete] run scoreboard players operation #DEL_ID player_id = @e[tag=sentry_to_delete,limit=1] player_id
-execute if entity @e[tag=sentry_to_delete] as @e[tag=sentry_hitbox] if score @s player_id = #DEL_ID player_id run kill @s
+# 【修正】削除対象(Visual)と重なっているHitboxだけをピンポイントで削除
+# ID指定だと自分の全タレットのHitboxが消えてしまうため、場所(at)を指定して削除
+execute at @e[tag=sentry_to_delete] run kill @e[tag=sentry_hitbox,distance=..0.5,limit=1]
 
 # 演出
 execute at @e[tag=sentry_to_delete] run playsound minecraft:block.fire.extinguish ambient @a ~ ~ ~ 1 1
