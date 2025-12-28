@@ -1,7 +1,8 @@
-scoreboard players remove @s scrap 5
+# コスト消費 (8)
+scoreboard players remove @s scrap 8
 scoreboard players set @s cd_turret 100
 
-# --- 【追加】設置上限チェック (Max 5) ---
+# --- 設置上限チェック (Max 5) ---
 
 # 1. 自分のIDを確保
 scoreboard players operation #TEMP player_id = @s player_id
@@ -14,15 +15,13 @@ execute as @e[tag=sentry] if score @s player_id = #TEMP player_id run tag @s add
 execute store result score #SENTRY_COUNT temp if entity @e[tag=my_sentry_temp]
 
 # 4. 5個以上あるなら、最も古い1つを削除
-# limit=1 を指定することで、生成順が最も古いエンティティが選択されます
-# まず削除対象にタグを付ける
 execute if score #SENTRY_COUNT temp matches 5.. run tag @e[tag=my_sentry_temp,limit=1] add sentry_to_delete
 
 # 削除対象(Visual)と同じIDを持つHitboxを探して削除
 execute if entity @e[tag=sentry_to_delete] run scoreboard players operation #DEL_ID player_id = @e[tag=sentry_to_delete,limit=1] player_id
 execute if entity @e[tag=sentry_to_delete] as @e[tag=sentry_hitbox] if score @s player_id = #DEL_ID player_id run kill @s
 
-# 演出 (プシュッという音と煙)
+# 演出
 execute at @e[tag=sentry_to_delete] run playsound minecraft:block.fire.extinguish ambient @a ~ ~ ~ 1 1
 execute at @e[tag=sentry_to_delete] run particle minecraft:smoke ~ ~1 ~ 0.5 0.5 0.5 0.1 10
 
@@ -30,7 +29,7 @@ execute at @e[tag=sentry_to_delete] run particle minecraft:smoke ~ ~1 ~ 0.5 0.5 
 kill @e[tag=sentry_to_delete]
 
 
-# --- 以下、既存の召喚処理 ---
+# --- 以下、召喚処理 ---
 
 # 1. 本体（見た目）
 summon armor_stand ~ ~ ~ {Tags:["gadget","sentry","gadget_visual"],Invulnerable:1b,ShowArms:1b,HandItems:[{id:"minecraft:crossbow",Count:1b},{}],Pose:{RightArm:[350f,0f,0f]},CustomName:'{"text":"Micro Sentry","color":"gold"}',Attributes:[{Name:"generic.knockback_resistance",Base:1.0f}],DisabledSlots:4144959}

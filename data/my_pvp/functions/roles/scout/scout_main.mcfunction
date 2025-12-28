@@ -4,7 +4,7 @@
 execute if entity @s[tag=is_grappling] run title @s actionbar [{"text":">> GRAPPLING <<","color":"aqua","bold":true}]
 
 # 通常時 (Scout Status)
-execute unless entity @s[tag=is_grappling] run title @s actionbar [{"text":"Scout Status","color":"aqua"}]
+execute unless entity @s[tag=is_grappling] run title @s actionbar [{"text":"Maneuverer Status","color":"aqua"}]
 
 
 # 2. クールダウン消化

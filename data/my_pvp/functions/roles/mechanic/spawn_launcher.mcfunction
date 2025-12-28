@@ -1,11 +1,11 @@
-scoreboard players remove @s scrap 3
+# スクラップを6消費
+scoreboard players remove @s scrap 6
 
-# 【変更】即時起動に変更
-# 待機時間やtemp_waitタグを削除しました
+# CT設定
 scoreboard players set @s cd_launcher 100
 scoreboard players set @s gadget_life 20
 
-# 召喚（temp_waitタグなし）
+# 召喚
 summon armor_stand ~ ~-1 ~ {Tags:["gadget","launcher"],Invisible:1b,Marker:1b,ArmorItems:[{},{},{},{id:"minecraft:piston",Count:1b}]}
 
 # ID設定

@@ -16,8 +16,8 @@ execute unless entity @e[tag=target_shadow] run tellraw @s {"text":"⚠ その�
 execute unless entity @e[tag=target_shadow] run return 0
 
 # --- 3. 入れ替え実行 (位置＋向きの完全交換) ---
-# CT設定 (15秒)
-scoreboard players set @s cd_ninja_swap 300
+# CT設定 (10秒)
+scoreboard players set @s cd_ninja_swap 200
 
 # ゴミ掃除
 kill @e[tag=pos_temp]

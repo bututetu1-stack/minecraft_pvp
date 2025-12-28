@@ -1,9 +1,7 @@
-# スクラップを2消費
-scoreboard players remove @s scrap 2
+# スクラップを5消費
+scoreboard players remove @s scrap 5
 
-# 【変更点】
-# 1. ArmorItems の中身を空 {} に変更しました（トラップドアを削除）
-# 2. これで Invisible:1b と合わせて「完全な透明」になります
+# 本体召喚（透明）
 summon armor_stand ~ ~ ~ {Tags:["gadget","mine"],Health:5f,Small:1b,Invisible:1b,Marker:1b,ArmorItems:[{},{},{},{}]}
 
 # 設置したエンジニアのIDをコピー（キル判定用）
