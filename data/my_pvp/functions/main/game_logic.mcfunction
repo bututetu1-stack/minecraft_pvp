@@ -8,6 +8,9 @@ execute as @a[tag=tank] at @s run function my_pvp:roles/tank/tank_main
 # バーサーカーのメイン処理
 execute as @a[tag=berserker] at @s run function my_pvp:roles/berserker/berserker_main
 
+# 魔術師のメイン処理
+execute as @a[tag=magician] at @s run function my_pvp:roles/magician/magician_main
+
 # --- 空腹度回復 (Saturation) ---
 # Normal難易度になったため、常時満腹にして餓死を防ぐ
 effect give @a minecraft:saturation 1 20 true
@@ -30,6 +33,9 @@ execute as @e[type=item] at @s run function my_pvp:roles/tank/scan_items
 # バーサーカーのアイテムスキャン
 execute as @e[type=item] at @s run function my_pvp:roles/berserker/scan_items
 
+# 魔術師のアイテムスキャン
+execute as @e[type=item] at @s run function my_pvp:roles/magician/scan_items
+
 # --- 3. ガジェットの処理 ---
 execute as @e[tag=gadget] at @s run function my_pvp:roles/mechanic/gadget_tic
 execute as @e[tag=gadget_hitbox] at @s run function my_pvp:roles/mechanic/gadget_tic
@@ -40,7 +46,10 @@ execute as @e[tag=shadow_hitbox] at @s run function my_pvp:roles/ninja/shadow_ti
 # --- 5. タレットの弾丸処理 ---
 execute as @e[tag=turret_shot] at @s run function my_pvp:roles/mechanic/turret_shot_tick
 
-# --- 6. スコアボード表示 ---
+# --- 6. 魔術師の炎玉処理 ---
+execute as @e[type=small_fireball,tag=mag_fireball] at @s run function my_pvp:roles/magician/fireball_tick
+
+# --- 7. スコアボード表示 ---
 scoreboard objectives setdisplay sidebar points
 
 # 7. 試合進行

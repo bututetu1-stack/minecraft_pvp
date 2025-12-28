@@ -1,0 +1,13 @@
+# 1. 所有者ID刻印
+execute as @e[type=item,tag=!id_set] at @s if entity @p[tag=magician,distance=..6] run scoreboard players operation @s player_id = @p[tag=magician,limit=1,sort=nearest] player_id
+
+# ID付与成功時のみフラグを立てる
+execute as @e[type=item,tag=!id_set] if score @s player_id matches 1.. run tag @s add id_set
+
+# 2. アイテム処理
+
+# 魔術箒 (ドロップ -> 飛行トグル)
+execute as @e[type=item,tag=id_set,nbt={Item:{tag:{magician_broom:1b}}}] at @s run function my_pvp:roles/magician/process_broom_drop
+
+# 魔術本 (ドロップ -> 炎玉発射)
+execute as @e[type=item,tag=id_set,nbt={Item:{tag:{magician_book:1b}}}] at @s run function my_pvp:roles/magician/process_book_drop

@@ -23,6 +23,12 @@ scoreboard players reset * cd_ber_raid
 scoreboard players reset * cd_ber_jump
 scoreboard players reset * last_kills
 
+# 【追加】魔術師用リセット
+scoreboard players reset * mana
+scoreboard players reset * cd_mag_broom
+scoreboard players reset * cd_mag_book
+scoreboard players reset * mag_fly_timer
+
 execute as @a run attribute @s minecraft:generic.max_health base set 20
 execute as @a run attribute @s minecraft:generic.knockback_resistance base set 0
 
@@ -48,6 +54,9 @@ tag @a remove scout
 tag @a remove tank
 # 【追加】バーサーカーのタグ削除
 tag @a remove berserker
+# 【追加】魔術師のタグ削除
+tag @a remove magician
+tag @a remove mag_flying
 tag @a remove target_candidate
 
 # --- 計算用の一時タグを全消去 ---
@@ -79,6 +88,8 @@ kill @e[tag=gadget_hitbox]
 kill @e[tag=role_card]
 kill @e[tag=ninja_shadow]
 kill @e[tag=shadow_hitbox]
+# 魔術師の炎玉を消去
+kill @e[type=small_fireball,tag=mag_fireball]
 
 # 残留アイテムの完全消去
 kill @e[type=item]

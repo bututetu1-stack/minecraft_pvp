@@ -1,0 +1,33 @@
+# 1. UI表示
+title @s actionbar [{"text":"MANA: ","color":"light_purple"},{"score":{"name":"@s","objective":"mana"},"color":"white"}]
+
+# 2. マナ自動回復 (5秒ごとに5増加) - ただし飛行中は回復しない
+scoreboard players operation @s temp = #GLOBAL match_timer
+scoreboard players operation @s temp %= #100 temp
+execute if score @s temp matches 0 if score #GLOBAL match_timer matches 1.. unless entity @s[tag=mag_flying] run scoreboard players add @s mana 5
+
+# マナ上限(100)
+execute if score @s mana matches 101.. run scoreboard players set @s mana 100
+
+# 3. 飛行中のマナ消費 (1秒=20tickごとに5マナ消費)
+execute if entity @s[tag=mag_flying] run scoreboard players add @s mag_fly_timer 1
+execute if entity @s[tag=mag_flying] if score @s mag_fly_timer matches 20.. run scoreboard players remove @s mana 5
+execute if entity @s[tag=mag_flying] if score @s mag_fly_timer matches 20.. run scoreboard players set @s mag_fly_timer 0
+
+# 3.5. 飛行中の毎tick処理（上昇/下降制御）
+execute if entity @s[tag=mag_flying] run function my_pvp:roles/magician/fly_tick
+
+# 4. マナ切れで強制着陸
+execute if entity @s[tag=mag_flying] if score @s mana matches ..0 run function my_pvp:roles/magician/land
+
+# 5. クールダウン消化 & アイテム返却
+
+# 魔術箒 (Slot 0)
+execute as @s[scores={cd_mag_broom=1}] run item replace entity @s container.0 with minecraft:stick{magician_broom:1b,display:{Name:'{"text":"魔術箒","italic":false,"color":"light_purple","bold":true}',Lore:['{"text":"[Q]キー: 飛行開始/終了","color":"yellow"}','{"text":"飛行中: 通常=上昇 / Shift=下降","color":"white"}','{"text":"Cost: 5 MANA + 5/秒","color":"gray"}','{"text":"CT: 1s","color":"aqua"}']}} 1
+execute as @s[scores={cd_mag_broom=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 2
+scoreboard players remove @s[scores={cd_mag_broom=1..}] cd_mag_broom 1
+
+# 魔術本 (Slot 1)
+execute as @s[scores={cd_mag_book=1}] run item replace entity @s container.1 with minecraft:book{magician_book:1b,display:{Name:'{"text":"魔術本","italic":false,"color":"gold","bold":true}',Lore:['{"text":"[Q]キー: 炎玉発射","color":"yellow"}','{"text":"Cost: 5 MANA","color":"gray"}','{"text":"ダメージ: ハート1個分","color":"red"}','{"text":"CT: 1s","color":"aqua"}']}} 1
+execute as @s[scores={cd_mag_book=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 2
+scoreboard players remove @s[scores={cd_mag_book=1..}] cd_mag_book 1

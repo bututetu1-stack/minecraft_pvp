@@ -13,6 +13,9 @@ execute as @a[tag=tank] run title @s subtitle {"text":"歩く要塞となり、�
 # 【追加】バーサーカーのサブタイトル
 execute as @a[tag=berserker] run title @s subtitle {"text":"血を捧げ、敵を粉砕せよ","color":"red"}
 
+# 【追加】魔術師のサブタイトル
+execute as @a[tag=magician] run title @s subtitle {"text":"魔力を操り、空を舞え","color":"light_purple"}
+
 # 音とログ
 execute as @a at @s run playsound minecraft:entity.ender_dragon.growl master @s ~ ~ ~ 1 1
 tellraw @a [{"text":"[System] ","color":"gray"},{"text":"試合開始！","color":"green"}]
@@ -24,3 +27,6 @@ execute as @a[tag=scout] run function my_pvp:system/give_scout_items
 execute as @a[tag=tank] run function my_pvp:system/give_tank_items
 # 【追加】バーサーカーへの配布
 execute as @a[tag=berserker] run function my_pvp:system/give_berserker_items
+
+# 【追加】魔術師への配布
+execute as @a[tag=magician] run function my_pvp:system/give_magician_items

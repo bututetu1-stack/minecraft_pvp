@@ -5,6 +5,8 @@ tag @s remove ninja
 tag @s remove scout
 tag @s remove tank
 tag @s remove berserker
+tag @s remove magician
+tag @s remove mag_flying
 tag @s remove role_assigned
 execute unless score @s player_id matches 1.. run function my_pvp:system/assign_new_id
 

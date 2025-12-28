@@ -12,3 +12,6 @@ summon marker ~ ~ ~ {Tags:["role_card","card_tank"]}
 
 # 【追加】バーサーカーのくじ
 summon marker ~ ~ ~ {Tags:["role_card","card_berserker"]}
+
+# 【追加】魔術師のくじ
+summon marker ~ ~ ~ {Tags:["role_card","card_magician"]}
