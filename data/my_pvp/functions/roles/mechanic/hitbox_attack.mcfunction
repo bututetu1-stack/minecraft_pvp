@@ -35,11 +35,10 @@ execute as @e[tag=gadget_visual,scores={gadget_hp=..0}] run tag @s add broken
 execute at @e[tag=broken] run particle minecraft:explosion_emitter ~ ~1 ~ 0 0 0 0 1
 execute at @e[tag=broken] run playsound minecraft:entity.generic.explode ambient @a ~ ~ ~ 1 1
 
-# --- 修正: 削除順序の変更 ---
-# 【重要】brokenが存在する場合のみID取得と削除を行うように変更
-# これがないと、壊れていないのに直前のID(#TEMP)を使って自分を消してしまいます
-execute if entity @e[tag=broken] run scoreboard players operation #TEMP player_id = @e[tag=broken,limit=1] player_id
-execute if entity @e[tag=broken] as @e[tag=gadget_hitbox] if score @s player_id = #TEMP player_id run kill @s
+# --- 修正: 削除処理 ---
+# 【修正】ID連携だと自分の全ガジェットの判定が消えるため、場所(at)を指定してピンポイント削除
+# 以前のコード: execute if entity @e[tag=broken] as @e[tag=gadget_hitbox] if score @s player_id = #TEMP player_id run kill @s
+execute at @e[tag=broken] run kill @e[tag=gadget_hitbox,distance=..0.5]
 
 # その後にVisualを消す
 kill @e[tag=broken]
