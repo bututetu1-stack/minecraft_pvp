@@ -9,10 +9,8 @@ execute if entity @p[tag=scout,distance=..5,scores={cd_wire=1..}] run playsound 
 # 矢を消す (CT中なので撃たせない)
 execute if entity @p[tag=scout,distance=..5,scores={cd_wire=1..}] run kill @s
 
-# ▼▼▼ 重要: CT中ならここで確実に終了させる (return 0) ▼▼▼
-# これがないと下の行に進んでしまい、CTがリセットされてしまいます
+# CT中なら終了
 execute if entity @p[tag=scout,distance=..5,scores={cd_wire=1..}] run return 0
-# ▲▲▲ 修正ここまで ▲▲▲
 
 
 # --- 2. 発射成功時の処理 (ここに来るのはCTが0の時だけ) ---
@@ -20,6 +18,9 @@ execute if entity @p[tag=scout,distance=..5,scores={cd_wire=1..}] run return 0
 # ID付与
 tag @s add wire_arrow
 scoreboard players operation @s player_id = @p[tag=scout,distance=..5] player_id
+
+# 【追加】矢のダメージを0にする (これでプレイヤーに当たってもダメージ0)
+data merge entity @s {damage:0.0d}
 
 # CT設定 (5秒 = 100tick)
 execute as @p[tag=scout,distance=..5] run scoreboard players set @s cd_wire 100

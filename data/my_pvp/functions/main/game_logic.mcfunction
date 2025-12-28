@@ -5,9 +5,11 @@ execute as @a[tag=ninja] at @s run function my_pvp:roles/ninja/ninja_main
 execute as @a[tag=scout] at @s run function my_pvp:roles/scout/scout_main
 execute as @a[tag=tank] at @s run function my_pvp:roles/tank/tank_main
 
-# --- 【修正】ゆっくり自動回復 (Slow Regen) ---
-# ピースフル設定のため満腹度は減りません。チェックを廃止して軽量化しました。
+# --- 【修正】空腹度回復 (Saturation) ---
+# Normal難易度になったため、常時満腹にして餓死を防ぐ
+effect give @a minecraft:saturation 1 20 true
 
+# --- ゆっくり自動回復 (Slow Regen) ---
 # 1. カウントアップ（生存者のみ）
 execute as @a[gamemode=!spectator] run scoreboard players add @s regen_timer 1
 
@@ -31,3 +33,21 @@ execute as @e[tag=shadow_hitbox] at @s run function my_pvp:roles/ninja/shadow_ti
 
 # --- 5. タレットの弾丸処理 ---
 execute as @e[tag=turret_shot] at @s run function my_pvp:roles/mechanic/turret_shot_tick
+
+# --- 6. スコアボード表示 ---
+scoreboard objectives setdisplay sidebar points
+
+# 7. 試合進行
+execute if score #GLOBAL match_state matches 1 run scoreboard players add #GLOBAL match_timer 1
+
+# --- ポイント計算 ---
+execute as @a run scoreboard players operation @s points = @s kills
+execute as @a run scoreboard players operation @s points *= #POINT_KILL temp
+execute as @a run scoreboard players operation @s temp = @s deaths
+execute as @a run scoreboard players operation @s temp *= #POINT_DEATH temp
+execute as @a run scoreboard players operation @s points -= @s temp
+
+# --- 試合終了判定 ---
+execute if score #GLOBAL match_state matches 1 if score #GLOBAL match_timer matches 6000.. run function my_pvp:system/game_end
+
+execute as @a[tag=tank] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/tank/assign
