@@ -1,18 +1,28 @@
-# 1. 所有者ID刻印
-# 【修正】検知距離を 3 -> 6 に拡大 (移動投げ対策)
-execute as @e[type=item,tag=!id_set] at @s if entity @p[tag=berserker,distance=..6] run scoreboard players operation @s player_id = @p[tag=berserker,limit=1,sort=nearest] player_id
+# 1. 所有者ID刻印 (バーサーカー用アイテムのみ対象にする)
+tag @e[type=item,tag=!id_set] remove target_item
 
-# ID付与成功時のみフラグを立てる
-execute as @e[type=item,tag=!id_set] if score @s player_id matches 1.. run tag @s add id_set
+# 対象アイテムをマーク
+execute as @e[type=item,tag=!id_set,nbt={Item:{tag:{berserker_axe:1b}}}] run tag @s add target_item
+execute as @e[type=item,tag=!id_set,nbt={Item:{tag:{berserker_raid:1b}}}] run tag @s add target_item
+execute as @e[type=item,tag=!id_set,nbt={Item:{tag:{berserker_jump:1b}}}] run tag @s add target_item
 
-# 2. アイテム処理
-# 【修正】tag=id_set を条件に追加 (ID未付与のまま処理関数に入り、所有者不明で消えるのを防ぐ)
+# マークされたアイテムに対してのみ、近くのバーサーカーのIDを付与
+# 感知範囲は 15 のまま維持
+execute as @e[tag=target_item] at @s if entity @p[tag=berserker,distance=..15] run scoreboard players operation @s player_id = @p[tag=berserker,limit=1,sort=nearest] player_id
 
-# ブラッドアックス (誤って捨てた場合の即時回収)
+# ID設定完了タグ
+execute as @e[tag=target_item] if score @s player_id matches 1.. run tag @s add id_set
+
+# 後始末
+tag @e[tag=target_item] remove target_item
+
+
+# 2. アイテム処理 (ここは変更なし)
+# 斧 (投げ禁止 -> 即回収)
 execute as @e[type=item,tag=id_set,nbt={Item:{tag:{berserker_axe:1b}}}] at @s run function my_pvp:roles/berserker/process_axe
 
-# ブラッドクリスタル (赤染料 -> スキル発動)
+# ブラッドクリスタル (スキル発動)
 execute as @e[type=item,tag=id_set,nbt={Item:{tag:{berserker_raid:1b}}}] at @s run function my_pvp:roles/berserker/process_raid
 
-# リープフェザー (移動スキル)
+# リープフェザー (スキル発動)
 execute as @e[type=item,tag=id_set,nbt={Item:{tag:{berserker_jump:1b}}}] at @s run function my_pvp:roles/berserker/process_feather
