@@ -6,8 +6,8 @@ scoreboard players set #GLOBAL match_timer 0
 title @a title {"text":"GAME START!","color":"red","bold":true}
 
 # 役職ごとのサブタイトル
-execute as @a[tag=mechanic] run title @s subtitle {"text":"ガジェットを駆使して戦場を支配せよ","color":"yellow"}
-execute as @a[tag=ninja] run title @s subtitle {"text":"神速の移動と変わり身の術","color":"gray"}
+execute as @a[tag=mechanic] run title @s subtitle {"text":"ガジェットを駆使して戦場を支配せよ","color":"gold"}
+execute as @a[tag=ninja] run title @s subtitle {"text":"変幻自在の忍術で敵を翻弄せよ","color":"dark_purple"}
 execute as @a[tag=scout] run title @s subtitle {"text":"ワイヤーを操り、戦場を縦横無尽に駆け巡れ","color":"aqua"}
 execute as @a[tag=tank] run title @s subtitle {"text":"歩く要塞となり、戦場を蹂躙せよ","color":"dark_green"}
 # 【追加】バーサーカーのサブタイトル

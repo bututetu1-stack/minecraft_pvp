@@ -14,10 +14,10 @@ tag @a remove no_money
 
 # A. CT中
 execute if entity @s[tag=can_process] as @p[tag=mechanic,distance=..300,limit=1,sort=nearest,scores={cd_snare=1..}] run tag @s add on_cd
-# B. OK
-execute if entity @s[tag=can_process] as @p[tag=mechanic,distance=..300,limit=1,sort=nearest,scores={cd_snare=0,scrap=6..}] run tag @s add is_ready
-# C. 金欠
-execute if entity @s[tag=can_process] as @p[tag=mechanic,distance=..300,limit=1,sort=nearest,scores={cd_snare=0,scrap=..5}] run tag @s add no_money
+# B. OK (コスト9以上)
+execute if entity @s[tag=can_process] as @p[tag=mechanic,distance=..300,limit=1,sort=nearest,scores={cd_snare=0,scrap=9..}] run tag @s add is_ready
+# C. 金欠 (コスト8以下)
+execute if entity @s[tag=can_process] as @p[tag=mechanic,distance=..300,limit=1,sort=nearest,scores={cd_snare=0,scrap=..8}] run tag @s add no_money
 
 # --- 分岐実行 ---
 execute if entity @s[tag=can_process] as @p[tag=is_ready] run scoreboard players set @s cd_snare 300

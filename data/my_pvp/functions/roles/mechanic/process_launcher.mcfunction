@@ -23,10 +23,10 @@ tag @a remove no_money
 
 # A. CT中
 execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_launcher=1..}] run tag @s add on_cd
-# B. OK (コスト3以上)
-execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_launcher=0,scrap=3..}] run tag @s add is_ready
-# C. 金欠 (コスト2以下)
-execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_launcher=0,scrap=..2}] run tag @s add no_money
+# B. OK (コスト6以上)
+execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_launcher=0,scrap=6..}] run tag @s add is_ready
+# C. 金欠 (コスト5以下)
+execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_launcher=0,scrap=..5}] run tag @s add no_money
 
 
 # --- 6. 実行処理 ---
@@ -37,5 +37,5 @@ execute if entity @s[tag=can_process] as @p[tag=is_ready] run function my_pvp:ro
 execute if entity @s[tag=can_process] as @p[tag=on_cd] run function my_pvp:roles/mechanic/cd_error
 execute if entity @s[tag=can_process] as @p[tag=no_money] run function my_pvp:roles/mechanic/scrap_error
 
-# アイテム消去 (補充済みなので消してOK)
+# アイテム消去
 execute if entity @s[tag=can_process] run kill @s
