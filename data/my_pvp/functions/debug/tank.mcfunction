@@ -1,8 +1,10 @@
+# 1. 既存のアイテムと役職タグを消す
 clear @s
 tag @s remove mechanic
 tag @s remove ninja
 tag @s remove scout
 tag @s remove tank
+tag @s remove berserker
 tag @s remove role_assigned
 execute unless score @s player_id matches 1.. run function my_pvp:system/assign_new_id
 

@@ -11,6 +11,7 @@ execute as @a[tag=mechanic] run title @s subtitle {"text":"ガジェットを駆
 execute as @a[tag=ninja] run title @s subtitle {"text":"神速の移動と変わり身の術","color":"gray"}
 execute as @a[tag=scout] run title @s subtitle {"text":"ワイヤーを操り、戦場を縦横無尽に駆け巡れ","color":"aqua"}
 execute as @a[tag=tank] run title @s subtitle {"text":"歩く要塞となり、戦場を蹂躙せよ","color":"dark_green"}
+execute as @a[tag=berserker] run title @s subtitle {"text":"血を代償に力を得て、戦場を破壊せよ","color":"red"}
 
 
 # 音とログ
@@ -24,3 +25,4 @@ execute as @a[tag=mechanic] run function my_pvp:system/give_mechanic_items
 execute as @a[tag=ninja] run function my_pvp:system/give_ninja_items
 execute as @a[tag=scout] run function my_pvp:system/give_scout_items
 execute as @a[tag=tank] run function my_pvp:system/give_tank_items
+execute as @a[tag=berserker] run function my_pvp:system/give_berserker_items

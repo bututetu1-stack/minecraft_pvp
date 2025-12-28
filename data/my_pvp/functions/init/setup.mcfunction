@@ -33,6 +33,17 @@ scoreboard objectives add cd_tank_crash dummy "クラッシュCT"
 # タンク用スキル検知 (歪んだキノコ付きの棒)
 scoreboard objectives add click_tank minecraft.used:minecraft.warped_fungus_on_a_stick "タンクスキル"
 
+# バーサーカー用クールダウン
+scoreboard objectives add cd_ber_raid dummy "ブラッドレイドCT"
+scoreboard objectives add cd_ber_jump dummy "ジャンプCT"
+
+# バーサーカー用判定
+# 【変更】斧と羽根、さらに赤染料のドロップを計測
+scoreboard objectives add drop_axe dropped:iron_axe "斧ドロップ"
+scoreboard objectives add drop_feather dropped:feather "羽ドロップ"
+# 【追加】スキル発動用
+scoreboard objectives add drop_blood dropped:red_dye "レイド発動"
+
 # ガジェット耐久・寿命
 scoreboard objectives add gadget_hp dummy "耐久値"
 scoreboard objectives add gadget_life dummy "稼働時間"
@@ -60,13 +71,16 @@ scoreboard objectives add drop_dye dropped:black_dye "影縫いドロップ"
 scoreboard objectives add drop_coal dropped:charcoal "煙玉ドロップ"
 scoreboard objectives add drop_rod dropped:carrot_on_a_stick "杖ドロップ"
 
-# --- 【追加】ワールド初期設定 ---
+# --- 【修正】ワールド初期設定 ---
 # 落下ダメージ無効
 gamerule fallDamage false
 gamerule drowningDamage false
 
-# 難易度ピースフル (敵モブが湧かなくなる)
-difficulty peaceful
+# 【修正】難易度をNormalに変更（爆発ダメージを有効にするため）
+difficulty normal
+
+# 【追加】モブが湧かないように設定
+gamerule doMobSpawning false
 
 # HP自然回復の停止 (空腹ゲージが満タンでも回復しない)
 gamerule naturalRegeneration false

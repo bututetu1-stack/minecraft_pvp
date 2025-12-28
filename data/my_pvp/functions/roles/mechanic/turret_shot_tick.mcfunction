@@ -25,31 +25,28 @@ execute as @a[tag=shot_hit] if score @s player_id = #TEMP player_id run tag @s r
 execute unless entity @a[tag=shot_hit] run return 0
 
 # 5. ダメージ処理 & ポイント加算
-# 持ち主のタレットを特定 (ノックバック方向用)
-tag @e remove my_owner
-execute as @e[tag=sentry] if score @s player_id = #TEMP player_id run tag @s add my_owner
-
 # 持ち主のプレイヤーを特定 (ポイント加算用)
 tag @a remove current_owner
 execute as @a if score @s player_id = #TEMP player_id run tag @s add current_owner
 
-# 生存確認 (死体蹴りでポイントが入らないように、HPが0より大きい人のみ対象にする...が、
-# damageコマンドは死体には効かないので大丈夫なはず。念の為)
+# ダメージ実行 (byを使わず at @s で保護貫通)
+execute as @a[tag=shot_hit,limit=1] run damage @s 2 minecraft:generic at ~ ~ ~
 
-# ダメージ実行
-# タレットが存在する場合
-execute if entity @e[tag=my_owner] run damage @a[tag=shot_hit,limit=1] 2 minecraft:generic by @e[tag=my_owner,limit=1]
-# タレットが破壊されている場合
-execute unless entity @e[tag=my_owner] run damage @a[tag=shot_hit,limit=1] 2 minecraft:generic by @s
+# --- 【追加】無敵時間のリセット ---
+# ダメージを与えた直後に無敵時間を0にすることで、
+# 同時に他のタレットから攻撃されてもダメージが入るようにします
+execute as @a[tag=shot_hit,limit=1] run data merge entity @s {HurtTime:0s}
 
-# --- 【修正】キル判定とポイント付与 ---
-# ダメージ後のHPを確認 (scale 100倍して取得することで、HP0.5未満->0になるのを防ぐ)
-execute as @a[tag=shot_hit,limit=1] store result score #TARGET_HP temp run data get entity @s Health 100
+
+# --- キル判定とポイント付与 (二重加算防止) ---
+# ダメージ後のHPを確認 (dead_processingタグがない人のみ)
+execute as @a[tag=shot_hit,tag=!dead_processing] store result score #TARGET_HP temp run data get entity @s Health 100
 
 # HPが0以下なら、所有者のキル数を+1する
-execute if score #TARGET_HP temp matches ..0 as @p[tag=current_owner] run scoreboard players add @s kills 1
+execute as @a[tag=shot_hit,tag=!dead_processing] if score #TARGET_HP temp matches ..0 as @p[tag=current_owner] run scoreboard players add @s kills 1
 
-# ※キルログは「Sentryに倒された」になりますが、スコア(kills)は増えるためポイント計算は正常に行われます。
+# 加算済みタグを付与
+execute as @a[tag=shot_hit] if score #TARGET_HP temp matches ..0 run tag @s add dead_processing
 
 # 命中したら弾丸を消去
 kill @s

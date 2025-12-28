@@ -6,15 +6,11 @@ tag @s add role_assigned
 tellraw @s [{"text":"[System] ","color":"gray"},{"text":"あなたは ","color":"white"},{"text":"『機械工』","color":"gold","bold":true},{"text":" です！","color":"white"}]
 
 # 3. 攻撃能力の無効化
-# 基礎攻撃力を0にする
+# 基礎攻撃力を0にする (これだけで素手などの攻撃は無力化されます)
 attribute @s minecraft:generic.attack_damage base set 0
 
-# 弱体化Lv255を付与して、ダメージを完全に0にする
-effect give @s minecraft:weakness infinite 255 true
-
-# 4. アイテム配布
-# 【削除】試合開始時に配るため、ここでは実行しません
-# function my_pvp:system/give_mechanic_items
+# 【削除】Weaknessをかけると地雷等のダメージコマンドまで0になるため削除
+# effect give @s minecraft:weakness infinite 255 true
 
 # 5. 効果音
 playsound minecraft:block.anvil.use master @s ~ ~ ~ 1 1
