@@ -24,8 +24,10 @@ execute as @a[tag=current_attacker] if score @s player_id = #TEMP player_id run 
 particle minecraft:poof ~ ~1 ~ 0.3 0.3 0.3 0.1 20
 playsound minecraft:entity.generic.extinguish_fire ambient @a ~ ~ ~ 1 1
 
-# 4. 本体（見た目）を道連れにする
-execute at @s as @e[tag=shadow_visual,distance=..0.5,limit=1] if score @s player_id = #TEMP player_id run kill @s
+# 4. 本体（見た目）と番号表示を道連れにする
+# 修正: shadow_visualだけでなく、番号表示(TextDisplay)も消すために
+# 「ninja_shadowタグを持ち、かつinteraction(当たり判定)ではないもの」を全て削除します
+execute at @s as @e[tag=ninja_shadow,distance=..0.5,type=!interaction] if score @s player_id = #TEMP player_id run kill @s
 
 # 5. 自分（当たり判定）を消す
 kill @s
