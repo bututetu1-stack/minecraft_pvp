@@ -1,5 +1,5 @@
-# スクラップを9消費
-scoreboard players remove @s scrap 9
+# スクラップを8消費 (9 -> 8)
+scoreboard players remove @s scrap 8
 
 # 1. 中心点の召喚
 summon marker ~ ~ ~ {Tags:["gadget","snare"]}

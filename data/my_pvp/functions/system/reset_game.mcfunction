@@ -23,7 +23,8 @@ scoreboard players reset * cd_ber_raid
 scoreboard players reset * cd_ber_jump
 scoreboard players reset * last_kills
 
-execute as @a run attribute @s minecraft:generic.max_health base set 20
+# 【修正】全員の基礎HPを 20 -> 40 に変更
+execute as @a run attribute @s minecraft:generic.max_health base set 40
 execute as @a run attribute @s minecraft:generic.knockback_resistance base set 0
 
 # システム用IDなどもリセット
