@@ -22,6 +22,25 @@ effect give @s minecraft:slow_falling 1 0 true
 # 雲のパーティクル
 particle minecraft:cloud ~ ~0.5 ~ 0 0 0 0.05 1
 
+# --- 接触ダメージ処理 ---
+# 自分に一時的なタグを付与
+tag @s add scout_attacker_now
+
+# 周囲2m以内の敵を特定（自分自身を除外）
+tag @a remove scout_contact_victim
+execute as @a[distance=..2.0,gamemode=!spectator] unless score @s player_id = #TEMP player_id run tag @s add scout_contact_victim
+
+# 6ダメージ（ハート3個分）を与える
+# 【修正】攻撃元を @p[tag=scout_attacker_now] にすることで確実に自分を指定
+execute as @a[tag=scout_contact_victim] run damage @s 6 minecraft:player_attack by @p[tag=scout_attacker_now,limit=1]
+
+# ヒット演出
+execute if entity @a[tag=scout_contact_victim] run particle minecraft:crit ~ ~1 ~ 0.3 0.3 0.3 0.1 5
+execute if entity @a[tag=scout_contact_victim] run playsound minecraft:entity.player.attack.sweep master @a ~ ~ ~ 0.5 1.5
+
+# タグの掃除
+tag @s remove scout_attacker_now
+
 # 風切り音 (5tickに1回)
 scoreboard players add @s sound_ticker 1
 execute if score @s sound_ticker matches 5.. run playsound minecraft:item.elytra.flying master @s ~ ~ ~ 0.3 2.0
