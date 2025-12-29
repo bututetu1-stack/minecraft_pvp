@@ -10,5 +10,8 @@ summon marker ~ ~ ~ {Tags:["role_card","card_scout"]}
 # タンクのくじ
 summon marker ~ ~ ~ {Tags:["role_card","card_tank"]}
 
-# 【追加】バーサーカーのくじ
+# バーサーカーのくじ
 summon marker ~ ~ ~ {Tags:["role_card","card_berserker"]}
+
+# 【追加】ストーカーのくじ
+summon marker ~ ~ ~ {Tags:["role_card","card_stalker"]}

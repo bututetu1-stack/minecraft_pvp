@@ -1,0 +1,26 @@
+[
+  {
+    "function": "minecraft:copy_nbt",
+    "source": {
+      "type": "storage",
+      "source": "my_pvp:temp"
+    },
+    "ops": [
+      {
+        "source": "target_x",
+        "target": "LodestonePos.X",
+        "op": "replace"
+      },
+      {
+        "source": "target_y",
+        "target": "LodestonePos.Y",
+        "op": "replace"
+      },
+      {
+        "source": "target_z",
+        "target": "LodestonePos.Z",
+        "op": "replace"
+      }
+    ]
+  }
+]
