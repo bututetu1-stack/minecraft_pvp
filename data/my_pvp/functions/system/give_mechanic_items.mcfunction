@@ -12,10 +12,15 @@ item replace entity @s container.2 with minecraft:piston{is_gadget:1b,gadget_typ
 item replace entity @s container.3 with minecraft:compass{is_gadget:1b,gadget_type:4b,display:{Name:'{"text":"重力スネア","italic":false,"color":"light_purple"}',Lore:['{"text":"Cost: 8 SCRAP","color":"gray"}','{"text":"CT: 15s","color":"aqua"}']}} 1
 
 # --- エンジニアレンチ (Slot 4) ---
+# スロット4（ホットバー5番目）に固定配布
 item replace entity @s container.4 with minecraft:iron_axe{is_wrench:1b,Unbreakable:1b,AttributeModifiers:[{AttributeName:"generic.attack_damage",Amount:-100.0d,Operation:0,Slot:"mainhand",UUID:[I;1234,5678,9012,3456],Name:"no_damage"}],display:{Name:'{"text":"エンジニアレンチ","italic":false,"color":"white"}',Lore:['{"text":"右クリック: 修理 (Cost: 1)","color":"gray"}','{"text":"左クリック: 解体 (Return: 2)","color":"gray"}']}} 1
 
-# 初期スクラップ
-scoreboard players set @s scrap 30
+# 初期スクラップ (30 -> 50)
+scoreboard players set @s scrap 50
+
+# --- キル検知用スコアの初期化 ---
+# これがないと試合開始時に「キル数が増えた」と誤認され、さらに+30されてしまいます
+scoreboard players operation @s last_kills = @s kills
 
 # クールダウン初期化
 scoreboard players set @s cd_turret 0
