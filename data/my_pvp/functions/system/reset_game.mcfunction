@@ -27,7 +27,7 @@ scoreboard players reset * last_kills
 scoreboard players reset * mana
 scoreboard players reset * cd_mag_broom
 scoreboard players reset * cd_mag_book
-scoreboard players reset * mag_fly_timer
+scoreboard players reset * mag_fly_tick
 
 # 【修正】全員の基礎HPを 20 -> 40 に変更
 execute as @a run attribute @s minecraft:generic.max_health base set 40

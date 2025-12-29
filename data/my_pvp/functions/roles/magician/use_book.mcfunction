@@ -1,12 +1,10 @@
-# 魔術本の使用処理（炎玉発射）
+# 魔術本の使用処理（ラッパー: 重複実行防止）
 
-# クールダウン中チェック
-execute if score @s cd_mag_book matches 1.. run tellraw @s [{"text":"[Magician] ","color":"light_purple"},{"text":"クールダウン中...","color":"gray"}]
-execute if score @s cd_mag_book matches 1.. run playsound minecraft:block.note_block.bass master @s ~ ~ ~ 1 0.5
+# アクションロックが付いていれば処理をスキップ
 
-# マナチェック
-execute if score @s cd_mag_book matches 0 if score @s mana matches ..4 run tellraw @s [{"text":"[Magician] ","color":"light_purple"},{"text":"マナが足りません！","color":"red"}]
-execute if score @s cd_mag_book matches 0 if score @s mana matches ..4 run playsound minecraft:block.note_block.bass master @s ~ ~ ~ 1 0.5
+# ロックを取得して1tickでクリアする（多重起動防止）
+tag @s add mag_action_lock
+schedule function my_pvp:roles/magician/clear_action_lock 1t replace
 
-# 発射実行
-execute if score @s cd_mag_book matches 0 if score @s mana matches 5.. run function my_pvp:roles/magician/shoot_fireball
+# 実処理を別ファイルに移して呼び出す
+function my_pvp:roles/magician/use_book_inner

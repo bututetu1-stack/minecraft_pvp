@@ -7,7 +7,7 @@ scoreboard players remove @s mana 5
 tag @s add mag_flying
 
 # 3. 飛行タイマー初期化
-scoreboard players set @s mag_fly_timer 0
+scoreboard players set @s mag_fly_tick 0
 
 # 4. 初期上昇（離陸時は少し強めのLevitation）
 effect give @s minecraft:levitation 1 3 true
@@ -18,9 +18,9 @@ playsound minecraft:entity.ender_dragon.flap master @s ~ ~ ~ 1 1.5
 particle minecraft:end_rod ~ ~ ~ 0.5 0.5 0.5 0.1 20
 particle minecraft:witch ~ ~ ~ 1 0.5 1 0.05 30
 
-# 6. クールダウン設定 (1秒 = 20tick)
-scoreboard players set @s cd_mag_broom 20
+# 6. クールダウン設定 (CT: 0s に統一)
+scoreboard players set @s cd_mag_broom 0
 
 # 7. 通知
-tellraw @s [{"text":"[Magician] ","color":"light_purple"},{"text":"飛行開始！","color":"aqua"}]
-tellraw @s [{"text":"  ","color":"gray"},{"text":"[操作] ","color":"yellow"},{"text":"通常:上昇 / Shift:下降 / Q:着陸","color":"white"}]
+tellraw @s [{"text":"[Magician] ","color":"light_purple"},{"text":"浮遊！","color":"aqua"}]
+tellraw @s [{"text":"  ","color":"gray"},{"text":"[操作] ","color":"yellow"},{"text":"通常:上昇 / Shift:下降 / Q:着地","color":"white"}]
