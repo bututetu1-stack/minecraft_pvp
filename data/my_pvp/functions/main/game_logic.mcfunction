@@ -67,9 +67,8 @@ execute if score #GLOBAL match_state matches 1 if score #GLOBAL match_timer matc
 
 # --- リスポーン時のステータス復旧 ---
 
-# タンク (HP 40)
-execute as @a[tag=tank] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/tank/apply_status
+# タンク (HP 80) [修正: 40.0d -> 80.0d]
+execute as @a[tag=tank] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:80.0d}]}] run function my_pvp:roles/tank/apply_status
 
-# 【修正】バーサーカー (HP 30)
-# assign ではなく apply_status を呼ぶように変更
-execute as @a[tag=berserker] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:30.0d}]}] run function my_pvp:roles/berserker/apply_status
+# バーサーカー (HP 60) [修正: 30.0d -> 60.0d]
+execute as @a[tag=berserker] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:60.0d}]}] run function my_pvp:roles/berserker/apply_status
