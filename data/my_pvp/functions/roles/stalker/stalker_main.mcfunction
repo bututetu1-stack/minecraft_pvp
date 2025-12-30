@@ -17,12 +17,13 @@ execute unless score @s last_damage_dealt = @s damage_dealt run scoreboard playe
 # 4. アイテム補充
 function my_pvp:roles/stalker/scan_items
 
-# 【追加】 狂愛の飛翔 (Mad Love)
+# 5. UI表示 (クールダウン表示)
+title @s actionbar [{"text":"Float: ","color":"light_purple"},{"score":{"name":"@s","objective":"cd_stalker_float"},"color":"white"}]
+
+# 6. スキル制御
+# 狂愛の飛翔 (Mad Love)
 function my_pvp:roles/stalker/ghost_float
 
-# 【追加】 クールダウンの消化 & 通知
-# カウントが 1 の瞬間（＝あと1tickで0になる時）に音を鳴らす
+# クールダウンの消化 & 通知
 execute if score @s cd_stalker_float matches 1 run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 2
-
-# タイマーを減らす
 execute if score @s cd_stalker_float matches 1.. run scoreboard players remove @s cd_stalker_float 1

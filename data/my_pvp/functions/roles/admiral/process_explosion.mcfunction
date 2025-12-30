@@ -1,8 +1,5 @@
 # --- 1. 攻撃主(飼い主)の特定 ---
-# マーカーが記憶している player_id を一時スコアにコピー
 scoreboard players operation #OWNER_ID temp = @s player_id
-
-# 全プレイヤーの中から、IDが一致する人にタグ(attacker_temp)を付ける
 tag @a remove attacker_temp
 execute as @a if score @s player_id = #OWNER_ID temp run tag @s add attacker_temp
 
@@ -15,16 +12,17 @@ particle minecraft:lava ~ ~1 ~ 5 1 5 0.1 50 force
 particle minecraft:flame ~ ~1 ~ 6 2 6 0.2 100 force
 particle minecraft:campfire_signal_smoke ~ ~ ~ 7 0 7 0.1 50 force
 
-# --- 3. ダメージ処理 (修正) ---
-# instant_damage(魔法) ではなく damage(物理) を使用
+# --- 3. ダメージ処理 (代理攻撃方式・修正版2) ---
+# 「防具立て(armor_stand)」をプロキシとして召喚
+# ※Marker:1b にすることで当たり判定を無くし、処理を軽くしています
+summon armor_stand ~ ~ ~ {Tags:["dmg_proxy"],CustomName:'{"text":"砲撃支援","color":"gold","bold":true}',Invisible:1b,Marker:1b,NoGravity:1b}
 
-# A. 飼い主が見つかった場合 (ログアウトしていなければここが動く)
-# "by @p[tag=attacker_temp]" をつけることで、そのプレイヤーが攻撃した扱いになります
-execute if entity @p[tag=attacker_temp] as @a[distance=..10] run damage @s 20 minecraft:explosion by @p[tag=attacker_temp,limit=1]
+# 【重要】ダメージの種類を "player_explosion" に指定して実行
+# これによりログが「爆発に巻き込まれた」ではなく「砲撃支援 に爆破された」になります
+execute as @a[distance=..10] run damage @s 20 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1,distance=..10]
 
-# B. 飼い主が見つからない場合 (ログアウト時など)
-# 攻撃元なしでダメージだけ与える
-execute unless entity @p[tag=attacker_temp] as @a[distance=..10] run damage @s 20 minecraft:explosion
+# 証拠隠滅
+kill @e[tag=dmg_proxy]
 
 # --- 4. 後始末 ---
 tag @a remove attacker_temp
