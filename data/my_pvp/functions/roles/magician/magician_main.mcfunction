@@ -4,10 +4,15 @@ title @s actionbar [{"text":"MANA: ","color":"light_purple"},{"score":{"name":"@
 # 2. マナ自動回復 (1秒ごとに1増加) - ただし飛行中は回復しない
 scoreboard players operation @s temp = #GLOBAL match_timer
 scoreboard players operation @s temp %= #20 temp
-execute if score @s temp matches 0 if score #GLOBAL match_timer matches 1.. unless entity @s[tag=mag_flying_true] run scoreboard players add @s mana 1
+execute if score @s temp matches 0 if score #GLOBAL match_timer matches 1.. unless entity @s[tag=mag_flying_true] run scoreboard players add @s mana 2
 
 # マナ上限(100)
 execute if score @s mana matches 101.. run scoreboard players set @s mana 100
+
+# --- キル時のマナ回復 (+30) ---
+execute unless score @s last_kills = @s kills run scoreboard players add @s mana 30
+execute unless score @s last_kills = @s kills run playsound minecraft:entity.experience_orb.pickup master @s ~ ~ ~ 1 2
+execute unless score @s last_kills = @s kills run scoreboard players operation @s last_kills = @s kills
 
 # 3. 飛行中のマナ消費 (タグ `mag_flying` がついている間、1秒ごとに5マナ消費)
 #    シンプル化のため mag_fly_timer を使わず、20tickごとの判定は別途簡易化できます。

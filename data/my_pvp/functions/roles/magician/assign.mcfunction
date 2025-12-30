@@ -11,6 +11,9 @@ attribute @s minecraft:generic.attack_damage base set 1
 # 4. マナ初期化
 scoreboard players set @s mana 50
 
+# キル検知用スコア初期化
+scoreboard players set @s last_kills 0
+
 # 5. クールダウン初期化
 scoreboard players set @s cd_mag_broom 0
 scoreboard players set @s cd_mag_book 0
