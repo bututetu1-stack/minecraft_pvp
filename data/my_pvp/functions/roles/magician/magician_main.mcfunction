@@ -25,7 +25,7 @@ execute if entity @s[tag=mag_flying_true] if score @s mana matches ..0 run funct
 # 5. クールダウン消化 & アイテム返却
 
 # 魔術箒 (Slot 0)
-execute as @s[scores={cd_mag_broom=1}] run item replace entity @s container.0 with minecraft:stick{magician_broom:1b,display:{Name:'{"text":"魔術箒","italic":false,"color":"light_purple","bold":true}',Lore:['{"text":"[Q]キー: 飛行開始/終了","color":"yellow"}','{"text":"Cost: 5 MANA + 5/秒","color":"gray"}','{"text":"CT: 1s","color":"aqua"}']}} 1
+execute as @s[scores={cd_mag_broom=1}] run item replace entity @s container.0 with minecraft:stick{magician_broom:1b,display:{Name:'{"text":"魔術箒","italic":false,"color":"light_purple","bold":true}',Lore:['{"text":"[Q]キー: 飛行開始/終了","color":"yellow"}','{"text":"Cost: 5 MANA + 5/秒","color":"gray"}','{"text":"CT: 0s","color":"aqua"}']}} 1
 execute as @s[scores={cd_mag_broom=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 2
 scoreboard players remove @s[scores={cd_mag_broom=1..}] cd_mag_broom 1
 

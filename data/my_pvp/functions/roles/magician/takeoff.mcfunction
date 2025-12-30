@@ -1,4 +1,4 @@
-# 離陸処理 (Levitation + Slow Falling ハイブリッド方式)
+# 離陸処理 (Levitationによる飛行開始)
 
 # 1. マナ消費
 scoreboard players remove @s mana 5
@@ -19,7 +19,8 @@ particle minecraft:end_rod ~ ~ ~ 0.5 0.5 0.5 0.1 20
 particle minecraft:witch ~ ~ ~ 1 0.5 1 0.05 30
 
 # 6. クールダウン設定 (1秒 = 20tick)
-scoreboard players set @s cd_mag_broom 20
+# CTを0に変更: 即時再使用可能にする
+scoreboard players set @s cd_mag_broom 0
 
 # 7. 通知
 tellraw @s [{"text":"[Magician] ","color":"light_purple"},{"text":"離陸！","color":"aqua"}]
