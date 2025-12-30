@@ -4,7 +4,8 @@
 scoreboard players add @s gadget_life 1
 
 # 2. 移動 — 回転を合わせた上でローカル座標で前方へ進める
-execute as @s at @s run tp @s ^ ^ ^0.6
+# 速度を上げるため前進量を増加（0.6 -> 1.2）
+execute as @s at @s run tp @s ^ ^ ^1.2
 
 # 3. 視認性パーティクル（弾の位置で出す）
 execute as @s at @s run particle minecraft:flame ~ ~ ~ 0.15 0.15 0.15 0.02 3

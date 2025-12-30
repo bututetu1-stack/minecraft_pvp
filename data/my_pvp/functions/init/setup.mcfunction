@@ -92,6 +92,7 @@ scoreboard objectives add cd_adm_aa dummy "対空CT"
 scoreboard players set #GLOBAL match_state 0
 scoreboard players set #NEXT_ID player_id 1
 scoreboard players set #100 temp 100
+scoreboard players set #20 temp 20
 
 scoreboard players set #POINT_KILL temp 10
 scoreboard players set #POINT_DEATH temp 5

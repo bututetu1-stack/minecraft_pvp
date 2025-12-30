@@ -107,7 +107,7 @@ kill @e[tag=role_card]
 kill @e[tag=ninja_shadow]
 kill @e[tag=shadow_hitbox]
 # 魔術師の炎玉を消去
-kill @e[type=small_fireball,tag=mag_fireball]
+kill @e[type=armor_stand,tag=mag_fireball]
 
 # 残留アイテムの完全消去
 kill @e[type=item]

@@ -50,7 +50,8 @@ execute as @e[tag=shadow_hitbox] at @s run function my_pvp:roles/ninja/shadow_ti
 execute as @e[tag=turret_shot] at @s run function my_pvp:roles/mechanic/turret_shot_tick
 
 # --- 6. 魔術師の炎玉処理 ---
-execute as @e[type=small_fireball,tag=mag_fireball] at @s run function my_pvp:roles/magician/fireball_tick
+# armor_stand 弾を毎tick処理
+execute as @e[type=armor_stand,tag=mag_fireball] at @s run function my_pvp:roles/magician/fireball_tick
 
 # --- 7. スコアボード表示 ---
 

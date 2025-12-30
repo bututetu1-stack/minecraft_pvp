@@ -1,10 +1,10 @@
 # 1. UI表示
 title @s actionbar [{"text":"MANA: ","color":"light_purple"},{"score":{"name":"@s","objective":"mana"},"color":"white"}]
 
-# 2. マナ自動回復 (5秒ごとに5増加) - ただし飛行中は回復しない
+# 2. マナ自動回復 (1秒ごとに1増加) - ただし飛行中は回復しない
 scoreboard players operation @s temp = #GLOBAL match_timer
-scoreboard players operation @s temp %= #100 temp
-execute if score @s temp matches 0 if score #GLOBAL match_timer matches 1.. unless entity @s[tag=mag_flying_true] run scoreboard players add @s mana 5
+scoreboard players operation @s temp %= #20 temp
+execute if score @s temp matches 0 if score #GLOBAL match_timer matches 1.. unless entity @s[tag=mag_flying_true] run scoreboard players add @s mana 1
 
 # マナ上限(100)
 execute if score @s mana matches 101.. run scoreboard players set @s mana 100
@@ -12,15 +12,18 @@ execute if score @s mana matches 101.. run scoreboard players set @s mana 100
 # 3. 飛行中のマナ消費 (タグ `mag_flying` がついている間、1秒ごとに5マナ消費)
 #    シンプル化のため mag_fly_timer を使わず、20tickごとの判定は別途簡易化できます。
 execute if entity @s[tag=mag_flying_true] run scoreboard players add @s mag_fly_tick 1
-execute if entity @s[tag=mag_flying_true] if score @s mag_fly_tick matches 20.. run scoreboard players remove @s mana 5
-execute if entity @s[tag=mag_flying_true] if score @s mag_fly_tick matches 20.. run scoreboard players set @s mag_fly_tick 0
+# 3a. 20tick到達時の処理: マナが5以上なら5消費、未満なら着陸させる（マイナス防止）
+execute if entity @s[tag=mag_flying_true] if score @s mag_fly_tick matches 20.. if score @s mana matches 5.. run scoreboard players remove @s mana 5
+execute if entity @s[tag=mag_flying_true] if score @s mag_fly_tick matches 20.. if score @s mana matches 5.. run scoreboard players set @s mag_fly_tick 0
+execute if entity @s[tag=mag_flying_true] if score @s mag_fly_tick matches 20.. if score @s mana matches ..4 run function my_pvp:roles/magician/land
+execute if entity @s[tag=mag_flying_true] if score @s mag_fly_tick matches 20.. if score @s mana matches ..4 run scoreboard players set @s mag_fly_tick 0
 
 # 3.5. 飛行中のエフェクト付与（シンプル化）
 # タグ `mag_flying` がついている間だけ Levitation を付与する
 execute as @s[tag=mag_flying_true] run effect give @s minecraft:levitation 2 4 true
 
 # 4. マナ切れで強制着陸
-execute if entity @s[tag=mag_flying_true] if score @s mana matches ..0 run function my_pvp:roles/magician/land
+execute if entity @s[tag=mag_flying_true] if score @s mana matches ..4 run function my_pvp:roles/magician/land
 
 # 5. クールダウン消化 & アイテム返却
 
