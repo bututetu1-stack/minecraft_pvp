@@ -18,8 +18,8 @@ execute as @s at @s run playsound minecraft:entity.blaze.shoot master @s ~ ~ ~ 1
 execute as @s at @s run particle minecraft:flame ^ ^ ^1 0.2 0.2 0.2 0.05 10
 
 # 6. クールダウン設定 (1秒 = 20tick)
-# クールダウン設定: 即時使用可能にする（CT: 0s）
-scoreboard players set @s cd_mag_book 0
+# クールダウン設定: 1秒に設定（CT: 1s）
+scoreboard players set @s cd_mag_book 20
 
 # 7. アイテムを一時的に消す
 clear @s minecraft:book{magician_book:1b} 1

@@ -57,7 +57,8 @@ tag @a remove tank
 tag @a remove berserker
 # 【追加】魔術師のタグ削除
 tag @a remove magician
-tag @a remove mag_flying
+tag @a remove mag_flying_true
+tag @a add mag_flying_false
 tag @a remove target_candidate
 
 # --- 計算用の一時タグを全消去 ---

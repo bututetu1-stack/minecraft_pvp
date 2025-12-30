@@ -10,7 +10,7 @@ execute as @p[tag=item_recipient,tag=magician] at @s unless entity @s[tag=mag_ac
 
 # 3. 所有者に返却を試み（既に所持していなければ give）
 execute as @a[tag=item_recipient] unless entity @s[nbt={Inventory:[{tag:{magician_book:1b}}]}] run tag @s add book_needs_return
-execute as @a[tag=item_recipient] unless entity @s[nbt={Inventory:[{tag:{magician_book:1b}}]}] run give @s minecraft:book{magician_book:1b,display:{Name:'{"text":"魔術本","italic":false,"color":"gold","bold":true}',Lore:['{"text":"[Q]キー: 炎玉発射","color":"yellow"}','{"text":"Cost: 5 MANA","color":"gray"}','{"text":"ダメージ: ハート1個分","color":"red"}','{"text":"CT: 0s","color":"aqua"}']}} 1
+execute as @a[tag=item_recipient] unless entity @s[nbt={Inventory:[{tag:{magician_book:1b}}]}] run give @s minecraft:book{magician_book:1b,display:{Name:'{"text":"魔術本","italic":false,"color":"gold","bold":true}',Lore:['{"text":"[Q]キー: 炎玉発射","color":"yellow"}','{"text":"Cost: 5 MANA","color":"gray"}','{"text":"ダメージ: ハート1個分","color":"red"}','{"text":"CT: 1s","color":"aqua"}']}} 1
 
 # 4. ドロップエンティティを消す（給付処理はタグで追跡）
 kill @s

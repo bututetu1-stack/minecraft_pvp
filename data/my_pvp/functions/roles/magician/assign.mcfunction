@@ -16,7 +16,8 @@ scoreboard players set @s cd_mag_broom 0
 scoreboard players set @s cd_mag_book 0
 
 # 6. 飛行状態初期化
-tag @s remove mag_flying
+tag @s remove mag_flying_true
+tag @s add mag_flying_false
 
 # 7. 効果音
 playsound minecraft:entity.evoker.prepare_summon master @s ~ ~ ~ 1 1

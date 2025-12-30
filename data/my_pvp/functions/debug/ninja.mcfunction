@@ -6,7 +6,8 @@ tag @s remove scout
 tag @s remove tank
 tag @s remove berserker
 tag @s remove magician
-tag @s remove mag_flying
+tag @s remove mag_flying_true
+tag @s add mag_flying_false
 tag @s remove role_assigned
 
 # 2. 忍者に任命する
