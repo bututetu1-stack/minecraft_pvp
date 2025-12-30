@@ -8,6 +8,9 @@ execute as @a[tag=berserker] at @s run function my_pvp:roles/berserker/berserker
 execute as @a[tag=stalker] at @s run function my_pvp:roles/stalker/stalker_main
 execute as @a[tag=admiral] at @s run function my_pvp:roles/admiral/admiral_main
 
+# 魔術師のメイン処理
+execute as @a[tag=magician] at @s run function my_pvp:roles/magician/magician_main
+
 # --- 空腹度回復 (Saturation) ---
 # Normal難易度になったため、常時満腹にして餓死を防ぐ
 effect give @a minecraft:saturation 1 20 true
@@ -30,6 +33,10 @@ execute as @e[type=item] at @s run function my_pvp:roles/berserker/scan_items
 execute as @e[type=item] at @s run function my_pvp:roles/stalker/scan_items
 execute as @e[type=item] at @s run function my_pvp:roles/admiral/scan_items
 
+# 魔術師のアイテムスキャン
+execute as @e[type=item] at @s run function my_pvp:roles/magician/scan_items
+
+# --- 3. ガジェットの処理 ---
 
 # --- 3. ガジェット・エンティティ処理 ---
 # ガジェット (タレット, 地雷など)
@@ -42,6 +49,11 @@ execute as @e[tag=shadow_hitbox] at @s run function my_pvp:roles/ninja/shadow_ti
 # タレットの弾丸
 execute as @e[tag=turret_shot] at @s run function my_pvp:roles/mechanic/turret_shot_tick
 
+# --- 6. 魔術師の炎玉処理 ---
+# armor_stand 弾を毎tick処理
+execute as @e[type=armor_stand,tag=mag_fireball] at @s run function my_pvp:roles/magician/fireball_tick
+
+# --- 7. スコアボード表示 ---
 
 # --- 4. ゲーム進行管理 ---
 
@@ -85,3 +97,6 @@ execute as @a[tag=stalker] unless entity @s[nbt={Attributes:[{Name:"minecraft:ge
 
 # 提督
 execute as @a[tag=admiral] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/admiral/apply_status
+
+# 魔術師 (HP 40)
+execute as @a[tag=magician] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/magician/apply_status

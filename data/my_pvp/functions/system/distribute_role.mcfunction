@@ -18,6 +18,9 @@ execute if entity @e[tag=selected_card,tag=card_tank] run function my_pvp:roles/
 # バーサーカーのカードだった場合
 execute if entity @e[tag=selected_card,tag=card_berserker] run function my_pvp:roles/berserker/assign
 
+# 魔術師のカードだった場合
+execute if entity @e[tag=selected_card,tag=card_magician] run function my_pvp:roles/magician/assign
+
 # ストーカーのカードだった場合
 execute if entity @e[tag=selected_card,tag=card_stalker] run function my_pvp:roles/stalker/assign
 

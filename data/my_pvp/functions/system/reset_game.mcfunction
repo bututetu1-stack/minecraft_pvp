@@ -23,6 +23,12 @@ scoreboard players reset * cd_ber_raid
 scoreboard players reset * cd_ber_jump
 scoreboard players reset * last_kills
 
+# 【追加】魔術師用リセット
+scoreboard players reset * mana
+scoreboard players reset * cd_mag_broom
+scoreboard players reset * cd_mag_book
+scoreboard players reset * mag_fly_tick
+
 # 【追加】ストーカー用CT・変数リセット
 scoreboard players reset * cd_stalker_float
 scoreboard players reset * target_check_timer
@@ -59,6 +65,11 @@ tag @a remove ninja
 tag @a remove scout
 tag @a remove tank
 tag @a remove berserker
+# 【追加】魔術師のタグ削除
+tag @a remove magician
+tag @a remove mag_flying_true
+tag @a add mag_flying_false
+
 tag @a remove stalker
 tag @a remove admiral
 tag @a remove target_candidate
@@ -95,6 +106,8 @@ kill @e[tag=gadget_hitbox]
 kill @e[tag=role_card]
 kill @e[tag=ninja_shadow]
 kill @e[tag=shadow_hitbox]
+# 魔術師の炎玉を消去
+kill @e[type=armor_stand,tag=mag_fireball]
 
 # 残留アイテムの完全消去
 kill @e[type=item]

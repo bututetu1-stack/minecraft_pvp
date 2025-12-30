@@ -45,6 +45,16 @@ scoreboard objectives add cd_ber_jump dummy "ジャンプCT"
 scoreboard objectives add click_ber_raid minecraft.used:minecraft.iron_axe "レイド発動"
 scoreboard objectives add click_ber_jump minecraft.used:minecraft.feather "ジャンプ発動"
 
+# 魔術師用クールダウン
+scoreboard objectives add mana dummy "マナ"
+scoreboard objectives add cd_mag_broom dummy "魔術箻CT"
+scoreboard objectives add cd_mag_book dummy "魔術本CT"
+scoreboard objectives add mag_fly_tick dummy "飛行タイマー"
+
+# 魔術師用スキル検知
+scoreboard objectives add click_mag_broom minecraft.used:minecraft.stick "魔術箻使用"
+scoreboard objectives add click_mag_book minecraft.used:minecraft.book "魔術本使用"
+
 # 【追加】キル検知用（回復処理に使用）
 scoreboard objectives add last_kills dummy "前回のキル数"
 
@@ -82,6 +92,7 @@ scoreboard objectives add cd_adm_aa dummy "対空CT"
 scoreboard players set #GLOBAL match_state 0
 scoreboard players set #NEXT_ID player_id 1
 scoreboard players set #100 temp 100
+scoreboard players set #20 temp 20
 
 scoreboard players set #POINT_KILL temp 10
 scoreboard players set #POINT_DEATH temp 5

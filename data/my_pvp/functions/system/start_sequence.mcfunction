@@ -14,6 +14,9 @@ execute as @a[tag=berserker] run title @s subtitle {"text":"血を捧げ、敵�
 execute as @a[tag=stalker] run title @s subtitle {"text":"執念深く獲物を追い詰め、息の根を止めよ","color":"dark_red"}
 execute as @a[tag=admiral] run title @s subtitle {"text":"全艦隊指揮、圧倒的火力で制圧せよ","color":"dark_aqua"}
 
+# 【追加】魔術師のサブタイトル
+execute as @a[tag=magician] run title @s subtitle {"text":"魔力を操り、空を舞え","color":"light_purple"}
+
 # 音とログ
 execute as @a at @s run playsound minecraft:entity.ender_dragon.growl master @s ~ ~ ~ 1 1
 tellraw @a [{"text":"[System] ","color":"gray"},{"text":"試合開始！","color":"green"}]
@@ -23,6 +26,11 @@ execute as @a[tag=mechanic] run function my_pvp:system/give_mechanic_items
 execute as @a[tag=ninja] run function my_pvp:system/give_ninja_items
 execute as @a[tag=scout] run function my_pvp:system/give_scout_items
 execute as @a[tag=tank] run function my_pvp:system/give_tank_items
+# 【追加】バーサーカーへの配布
+execute as @a[tag=berserker] run function my_pvp:system/give_berserker_items
+
+# 【追加】魔術師への配布
+execute as @a[tag=magician] run function my_pvp:system/give_magician_items
 execute as @a[tag=berserker] run function my_pvp:system/give_berserker_items
 execute as @a[tag=stalker] run function my_pvp:system/give_stalker_items
 execute as @a[tag=admiral] run function my_pvp:system/give_admiral_items

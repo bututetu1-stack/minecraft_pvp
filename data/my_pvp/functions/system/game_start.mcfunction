@@ -6,6 +6,7 @@ function my_pvp:system/reset_game
 scoreboard players set #POINT_KILL temp 10
 scoreboard players set #POINT_DEATH temp 5
 scoreboard players set #100 temp 100
+scoreboard players set #20 temp 20
 
 # --- スコアの初期化 ---
 # 全員を 0 にセットして計算可能にする
