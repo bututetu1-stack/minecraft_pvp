@@ -13,5 +13,8 @@ summon marker ~ ~ ~ {Tags:["role_card","card_tank"]}
 # バーサーカーのくじ
 summon marker ~ ~ ~ {Tags:["role_card","card_berserker"]}
 
-# 【追加】ストーカーのくじ
+# ストーカーのくじ
 summon marker ~ ~ ~ {Tags:["role_card","card_stalker"]}
+
+# 提督のくじ
+summon marker ~ ~ ~ {Tags:["role_card","card_admiral"]}

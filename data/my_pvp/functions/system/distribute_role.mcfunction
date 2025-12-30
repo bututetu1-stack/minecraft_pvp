@@ -18,8 +18,11 @@ execute if entity @e[tag=selected_card,tag=card_tank] run function my_pvp:roles/
 # バーサーカーのカードだった場合
 execute if entity @e[tag=selected_card,tag=card_berserker] run function my_pvp:roles/berserker/assign
 
-# 【追加】ストーカーのカードだった場合
+# ストーカーのカードだった場合
 execute if entity @e[tag=selected_card,tag=card_stalker] run function my_pvp:roles/stalker/assign
+
+# 提督のカードだった場合
+execute if entity @e[tag=selected_card,tag=card_admiral] run function my_pvp:roles/admiral/assign
 
 # 3. 使用済みカードの破棄
 kill @e[tag=selected_card]
