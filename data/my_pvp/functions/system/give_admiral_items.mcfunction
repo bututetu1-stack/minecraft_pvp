@@ -1,12 +1,14 @@
 clear @s
 
-# 1. [砲撃支援] (メイン火力: CT 3秒) -> Slot 0
+# 1. [砲撃支援] (メイン火力: CT 20秒) -> Slot 0
 # Tag: adm_artillery, CMD: 1
-item replace entity @s container.0 with minecraft:carrot_on_a_stick{adm_artillery:1b,CustomModelData:1,display:{Name:'{"text":"【砲撃支援】","color":"gold","bold":true}',Lore:['{"text":"[右クリック] 指定地点へ砲撃","color":"yellow"}','{"text":"CT: 3秒","color":"gray"}']},Unbreakable:1b} 1
+# 修正: CT表記を 3秒 -> 20秒 に変更
+item replace entity @s container.0 with minecraft:carrot_on_a_stick{adm_artillery:1b,CustomModelData:1,display:{Name:'{"text":"【砲撃支援】","color":"gold","bold":true}',Lore:['{"text":"[右クリック] 指定地点へ砲撃","color":"yellow"}','{"text":"CT: 20秒","color":"gray"}']},Unbreakable:1b} 1
 
 # 2. [魚雷カットイン] (近-中距離: CT 10秒) -> Slot 1
 # Tag: adm_torpedo, CMD: 2
-item replace entity @s container.1 with minecraft:carrot_on_a_stick{adm_torpedo:1b,CustomModelData:2,display:{Name:'{"text":"【魚雷カットイン】","color":"aqua","bold":true}',Lore:['{"text":"[右クリック] 扇状に魚雷発射","color":"yellow"}','{"text":"CT: 10秒","color":"gray"}']},Unbreakable:1b} 1
+# 修正: 説明文を「扇状に」から「前方へ3連」に変更
+item replace entity @s container.1 with minecraft:carrot_on_a_stick{adm_torpedo:1b,CustomModelData:2,display:{Name:'{"text":"【魚雷カットイン】","color":"aqua","bold":true}',Lore:['{"text":"[右クリック] 前方へ3連魚雷","color":"yellow"}','{"text":"CT: 10秒","color":"gray"}']},Unbreakable:1b} 1
 
 # 3. [航空支援] (必殺技: CT 40秒) -> Slot 2
 # Tag: adm_air, CMD: 3
