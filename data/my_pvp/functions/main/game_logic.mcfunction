@@ -4,9 +4,9 @@ execute as @a[tag=mechanic] at @s run function my_pvp:roles/mechanic/mechanic_ma
 execute as @a[tag=ninja] at @s run function my_pvp:roles/ninja/ninja_main
 execute as @a[tag=scout] at @s run function my_pvp:roles/scout/scout_main
 execute as @a[tag=tank] at @s run function my_pvp:roles/tank/tank_main
-
-# バーサーカーのメイン処理
 execute as @a[tag=berserker] at @s run function my_pvp:roles/berserker/berserker_main
+execute as @a[tag=stalker] at @s run function my_pvp:roles/stalker/stalker_main
+execute as @a[tag=admiral] at @s run function my_pvp:roles/admiral/admiral_main
 
 # 魔術師のメイン処理
 execute as @a[tag=magician] at @s run function my_pvp:roles/magician/magician_main
@@ -29,46 +29,73 @@ execute as @e[type=item] at @s run function my_pvp:roles/mechanic/scan_items
 execute as @e[type=item] at @s run function my_pvp:roles/ninja/scan_items
 execute as @e[type=item] at @s run function my_pvp:roles/scout/scan_items
 execute as @e[type=item] at @s run function my_pvp:roles/tank/scan_items
-
-# バーサーカーのアイテムスキャン
 execute as @e[type=item] at @s run function my_pvp:roles/berserker/scan_items
+execute as @e[type=item] at @s run function my_pvp:roles/stalker/scan_items
+execute as @e[type=item] at @s run function my_pvp:roles/admiral/scan_items
 
 # 魔術師のアイテムスキャン
 execute as @e[type=item] at @s run function my_pvp:roles/magician/scan_items
 
 # --- 3. ガジェットの処理 ---
+
+# --- 3. ガジェット・エンティティ処理 ---
+# ガジェット (タレット, 地雷など)
 execute as @e[tag=gadget] at @s run function my_pvp:roles/mechanic/gadget_tic
 execute as @e[tag=gadget_hitbox] at @s run function my_pvp:roles/mechanic/gadget_tic
 
-# --- 4. 忍者の身代わり処理 ---
+# 忍者の身代わり
 execute as @e[tag=shadow_hitbox] at @s run function my_pvp:roles/ninja/shadow_tick
 
-# --- 5. タレットの弾丸処理 ---
+# タレットの弾丸
 execute as @e[tag=turret_shot] at @s run function my_pvp:roles/mechanic/turret_shot_tick
 
 # --- 6. 魔術師の炎玉処理 ---
 execute as @e[type=small_fireball,tag=mag_fireball] at @s run function my_pvp:roles/magician/fireball_tick
 
 # --- 7. スコアボード表示 ---
+
+# --- 4. ゲーム進行管理 ---
+
+# スコアボード表示
 scoreboard objectives setdisplay sidebar points
 
-# 7. 試合進行
+# タイマー加算 (1tickに1加算)
 execute if score #GLOBAL match_state matches 1 run scoreboard players add #GLOBAL match_timer 1
 
-# --- ポイント計算 ---
+# ポイント計算
 execute as @a run scoreboard players operation @s points = @s kills
 execute as @a run scoreboard players operation @s points *= #POINT_KILL temp
 execute as @a run scoreboard players operation @s temp = @s deaths
 execute as @a run scoreboard players operation @s temp *= #POINT_DEATH temp
 execute as @a run scoreboard players operation @s points -= @s temp
 
-# --- 試合終了判定 ---
+# 試合終了判定 (6000 ticks = 5分)
 execute if score #GLOBAL match_state matches 1 if score #GLOBAL match_timer matches 6000.. run function my_pvp:system/game_end
 
-# --- リスポーン時のステータス復旧 ---
 
-# タンク (HP 80) [修正: 40.0d -> 80.0d]
+# --- 5. リスポーン時のステータス復旧 ---
+# 死ぬと属性(Attribute)がリセットされ、最大HPが20に戻る仕様を利用してリスポーンを検知
+
+# タンク (HP 80)
 execute as @a[tag=tank] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:80.0d}]}] run function my_pvp:roles/tank/apply_status
 
-# バーサーカー (HP 60) [修正: 30.0d -> 60.0d]
+# バーサーカー (HP 60)
 execute as @a[tag=berserker] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:60.0d}]}] run function my_pvp:roles/berserker/apply_status
+
+# 立体機動兵 (HP 40)
+execute as @a[tag=scout] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/scout/apply_status
+
+# 忍者 (HP 40)
+execute as @a[tag=ninja] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/ninja/apply_status
+
+# 機械工 (HP 40)
+execute as @a[tag=mechanic] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/mechanic/apply_status
+
+# ストーカー (HP 40 & ターゲット再抽選)
+execute as @a[tag=stalker] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/stalker/apply_status
+
+# 提督
+execute as @a[tag=admiral] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/admiral/apply_status
+
+# 魔術師 (HP 40)
+execute as @a[tag=magician] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/magician/apply_status

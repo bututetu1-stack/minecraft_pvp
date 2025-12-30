@@ -10,8 +10,14 @@ summon marker ~ ~ ~ {Tags:["role_card","card_scout"]}
 # タンクのくじ
 summon marker ~ ~ ~ {Tags:["role_card","card_tank"]}
 
-# 【追加】バーサーカーのくじ
+# 魔術師のくじ
+summon marker ~ ~ ~ {Tags:["role_card","card_magician"]}
+
+# バーサーカーのくじ
 summon marker ~ ~ ~ {Tags:["role_card","card_berserker"]}
 
-# 【追加】魔術師のくじ
-summon marker ~ ~ ~ {Tags:["role_card","card_magician"]}
+# ストーカーのくじ
+summon marker ~ ~ ~ {Tags:["role_card","card_stalker"]}
+
+# 提督のくじ
+summon marker ~ ~ ~ {Tags:["role_card","card_admiral"]}

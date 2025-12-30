@@ -15,11 +15,17 @@ execute if entity @e[tag=selected_card,tag=card_scout] run function my_pvp:roles
 # タンクのカードだった場合
 execute if entity @e[tag=selected_card,tag=card_tank] run function my_pvp:roles/tank/assign
 
-# 【追加】バーサーカーのカードだった場合
+# バーサーカーのカードだった場合
 execute if entity @e[tag=selected_card,tag=card_berserker] run function my_pvp:roles/berserker/assign
 
-# 【追加】魔術師のカードだった場合
+# 魔術師のカードだった場合
 execute if entity @e[tag=selected_card,tag=card_magician] run function my_pvp:roles/magician/assign
+
+# ストーカーのカードだった場合
+execute if entity @e[tag=selected_card,tag=card_stalker] run function my_pvp:roles/stalker/assign
+
+# 提督のカードだった場合
+execute if entity @e[tag=selected_card,tag=card_admiral] run function my_pvp:roles/admiral/assign
 
 # 3. 使用済みカードの破棄
 kill @e[tag=selected_card]

@@ -11,6 +11,10 @@ scoreboard objectives add temp dummy
 scoreboard objectives add scrap dummy "スクラップ"
 scoreboard objectives add regen_timer dummy "回復タイマー"
 
+scoreboard objectives add timer dummy
+scoreboard objectives add ammo dummy
+scoreboard objectives add temp dummy
+
 # --- クールダウン ---
 #機械工用クールダウン
 scoreboard objectives add cooldown dummy "射撃CT"
@@ -63,9 +67,26 @@ scoreboard objectives add gadget_life dummy "稼働時間"
 scoreboard objectives add click_skill minecraft.used:minecraft.carrot_on_a_stick "スキル使用"
 scoreboard objectives add slot_cycle dummy "設置スロット"
 
-#スカウトシステムスコア
+# スカウトシステムスコア
 # サウンド間隔制御用
 scoreboard objectives add sound_ticker dummy
+
+# ストーカー用
+scoreboard objectives add cd_stalker_float dummy
+# 【追加】ターゲット管理用
+scoreboard objectives add target_id dummy "ターゲットID"
+scoreboard objectives add target_check_timer dummy "ターゲット確認タイマー"
+
+# 【追加】攻撃判定用 (ダメージを与えたかを検知)
+scoreboard objectives add damage_dealt minecraft.custom:minecraft.damage_dealt "与ダメージ"
+scoreboard objectives add last_damage_dealt dummy "前回与ダメージ"
+
+# --- 提督 (Admiral) 用 ---
+# クールダウン
+scoreboard objectives add cd_adm_artillery dummy "砲撃支援CT"
+scoreboard objectives add cd_adm_torpedo dummy "魚雷CT"
+scoreboard objectives add cd_adm_air dummy "航空支援CT"
+scoreboard objectives add cd_adm_aa dummy "対空CT"
 
 # --- 初期値セット ---
 scoreboard players set #GLOBAL match_state 0

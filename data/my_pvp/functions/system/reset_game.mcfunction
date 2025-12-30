@@ -29,6 +29,17 @@ scoreboard players reset * cd_mag_broom
 scoreboard players reset * cd_mag_book
 scoreboard players reset * mag_fly_tick
 
+# 【追加】ストーカー用CT・変数リセット
+scoreboard players reset * cd_stalker_float
+scoreboard players reset * target_check_timer
+scoreboard players reset * target_id
+
+# ▼▼▼ 追加: 提督用CTリセット ▼▼▼
+scoreboard players reset * cd_adm_artillery
+scoreboard players reset * cd_adm_torpedo
+scoreboard players reset * cd_adm_air
+scoreboard players reset * cd_adm_aa
+
 # 【修正】全員の基礎HPを 20 -> 40 に変更
 execute as @a run attribute @s minecraft:generic.max_health base set 40
 execute as @a run attribute @s minecraft:generic.knockback_resistance base set 0
@@ -53,12 +64,14 @@ tag @a remove mechanic
 tag @a remove ninja
 tag @a remove scout
 tag @a remove tank
-# 【追加】バーサーカーのタグ削除
 tag @a remove berserker
 # 【追加】魔術師のタグ削除
 tag @a remove magician
 tag @a remove mag_flying_true
 tag @a add mag_flying_false
+
+tag @a remove stalker
+tag @a remove admiral
 tag @a remove target_candidate
 
 # --- 計算用の一時タグを全消去 ---
@@ -75,6 +88,9 @@ tag @a remove item_recipient
 tag @a remove is_ready
 tag @a remove on_cd
 tag @a remove no_money
+# 【追加】ストーカーの一時タグ削除
+tag @a remove my_target
+tag @a remove is_my_target
 
 # 攻撃力を標準(1.0)に戻す
 execute as @a run attribute @s minecraft:generic.attack_damage base set 1

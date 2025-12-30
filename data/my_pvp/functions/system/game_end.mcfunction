@@ -6,14 +6,26 @@ title @a title {"text":"GAME SET!","color":"red","bold":true}
 title @a subtitle {"text":"お疲れ様でした！","color":"yellow"}
 
 # 3. 効果音
-# 【修正】実行場所を各プレイヤーの位置(at @s)に変更
-# これにより、原点から離れていても自分の場所で音が鳴るため確実に聞こえます
+# 実行場所を各プレイヤーの位置(at @s)に変更
 execute as @a at @s run playsound minecraft:ui.toast.challenge_complete master @s ~ ~ ~ 1 1
 
-# 4. 勝者発表（チャット欄）
-# スコアが残っている状態で実行
+# --- 4. 勝者判定ロジック (修正版) ---
 tellraw @a [{"text":"-------------------","color":"gray"}]
-tellraw @a [{"text":"🏆 WINNER: ","color":"gold"},{"selector":"@p[sort=arbitrary,limit=1,scores={points=-9999..}]"}]
+
+# (1) 最大スコア変数の初期化 (Int最小値など、あり得ない低い値にする)
+scoreboard players set #MAX_SCORE temp -2147483648
+
+# (2) 全プレイヤーのスコアを参照し、最大値を #MAX_SCORE にコピーする
+#     operation > は「左辺が右辺より小さければ、右辺の値を代入する」という動作
+execute as @a run scoreboard players operation #MAX_SCORE temp > @s points
+
+# (3) 自分のスコアが最大値(#MAX_SCORE)と一致するプレイヤーを優勝者として表示
+#     セレクター(@s)を使うことで、同点の場合も全員正しく表示されます
+execute as @a if score @s points = #MAX_SCORE temp run tellraw @a [{"text":"🏆 WINNER: ","color":"gold"},{"selector":"@s","color":"yellow","bold":true},{"text":" (","color":"white"},{"score":{"name":"@s","objective":"points"},"color":"aqua"},{"text":" pts)","color":"white"}]
+
+# (4) 優勝者に演出
+execute as @a if score @s points = #MAX_SCORE temp run playsound minecraft:entity.player.levelup master @a ~ ~ ~ 1 0.5
+
 
 # --- 5. 盤面のお片付け (スコアは残す) ---
 # ※ reset_game は呼ばず、邪魔なエンティティだけ消します。
