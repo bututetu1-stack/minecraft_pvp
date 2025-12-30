@@ -6,6 +6,7 @@ execute as @a[tag=scout] at @s run function my_pvp:roles/scout/scout_main
 execute as @a[tag=tank] at @s run function my_pvp:roles/tank/tank_main
 execute as @a[tag=berserker] at @s run function my_pvp:roles/berserker/berserker_main
 execute as @a[tag=stalker] at @s run function my_pvp:roles/stalker/stalker_main
+execute as @a[tag=admiral] at @s run function my_pvp:roles/admiral/admiral_main
 
 # --- 空腹度回復 (Saturation) ---
 # Normal難易度になったため、常時満腹にして餓死を防ぐ
@@ -27,6 +28,7 @@ execute as @e[type=item] at @s run function my_pvp:roles/scout/scan_items
 execute as @e[type=item] at @s run function my_pvp:roles/tank/scan_items
 execute as @e[type=item] at @s run function my_pvp:roles/berserker/scan_items
 execute as @e[type=item] at @s run function my_pvp:roles/stalker/scan_items
+execute as @e[type=item] at @s run function my_pvp:roles/admiral/scan_items
 
 
 # --- 3. ガジェット・エンティティ処理 ---
@@ -80,3 +82,6 @@ execute as @a[tag=mechanic] unless entity @s[nbt={Attributes:[{Name:"minecraft:g
 
 # ストーカー (HP 40 & ターゲット再抽選)
 execute as @a[tag=stalker] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/stalker/apply_status
+
+# 提督
+execute as @a[tag=admiral] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/admiral/apply_status
