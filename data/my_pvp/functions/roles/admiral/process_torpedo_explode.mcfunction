@@ -1,38 +1,41 @@
-# --- 移動処理 ---
-tp @s ~ ~ ~ ~ 0
-tp @s ^ ^ ^0.5
-execute at @s if block ~ ~-0.1 ~ minecraft:air run tp @s ~ ~-0.5 ~
-execute at @s unless block ~ ~ ~ minecraft:air run tp @s ~ ~0.5 ~
-
-# 演出
-particle minecraft:bubble ~ ~ ~ 0 0 0 0.1 1 force
-particle minecraft:splash ~ ~ ~ 0 0 0 0.1 1 force
-
-# --- 衝突判定 ---
-execute unless block ^ ^ ^0.6 minecraft:air run tag @s add hit_wall
-execute as @a[distance=..1.5,tag=!admiral] run tag @e[tag=adm_torpedo,limit=1,sort=nearest] add hit_entity
-
-execute if entity @s[tag=hit_wall] run tag @s add explode_now
-execute if entity @s[tag=hit_entity] run tag @s add explode_now
-
 # --- 爆発処理 ---
 execute unless entity @s[tag=explode_now] run return 0
 
-# 攻撃主(飼い主)の特定
+# 攻撃主特定
 scoreboard players operation #OWNER_ID temp = @s player_id
 tag @a remove attacker_temp
 execute as @a if score @s player_id = #OWNER_ID temp run tag @s add attacker_temp
 
-# 演出
+# 共通演出
 playsound minecraft:entity.generic.explode master @a ~ ~ ~ 2 1
 particle minecraft:explosion_emitter ~ ~ ~ 1 0 0 0 1
 
-# ▼ ダメージ処理（ここだけ重要）▼
-# 飼い主がいるなら "by ..." をつけてログを出す
-execute if entity @p[tag=attacker_temp] as @a[distance=..4] run damage @s 8 minecraft:player_explosion by @p[tag=attacker_temp,limit=1]
-# いないなら普通に爆発
-execute unless entity @p[tag=attacker_temp] as @a[distance=..4] run damage @s 8 minecraft:player_explosion
+# ▼ ダメージ処理 ▼
+summon area_effect_cloud ~ ~ ~ {Tags:["dmg_proxy"],Duration:5}
+
+# 名前設定
+execute if entity @s[tag=type_shimakaze] run data modify entity @e[tag=dmg_proxy,limit=1] CustomName set value '{"text":"61cm五連装(酸素)魚雷","color":"aqua","bold":true}'
+execute if entity @s[tag=type_abukuma] run data modify entity @e[tag=dmg_proxy,limit=1] CustomName set value '{"text":"61cm四連装(酸素)魚雷","color":"gold","bold":true}'
+execute if entity @s[tag=type_kitakami] run data modify entity @e[tag=dmg_proxy,limit=1] CustomName set value '{"text":"61cm五連装(酸素)魚雷","color":"green","bold":true}'
+
+# ダメージ実行 & ポイント判定
+
+# === A. 島風 (8ダメージ) ===
+execute if entity @s[tag=type_shimakaze] as @a[distance=..4] run scoreboard players operation @s temp = @s deaths
+execute if entity @s[tag=type_shimakaze] as @a[distance=..4] run damage @s 8 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1] from @e[tag=dmg_proxy,limit=1]
+execute if entity @s[tag=type_shimakaze] as @a[distance=..4] if score @s deaths > @s temp unless score @s player_id = #OWNER_ID temp as @a if score @s player_id = #OWNER_ID temp run scoreboard players add @s kills 1
+
+# === B. 阿武隈 (12ダメージ) ===
+execute if entity @s[tag=type_abukuma] as @a[distance=..4] run scoreboard players operation @s temp = @s deaths
+execute if entity @s[tag=type_abukuma] as @a[distance=..4] run damage @s 12 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1] from @e[tag=dmg_proxy,limit=1]
+execute if entity @s[tag=type_abukuma] as @a[distance=..4] if score @s deaths > @s temp unless score @s player_id = #OWNER_ID temp as @a if score @s player_id = #OWNER_ID temp run scoreboard players add @s kills 1
+
+# === C. 北上 (10ダメージ) ===
+execute if entity @s[tag=type_kitakami] as @a[distance=..4] run scoreboard players operation @s temp = @s deaths
+execute if entity @s[tag=type_kitakami] as @a[distance=..4] run damage @s 10 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1] from @e[tag=dmg_proxy,limit=1]
+execute if entity @s[tag=type_kitakami] as @a[distance=..4] if score @s deaths > @s temp unless score @s player_id = #OWNER_ID temp as @a if score @s player_id = #OWNER_ID temp run scoreboard players add @s kills 1
 
 # 消滅
+kill @e[tag=dmg_proxy]
 tag @a remove attacker_temp
 kill @s

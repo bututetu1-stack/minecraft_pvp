@@ -39,6 +39,8 @@ scoreboard players reset * cd_adm_artillery
 scoreboard players reset * cd_adm_torpedo
 scoreboard players reset * cd_adm_air
 scoreboard players reset * cd_adm_aa
+scoreboard players reset * ammo
+scoreboard players reset * timer
 
 # 【修正】全員の基礎HPを 20 -> 40 に変更
 execute as @a run attribute @s minecraft:generic.max_health base set 40
@@ -83,6 +85,9 @@ tag @a remove launcher_target
 tag @a remove current_caster
 tag @a remove current_attacker
 tag @a remove item_recipient
+# 【追加】提督用一時タグ
+tag @a remove attacker_temp
+tag @a remove using_skill
 
 tag @a remove is_ready
 tag @a remove on_cd
@@ -107,6 +112,24 @@ kill @e[tag=ninja_shadow]
 kill @e[tag=shadow_hitbox]
 # 魔術師の炎玉を消去
 kill @e[type=armor_stand,tag=mag_fireball]
+# ダメージ判定用プロキシを消去
+kill @e[tag=dmg_proxy]
+
+# ▼▼▼ 追加: 提督用エンティティ消去 ▼▼▼
+# 砲撃マーカー
+kill @e[tag=artillery_marker]
+kill @e[tag=new_marker]
+# 魚雷
+kill @e[tag=adm_torpedo]
+kill @e[tag=new_torp]
+# 航空支援
+kill @e[tag=airstrike_center]
+kill @e[tag=adm_plane]
+kill @e[tag=temp_air_marker]
+# 爆弾
+kill @e[tag=adm_bomb]
+kill @e[tag=new_bomb]
+
 
 # 残留アイテムの完全消去
 kill @e[type=item]
