@@ -5,7 +5,6 @@ scoreboard players remove @s mana 5
 
 # 2. 飛行タグ付与
 tag @s add mag_flying_true
-tag @s remove mag_flying_false
 
 # 3. 飛行タイマー初期化
 scoreboard players set @s mag_fly_tick 0

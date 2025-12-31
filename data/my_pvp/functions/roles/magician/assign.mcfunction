@@ -20,7 +20,7 @@ scoreboard players set @s cd_mag_book 0
 
 # 6. 飛行状態初期化
 tag @s remove mag_flying_true
-tag @s add mag_flying_false
+# 初期化は飛行タグの削除のみで行う（非飛行状態はタグがないことで判定）
 
 # 7. 効果音
 playsound minecraft:entity.evoker.prepare_summon master @s ~ ~ ~ 1 1

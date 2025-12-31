@@ -10,7 +10,6 @@ tag @s remove role_assigned
 
 # 飛行状態もリセット
 tag @s remove mag_flying_true
-tag @s add mag_flying_false
 effect clear @s minecraft:slow_falling
 
 # IDがない場合は付与する（安全装置）
