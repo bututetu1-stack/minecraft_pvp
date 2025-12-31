@@ -3,4 +3,4 @@ execute as @s run worldborder set 59000000
 execute as @s at @s run setworldspawn ~ ~ ~
 execute as @s run kill @e[tag=border_center]
 execute as @s run scoreboard players set #BORDER_RADIUS border_radius 0
-execute as @s run scoreboard players set @s border_remove 0
+gamerule spawnRadius 0
