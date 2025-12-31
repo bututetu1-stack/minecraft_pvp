@@ -14,19 +14,23 @@ execute at @s run data modify entity @e[tag=dmg_proxy,limit=1,sort=nearest] Cust
 
 # --- 3. ダメージ実行 (火力強化版) ---
 
-# === A. 彗星 (12ダメージ) ===
+# === A. 彗星 (15ダメージ, 半径5m) ===
+# 強化: 12 -> 15
 execute if entity @s[tag=type_suisei] as @a[distance=..5] run scoreboard players operation @s temp = @s deaths
-execute if entity @s[tag=type_suisei] as @a[distance=..5] run damage @s 12 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1,sort=nearest] from @e[tag=dmg_proxy,limit=1,sort=nearest]
+execute if entity @s[tag=type_suisei] as @a[distance=..5] run damage @s 15 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1,sort=nearest] from @e[tag=dmg_proxy,limit=1,sort=nearest]
 execute if entity @s[tag=type_suisei] as @a[distance=..5] if score @s deaths > @s temp unless score @s player_id = #OWNER_ID temp as @a if score @s player_id = #OWNER_ID temp run scoreboard players add @s kills 1
 
-# === B. 烈風 (10ダメージ) ===
+# === B. 烈風 (12ダメージ, 半径8m) ===
+# 強化: 10 -> 12
 execute if entity @s[tag=type_reppu] as @a[distance=..8] run scoreboard players operation @s temp = @s deaths
-execute if entity @s[tag=type_reppu] as @a[distance=..8] run damage @s 10 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1,sort=nearest] from @e[tag=dmg_proxy,limit=1,sort=nearest]
+execute if entity @s[tag=type_reppu] as @a[distance=..8] run damage @s 12 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1,sort=nearest] from @e[tag=dmg_proxy,limit=1,sort=nearest]
 execute if entity @s[tag=type_reppu] as @a[distance=..8] if score @s deaths > @s temp unless score @s player_id = #OWNER_ID temp as @a if score @s player_id = #OWNER_ID temp run scoreboard players add @s kills 1
 
-# === C. 流星 (24ダメージ - 即死級) ===
+# === C. 流星 (30ダメージ, 半径6m) ===
+# 強化: 24 -> 30 (即死)
+# 範囲強化: 4m -> 6m
 execute if entity @s[tag=type_ryusei] as @a[distance=..6] run scoreboard players operation @s temp = @s deaths
-execute if entity @s[tag=type_ryusei] as @a[distance=..6] run damage @s 24 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1,sort=nearest] from @e[tag=dmg_proxy,limit=1,sort=nearest]
+execute if entity @s[tag=type_ryusei] as @a[distance=..6] run damage @s 30 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1,sort=nearest] from @e[tag=dmg_proxy,limit=1,sort=nearest]
 execute if entity @s[tag=type_ryusei] as @a[distance=..6] if score @s deaths > @s temp unless score @s player_id = #OWNER_ID temp as @a if score @s player_id = #OWNER_ID temp run scoreboard players add @s kills 1
 
 # --- 4. 後始末 ---

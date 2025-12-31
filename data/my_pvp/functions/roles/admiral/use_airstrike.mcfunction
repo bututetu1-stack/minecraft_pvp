@@ -1,6 +1,9 @@
 # CTチェック
 execute if score @s cd_adm_air matches 1.. run return 0
-scoreboard players set @s cd_adm_air 800
+
+# --- 変更点: CTを 800 -> 600 (30秒) に短縮 ---
+scoreboard players set @s cd_adm_air 600
+
 tellraw @a [{"text":"味方航空支援艦隊が到着しました！","color":"red"}]
 
 # --- マーカー設置 ---

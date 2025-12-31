@@ -12,7 +12,7 @@ item replace entity @s container.1 with minecraft:carrot_on_a_stick{adm_torpedo:
 
 # 3. [航空支援] (必殺技: CT 40秒) -> Slot 2
 # Tag: adm_air, CMD: 3
-item replace entity @s container.2 with minecraft:carrot_on_a_stick{adm_air:1b,CustomModelData:3,display:{Name:'{"text":"【航空支援】","color":"red","bold":true}',Lore:['{"text":"[右クリック] 絨毯爆撃要請","color":"yellow"}','{"text":"CT: 40秒","color":"gray"}']},Unbreakable:1b} 1
+item replace entity @s container.2 with minecraft:carrot_on_a_stick{adm_air:1b,CustomModelData:3,display:{Name:'{"text":"【航空支援】","color":"red","bold":true}',Lore:['{"text":"[右クリック] 絨毯爆撃要請","color":"yellow"}','{"text":"CT: 30秒","color":"gray"}']},Unbreakable:1b} 1
 
 # 4. [対空カットイン] (防御: CT 15秒) -> Slot 3
 # Tag: adm_aa, CMD: 4
