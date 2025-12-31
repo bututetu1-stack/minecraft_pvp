@@ -124,6 +124,8 @@ gamerule keepInventory true
 gamerule doDaylightCycle false
 time set day
 
+# 即時復活を有効化（デフォルトでリスポーン画面をスキップ）
+gamerule doImmediateRespawn true
 # --- ボーダー設定用トリガー ---
 scoreboard objectives add border_distance trigger "ボーダー距離"
 # 新規参加プレイヤー向けにトリガーを有効化
