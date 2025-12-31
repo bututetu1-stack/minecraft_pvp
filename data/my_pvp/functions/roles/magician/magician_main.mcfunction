@@ -38,6 +38,6 @@ execute as @s[scores={cd_mag_broom=1}] run playsound minecraft:block.note_block.
 scoreboard players remove @s[scores={cd_mag_broom=1..}] cd_mag_broom 1
 
 # 魔術本 (Slot 1)
-execute as @s[scores={cd_mag_book=1}] run item replace entity @s container.1 with minecraft:book{magician_book:1b,display:{Name:'{"text":"魔術本","italic":false,"color":"gold","bold":true}',Lore:['{"text":"[Q]キー: 炎玉発射","color":"yellow"}','{"text":"Cost: 5 MANA","color":"gray"}','{"text":"ダメージ: ハート1個分","color":"red"}','{"text":"CT: 1s","color":"aqua"}']}} 1
+execute as @s[scores={cd_mag_book=1}] run item replace entity @s container.1 with minecraft:book{magician_book:1b,display:{Name:'{"text":"魔術本","italic":false,"color":"gold","bold":true}',Lore:['{"text":"[Q]キー: 炎玉発射","color":"yellow"}','{"text":"Cost: 5 MANA","color":"gray"}','{"text":"ダメージ: ハート3個分","color":"red"}','{"text":"CT: 0s","color":"aqua"}']}} 1
 execute as @s[scores={cd_mag_book=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 2
 scoreboard players remove @s[scores={cd_mag_book=1..}] cd_mag_book 1

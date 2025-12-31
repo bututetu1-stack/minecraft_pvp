@@ -1,19 +1,11 @@
-# 1. 既存のアイテムと役職タグを消す
-clear @s
-tag @s remove mechanic
-tag @s remove ninja
-tag @s remove scout
-tag @s remove tank
-tag @s remove berserker
-tag @s remove magician
-tag @s remove mag_flying_true
-tag @s remove role_assigned
+# 共通セットアップ
+function my_pvp:debug/common_setup
 
 # 2. スカウトに任命する
 function my_pvp:roles/scout/assign
 
-# 3. デバッグ用：即座にアイテムを配布
+# デバッグ用：即座にアイテムを配布
 function my_pvp:system/give_scout_items
 
-# 4. テスト用アナウンス
-tellraw @s [{"text":"[Debug] ","color":"gray"},{"text":"スカウトに変更しました","color":"aqua"}]
+# 3. テスト用アナウンス
+tellraw @s [{"text":"[Debug] ","color":"gray"},{"text":"あなたは ","color":"white"},{"text":"『立体機動兵』","color":"aqua","bold":true},{"text":" に変更しました","color":"white"}]

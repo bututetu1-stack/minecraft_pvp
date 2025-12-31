@@ -12,6 +12,10 @@ particle minecraft:cloud ~ ~ ~ 0.5 0.1 0.5 0.1 15
 particle minecraft:witch ~ ~ ~ 0.8 0.3 0.8 0.02 20
 
 # 5. 通知
+# マナ切れで着陸した場合、マナ不足メッセージも表示
+execute if score @s mana matches ..4 run tellraw @s [{"text":"[Magician] ","color":"light_purple"},{"text":"マナが足りません！","color":"red"}]
+execute if score @s mana matches ..4 run playsound minecraft:block.note_block.bass master @s ~ ~ ~ 1 0.5
+
 tellraw @s [{"text":"[Magician] ","color":"light_purple"},{"text":"着陸！","color":"yellow"}]
 
 # 5.5. 飛行終了時のアイテム返却（所持していなければ戻す）
