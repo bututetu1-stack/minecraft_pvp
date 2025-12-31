@@ -93,6 +93,23 @@ C:\Users\<ユーザー名>\curseforge\minecraft\Instances\pvp\saves\<ワール�
 /reload
 ```
 
+### ボーダー設定（リスポーンエリア指定）
+
+以下のコマンドで、立っている位置を中心に正方形のワールドボーダーを作成し、内側全体をリスポーンエリアとして扱えます。
+
+```mcfunction
+# ボーダーを設定（中心に立って実行）
+# n は 1 〜 100（現在の実装範囲）
+/trigger border_distance set <n>
+```
+```mcfunction
+# ボーダーを解除（元に戻す）
+/function my_pvp:system/clear_border
+```
+
+ - 動作概要：プレイヤーの現在位置をワールドスポーンに設定し、ワールドボーダーの辺長を `n * 2` に設定します。リスポーン位置の分散や復活処理はデータパック側のロジックで制御され、必要に応じてプレイヤーを散開します。
+ - 使用方法：ボーダーの中心に立ち、目的の距離 `n` を指定して `/trigger border_distance set <n>` を実行してください。解除は `/function my_pvp:system/clear_border` を使用してください。
+ - 注意：現在 `data/my_pvp/functions/system/apply_border.mcfunction` は `n=1..100` に対応しています。
 
 ## 🗂️ プロジェクト構造
 

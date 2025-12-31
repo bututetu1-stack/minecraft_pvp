@@ -116,3 +116,13 @@ gamerule doMobSpawning false
 
 # HP自然回復の停止 (空腹ゲージが満タンでも回復しない)
 gamerule naturalRegeneration false
+
+# --- ボーダー設定用トリガー ---
+scoreboard objectives add border_distance trigger "ボーダー距離"
+# 新規参加プレイヤー向けにトリガーを有効化
+scoreboard players enable @a border_distance
+## ボーダー中心の半径保存用スコア
+scoreboard objectives add border_radius dummy "ボーダー半径"
+scoreboard objectives add last_death dummy "前回のデス数"
+# 初期化: 現在の deaths を last_death にコピー
+execute as @a run scoreboard players operation @s last_death = @s deaths
