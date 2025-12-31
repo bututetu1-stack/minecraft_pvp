@@ -2,7 +2,6 @@
 
 # 1. 飛行タグ更新
 tag @s remove mag_flying_true
-tag @s add mag_flying_false
 
 # 2. 飛行エフェクトを全て解除
 effect clear @s minecraft:levitation

@@ -15,5 +15,4 @@ scoreboard players set @s cd_mag_book 0
 
 # 5. 飛行状態初期化
 tag @s remove mag_flying_true
-tag @s add mag_flying_false
 scoreboard players set @s mag_fly_tick 0
