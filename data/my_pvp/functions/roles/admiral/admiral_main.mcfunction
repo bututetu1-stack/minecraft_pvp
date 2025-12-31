@@ -39,6 +39,7 @@ execute as @e[tag=adm_torpedo] at @s run function my_pvp:roles/admiral/tick_torp
 
 # 航空支援の制御
 execute as @e[tag=airstrike_center] at @s run function my_pvp:roles/admiral/process_airstrike
+execute as @e[tag=adm_bomb] at @s run function my_pvp:roles/admiral/tick_bomb
 
 # 【追加】アイテムスキャン処理を実行
 function my_pvp:roles/admiral/scan_items
