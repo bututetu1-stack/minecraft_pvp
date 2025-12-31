@@ -116,3 +116,10 @@ gamerule doMobSpawning false
 
 # HP自然回復の停止 (空腹ゲージが満タンでも回復しない)
 gamerule naturalRegeneration false
+
+# 死亡時のアイテムドロップを無効化（インベントリを保持）
+gamerule keepInventory true
+
+# 常に昼に固定する（時間停止と現在時刻を昼に設定）
+gamerule doDaylightCycle false
+time set day
