@@ -123,6 +123,7 @@ gamerule keepInventory true
 # 常に昼に固定する（時間停止と現在時刻を昼に設定）
 gamerule doDaylightCycle false
 time set day
+
 # --- ボーダー設定用トリガー ---
 scoreboard objectives add border_distance trigger "ボーダー距離"
 # 新規参加プレイヤー向けにトリガーを有効化
