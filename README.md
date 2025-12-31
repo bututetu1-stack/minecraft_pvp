@@ -11,11 +11,18 @@ Minecraft 1.20.1 用のカスタム PVP データパック。
 
 ### 実装済み役職
 
-| 役職 | 特徴 | 主なアビリティ |
-|------|------|---------------|
-| **Mechanic** | ガジェットを設置して戦う | タレット、地雷、ランチャー、スネア、修理 |
-| **Ninja** | 高機動＋ステルス戦闘に特化 | 影縫い、変わり身、煙玉 |
-| **Samurai** | - | - |
+| 役職 | サブタイトル（特徴） | アイテム |
+|------|--------------------|---------------|
+| **Mechanic** | ガジェットを駆使して戦場を支配せよ | マイクロタレット、地雷、インパクト・ランチャー、重力スネア、エンジニアレンチ |
+| **Ninja** | 変幻自在の忍術で敵を翻弄せよ | 忍刀、変わり身：壱／弐／参、影縫い、煙玉 |
+| **Berserker** | 血を捧げ、敵を粉砕せよ | ブラッドアックス、リープフェザー、ブラッドクリスタル |
+| **Magician** | 魔力を操り、空を舞え | 魔術箒、魔術本 |
+| **Tank** | 歩く要塞となり、戦場を蹂躙せよ | タイタンハンマー、アースクラッシュ |
+| **Scout** | ワイヤーを操り、戦場を縦横無尽に駆け巡れ | ワイヤーボウ、リパルサーブレード、矢 |
+| **Stalker** | 執念深く獲物を追い詰め、息の根を止めよ | 凶手の剣、追跡のコンパス |
+| **Admiral** | 全艦隊指揮、圧倒的火力で制圧せよ | 砲撃支援、魚雷カットイン、航空支援、対空カットイン |
+| **Samurai** | 実装中（開発中） | 実装中 |
+
 
 ---
 
@@ -52,11 +59,31 @@ C:\Users\<ユーザー名>\curseforge\minecraft\Instances\pvp\saves\<ワール�
 ### デバッグ用
 
 ```mcfunction
+# 指定役職に強制変更（テスト用）
+
+# Admiral に強制変更（テスト用）
+/function my_pvp:debug/admiral
+
+# Berserker に強制変更（テスト用）
+/function my_pvp:debug/berserker
+
+# Magician に強制変更（テスト用）
+/function my_pvp:debug/magician
+
 # Mechanic に強制変更（テスト用）
 /function my_pvp:debug/mechanic
 
 # Ninja に強制変更（テスト用）
 /function my_pvp:debug/ninja
+
+# Scout に強制変更（テスト用）
+/function my_pvp:debug/scout
+
+# Stalker に強制変更（テスト用）
+/function my_pvp:debug/stalker
+
+# Tank に強制変更（テスト用）
+/function my_pvp:debug/tank
 ```
 
 ### その他
