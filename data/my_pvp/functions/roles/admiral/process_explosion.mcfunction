@@ -84,21 +84,38 @@ execute if entity @s[tag=type_yamato] run data modify entity @e[tag=dmg_proxy,li
 execute if entity @s[tag=type_kongo] run data modify entity @e[tag=dmg_proxy,limit=1,sort=nearest] CustomName set value '{"text":"戦艦金剛","color":"gold","bold":true}'
 execute if entity @s[tag=type_nagato] run data modify entity @e[tag=dmg_proxy,limit=1,sort=nearest] CustomName set value '{"text":"戦艦長門","color":"light_purple","bold":true}'
 
-# 4. 攻撃実行 & ポイント判定
+# --- 4. ダメージ処理 (手動判定方式) ---
+
+# 1. 代理攻撃用の雲(AEC)を召喚
+summon area_effect_cloud ~ ~ ~ {Tags:["dmg_proxy"],Duration:5}
+
+# 2. 艦種に応じて雲に名前を付ける
+execute if entity @s[tag=type_yamato] run data modify entity @e[tag=dmg_proxy,limit=1,sort=nearest] CustomName set value '{"text":"戦艦大和","color":"dark_red","bold":true}'
+execute if entity @s[tag=type_kongo] run data modify entity @e[tag=dmg_proxy,limit=1,sort=nearest] CustomName set value '{"text":"戦艦金剛","color":"gold","bold":true}'
+execute if entity @s[tag=type_nagato] run data modify entity @e[tag=dmg_proxy,limit=1,sort=nearest] CustomName set value '{"text":"戦艦長門","color":"light_purple","bold":true}'
+
+# 3. 攻撃実行 & ポイント判定
+# 【修正】 unless score @s player_id = #OWNER_ID temp を追加して自分を除外
 
 # === A. 大和 ===
 execute if entity @s[tag=type_yamato] as @a[distance=..15] run scoreboard players operation @s temp = @s deaths
-execute if entity @s[tag=type_yamato] as @a[distance=..15] run damage @s 30 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1,sort=nearest] from @e[tag=dmg_proxy,limit=1,sort=nearest]
+# ▼ ここを変更
+execute if entity @s[tag=type_yamato] as @a[distance=..15] unless score @s player_id = #OWNER_ID temp run damage @s 30 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1,sort=nearest] from @e[tag=dmg_proxy,limit=1,sort=nearest]
+# ▲
 execute if entity @s[tag=type_yamato] as @a[distance=..15] if score @s deaths > @s temp unless score @s player_id = #OWNER_ID temp as @a if score @s player_id = #OWNER_ID temp run scoreboard players add @s kills 1
 
 # === B. 金剛 ===
 execute if entity @s[tag=type_kongo] as @a[distance=..8] run scoreboard players operation @s temp = @s deaths
-execute if entity @s[tag=type_kongo] as @a[distance=..8] run damage @s 12 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1,sort=nearest] from @e[tag=dmg_proxy,limit=1,sort=nearest]
+# ▼ ここを変更
+execute if entity @s[tag=type_kongo] as @a[distance=..8] unless score @s player_id = #OWNER_ID temp run damage @s 12 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1,sort=nearest] from @e[tag=dmg_proxy,limit=1,sort=nearest]
+# ▲
 execute if entity @s[tag=type_kongo] as @a[distance=..8] if score @s deaths > @s temp unless score @s player_id = #OWNER_ID temp as @a if score @s player_id = #OWNER_ID temp run scoreboard players add @s kills 1
 
 # === C. 長門 ===
 execute if entity @s[tag=type_nagato] as @a[distance=..10] run scoreboard players operation @s temp = @s deaths
-execute if entity @s[tag=type_nagato] as @a[distance=..10] run damage @s 20 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1,sort=nearest] from @e[tag=dmg_proxy,limit=1,sort=nearest]
+# ▼ ここを変更
+execute if entity @s[tag=type_nagato] as @a[distance=..10] unless score @s player_id = #OWNER_ID temp run damage @s 20 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1,sort=nearest] from @e[tag=dmg_proxy,limit=1,sort=nearest]
+# ▲
 execute if entity @s[tag=type_nagato] as @a[distance=..10] if score @s deaths > @s temp unless score @s player_id = #OWNER_ID temp as @a if score @s player_id = #OWNER_ID temp run scoreboard players add @s kills 1
 
 

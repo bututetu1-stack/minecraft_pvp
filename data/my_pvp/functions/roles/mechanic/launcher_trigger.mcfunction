@@ -17,7 +17,7 @@ execute unless entity @a[tag=launcher_target] run return 0
 execute as @a[tag=launcher_target] at @s run tp @s ~ ~1.2 ~
 
 # 浮遊と加速
-execute as @a[tag=launcher_target] run effect give @s minecraft:levitation 1 10 true
+execute as @a[tag=launcher_target] run effect give @s minecraft:levitation 1 15 true
 execute as @a[tag=launcher_target] run effect give @s minecraft:speed 2 20 true
 
 # 音とエフェクト

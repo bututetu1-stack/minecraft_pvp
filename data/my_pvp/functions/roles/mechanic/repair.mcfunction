@@ -10,8 +10,8 @@ execute unless score @p[tag=owner_temp] scrap matches 1.. run return 0
 scoreboard players remove @p[tag=owner_temp] scrap 1
 
 # 3. 回復処理
-# 近くのVisual本体を探してHPスコアを全快(10)にする
-execute at @s as @e[tag=gadget_visual,distance=..1,limit=1] run scoreboard players set @s gadget_hp 10
+# 【修正】HPを全快(5)にする (元: 10)
+execute at @s as @e[tag=gadget_visual,distance=..1,limit=1] run scoreboard players set @s gadget_hp 5
 
 # 4. 演出
 particle minecraft:crit ~ ~0.5 ~ 0.2 0.2 0.2 0.1 5

@@ -30,19 +30,19 @@ execute if entity @e[tag=new_marker,tag=hit_block] as @e[tag=new_marker] if scor
 
 # 2. 艦種決定 & 設定
 
-# 【戦艦大和】 (temp=0) -> 6秒, 赤
+# 【戦艦大和】 (temp=0) -> 4.5秒, 赤
 execute if entity @e[tag=new_marker,tag=hit_block] as @e[tag=new_marker] if score @s temp matches 0 run tag @s add type_yamato
-execute if entity @e[tag=new_marker,tag=hit_block] as @e[tag=new_marker] if score @s temp matches 0 run scoreboard players set @s temp 120
+execute if entity @e[tag=new_marker,tag=hit_block] as @e[tag=new_marker] if score @s temp matches 0 run scoreboard players set @s temp 90
 execute if entity @e[tag=new_marker,tag=hit_block] as @e[tag=new_marker] if score @s temp matches 0 run data modify entity @s CustomName set value '{"text":"戦艦大和","color":"dark_red","bold":true}'
 
-# 【戦艦金剛】 (temp=1) -> 2秒, 金
+# 【戦艦金剛】 (temp=1) -> 1秒, 金
 execute if entity @e[tag=new_marker,tag=hit_block] as @e[tag=new_marker] if score @s temp matches 1 run tag @s add type_kongo
-execute if entity @e[tag=new_marker,tag=hit_block] as @e[tag=new_marker] if score @s temp matches 1 run scoreboard players set @s temp 40
+execute if entity @e[tag=new_marker,tag=hit_block] as @e[tag=new_marker] if score @s temp matches 1 run scoreboard players set @s temp 20
 execute if entity @e[tag=new_marker,tag=hit_block] as @e[tag=new_marker] if score @s temp matches 1 run data modify entity @s CustomName set value '{"text":"戦艦金剛","color":"gold","bold":true}'
 
-# 【戦艦長門】 (temp=2) -> 4秒, 紫
+# 【戦艦長門】 (temp=2) -> 3秒, 紫
 execute if entity @e[tag=new_marker,tag=hit_block] as @e[tag=new_marker] if score @s temp matches 2 run tag @s add type_nagato
-execute if entity @e[tag=new_marker,tag=hit_block] as @e[tag=new_marker] if score @s temp matches 2 run scoreboard players set @s temp 80
+execute if entity @e[tag=new_marker,tag=hit_block] as @e[tag=new_marker] if score @s temp matches 2 run scoreboard players set @s temp 60
 execute if entity @e[tag=new_marker,tag=hit_block] as @e[tag=new_marker] if score @s temp matches 2 run data modify entity @s CustomName set value '{"text":"戦艦長門","color":"light_purple","bold":true}'
 
 

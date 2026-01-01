@@ -12,7 +12,7 @@ execute unless block ~ ~2 ~ minecraft:air run return 0
 # 3. 効果発動
 # 浮遊 (Levitation) Lv10 を 0.8秒付与 → 一気に上昇
 # ※落下ダメージはgameruleで無効化されているため、着地ケアは不要
-effect give @s minecraft:levitation 1 9 true
+effect give @s minecraft:levitation 1 15 true
 
 # 4. 演出 (狂気の愛)
 # 音: 羽ばたき音 + 魔女の笑い声（狂気感）

@@ -1,6 +1,9 @@
 # 1. 試合状態を停止
 scoreboard players set #GLOBAL match_state 2
 
+# ボスバーを隠す
+bossbar set my_pvp:timer visible false
+
 # 2. タイトル表示
 title @a title {"text":"GAME SET!","color":"red","bold":true}
 title @a subtitle {"text":"お疲れ様でした！","color":"yellow"}

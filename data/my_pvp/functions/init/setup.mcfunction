@@ -123,3 +123,10 @@ gamerule keepInventory true
 # 常に昼に固定する（時間停止と現在時刻を昼に設定）
 gamerule doDaylightCycle false
 time set day
+
+# (既存のコードの最後に追加)
+
+# --- タイマー用ボスバーの作成 ---
+bossbar add my_pvp:timer {"text":"残り時間","color":"yellow","bold":true}
+bossbar set my_pvp:timer style progress
+bossbar set my_pvp:timer max 6000

@@ -63,6 +63,18 @@ scoreboard objectives setdisplay sidebar points
 # タイマー加算 (1tickに1加算)
 execute if score #GLOBAL match_state matches 1 run scoreboard players add #GLOBAL match_timer 1
 
+# --- 【追加】ボスバー更新処理 ---
+# 1. 残り時間を計算用スコア(#CALC temp)に代入 (6000 - 現在経過時間)
+scoreboard players set #CALC temp 6000
+execute if score #GLOBAL match_state matches 1 run scoreboard players operation #CALC temp -= #GLOBAL match_timer
+
+# 2. ボスバーに数値を反映
+execute if score #GLOBAL match_state matches 1 run execute store result bossbar my_pvp:timer value run scoreboard players get #CALC temp
+
+# 3. 演出: 残り1分(1200tick)を切ったら赤くする
+execute if score #CALC temp matches ..1200 run bossbar set my_pvp:timer color red
+execute if score #CALC temp matches 1201.. run bossbar set my_pvp:timer color yellow
+
 # ポイント計算
 execute as @a run scoreboard players operation @s points = @s kills
 execute as @a run scoreboard players operation @s points *= #POINT_KILL temp
@@ -100,3 +112,5 @@ execute as @a[tag=admiral] unless entity @s[nbt={Attributes:[{Name:"minecraft:ge
 
 # 魔術師 (HP 40)
 execute as @a[tag=magician] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/magician/apply_status
+
+
