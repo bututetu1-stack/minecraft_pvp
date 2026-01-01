@@ -43,3 +43,6 @@ execute as @e[tag=adm_bomb] at @s run function my_pvp:roles/admiral/tick_bomb
 
 # 【追加】アイテムスキャン処理を実行
 function my_pvp:roles/admiral/scan_items
+
+# 対空防御スキルの実行 (aa_center タグを持つエンティティに処理させる)
+execute as @e[type=area_effect_cloud,tag=aa_center] at @s run function my_pvp:roles/admiral/tick_aa
