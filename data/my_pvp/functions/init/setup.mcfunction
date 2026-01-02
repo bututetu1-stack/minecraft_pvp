@@ -87,6 +87,9 @@ scoreboard objectives add cd_adm_artillery dummy "砲撃支援CT"
 scoreboard objectives add cd_adm_torpedo dummy "魚雷CT"
 scoreboard objectives add cd_adm_air dummy "航空支援CT"
 scoreboard objectives add cd_adm_aa dummy "対空CT"
+scoreboard objectives add adm_formation dummy "陣形ID"
+scoreboard objectives add cd_formation dummy "陣形CT"
+scoreboard objectives add click_formation minecraft.used:minecraft.recovery_compass "羅針盤使用"
 
 # --- 初期値セット ---
 scoreboard players set #GLOBAL match_state 0
