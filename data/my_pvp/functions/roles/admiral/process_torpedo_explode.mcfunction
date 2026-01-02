@@ -6,6 +6,11 @@ scoreboard players operation #OWNER_ID temp = @s player_id
 tag @a remove attacker_temp
 execute as @a if score @s player_id = #OWNER_ID temp run tag @s add attacker_temp
 
+# 【追加】 攻撃主の陣形を取得
+scoreboard players set #FORMATION temp 0
+execute as @a[tag=attacker_temp] run scoreboard players operation #FORMATION temp = @s adm_formation
+
+
 # 共通演出
 playsound minecraft:entity.generic.explode master @a ~ ~ ~ 2 1
 particle minecraft:explosion_emitter ~ ~ ~ 1 0 0 0 1
@@ -19,21 +24,29 @@ execute if entity @s[tag=type_abukuma] run data modify entity @e[tag=dmg_proxy,l
 execute if entity @s[tag=type_kitakami] run data modify entity @e[tag=dmg_proxy,limit=1] CustomName set value '{"text":"61cm五連装(酸素)魚雷","color":"green","bold":true}'
 
 # ダメージ実行 & ポイント判定
-# 【修正】 unless score @s player_id = #OWNER_ID temp を追加
 
-# === A. 島風 (8ダメージ) ===
+# === A. 島風 (基本8) ===
+# 単縦:8, 輪形:5, 警戒:4
 execute if entity @s[tag=type_shimakaze] as @a[distance=..4] run scoreboard players operation @s temp = @s deaths
-execute if entity @s[tag=type_shimakaze] as @a[distance=..4] unless score @s player_id = #OWNER_ID temp run damage @s 8 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1] from @e[tag=dmg_proxy,limit=1]
+execute if entity @s[tag=type_shimakaze] as @a[distance=..4] unless score @s player_id = #OWNER_ID temp if score #FORMATION temp matches 0 run damage @s 8 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1] from @e[tag=dmg_proxy,limit=1]
+execute if entity @s[tag=type_shimakaze] as @a[distance=..4] unless score @s player_id = #OWNER_ID temp if score #FORMATION temp matches 1 run damage @s 5 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1] from @e[tag=dmg_proxy,limit=1]
+execute if entity @s[tag=type_shimakaze] as @a[distance=..4] unless score @s player_id = #OWNER_ID temp if score #FORMATION temp matches 2 run damage @s 4 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1] from @e[tag=dmg_proxy,limit=1]
 execute if entity @s[tag=type_shimakaze] as @a[distance=..4] if score @s deaths > @s temp unless score @s player_id = #OWNER_ID temp as @a if score @s player_id = #OWNER_ID temp run scoreboard players add @s kills 1
 
-# === B. 阿武隈 (12ダメージ) ===
+# === B. 阿武隈 (基本12) ===
+# 単縦:12, 輪形:8, 警戒:6
 execute if entity @s[tag=type_abukuma] as @a[distance=..4] run scoreboard players operation @s temp = @s deaths
-execute if entity @s[tag=type_abukuma] as @a[distance=..4] unless score @s player_id = #OWNER_ID temp run damage @s 12 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1] from @e[tag=dmg_proxy,limit=1]
+execute if entity @s[tag=type_abukuma] as @a[distance=..4] unless score @s player_id = #OWNER_ID temp if score #FORMATION temp matches 0 run damage @s 12 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1] from @e[tag=dmg_proxy,limit=1]
+execute if entity @s[tag=type_abukuma] as @a[distance=..4] unless score @s player_id = #OWNER_ID temp if score #FORMATION temp matches 1 run damage @s 8 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1] from @e[tag=dmg_proxy,limit=1]
+execute if entity @s[tag=type_abukuma] as @a[distance=..4] unless score @s player_id = #OWNER_ID temp if score #FORMATION temp matches 2 run damage @s 6 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1] from @e[tag=dmg_proxy,limit=1]
 execute if entity @s[tag=type_abukuma] as @a[distance=..4] if score @s deaths > @s temp unless score @s player_id = #OWNER_ID temp as @a if score @s player_id = #OWNER_ID temp run scoreboard players add @s kills 1
 
-# === C. 北上 (10ダメージ) ===
+# === C. 北上 (基本10) ===
+# 単縦:10, 輪形:6, 警戒:5
 execute if entity @s[tag=type_kitakami] as @a[distance=..4] run scoreboard players operation @s temp = @s deaths
-execute if entity @s[tag=type_kitakami] as @a[distance=..4] unless score @s player_id = #OWNER_ID temp run damage @s 10 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1] from @e[tag=dmg_proxy,limit=1]
+execute if entity @s[tag=type_kitakami] as @a[distance=..4] unless score @s player_id = #OWNER_ID temp if score #FORMATION temp matches 0 run damage @s 10 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1] from @e[tag=dmg_proxy,limit=1]
+execute if entity @s[tag=type_kitakami] as @a[distance=..4] unless score @s player_id = #OWNER_ID temp if score #FORMATION temp matches 1 run damage @s 6 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1] from @e[tag=dmg_proxy,limit=1]
+execute if entity @s[tag=type_kitakami] as @a[distance=..4] unless score @s player_id = #OWNER_ID temp if score #FORMATION temp matches 2 run damage @s 5 minecraft:player_explosion by @e[tag=dmg_proxy,limit=1] from @e[tag=dmg_proxy,limit=1]
 execute if entity @s[tag=type_kitakami] as @a[distance=..4] if score @s deaths > @s temp unless score @s player_id = #OWNER_ID temp as @a if score @s player_id = #OWNER_ID temp run scoreboard players add @s kills 1
 
 # 消滅
