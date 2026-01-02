@@ -11,7 +11,7 @@ execute if score @s cd_tank_crash matches 1.. run return 0
 scoreboard players set @s cd_tank_crash 200
 
 # スニークジャンプ処理 (省略なし、そのまま記述)
-execute if predicate my_pvp:is_sneaking run effect give @s minecraft:levitation 1 10 true
+execute if predicate my_pvp:is_sneaking run effect give @s minecraft:levitation 1 15 true
 execute if predicate my_pvp:is_sneaking run playsound minecraft:entity.generic.explode master @a ~ ~ ~ 1 0.6
 execute if predicate my_pvp:is_sneaking run particle minecraft:cloud ~ ~ ~ 0.5 0 0.5 0.1 20
 execute if predicate my_pvp:is_sneaking run return 1

@@ -28,7 +28,7 @@ summon armor_stand ~ ~ ~ {Tags:["gadget","sentry","gadget_visual"],Invulnerable:
 summon interaction ~ ~ ~ {Tags:["gadget_hitbox","sentry_hitbox"],width:0.8f,height:2.0f,response:1b}
 # 3. ID設定 & HP初期化
 execute as @e[tag=gadget_visual,limit=1,sort=nearest] run scoreboard players operation @s player_id = @p[tag=mechanic] player_id
-execute as @e[tag=gadget_visual,limit=1,sort=nearest] run scoreboard players set @s gadget_hp 10
+execute as @e[tag=gadget_visual,limit=1,sort=nearest] run scoreboard players set @s gadget_hp 5
 # 当たり判定にもIDを設定
 execute as @e[tag=gadget_hitbox,limit=1,sort=nearest] run scoreboard players operation @s player_id = @p[tag=mechanic] player_id
 # 設置音

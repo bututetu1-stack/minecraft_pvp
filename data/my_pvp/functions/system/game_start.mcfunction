@@ -29,5 +29,12 @@ execute as @a run function my_pvp:system/assign_new_id
 function my_pvp:system/init_role_deck
 function my_pvp:system/distribute_loop
 
+# --- ボスバーの初期化 ---
+# 全プレイヤーに表示
+bossbar set my_pvp:timer players @a
+bossbar set my_pvp:timer visible true
+bossbar set my_pvp:timer color yellow
+bossbar set my_pvp:timer value 6000
+
 # 4. 4秒後(80tick)に、試合開始の合図を出す
 schedule function my_pvp:system/start_sequence 4s replace

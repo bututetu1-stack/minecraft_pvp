@@ -10,6 +10,8 @@ execute as @e[type=item,tag=!id_set,nbt={Item:{tag:{adm_torpedo:1b}}}] run tag @
 execute as @e[type=item,tag=!id_set,nbt={Item:{tag:{adm_air:1b}}}] run tag @s add target_item
 # 対空 (Slot 3)
 execute as @e[type=item,tag=!id_set,nbt={Item:{tag:{adm_aa:1b}}}] run tag @s add target_item
+# 【追加】 羅針盤 (Slot 4)
+execute as @e[type=item,tag=!id_set,nbt={Item:{tag:{admiral_compass:1b}}}] run tag @s add target_item
 
 # マークされたアイテムに対してのみ、近くの提督のIDを付与
 execute as @e[tag=target_item] at @s if entity @p[tag=admiral,distance=..15] run scoreboard players operation @s player_id = @p[tag=admiral,limit=1,sort=nearest] player_id
@@ -22,10 +24,10 @@ tag @e[tag=target_item] remove target_item
 
 
 # 2. アイテム処理
-# 【重要修正】 tag=id_set の条件を復活させました。
-# これにより、ID付与に失敗したアイテムが消失するのを防ぎます。
-
 execute as @e[type=item,tag=id_set,nbt={Item:{tag:{adm_artillery:1b}}}] at @s run function my_pvp:roles/admiral/process_artillery
 execute as @e[type=item,tag=id_set,nbt={Item:{tag:{adm_torpedo:1b}}}] at @s run function my_pvp:roles/admiral/process_torpedo
 execute as @e[type=item,tag=id_set,nbt={Item:{tag:{adm_air:1b}}}] at @s run function my_pvp:roles/admiral/process_air
 execute as @e[type=item,tag=id_set,nbt={Item:{tag:{adm_aa:1b}}}] at @s run function my_pvp:roles/admiral/process_aa
+
+# 羅針盤の処理呼び出し (以前はIDが付与されず無視されていたため、ここで反応するようになります)
+execute as @e[type=item,tag=id_set,nbt={Item:{id:"minecraft:recovery_compass",tag:{admiral_compass:1b}}}] at @s run function my_pvp:roles/admiral/process_compass

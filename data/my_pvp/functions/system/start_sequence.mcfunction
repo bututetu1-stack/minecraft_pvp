@@ -12,7 +12,7 @@ execute as @a[tag=scout] run title @s subtitle {"text":"ワイヤーを操り、
 execute as @a[tag=tank] run title @s subtitle {"text":"歩く要塞となり、戦場を蹂躙せよ","color":"dark_green"}
 execute as @a[tag=berserker] run title @s subtitle {"text":"血を捧げ、敵を粉砕せよ","color":"red"}
 execute as @a[tag=stalker] run title @s subtitle {"text":"執念深く獲物を追い詰め、息の根を止めよ","color":"dark_red"}
-execute as @a[tag=admiral] run title @s subtitle {"text":"全艦隊指揮、圧倒的火力で制圧せよ","color":"dark_aqua"}
+execute as @a[tag=admiral] run title @s subtitle {"text":"暁の水平線に、勝利を刻め！","color":"dark_aqua"}
 
 # 【追加】魔術師のサブタイトル
 execute as @a[tag=magician] run title @s subtitle {"text":"魔力を操り、空を舞え","color":"light_purple"}

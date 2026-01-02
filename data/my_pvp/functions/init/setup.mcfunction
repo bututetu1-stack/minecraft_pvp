@@ -87,6 +87,12 @@ scoreboard objectives add cd_adm_artillery dummy "砲撃支援CT"
 scoreboard objectives add cd_adm_torpedo dummy "魚雷CT"
 scoreboard objectives add cd_adm_air dummy "航空支援CT"
 scoreboard objectives add cd_adm_aa dummy "対空CT"
+scoreboard objectives add adm_formation dummy "陣形ID"
+scoreboard objectives add cd_formation dummy "陣形CT"
+scoreboard objectives add click_formation minecraft.used:minecraft.recovery_compass "羅針盤使用"
+
+# 被ダメージ検知用 (提督の警戒陣などで使用)
+scoreboard objectives add damage_taken minecraft.custom:minecraft.damage_taken
 
 # --- 初期値セット ---
 scoreboard players set #GLOBAL match_state 0
@@ -123,3 +129,10 @@ gamerule keepInventory true
 # 常に昼に固定する（時間停止と現在時刻を昼に設定）
 gamerule doDaylightCycle false
 time set day
+
+# (既存のコードの最後に追加)
+
+# --- タイマー用ボスバーの作成 ---
+bossbar add my_pvp:timer {"text":"残り時間","color":"yellow","bold":true}
+bossbar set my_pvp:timer style progress
+bossbar set my_pvp:timer max 6000
