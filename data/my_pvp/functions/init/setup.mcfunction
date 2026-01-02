@@ -93,6 +93,9 @@ scoreboard objectives add click_formation minecraft.used:minecraft.recovery_comp
 
 # 被ダメージ検知用 (提督の警戒陣などで使用)
 scoreboard objectives add damage_taken minecraft.custom:minecraft.damage_taken
+# 警戒陣ペナルティ用
+scoreboard objectives add penalty_timer dummy
+scoreboard objectives add penalty_dmg dummy
 
 # --- 初期値セット ---
 scoreboard players set #GLOBAL match_state 0

@@ -113,4 +113,29 @@ execute as @a[tag=admiral] unless entity @s[nbt={Attributes:[{Name:"minecraft:ge
 # 魔術師 (HP 40)
 execute as @a[tag=magician] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/magician/apply_status
 
+# (既存のゲーム進行処理の後に追記)
 
+# ==========================================
+# ▼▼▼ 全役職共通: 遅延ダメージ処理システム ▼▼▼
+
+# 1. タイマー進行 (残り2tick以上の人を減らす)
+execute as @a[scores={penalty_timer=2..}] run scoreboard players remove @s penalty_timer 1
+
+# 2. ダメージ実行 (タイマーが1になった瞬間)
+# 音と通知
+execute as @a[scores={penalty_timer=1}] run tellraw @s {"text":"[!] 追加ダメージ","color":"red"}
+execute as @a[scores={penalty_timer=1}] run playsound minecraft:entity.player.hurt master @s ~ ~ ~ 1 1.5
+
+# ダメージ分岐 (scoresを1つにまとめました)
+execute as @a[scores={penalty_timer=1,penalty_dmg=1}] run damage @s 1 minecraft:generic
+execute as @a[scores={penalty_timer=1,penalty_dmg=2}] run damage @s 2 minecraft:generic
+execute as @a[scores={penalty_timer=1,penalty_dmg=4}] run damage @s 4 minecraft:generic
+execute as @a[scores={penalty_timer=1,penalty_dmg=6}] run damage @s 6 minecraft:generic
+execute as @a[scores={penalty_timer=1,penalty_dmg=8..}] run damage @s 8 minecraft:generic
+
+# 3. ループ防止タグの付与
+execute as @a[scores={penalty_timer=1}] run tag @s add ignore_penalty_loop
+
+# 4. 後処理 (リセット)
+execute as @a[scores={penalty_timer=1}] run scoreboard players set @s penalty_dmg 0
+execute as @a[scores={penalty_timer=1}] run scoreboard players set @s penalty_timer 0
