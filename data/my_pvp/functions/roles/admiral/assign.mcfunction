@@ -13,6 +13,8 @@ scoreboard players set @s cd_adm_artillery 0
 scoreboard players set @s cd_adm_torpedo 0
 scoreboard players set @s cd_adm_air 0
 scoreboard players set @s cd_adm_aa 0
+scoreboard players set @s cd_formation 0
+scoreboard players set @s adm_formation 0
 
 # 4. 音
 playsound minecraft:entity.experience_orb.pickup master @s ~ ~ ~ 1 0.5

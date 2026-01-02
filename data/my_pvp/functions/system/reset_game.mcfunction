@@ -41,6 +41,10 @@ scoreboard players reset * cd_adm_air
 scoreboard players reset * cd_adm_aa
 scoreboard players reset * ammo
 scoreboard players reset * timer
+# --- 提督 & 汎用システムのスコアリセット ---
+scoreboard players reset @a damage_taken
+scoreboard players reset @a adm_formation
+scoreboard players reset @a cd_formation
 
 # 【修正】全員の基礎HPを 20 -> 40 に変更
 execute as @a run attribute @s minecraft:generic.max_health base set 40

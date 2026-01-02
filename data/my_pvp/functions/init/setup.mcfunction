@@ -91,6 +91,9 @@ scoreboard objectives add adm_formation dummy "陣形ID"
 scoreboard objectives add cd_formation dummy "陣形CT"
 scoreboard objectives add click_formation minecraft.used:minecraft.recovery_compass "羅針盤使用"
 
+# 被ダメージ検知用 (提督の警戒陣などで使用)
+scoreboard objectives add damage_taken minecraft.custom:minecraft.damage_taken
+
 # --- 初期値セット ---
 scoreboard players set #GLOBAL match_state 0
 scoreboard players set #NEXT_ID player_id 1

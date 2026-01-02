@@ -1,8 +1,8 @@
 # 1. CTチェック
 execute if score @s cd_adm_aa matches 1.. run return 0
 
-# 2. 基本CT設定 (一律 30秒 = 600tick)
-scoreboard players set @s cd_adm_aa 600
+# 2. 基本CT設定 (一律 20秒 = 400tick)
+scoreboard players set @s cd_adm_aa 400
 
 # 3. 防御マーカーの設置 (自分の位置)
 summon area_effect_cloud ~ ~ ~ {Tags:["aa_center","new_aa"],Duration:200}
@@ -21,29 +21,33 @@ execute as @e[tag=new_aa] if score @s temp matches ..-1 run scoreboard players a
 # --- 5. パラメータ & セリフ設定 ---
 
 # === A. 秋月 (temp=0) ===
-# 効果: 10秒 (200tick)
+# 効果: 10秒 (200tick) - 耐性IV & 火炎耐性
 execute as @e[tag=new_aa] if score @s temp matches 0 run tag @s add type_akizuki
 execute as @e[tag=new_aa] if score @s temp matches 0 run scoreboard players set @s timer 200
 execute as @e[tag=new_aa] if score @s temp matches 0 at @s run tellraw @p[tag=admiral,limit=1,distance=..5] [{"text":"[秋月] ","color":"green","bold":true},{"text":"この秋月が健在な限り、やらせはしません！","color":"white","bold":false}]
+# 【追加】効果説明
+execute as @e[tag=new_aa] if score @s temp matches 0 at @s run tellraw @p[tag=admiral,limit=1,distance=..5] [{"text":"[効果] ","color":"gray"},{"text":"自身に耐性IV & 火炎耐性 (10秒)","color":"green"}]
 execute as @e[tag=new_aa] if score @s temp matches 0 at @s run playsound minecraft:entity.iron_golem.repair master @a ~ ~ ~ 1 1.5
 
 # === B. 摩耶 (temp=1) ===
-# 効果: 5秒 (100tick)
+# 効果: 5秒 (100tick) - 周囲にウィザーII & 鈍足
 execute as @e[tag=new_aa] if score @s temp matches 1 run tag @s add type_maya
 # Duration更新
 execute as @e[tag=new_aa] if score @s temp matches 1 run data merge entity @s {Duration:100}
 execute as @e[tag=new_aa] if score @s temp matches 1 run scoreboard players set @s timer 100
 execute as @e[tag=new_aa] if score @s temp matches 1 at @s run tellraw @p[tag=admiral,limit=1,distance=..5] [{"text":"[摩耶] ","color":"red","bold":true},{"text":"摩耶様の攻撃、喰らえ～っ！","color":"white","bold":false}]
+# 【追加】効果説明
+execute as @e[tag=new_aa] if score @s temp matches 1 at @s run tellraw @p[tag=admiral,limit=1,distance=..5] [{"text":"[効果] ","color":"gray"},{"text":"周囲の敵にウィザーII & 鈍足 (5秒)","color":"red"}]
 execute as @e[tag=new_aa] if score @s temp matches 1 at @s run playsound minecraft:entity.generic.explode master @a ~ ~ ~ 1 0.8
 
 # === C. Johnston (temp=2) ===
-# 効果: 10秒 (200tick)
+# 効果: 10秒 (200tick) - 速度II & 飛び道具無効化
 execute as @e[tag=new_aa] if score @s temp matches 2 run tag @s add type_johnston
 execute as @e[tag=new_aa] if score @s temp matches 2 run scoreboard players set @s timer 200
 execute as @e[tag=new_aa] if score @s temp matches 2 at @s run tellraw @p[tag=admiral,limit=1,distance=..5] [{"text":"[Johnston] ","color":"blue","bold":true},{"text":"突撃よ！　Open fire！","color":"white","bold":false}]
+# 【追加】効果説明
+execute as @e[tag=new_aa] if score @s temp matches 2 at @s run tellraw @p[tag=admiral,limit=1,distance=..5] [{"text":"[効果] ","color":"gray"},{"text":"自身に速度II & 飛び道具無効 (10秒)","color":"aqua"}]
 execute as @e[tag=new_aa] if score @s temp matches 2 at @s run playsound minecraft:entity.firework_rocket.blast master @a ~ ~ ~ 1 1.2
-
-# (JohnstonのCT短縮処理は削除しました)
 
 # 後処理
 tag @e[tag=new_aa] remove new_aa
