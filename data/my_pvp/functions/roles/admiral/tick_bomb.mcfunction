@@ -1,3 +1,6 @@
+# 【追加】凍結中は処理を停止
+execute if entity @s[tag=is_frozen] run return 0
+
 # --- 1. 位置調整 ---
 # 空中にいる場合は地面に落とす
 execute if entity @s[tag=bomb_falling] if block ~ ~-0.1 ~ minecraft:air run tp @s ~ ~-1 ~

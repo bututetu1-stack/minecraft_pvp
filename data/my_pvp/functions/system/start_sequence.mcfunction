@@ -13,9 +13,8 @@ execute as @a[tag=tank] run title @s subtitle {"text":"歩く要塞となり、�
 execute as @a[tag=berserker] run title @s subtitle {"text":"血を捧げ、敵を粉砕せよ","color":"red"}
 execute as @a[tag=stalker] run title @s subtitle {"text":"執念深く獲物を追い詰め、息の根を止めよ","color":"dark_red"}
 execute as @a[tag=admiral] run title @s subtitle {"text":"暁の水平線に、勝利を刻め！","color":"dark_aqua"}
-
-# 【追加】魔術師のサブタイトル
 execute as @a[tag=magician] run title @s subtitle {"text":"魔力を操り、空を舞え","color":"light_purple"}
+execute as @a[tag=chrono] run title @s subtitle {"text":"時を操り、戦場の運命を改変せよ","color":"yellow"}
 
 # 音とログ
 execute as @a at @s run playsound minecraft:entity.ender_dragon.growl master @s ~ ~ ~ 1 1
@@ -26,11 +25,9 @@ execute as @a[tag=mechanic] run function my_pvp:system/give_mechanic_items
 execute as @a[tag=ninja] run function my_pvp:system/give_ninja_items
 execute as @a[tag=scout] run function my_pvp:system/give_scout_items
 execute as @a[tag=tank] run function my_pvp:system/give_tank_items
-# 【追加】バーサーカーへの配布
 execute as @a[tag=berserker] run function my_pvp:system/give_berserker_items
-
-# 【追加】魔術師への配布
 execute as @a[tag=magician] run function my_pvp:system/give_magician_items
 execute as @a[tag=berserker] run function my_pvp:system/give_berserker_items
 execute as @a[tag=stalker] run function my_pvp:system/give_stalker_items
 execute as @a[tag=admiral] run function my_pvp:system/give_admiral_items
+execute as @a[tag=chrono] run function my_pvp:system/give_chrono_items

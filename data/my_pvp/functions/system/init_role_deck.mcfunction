@@ -21,3 +21,6 @@ summon marker ~ ~ ~ {Tags:["role_card","card_stalker"]}
 
 # 提督のくじ
 summon marker ~ ~ ~ {Tags:["role_card","card_admiral"]}
+
+# 【追加】 時空跳躍者のくじ
+summon marker ~ ~ ~ {Tags:["role_card","card_chrono"]}

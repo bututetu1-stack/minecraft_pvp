@@ -1,3 +1,6 @@
+# 【追加】凍結中は処理を停止
+execute if entity @s[tag=is_frozen] run return 0
+
 # 炎玉（armor_stand弾）の毎tick処理
 
 # 1. 寿命カウント（召喚時に score 初期化している前提）

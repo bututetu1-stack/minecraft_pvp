@@ -93,6 +93,16 @@ scoreboard objectives add click_formation minecraft.used:minecraft.recovery_comp
 
 # 被ダメージ検知用 (提督の警戒陣などで使用)
 scoreboard objectives add damage_taken minecraft.custom:minecraft.damage_taken
+# 警戒陣ペナルティ用
+scoreboard objectives add penalty_timer dummy
+scoreboard objectives add penalty_dmg dummy
+
+# --- 時空跳躍者 (Chronomancer) 用 ---
+# 【追加】 個別CT用スコア
+scoreboard objectives add cd_chrono_reverse dummy
+scoreboard objectives add cd_chrono_stasis dummy
+scoreboard objectives add cd_chrono_clockup dummy
+scoreboard objectives add freeze_timer dummy
 
 # --- 初期値セット ---
 scoreboard players set #GLOBAL match_state 0
