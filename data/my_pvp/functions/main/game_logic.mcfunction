@@ -7,6 +7,7 @@ execute as @a[tag=tank] at @s run function my_pvp:roles/tank/tank_main
 execute as @a[tag=berserker] at @s run function my_pvp:roles/berserker/berserker_main
 execute as @a[tag=stalker] at @s run function my_pvp:roles/stalker/stalker_main
 execute as @a[tag=admiral] at @s run function my_pvp:roles/admiral/admiral_main
+execute as @a[tag=chrono] at @s run function my_pvp:roles/chrono/chrono_main
 
 # 魔術師のメイン処理
 execute as @a[tag=magician] at @s run function my_pvp:roles/magician/magician_main
@@ -113,6 +114,9 @@ execute as @a[tag=admiral] unless entity @s[nbt={Attributes:[{Name:"minecraft:ge
 # 魔術師 (HP 40)
 execute as @a[tag=magician] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/magician/apply_status
 
+# 【追加】 時空跳躍者 (HP 40)
+execute as @a[tag=chrono] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/chrono/apply_status
+
 # (既存のゲーム進行処理の後に追記)
 
 # ==========================================
@@ -139,3 +143,33 @@ execute as @a[scores={penalty_timer=1}] run tag @s add ignore_penalty_loop
 # 4. 後処理 (リセット)
 execute as @a[scores={penalty_timer=1}] run scoreboard players set @s penalty_dmg 0
 execute as @a[scores={penalty_timer=1}] run scoreboard players set @s penalty_timer 0
+
+# (game_logicの末尾に追記)
+
+# ==========================================
+# ▼▼▼ 時空停止 (Frozen) 処理 ▼▼▼
+
+# 1. タイマー消化
+execute as @e[scores={freeze_timer=1..}] run scoreboard players remove @s freeze_timer 1
+
+# 2. 解除 (0になったらタグを消す)
+execute as @e[scores={freeze_timer=0},tag=is_frozen] run tag @s remove is_frozen
+
+# 3. 凍結中の挙動 (タグがある間)
+
+# A. プレイヤー: 移動不可 (鈍足 & ジャンプ不可)
+execute as @a[tag=is_frozen] run effect give @s minecraft:slowness 1 255 true
+execute as @a[tag=is_frozen] run effect give @s minecraft:jump_boost 1 255 true
+execute as @a[tag=is_frozen] run title @s actionbar {"text":"|| 時間停止中 ||","color":"yellow"}
+
+# B. 物理型・飛び道具 (矢、トライデントなど) : その場に固定
+# Minecraftの物理演算を打ち消すため、常に自分の位置にTPし続ける
+execute as @e[type=arrow,tag=is_frozen] run tp @s ~ ~ ~
+execute as @e[type=trident,tag=is_frozen] run tp @s ~ ~ ~
+# (ポーション等はキリがないので省きますが、必要なら追加)
+
+# C. コマンド型 (魚雷など)
+# これらは各tickファイル側で「タグがあったら処理中断」することで止める
+
+# (前回の「遅延ダメージ処理」の後に追記)
+

@@ -1,3 +1,6 @@
+# 【追加】凍結中は処理を停止
+execute if entity @s[tag=is_frozen] run return 0
+
 # --- 移動処理 ---
 tp @s ~ ~ ~ ~ 0
 tp @s ^ ^ ^0.6

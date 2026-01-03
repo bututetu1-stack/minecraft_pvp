@@ -27,5 +27,8 @@ execute if entity @e[tag=selected_card,tag=card_stalker] run function my_pvp:rol
 # 提督のカードだった場合
 execute if entity @e[tag=selected_card,tag=card_admiral] run function my_pvp:roles/admiral/assign
 
+# 【追加】 時空跳躍者のカードだった場合
+execute if entity @e[tag=selected_card,tag=card_chrono] run function my_pvp:roles/chrono/assign
+
 # 3. 使用済みカードの破棄
 kill @e[tag=selected_card]

@@ -1,3 +1,6 @@
+# 【追加】凍結中は処理を停止
+execute if entity @s[tag=is_frozen] run return 0
+
 # --- 1. ダメージ無効化 (既存) ---
 data merge entity @s {damage:0.0d}
 

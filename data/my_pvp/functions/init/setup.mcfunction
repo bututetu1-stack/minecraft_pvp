@@ -97,6 +97,13 @@ scoreboard objectives add damage_taken minecraft.custom:minecraft.damage_taken
 scoreboard objectives add penalty_timer dummy
 scoreboard objectives add penalty_dmg dummy
 
+# --- 時空跳躍者 (Chronomancer) 用 ---
+# 【追加】 個別CT用スコア
+scoreboard objectives add cd_chrono_reverse dummy
+scoreboard objectives add cd_chrono_stasis dummy
+scoreboard objectives add cd_chrono_clockup dummy
+scoreboard objectives add freeze_timer dummy
+
 # --- 初期値セット ---
 scoreboard players set #GLOBAL match_state 0
 scoreboard players set #NEXT_ID player_id 1
