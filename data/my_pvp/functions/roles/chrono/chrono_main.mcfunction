@@ -9,11 +9,6 @@ execute if score @s cd_chrono_reverse matches 1.. run scoreboard players remove 
 execute if score @s cd_chrono_stasis matches 1.. run scoreboard players remove @s cd_chrono_stasis 1
 execute if score @s cd_chrono_clockup matches 1.. run scoreboard players remove @s cd_chrono_clockup 1
 
-# --- アクションバー (並列表示) ---
-# CTの合計を計算
-scoreboard players operation #TEMP_CT temp = @s cd_chrono_reverse
-scoreboard players operation #TEMP_CT temp += @s cd_chrono_stasis
-scoreboard players operation #TEMP_CT temp += @s cd_chrono_clockup
-
-# どれか一つでもCT中なら表示
-execute if score #TEMP_CT temp matches 1.. run title @s actionbar [{"text":"Rev:","color":"aqua"},{"score":{"name":"@s","objective":"cd_chrono_reverse"},"color":"white"},{"text":" | ","color":"gray"},{"text":"Sts:","color":"yellow"},{"score":{"name":"@s","objective":"cd_chrono_stasis"},"color":"white"},{"text":" | ","color":"gray"},{"text":"Clk:","color":"red"},{"score":{"name":"@s","objective":"cd_chrono_clockup"},"color":"white"}]
+# --- アクションバー (常時表示) ---
+# 条件分岐を削除し、CTが0の状態でも常に表示するように変更
+title @s actionbar [{"text":"Rev:","color":"aqua"},{"score":{"name":"@s","objective":"cd_chrono_reverse"},"color":"white"},{"text":" | ","color":"gray"},{"text":"Sts:","color":"yellow"},{"score":{"name":"@s","objective":"cd_chrono_stasis"},"color":"white"},{"text":" | ","color":"gray"},{"text":"Clk:","color":"red"},{"score":{"name":"@s","objective":"cd_chrono_clockup"},"color":"white"}]

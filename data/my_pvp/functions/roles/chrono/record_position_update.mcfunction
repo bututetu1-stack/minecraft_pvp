@@ -1,23 +1,38 @@
-# マーカーの更新 (トコロテン方式: 5秒分)
+# 1. 実行者のIDを一時スコアに保存
+scoreboard players operation #ID temp = @s player_id
 
-# 1. 5秒前(一番古い)を消す
-execute at @s run kill @e[tag=chrono_5s,distance=..0.1,limit=1]
+# 2. 自分のIDを持つマーカー全てに一時タグ(my_marker)を付与
+tag @e[tag=chrono_marker] remove my_marker
+execute as @e[type=area_effect_cloud,tag=chrono_marker] if score @s player_id = #ID temp run tag @s add my_marker
 
-# 2. 4秒前 -> 5秒前
-execute at @s run tag @e[tag=chrono_4s,distance=..2] add chrono_5s
-execute at @s run tag @e[tag=chrono_5s] remove chrono_4s
+# --- マーカーの更新処理 (自分のマーカーのみ操作) ---
 
-# 3. 3秒前 -> 4秒前
-execute at @s run tag @e[tag=chrono_3s,distance=..2] add chrono_4s
-execute at @s run tag @e[tag=chrono_4s] remove chrono_3s
+# 3. 寿命が来た(5秒経過した)マーカーを削除
+kill @e[tag=my_marker,tag=chrono_5s]
 
-# 4. 2秒前 -> 3秒前
-execute at @s run tag @e[tag=chrono_2s,distance=..2] add chrono_3s
-execute at @s run tag @e[tag=chrono_3s] remove chrono_2s
+# 4. 時間タグのシフト (4s -> 5s, 3s -> 4s ...)
+tag @e[tag=my_marker,tag=chrono_4s] add chrono_5s
+tag @e[tag=my_marker,tag=chrono_5s] remove chrono_4s
 
-# 5. 1秒前 -> 2秒前
-execute at @s run tag @e[tag=chrono_1s,distance=..2] add chrono_2s
-execute at @s run tag @e[tag=chrono_2s] remove chrono_1s
+tag @e[tag=my_marker,tag=chrono_3s] add chrono_4s
+tag @e[tag=my_marker,tag=chrono_4s] remove chrono_3s
 
-# 6. 現在地に「1秒前マーカー」を設置
-summon area_effect_cloud ~ ~ ~ {Tags:["chrono_marker","chrono_1s"],Duration:120}
+tag @e[tag=my_marker,tag=chrono_2s] add chrono_3s
+tag @e[tag=my_marker,tag=chrono_3s] remove chrono_2s
+
+tag @e[tag=my_marker,tag=chrono_1s] add chrono_2s
+tag @e[tag=my_marker,tag=chrono_2s] remove chrono_1s
+
+# 5. 現在地に新しい「1秒前マーカー」を設置
+# summonだけだと向きが南(0,0)固定になってしまう
+summon area_effect_cloud ~ ~ ~ {Tags:["chrono_marker","chrono_1s"],Duration:200}
+
+# 6. 新規マーカーの設定 (ID付与 & 向きの同期)
+execute as @e[type=area_effect_cloud,tag=chrono_1s,distance=..0.1,limit=1,sort=nearest] run scoreboard players operation @s player_id = #ID temp
+
+# 【重要】実行コンテキスト(プレイヤーの場所・向き)に合わせてマーカーの向きを回転させる
+# ~ ~ ~ ~ ~ は「位置を変えずに、向きだけ現在の実行環境に合わせる」という意味
+execute as @e[type=area_effect_cloud,tag=chrono_1s,distance=..0.1,limit=1,sort=nearest] run tp @s ~ ~ ~ ~ ~
+
+# 7. 掃除
+tag @e[tag=my_marker] remove my_marker

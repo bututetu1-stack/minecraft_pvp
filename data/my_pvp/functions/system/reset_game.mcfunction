@@ -46,6 +46,13 @@ scoreboard players reset @a damage_taken
 scoreboard players reset @a adm_formation
 scoreboard players reset @a cd_formation
 
+# 時空跳躍者用リセット
+scoreboard players set @a cd_chrono_reverse 0
+scoreboard players set @a cd_chrono_stasis 0
+scoreboard players set @a cd_chrono_clockup 0
+scoreboard players set @a freeze_timer 0
+scoreboard players set @a timer 0
+
 # 【修正】全員の基礎HPを 20 -> 40 に変更
 execute as @a run attribute @s minecraft:generic.max_health base set 40
 execute as @a run attribute @s minecraft:generic.knockback_resistance base set 0
@@ -71,13 +78,13 @@ tag @a remove ninja
 tag @a remove scout
 tag @a remove tank
 tag @a remove berserker
-# 【追加】魔術師のタグ削除
 tag @a remove magician
 tag @a remove mag_flying_true
-
 tag @a remove stalker
 tag @a remove admiral
 tag @a remove target_candidate
+tag @a remove chrono
+tag @a remove is_frozen
 
 # --- 計算用の一時タグを全消去 ---
 tag @a remove owner_temp
@@ -114,8 +121,10 @@ kill @e[tag=gadget_hitbox]
 kill @e[tag=role_card]
 kill @e[tag=ninja_shadow]
 kill @e[tag=shadow_hitbox]
+
 # 魔術師の炎玉を消去
 kill @e[type=armor_stand,tag=mag_fireball]
+
 # ダメージ判定用プロキシを消去
 kill @e[tag=dmg_proxy]
 
@@ -133,6 +142,12 @@ kill @e[tag=temp_air_marker]
 # 爆弾
 kill @e[tag=adm_bomb]
 kill @e[tag=new_bomb]
+
+# 【追加】 時空跳躍者のマーカー削除
+# 過去位置マーカー
+kill @e[tag=chrono_marker]
+# 時空の静止フィールド
+kill @e[tag=stasis_center]
 
 
 # 残留アイテムの完全消去
