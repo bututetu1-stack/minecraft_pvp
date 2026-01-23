@@ -1,40 +1,44 @@
-# 1. 試合リセット処理（ここで全データが消去される）
+# 1. 試合リセット処理
 function my_pvp:system/reset_game
 
-# --- 【重要】消えてしまった計算用定数を再設定 ---
-# reset * temp でこれらも消えてしまうため、ここで値を戻します
+# --- 定数再設定 ---
 scoreboard players set #POINT_KILL temp 10
 scoreboard players set #POINT_DEATH temp 5
 scoreboard players set #100 temp 100
 scoreboard players set #20 temp 20
 
-# --- スコアの初期化 ---
-# 全員を 0 にセットして計算可能にする
+# --- ワールドボーダーと中心点の設定 ---
+# 実行場所を中心とする
+worldborder center ~ ~
+# 半径150ブロック(直径300)に変更
+worldborder set 300
+
+# 古いマーカーがあれば削除し、新しい中心点マーカーを設置
+kill @e[tag=arena_center]
+summon marker ~ ~ ~ {Tags:["arena_center"]}
+
+# プレイヤーを半径150以内にランダム転送
+spreadplayers ~ ~ 30 150 false @a
+
+# --- スコア初期化 ---
 scoreboard players set @a kills 0
 scoreboard players set @a deaths 0
 scoreboard players set @a points 0
 
-# 2. IDの完全リセットと再割り振り
-# グローバルカウンターを 1 に戻す
+# 2. IDリセット
 scoreboard players set #NEXT_ID player_id 1
-
-# 全プレイヤーの現在のIDを消去
 scoreboard players reset @a player_id
-
-# 全員に新しいIDを(1から順に)割り振る
 execute as @a run function my_pvp:system/assign_new_id
 
-
-# 3. 役職抽選プロセス
+# 3. 役職抽選
 function my_pvp:system/init_role_deck
 function my_pvp:system/distribute_loop
 
-# --- ボスバーの初期化 ---
-# 全プレイヤーに表示
+# --- ボスバー初期化 ---
 bossbar set my_pvp:timer players @a
 bossbar set my_pvp:timer visible true
 bossbar set my_pvp:timer color yellow
 bossbar set my_pvp:timer value 6000
 
-# 4. 4秒後(80tick)に、試合開始の合図を出す
+# 4. 開始合図
 schedule function my_pvp:system/start_sequence 4s replace

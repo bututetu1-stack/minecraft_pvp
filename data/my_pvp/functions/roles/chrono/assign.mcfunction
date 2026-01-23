@@ -16,4 +16,4 @@ scoreboard players set @s cd_chrono_stasis 0
 scoreboard players set @s cd_chrono_clockup 0
 
 # 任命サウンド
-playsound minecraft:block.beacon.activate master @s ~ ~ ~ 1 2
+execute at @s run playsound minecraft:block.beacon.activate master @s ~ ~ ~ 1 2

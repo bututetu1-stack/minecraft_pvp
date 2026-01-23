@@ -103,6 +103,14 @@ scoreboard objectives add cd_chrono_reverse dummy
 scoreboard objectives add cd_chrono_stasis dummy
 scoreboard objectives add cd_chrono_clockup dummy
 scoreboard objectives add freeze_timer dummy
+scoreboard objectives add stasis_timer dummy "時間停止タイマー"
+
+# --- 彫刻家 (Sculptor) 用 ---
+scoreboard objectives add sculpture_count dummy "彫刻設置数"
+scoreboard objectives add cd_sculptor_create dummy "彫刻生成CT"
+scoreboard objectives add sculpture_cycle dummy "彫刻サイクル"
+scoreboard objectives add sculpture_slot dummy "彫刻スロット"
+scoreboard objectives add sculpture_hp dummy "彫刻HP"
 
 # --- 初期値セット ---
 scoreboard players set #GLOBAL match_state 0

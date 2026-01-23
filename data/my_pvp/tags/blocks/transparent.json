@@ -1,0 +1,27 @@
+{
+    "values": [
+        "minecraft:air",
+        "minecraft:void_air",
+        "minecraft:cave_air",
+        "minecraft:light",
+        "minecraft:structure_void",
+        "minecraft:water",
+        "minecraft:lava",
+        "#minecraft:small_flowers",
+        "#minecraft:tall_flowers",
+        "#minecraft:replaceable_plants",
+        "minecraft:grass",
+        "minecraft:fern",
+        "minecraft:dead_bush",
+        "minecraft:seagrass",
+        "minecraft:tall_seagrass",
+        "minecraft:tall_grass",
+        "minecraft:vine",
+        "minecraft:glow_lichen",
+        "minecraft:ladder",
+        "minecraft:scaffolding",
+        "minecraft:iron_bars",
+        "minecraft:tripwire",
+        "minecraft:tripwire_hook"
+    ]
+}

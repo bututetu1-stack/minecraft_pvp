@@ -52,6 +52,13 @@ scoreboard players set @a cd_chrono_stasis 0
 scoreboard players set @a cd_chrono_clockup 0
 scoreboard players set @a freeze_timer 0
 scoreboard players set @a timer 0
+scoreboard players set @a stasis_timer 0
+tag @a remove stasis_caster
+
+# 彫刻家用リセット
+scoreboard players set @a sculpture_count 0
+scoreboard players set @a cd_sculptor_create 0
+scoreboard players set @a sculpture_cycle 1
 
 # 【修正】全員の基礎HPを 20 -> 40 に変更
 execute as @a run attribute @s minecraft:generic.max_health base set 40
@@ -85,6 +92,7 @@ tag @a remove admiral
 tag @a remove target_candidate
 tag @a remove chrono
 tag @a remove is_frozen
+tag @a remove sculptor
 
 # --- 計算用の一時タグを全消去 ---
 tag @a remove owner_temp
@@ -148,6 +156,11 @@ kill @e[tag=new_bomb]
 kill @e[tag=chrono_marker]
 # 時空の静止フィールド
 kill @e[tag=stasis_center]
+
+# 【追加】 彫刻家のエンティティ削除
+execute as @e[tag=sculpture] run data merge entity @s {HandItems:[{},{}],ArmorItems:[{},{},{},{}]}
+kill @e[tag=sculpture]
+kill @e[tag=sculpture_hitbox]
 
 
 # 残留アイテムの完全消去

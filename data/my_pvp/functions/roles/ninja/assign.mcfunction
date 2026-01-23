@@ -19,4 +19,4 @@ scoreboard players set @s cd_ninja_smoke 0
 # function my_pvp:system/give_ninja_items
 
 # 6. 音
-playsound minecraft:entity.illusioner.prepare_mirror master @s ~ ~ ~ 1 1
+execute at @s run playsound minecraft:entity.illusioner.prepare_mirror master @s ~ ~ ~ 1 1

@@ -10,7 +10,7 @@ function my_pvp:roles/stalker/apply_status
 
 # 4. 音 (変更)
 # ウォーデンの心音（ドクン…）で緊張感を演出
-playsound minecraft:entity.warden.heartbeat master @s ~ ~ ~ 2 0.8
+execute at @s run playsound minecraft:entity.warden.heartbeat master @s ~ ~ ~ 2 0.8
 
 # 決定音として、少し重い金属音を重ねる
-playsound minecraft:block.respawn_anchor.charge master @s ~ ~ ~ 1 0.5
+execute at @s run playsound minecraft:block.respawn_anchor.charge master @s ~ ~ ~ 1 0.5
