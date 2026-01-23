@@ -1,8 +1,8 @@
 # 全プレイヤーが実行
 # 1. 定数セット (初回のみで良いが、安全のため毎回確認、あるいは `setup` でやるべきだがここでやる)
-scoreboard players set #CONST 36000 36000
-scoreboard players set #CONST 18000 18000
-scoreboard players set #CONST -1 -1
+scoreboard players set #36000 temp 36000
+scoreboard players set #18000 temp 18000
+scoreboard players set #-1 temp -1
 
 # 2. 自分にタグ付け
 tag @s add current_checker

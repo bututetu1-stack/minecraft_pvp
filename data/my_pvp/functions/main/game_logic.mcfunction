@@ -1,4 +1,9 @@
 # --- 1. プレイヤーの処理 ---
+# --- Delayed Heal (Respawn Fix) ---
+execute as @a[tag=pending_heal] run effect give @s minecraft:instant_health 1 100 true
+execute as @a[tag=pending_heal] run effect give @s minecraft:saturation 1 255 true
+tag @a[tag=pending_heal] remove pending_heal
+
 # at @s を入れて、自身の位置を基準にする
 execute as @a[tag=mechanic] at @s run function my_pvp:roles/mechanic/mechanic_main
 execute as @a[tag=ninja] at @s run function my_pvp:roles/ninja/ninja_main
@@ -10,6 +15,7 @@ execute as @a[tag=admiral] at @s run function my_pvp:roles/admiral/admiral_main
 execute as @a[tag=chrono] at @s run function my_pvp:roles/chrono/chrono_main
 execute as @a[tag=sculptor] at @s run function my_pvp:roles/sculptor/sculptor_main
 execute as @a[tag=magician] at @s run function my_pvp:roles/magician/magician_main
+execute as @a[tag=gambler] at @s run function my_pvp:roles/gambler/gambler_main
 
 # --- 時空跳躍者のグローバル処理 (フィールド・凍結制御) ---
 # プレイヤーに関係なくサーバー全体で処理するため、as @a は付けずに呼び出す
@@ -42,6 +48,9 @@ execute as @e[type=item] at @s run function my_pvp:roles/magician/scan_items
 
 # 彫刻家のアイテムスキャン
 execute as @e[type=item] at @s run function my_pvp:roles/sculptor/scan_items
+
+# ギャンブラーのアイテムスキャン
+execute as @e[type=item] at @s run function my_pvp:roles/gambler/scan_items
 
 # --- 3. ガジェットの処理 ---
 
@@ -113,34 +122,37 @@ execute if score #GLOBAL match_state matches 1 if score #GLOBAL match_timer matc
 # 死ぬと属性(Attribute)がリセットされ、最大HPが20に戻る仕様を利用してリスポーンを検知
 
 # タンク (HP 80)
-execute as @a[tag=tank] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:80.0d}]}] run function my_pvp:roles/tank/apply_status
+execute as @a[tag=tank,tag=!ignore_status_check] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:80.0d}]}] run function my_pvp:roles/tank/apply_status
 
 # バーサーカー (HP 60)
-execute as @a[tag=berserker] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:60.0d}]}] run function my_pvp:roles/berserker/apply_status
+execute as @a[tag=berserker,tag=!ignore_status_check] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:60.0d}]}] run function my_pvp:roles/berserker/apply_status
 
 # 立体機動兵 (HP 40)
-execute as @a[tag=scout] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/scout/apply_status
+execute as @a[tag=scout,tag=!ignore_status_check] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/scout/apply_status
 
 # 忍者 (HP 40)
-execute as @a[tag=ninja] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/ninja/apply_status
+execute as @a[tag=ninja,tag=!ignore_status_check] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/ninja/apply_status
 
 # 機械工 (HP 40)
-execute as @a[tag=mechanic] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/mechanic/apply_status
+execute as @a[tag=mechanic,tag=!ignore_status_check] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/mechanic/apply_status
 
 # ストーカー (HP 40 & ターゲット再抽選)
-execute as @a[tag=stalker] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/stalker/apply_status
+execute as @a[tag=stalker,tag=!ignore_status_check] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/stalker/apply_status
 
 # 提督
-execute as @a[tag=admiral] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/admiral/apply_status
+execute as @a[tag=admiral,tag=!ignore_status_check] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/admiral/apply_status
 
 # 魔術師 (HP 40)
-execute as @a[tag=magician] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/magician/apply_status
+execute as @a[tag=magician,tag=!ignore_status_check] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/magician/apply_status
 
 # 【追加】 時空跳躍者 (HP 40)
-execute as @a[tag=chrono] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/chrono/apply_status
+execute as @a[tag=chrono,tag=!ignore_status_check] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/chrono/apply_status
 
 # 【追加】 彫刻家 (HP 40)
-execute as @a[tag=sculptor] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/sculptor/apply_status
+execute as @a[tag=sculptor,tag=!ignore_status_check] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/sculptor/apply_status
+
+# ギャンブラー (HP 40)
+execute as @a[tag=gambler,tag=!ignore_status_check] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/gambler/apply_status
 
 # (既存のゲーム進行処理の後に追記)
 

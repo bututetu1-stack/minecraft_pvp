@@ -9,7 +9,10 @@ tag @s remove magician
 tag @s remove mag_flying_true
 tag @s remove admiral
 tag @s remove stalker
+tag @s remove sculptor
+tag @s remove chrono
 tag @s remove role_assigned
+tag @s remove gambler
 
 # IDがない場合は付与する（安全装置）
 execute unless score @s player_id matches 1.. run function my_pvp:system/assign_new_id

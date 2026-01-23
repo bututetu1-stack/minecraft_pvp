@@ -27,3 +27,6 @@ summon marker ~ ~ ~ {Tags:["role_card","card_chrono"]}
 
 # 【追加】 彫刻家のくじ
 summon marker ~ ~ ~ {Tags:["role_card","card_sculptor"]}
+
+# 【追加】 ギャンブラーのくじ
+summon marker ~ ~ ~ {Tags:["role_card","card_gambler"]}

@@ -12,7 +12,7 @@ execute as @a[tag=skill_user,tag=ct_error] run playsound minecraft:ui.button.cli
 
 # 4. アイテム返却 (Lore更新: 5秒前)
 kill @e[tag=processing_item]
-give @a[tag=skill_user] minecraft:light_blue_dye{chrono_reverse:1b,display:{Name:'{"text":"<< タイム・リバース","color":"aqua","italic":false}',Lore:['{"text":"[Qキー] 5秒前の位置とHPに戻る","color":"yellow"}','{"text":"CT: 20秒","color":"gray"}']}} 1
+item replace entity @a[tag=skill_user] hotbar.1 with minecraft:light_blue_dye{chrono_reverse:1b,display:{Name:'{"text":"<< タイム・リバース","color":"aqua","italic":false}',Lore:['{"text":"[Qキー] 5秒前の位置とHPに戻る","color":"yellow"}','{"text":"CT: 20秒","color":"gray"}']}}
 
 # 5. タグ掃除
 tag @a remove skill_user

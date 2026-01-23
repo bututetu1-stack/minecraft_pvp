@@ -16,6 +16,7 @@ execute as @a[tag=admiral] run title @s subtitle {"text":"暁の水平線に、�
 execute as @a[tag=magician] run title @s subtitle {"text":"魔力を操り、空を舞え","color":"light_purple"}
 execute as @a[tag=chrono] run title @s subtitle {"text":"時を操り、戦場の運命を改変せよ","color":"yellow"}
 execute as @a[tag=sculptor] run title @s subtitle {"text":"生命を吹き込み、戦場を創造せよ","color":"blue"}
+execute as @a[tag=gambler] run title @s subtitle {"text":"運命を賭け、全てを手に入れろ","color":"green"}
 
 # 音とログ
 # 【修正】音量を10000にして距離減衰を無視させる（グローバル音化）
@@ -33,3 +34,4 @@ execute as @a[tag=stalker] run function my_pvp:system/give_stalker_items
 execute as @a[tag=admiral] run function my_pvp:system/give_admiral_items
 execute as @a[tag=chrono] run function my_pvp:system/give_chrono_items
 execute as @a[tag=sculptor] run function my_pvp:system/give_sculptor_items
+execute as @a[tag=gambler] run function my_pvp:system/give_gambler_items

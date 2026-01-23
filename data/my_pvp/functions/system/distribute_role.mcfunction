@@ -33,5 +33,8 @@ execute if entity @e[tag=selected_card,tag=card_chrono] run function my_pvp:role
 # 【追加】 彫刻家のカードだった場合
 execute if entity @e[tag=selected_card,tag=card_sculptor] run function my_pvp:roles/sculptor/assign
 
+# 【追加】 ギャンブラーのカードだった場合
+execute if entity @e[tag=selected_card,tag=card_gambler] run function my_pvp:roles/gambler/assign
+
 # 3. 使用済みカードの破棄
 kill @e[tag=selected_card]

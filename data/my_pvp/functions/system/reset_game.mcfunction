@@ -162,6 +162,25 @@ execute as @e[tag=sculpture] run data merge entity @s {HandItems:[{},{}],ArmorIt
 kill @e[tag=sculpture]
 kill @e[tag=sculpture_hitbox]
 
+# 【追加】 ギャンブラー用リセット
+scoreboard players reset * coins
+scoreboard players reset * coins_timer
+scoreboard players reset * bj_action
+scoreboard players reset * bj_dealer
+scoreboard players reset * bj_hand
+scoreboard players reset * bj_state
+scoreboard players reset * bj_timer
+scoreboard players reset * bj_debuff_timer
+scoreboard players reset * bj_hit_cd
+scoreboard players reset * roulette_timer
+scoreboard players reset * skill_gambler_war
+scoreboard players reset * damage_boost
+
+tag @a remove gambler
+tag @a remove bj_debuff
+
+kill @e[tag=roulette_marker]
+
 
 # 残留アイテムの完全消去
 kill @e[type=item]
