@@ -10,5 +10,10 @@ scoreboard players set @s deaths 0
 tellraw @s [{"text":"[System] ","color":"gray"},{"text":"戦場へ復帰しました！","color":"yellow"}]
 playsound minecraft:entity.enderman.teleport master @s ~ ~ ~ 1 1
 
+# 4. 状態異常タグのリセット (バースト中やAll-In中に死んだ場合などの救済)
+tag @s remove ignore_status_check
+tag @s remove bj_debuff
+scoreboard players set @s bj_debuff_timer 0
+
 # (オプション) もしリスポーン時に特定のアイテムを再配布したい場合はここに記述
 # 例: function my_pvp:roles/common/give_kit

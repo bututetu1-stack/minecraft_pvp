@@ -7,14 +7,6 @@ scoreboard players operation #TEMP_OWNER temp = @s player_id
 execute as @a[tag=current_raycaster] if score @s player_id = #TEMP_OWNER temp run return 0
 
 # --- 1. 視線判定の可視化 & キル判定用記録 ---
-# --- 1. 視線判定の可視化 & キル判定用記録 ---
-# アクションバーはCT表示に使われているため、tellrawやsubtitleを使用
-# ここではtellraw (ログ流れるが確実) か title subtitle (邪魔かも)
-# ユーザー要望は tell なので tellraw で。
-# 毎tick出るとログが消えるので、間引くか、あるいはアクションバーの優先度を変えるか…
-# とりあえず tellraw で出すが、毎tickだとスパムになる。
-# しかし「警告して」と言われたので毎tick出す。
-execute as @a[tag=current_raycaster] run tellraw @s {"text":"[!] 彫刻を直視しています","color":"red"}
 
 # ID記録 (キル判定用)
 scoreboard players operation #TEMP_OWNER temp = @s player_id

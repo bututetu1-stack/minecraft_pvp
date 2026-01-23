@@ -12,8 +12,9 @@ scoreboard objectives add scrap dummy "スクラップ"
 scoreboard objectives add regen_timer dummy "回復タイマー"
 
 scoreboard objectives add timer dummy
+scoreboard objectives add coins_timer dummy
+scoreboard objectives add bj_debuff_timer dummy
 scoreboard objectives add ammo dummy
-scoreboard objectives add temp dummy
 
 # --- クールダウン ---
 #機械工用クールダウン
@@ -147,6 +148,37 @@ gamerule keepInventory true
 # 常に昼に固定する（時間停止と現在時刻を昼に設定）
 gamerule doDaylightCycle false
 time set day
+
+# --- 彫刻家 (Sculptor) 用 (追加分) ---
+scoreboard objectives add last_attacker_id dummy "ラストアタッカー"
+scoreboard objectives add sculptor_hit_timer dummy "彫刻ヒットタイマー"
+
+
+# --- ギャンブラー (Gambler) 用 ---
+scoreboard objectives add coins dummy "コイン"
+scoreboard objectives add bj_action trigger "BJアクション"
+scoreboard objectives add bj_dealer dummy "BJディーラー手札"
+scoreboard objectives add bj_hand dummy "BJプレイヤー手札"
+scoreboard objectives add bj_state dummy "BJ状態"
+scoreboard objectives add bj_timer dummy "BJタイマー"
+scoreboard objectives add roulette_timer dummy "ルーレットタイマー"
+scoreboard objectives add skill_gambler_war dummy "戦争フラグ"
+scoreboard objectives add damage_boost dummy "ダメ増フラグ"
+scoreboard objectives add swap_item minecraft.custom:minecraft.swap_item "アイテム持ち替え"
+scoreboard objectives add bj_hit_cd dummy "被ダメ増CT"
+
+# アイテム検知用
+# 鉄インゴット(BJ)
+scoreboard objectives add drop_iron dropped:iron_ingot "BJ起動"
+# 金塊(All-In)
+scoreboard objectives add drop_gold dropped:gold_nugget "AllIn起動"
+# ガストの涙(Roulette)
+scoreboard objectives add drop_tear dropped:ghast_tear "ルーレット起動"
+# 銅インゴット(Coin)
+scoreboard objectives add drop_copper dropped:copper_ingot "コイン起動"
+# 赤色の染料(War)
+scoreboard objectives add drop_red_dye dropped:red_dye "戦争起動"
+
 
 # (既存のコードの最後に追加)
 
