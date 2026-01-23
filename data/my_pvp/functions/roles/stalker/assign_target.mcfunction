@@ -27,5 +27,5 @@ scoreboard players operation #TEMP player_id = @e[tag=stalker_target_temp,limit=
 scoreboard players operation @s target_id = #TEMP player_id
 
 # 5. 通知
-playsound minecraft:entity.experience_orb.pickup master @s ~ ~ ~ 1 0.5
+execute at @s run playsound minecraft:entity.experience_orb.pickup master @s ~ ~ ~ 1 0.5
 tellraw @s [{"text":"[Stalker] ","color":"dark_red"},{"text":"新たなターゲット: ","color":"white"},{"selector":"@e[tag=stalker_target_temp]","color":"red","bold":true}]

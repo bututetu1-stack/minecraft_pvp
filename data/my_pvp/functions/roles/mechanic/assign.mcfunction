@@ -13,4 +13,4 @@ attribute @s minecraft:generic.attack_damage base set 0
 # effect give @s minecraft:weakness infinite 255 true
 
 # 5. 効果音
-playsound minecraft:block.anvil.use master @s ~ ~ ~ 1 1
+execute at @s run playsound minecraft:block.anvil.use master @s ~ ~ ~ 1 1

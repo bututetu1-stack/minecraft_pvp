@@ -24,3 +24,6 @@ summon marker ~ ~ ~ {Tags:["role_card","card_admiral"]}
 
 # 【追加】 時空跳躍者のくじ
 summon marker ~ ~ ~ {Tags:["role_card","card_chrono"]}
+
+# 【追加】 彫刻家のくじ
+summon marker ~ ~ ~ {Tags:["role_card","card_sculptor"]}

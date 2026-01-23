@@ -1,3 +1,6 @@
+# 凍結中は処理をスキップ
+execute if entity @s[tag=is_frozen] run return 0
+
 # 1. 前進
 tp @s ^ ^ ^0.8
 

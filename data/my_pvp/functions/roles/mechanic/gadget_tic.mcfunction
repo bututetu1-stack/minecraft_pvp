@@ -1,3 +1,6 @@
+# 凍結中は処理をスキップ
+execute if entity @s[tag=is_frozen] run return 0
+
 # --- タレット (Sentry) ---
 # startup判定を削除し、常に攻撃処理を行うように戻しました
 execute if entity @s[tag=sentry] run function my_pvp:roles/mechanic/sentry_attack

@@ -9,4 +9,4 @@ tellraw @s [{"text":"[System] ","color":"gray"},{"text":"あなたは ","color":
 function my_pvp:roles/tank/apply_status
 
 # 5. 音
-playsound minecraft:entity.iron_golem.repair master @s ~ ~ ~ 1 1
+execute at @s run playsound minecraft:entity.iron_golem.repair master @s ~ ~ ~ 1 1

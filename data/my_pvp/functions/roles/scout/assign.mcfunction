@@ -11,4 +11,4 @@ scoreboard players set @s cd_wire 0
 tag @s remove is_grappling
 
 # 4. 音
-playsound minecraft:entity.bat.takeoff master @s ~ ~ ~ 1 1.5
+execute at @s run playsound minecraft:entity.bat.takeoff master @s ~ ~ ~ 1 1.5

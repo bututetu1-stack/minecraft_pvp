@@ -23,4 +23,4 @@ tag @s remove mag_flying_true
 # 初期化は飛行タグの削除のみで行う（非飛行状態はタグがないことで判定）
 
 # 7. 効果音
-playsound minecraft:entity.evoker.prepare_summon master @s ~ ~ ~ 1 1
+execute at @s run playsound minecraft:entity.evoker.prepare_summon master @s ~ ~ ~ 1 1

@@ -15,9 +15,11 @@ execute as @a[tag=stalker] run title @s subtitle {"text":"執念深く獲物を�
 execute as @a[tag=admiral] run title @s subtitle {"text":"暁の水平線に、勝利を刻め！","color":"dark_aqua"}
 execute as @a[tag=magician] run title @s subtitle {"text":"魔力を操り、空を舞え","color":"light_purple"}
 execute as @a[tag=chrono] run title @s subtitle {"text":"時を操り、戦場の運命を改変せよ","color":"yellow"}
+execute as @a[tag=sculptor] run title @s subtitle {"text":"生命を吹き込み、戦場を創造せよ","color":"blue"}
 
 # 音とログ
-execute as @a at @s run playsound minecraft:entity.ender_dragon.growl master @s ~ ~ ~ 1 1
+# 【修正】音量を10000にして距離減衰を無視させる（グローバル音化）
+execute as @a at @s run playsound minecraft:entity.ender_dragon.growl master @s ~ ~ ~ 10000 1
 tellraw @a [{"text":"[System] ","color":"gray"},{"text":"試合開始！","color":"green"}]
 
 # --- 3. アイテム配布 (ここで一斉に武装) ---
@@ -27,7 +29,7 @@ execute as @a[tag=scout] run function my_pvp:system/give_scout_items
 execute as @a[tag=tank] run function my_pvp:system/give_tank_items
 execute as @a[tag=berserker] run function my_pvp:system/give_berserker_items
 execute as @a[tag=magician] run function my_pvp:system/give_magician_items
-execute as @a[tag=berserker] run function my_pvp:system/give_berserker_items
 execute as @a[tag=stalker] run function my_pvp:system/give_stalker_items
 execute as @a[tag=admiral] run function my_pvp:system/give_admiral_items
 execute as @a[tag=chrono] run function my_pvp:system/give_chrono_items
+execute as @a[tag=sculptor] run function my_pvp:system/give_sculptor_items

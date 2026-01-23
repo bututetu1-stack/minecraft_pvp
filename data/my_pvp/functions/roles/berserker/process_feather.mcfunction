@@ -20,7 +20,7 @@ execute if entity @s[tag=can_process] as @p[tag=is_ready] run scoreboard players
 # 自傷ダメージは着地時に移動済み
 
 # 浮遊設定 (1秒 Lv10)
-execute if entity @s[tag=can_process] as @p[tag=is_ready] run effect give @s minecraft:levitation 1 10 true
+execute if entity @s[tag=can_process] as @p[tag=is_ready] run effect give @s minecraft:levitation 1 15 true
 
 # 着地判定用のタグを付与 (重要)
 execute if entity @s[tag=can_process] as @p[tag=is_ready] run tag @s add ber_ready

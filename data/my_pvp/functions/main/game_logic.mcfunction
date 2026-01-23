@@ -8,6 +8,7 @@ execute as @a[tag=berserker] at @s run function my_pvp:roles/berserker/berserker
 execute as @a[tag=stalker] at @s run function my_pvp:roles/stalker/stalker_main
 execute as @a[tag=admiral] at @s run function my_pvp:roles/admiral/admiral_main
 execute as @a[tag=chrono] at @s run function my_pvp:roles/chrono/chrono_main
+execute as @a[tag=sculptor] at @s run function my_pvp:roles/sculptor/sculptor_main
 execute as @a[tag=magician] at @s run function my_pvp:roles/magician/magician_main
 
 # --- 時空跳躍者のグローバル処理 (フィールド・凍結制御) ---
@@ -39,6 +40,9 @@ execute as @e[type=item] at @s run function my_pvp:roles/admiral/scan_items
 # 魔術師のアイテムスキャン
 execute as @e[type=item] at @s run function my_pvp:roles/magician/scan_items
 
+# 彫刻家のアイテムスキャン
+execute as @e[type=item] at @s run function my_pvp:roles/sculptor/scan_items
+
 # --- 3. ガジェットの処理 ---
 
 # --- 3. ガジェット・エンティティ処理 ---
@@ -55,6 +59,22 @@ execute as @e[tag=turret_shot] at @s run function my_pvp:roles/mechanic/turret_s
 # --- 6. 魔術師の炎玉処理 ---
 # armor_stand 弾を毎tick処理
 execute as @e[type=armor_stand,tag=mag_fireball] at @s run function my_pvp:roles/magician/fireball_tick
+
+# --- 彫刻家の彫刻処理 (毎tick) ---
+# パーティクル演出
+execute as @e[tag=sculpture] at @s run function my_pvp:roles/sculptor/sculpture_tick
+# 破壊判定
+execute as @e[tag=sculpture_hitbox] at @s run function my_pvp:roles/sculptor/sculpture_destroy
+
+# 【デバッグ】Hitbox生存確認
+# execute as @e[tag=sculpture_hitbox] run tellraw @a {"text":"[DEBUG] I am Hitbox","color":"dark_gray"}
+
+# 【追加】視線判定 (レイキャスト + FOV判定)
+# 全プレイヤーが視線を飛ばして判定 (20m, 壁判定あり, 視野角あり)
+execute as @a[gamemode=!spectator] at @s run function my_pvp:roles/sculptor/checker/main
+
+# 【追加】彫刻関連のキル判定 (毒死など)
+execute as @a[gamemode=!spectator] run function my_pvp:roles/sculptor/kill_check
 
 # --- 7. スコアボード表示 ---
 
@@ -118,6 +138,9 @@ execute as @a[tag=magician] unless entity @s[nbt={Attributes:[{Name:"minecraft:g
 
 # 【追加】 時空跳躍者 (HP 40)
 execute as @a[tag=chrono] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/chrono/apply_status
+
+# 【追加】 彫刻家 (HP 40)
+execute as @a[tag=sculptor] unless entity @s[nbt={Attributes:[{Name:"minecraft:generic.max_health",Base:40.0d}]}] run function my_pvp:roles/sculptor/apply_status
 
 # (既存のゲーム進行処理の後に追記)
 

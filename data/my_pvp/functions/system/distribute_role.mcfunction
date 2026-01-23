@@ -30,5 +30,8 @@ execute if entity @e[tag=selected_card,tag=card_admiral] run function my_pvp:rol
 # 【追加】 時空跳躍者のカードだった場合
 execute if entity @e[tag=selected_card,tag=card_chrono] run function my_pvp:roles/chrono/assign
 
+# 【追加】 彫刻家のカードだった場合
+execute if entity @e[tag=selected_card,tag=card_sculptor] run function my_pvp:roles/sculptor/assign
+
 # 3. 使用済みカードの破棄
 kill @e[tag=selected_card]

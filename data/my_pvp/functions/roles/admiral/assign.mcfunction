@@ -17,5 +17,5 @@ scoreboard players set @s cd_formation 0
 scoreboard players set @s adm_formation 0
 
 # 4. 音
-playsound minecraft:entity.experience_orb.pickup master @s ~ ~ ~ 1 0.5
-playsound minecraft:item.trident.thunder master @s ~ ~ ~ 1 2
+execute at @s run playsound minecraft:entity.experience_orb.pickup master @s ~ ~ ~ 1 0.5
+execute at @s run playsound minecraft:item.trident.thunder master @s ~ ~ ~ 1 2

@@ -19,4 +19,4 @@ scoreboard players set @s cd_ber_jump 0
 # ▲▲▲▲▲▲
 
 # 5. 音
-playsound minecraft:entity.ravager.roar master @s ~ ~ ~ 1 1
+execute at @s run playsound minecraft:entity.ravager.roar master @s ~ ~ ~ 1 1
