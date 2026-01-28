@@ -1,0 +1,10 @@
+# 1. 忍刀 -> Slot 0
+# 【修正】Amount:3 -> 5 (合計攻撃力 4 -> 6)
+item replace entity @s container.0 with minecraft:iron_sword[minecraft:custom_data={ninja_sword:1b},minecraft:unbreakable={},minecraft:attribute_modifiers={modifiers:[{type:"minecraft:attack_damage",amount:5.0,operation:"add_value",slot:"mainhand",id:"my_pvp:ninja_sword_damage"}],show_in_tooltip:false},minecraft:custom_name='{"text":"忍刀","color":"white"}',minecraft:lore=['{"text":"攻撃力: 6 (固定)","color":"gray"}']] 1
+
+# （以下変更なし）
+item replace entity @s container.1 with minecraft:carrot_on_a_stick[minecraft:custom_data={Tags:["ninja_tool","swap_1"]},minecraft:custom_model_data={floats:[1.0]},minecraft:custom_name='{"text":"変わり身：壱","color":"yellow"}',minecraft:lore=['{"text":"右クリック: 身代わり[1]と入替","color":"gray"}','{"text":"CT: 10s (共通)","color":"aqua"}']] 1
+item replace entity @s container.2 with minecraft:carrot_on_a_stick[minecraft:custom_data={Tags:["ninja_tool","swap_2"]},minecraft:custom_model_data={floats:[2.0]},minecraft:custom_name='{"text":"変わり身：弐","color":"yellow"}',minecraft:lore=['{"text":"右クリック: 身代わり[2]と入替","color":"gray"}','{"text":"CT: 10s (共通)","color":"aqua"}']] 1
+item replace entity @s container.3 with minecraft:carrot_on_a_stick[minecraft:custom_data={Tags:["ninja_tool","swap_3"]},minecraft:custom_model_data={floats:[3.0]},minecraft:custom_name='{"text":"変わり身：参","color":"yellow"}',minecraft:lore=['{"text":"右クリック: 身代わり[3]と入替","color":"gray"}','{"text":"CT: 10s (共通)","color":"aqua"}']] 1
+item replace entity @s container.4 with minecraft:black_dye[minecraft:custom_name='{"text":"影縫い (設置)","color":"dark_purple"}',minecraft:lore=['{"text":"Q: 投げて身代わりを設置 (1->2->3)","color":"gray"}','{"text":"CT: 3s","color":"aqua"}']] 1
+item replace entity @s container.5 with minecraft:charcoal[minecraft:custom_name='{"text":"煙玉 (目眩まし)","color":"gray"}',minecraft:lore=['{"text":"Q: 投げて範囲盲目","color":"gray"}','{"text":"CT: 15s","color":"aqua"}']] 1
