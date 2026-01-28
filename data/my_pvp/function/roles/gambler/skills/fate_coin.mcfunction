@@ -9,13 +9,14 @@ execute if entity @s[tag=fate_running] run function my_pvp:roles/gambler/skills/
 execute if entity @s[tag=fate_running] run return 0
 
 # 2. 借金チェック
-execute if score @s coins matches ..-1 run tellraw @s {"text":"[Fate] 借金中はギャンブルを行えません","color":"dark_red"}
+execute if score @s coins matches ..-1 run tellraw @s [{"text":"[System] ","color":"gray"},{"text":"借金中はギャンブルを行えません","color":"red"}]
 execute if score @s coins matches ..-1 run item replace entity @s hotbar.4 with minecraft:copper_ingot[custom_name='{"text":"運命のコイン","color":"aqua","italic":false}',lore=['{"text":"[Q]キーでドロップして開始 (5 Coins)","color":"gray"}']]
 execute if score @s coins matches ..-1 run return 0
 
 # 3. 開始処理
 # コイン消費 (借金可能)
-scoreboard players remove @s coins 5
+# コイン消費 (借金可能)
+execute unless entity @s[tag=rush_mode] run scoreboard players remove @s coins 5
 tellraw @s {"text":"[Fate] 運命のコイン開始! (Pot: 10)","color":"aqua"}
 
 # 初期化

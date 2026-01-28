@@ -2,11 +2,16 @@
 scoreboard objectives add kills playerKillCount "キル数"
 scoreboard objectives add deaths deathCount "デス数"
 scoreboard objectives add points dummy "ポイント"
+scoreboard objectives add bonus_points dummy "Bonus Points"
+
+# 【追加】累計デス数 (ポイント計算用)
+scoreboard objectives add total_deaths dummy "Total Deaths"
 
 scoreboard objectives add match_timer dummy "残り時間"
 scoreboard objectives add match_state dummy "試合状態"
 
 scoreboard objectives add player_id dummy "PlayerID"
+scoreboard objectives add role_id dummy "RoleID"
 scoreboard objectives add temp dummy
 scoreboard objectives add scrap dummy "スクラップ"
 scoreboard objectives add regen_timer dummy "回復タイマー"
@@ -15,6 +20,8 @@ scoreboard objectives add timer dummy
 scoreboard objectives add coins_timer dummy
 scoreboard objectives add bj_debuff_timer dummy
 scoreboard objectives add ammo dummy
+scoreboard objectives add health health "HP"
+scoreboard objectives add hp_snapshot dummy "HP Snapshot"
 
 # --- クールダウン ---
 #機械工用クールダウン
@@ -80,6 +87,7 @@ scoreboard objectives add cd_stalker_float dummy
 # 【追加】ターゲット管理用
 scoreboard objectives add target_id dummy "ターゲットID"
 scoreboard objectives add target_check_timer dummy "ターゲット確認タイマー"
+scoreboard objectives add trail_timer dummy "痕跡タイマー"
 
 # 【追加】攻撃判定用 (ダメージを与えたかを検知)
 scoreboard objectives add damage_dealt minecraft.custom:minecraft.damage_dealt "与ダメージ"
@@ -120,7 +128,12 @@ scoreboard objectives add sculpture_hp dummy "彫刻HP"
 scoreboard players set #GLOBAL match_state 0
 scoreboard players set #NEXT_ID player_id 1
 scoreboard players set #100 temp 100
+scoreboard players set #100 temp 100
 scoreboard players set #20 temp 20
+scoreboard players set #4_CONST temp 4
+scoreboard players set #CONST_3 temp 3
+scoreboard players set #CONST_10 temp 10
+scoreboard players set #GLOBAL regen_timer 0
 
 scoreboard players set #POINT_KILL temp 10
 scoreboard players set #POINT_DEATH temp 5
@@ -185,9 +198,23 @@ scoreboard objectives add drop_copper dropped:copper_ingot "コイン起動"
 scoreboard objectives add drop_red_dye dropped:red_dye "戦争起動"
 
 
-# (既存のコードの最後に追加)
+# --- 共有スキル (Super Jump) 用 ---
+scoreboard objectives add sneak_time minecraft.custom:minecraft.sneak_time "スニーク時間"
+scoreboard objectives add cd_super_jump dummy "大ジャンプCT"
 
 # --- タイマー用ボスバーの作成 ---
 bossbar add my_pvp:timer {"text":"残り時間","color":"yellow","bold":true}
 bossbar set my_pvp:timer style progress
 bossbar set my_pvp:timer max 6000
+
+# --- ランダムイベント用 ---
+scoreboard objectives add event_timer dummy "イベントタイマー"
+scoreboard objectives add event_duration dummy "イベント持続時間"
+scoreboard objectives add event_type dummy "イベントタイプ"
+scoreboard objectives add bounty_target dummy "賞金首ID"
+
+# ルーレット用
+scoreboard objectives add sector_offset dummy "セクターオフセット"
+scoreboard objectives add part_radius dummy "パーツ半径"
+# ルーレット用 (追加)
+scoreboard objectives add last_sector dummy "前回のセクター"

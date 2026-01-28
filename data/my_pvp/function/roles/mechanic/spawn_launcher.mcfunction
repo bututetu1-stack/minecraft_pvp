@@ -1,8 +1,11 @@
-# スクラップを5消費 (6 -> 5)
-scoreboard players remove @s scrap 5
+# スクラップを10消費
+execute unless entity @s[tag=rush_mode] run scoreboard players remove @s scrap 10
 
 # CT設定
-scoreboard players set @s cd_launcher 100
+# CT設定
+execute unless entity @s[tag=rush_mode] run scoreboard players set @s cd_launcher 100
+execute if entity @s[tag=rush_mode] run scoreboard players set @s cd_launcher 0
+execute if entity @s[tag=rush_mode] run item replace entity @s container.2 with minecraft:piston[custom_name='{"text":"インパクト・ランチャー","italic":false,"color":"gray"}',lore=['{"text":"Cost: 10 SCRAP","color":"gray"}','{"text":"CT: 5s","color":"aqua"}'],custom_data={is_gadget:1b,gadget_type:3b}] 1
 scoreboard players set @s gadget_life 20
 
 # 召喚

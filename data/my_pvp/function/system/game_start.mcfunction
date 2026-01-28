@@ -11,18 +11,19 @@ scoreboard players set #20 temp 20
 # 実行場所を中心とする
 worldborder center ~ ~
 # 半径150ブロック(直径300)に変更
-worldborder set 300
+worldborder set 120
 
 # 古いマーカーがあれば削除し、新しい中心点マーカーを設置
-kill @e[tag=arena_center]
-summon marker ~ ~ ~ {Tags:["arena_center"]}
+kill @e[tag=game_center]
+summon marker ~ ~ ~ {Tags:["game_center"]}
 
-# プレイヤーを半径150以内にランダム転送
-spreadplayers ~ ~ 30 150 false @a
+# プレイヤーを半径150以内... は start_sequence で行うため削除
+# spreadplayers ~ ~ 30 150 false @a
 
 # --- スコア初期化 ---
 scoreboard players set @a kills 0
 scoreboard players set @a deaths 0
+scoreboard players set @a total_deaths 0
 scoreboard players set @a points 0
 
 # 2. IDリセット

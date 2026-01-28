@@ -14,29 +14,31 @@ execute if score @s coins matches ..39 run return 0
 # 3. 全消費 & ダメージ計算 (Coins * 0.5)
 scoreboard players operation #dmg temp = @s coins
 scoreboard players operation #dmg temp /= #2 temp
-scoreboard players set @s coins 0
+scoreboard players operation #dmg temp /= #2 temp
+execute unless entity @s[tag=rush_mode] run scoreboard players set @s coins 0
 
 tellraw @s [{"text":"[All-In] ","color":"dark_red","bold":true},{"text":"全財産を賭けます... (Dmg: ","color":"yellow"},{"score":{"name":"#dmg","objective":"temp"}},{"text":")","color":"yellow"}]
 
 # 4. 50%判定 (ターゲット決定)
-summon marker ~ ~ ~ {Tags:["random_seed"]}
-execute store result score #RND temp run data get entity @e[tag=random_seed,limit=1] UUID[0]
-kill @e[tag=random_seed]
-scoreboard players operation #RND temp %= #2 temp
+# 4. 50%判定 (ターゲット決定: 1 or 2)
+execute store result score #RND temp run random value 1..2
+tellraw @s [{"text":"[DEBUG] All-In RNG: ","color":"gray"},{"score":{"name":"#RND","objective":"temp"}}]
 
 # 5. 結果分岐
 # Storageにダメージ量を保存 (Macros用)
 execute store result storage my_pvp:macro all_in.amount int 1 run scoreboard players get #dmg temp
 
-# 偶数(0) -> 自分 (Self)
-execute if score #RND temp matches 0 run tellraw @s {"text":"[All-In] BAD... 自分にダメージ","color":"red","bold":true}
-execute if score #RND temp matches 0 run function my_pvp:roles/gambler/skills/all_in_damage_self with storage my_pvp:macro all_in
+# 1 = Enemy (Success), 2 = Self (Fail)
 
-# 奇数(!=0) -> 敵 (Enemy)
-execute unless score #RND temp matches 0 run tellraw @s {"text":"[All-In] SUCCESS! 敵にダメージ","color":"gold","bold":true}
+# 2 (Even/High) -> 自分 (Self)
+execute if score #RND temp matches 2 run tellraw @s {"text":"[All-In] BAD... 自分にダメージ","color":"red","bold":true}
+execute if score #RND temp matches 2 run function my_pvp:roles/gambler/skills/all_in_damage_self with storage my_pvp:macro all_in
+
+# 1 (Odd/Low) -> 敵 (Enemy)
+execute if score #RND temp matches 1 run tellraw @s {"text":"[All-In] SUCCESS! 敵にダメージ","color":"gold","bold":true}
 # 半径10m以内の敵 (一番近い敵にダメージ)
 tag @s add attacker
-execute unless score #RND temp matches 0 as @e[distance=..10,limit=1,sort=nearest,tag=!attacker] run function my_pvp:roles/gambler/skills/all_in_damage_enemy with storage my_pvp:macro all_in
+execute if score #RND temp matches 1 as @a[distance=..10,limit=1,sort=nearest,tag=!attacker,gamemode=!spectator] run function my_pvp:roles/gambler/skills/all_in_damage_enemy with storage my_pvp:macro all_in
 tag @s remove attacker
 
 # アイテム補充

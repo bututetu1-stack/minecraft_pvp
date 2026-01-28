@@ -16,7 +16,8 @@ tag @a remove no_money
 # 【修正】コスト判定 5 -> 10
 execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_launcher=1..}] run tag @s add on_cd
 execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_launcher=0,scrap=10..}] run tag @s add is_ready
-execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_launcher=0,scrap=..9}] run tag @s add no_money
+execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_launcher=0},tag=rush_mode] run tag @s add is_ready
+execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_launcher=0,scrap=..9},tag=!rush_mode] run tag @s add no_money
 
 # --- 6. 実行処理 ---
 # 成功時

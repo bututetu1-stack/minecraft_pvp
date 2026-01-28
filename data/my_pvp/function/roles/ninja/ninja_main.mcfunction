@@ -11,6 +11,8 @@ title @s actionbar [{"text":"Swap: ","color":"light_purple"},{"score":{"name":"@
 execute as @s[scores={cd_ninja_mark=1}] run item replace entity @s container.4 with minecraft:black_dye[custom_name='{"text":"影縫い (設置)","color":"dark_purple"}',lore=['{"text":"Q: 投げて身代わりを設置 (1->2->3)","color":"gray"}','{"text":"CT: 3s","color":"aqua"}']] 1
 execute as @s[scores={cd_ninja_mark=1}] run playsound minecraft:entity.experience_orb.pickup master @s ~ ~ ~ 1 1
 scoreboard players remove @s[scores={cd_ninja_mark=1..}] cd_ninja_mark 1
+# Rush Mode Safety
+execute as @s[tag=rush_mode,scores={cd_ninja_mark=0}] unless entity @s[nbt={Inventory:[{Slot:4b,id:"minecraft:black_dye"}]}] run item replace entity @s container.4 with minecraft:black_dye[custom_name='{"text":"影縫い (設置)","color":"dark_purple"}',lore=['{"text":"Q: 投げて身代わりを設置 (1->2->3)","color":"gray"}','{"text":"CT: 3s","color":"aqua"}']] 1
 
 # 変わり身
 execute as @s[scores={cd_ninja_swap=1}] run playsound minecraft:entity.experience_orb.pickup master @s ~ ~ ~ 1 1
@@ -20,6 +22,8 @@ scoreboard players remove @s[scores={cd_ninja_swap=1..}] cd_ninja_swap 1
 execute as @s[scores={cd_ninja_smoke=1}] run item replace entity @s container.5 with minecraft:charcoal[custom_name='{"text":"煙玉 (目眩まし)","color":"gray"}',lore=['{"text":"Q: 投げて範囲盲目","color":"gray"}','{"text":"CT: 15s","color":"aqua"}']] 1
 execute as @s[scores={cd_ninja_smoke=1}] run playsound minecraft:entity.experience_orb.pickup master @s ~ ~ ~ 1 1
 scoreboard players remove @s[scores={cd_ninja_smoke=1..}] cd_ninja_smoke 1
+# Rush Mode Safety
+execute as @s[tag=rush_mode,scores={cd_ninja_smoke=0}] unless entity @s[nbt={Inventory:[{Slot:5b,id:"minecraft:charcoal"}]}] run item replace entity @s container.5 with minecraft:charcoal[custom_name='{"text":"煙玉 (目眩まし)","color":"gray"}',lore=['{"text":"Q: 投げて範囲盲目","color":"gray"}','{"text":"CT: 15s","color":"aqua"}']] 1
 
 
 # 4. 変わり身（右クリック）検知

@@ -18,7 +18,7 @@ execute unless score @s last_kills = @s kills run scoreboard players operation @
 #    シンプル化のため mag_fly_timer を使わず、20tickごとの判定は別途簡易化できます。
 execute if entity @s[tag=mag_flying_true] run scoreboard players add @s mag_fly_tick 1
 # 3a. 20tick到達時の処理: マナが5以上なら5消費、未満なら着陸させる（マイナス防止）
-execute if entity @s[tag=mag_flying_true] if score @s mag_fly_tick matches 20.. if score @s mana matches 5.. run scoreboard players remove @s mana 5
+execute if entity @s[tag=mag_flying_true] unless entity @s[tag=rush_mode] if score @s mag_fly_tick matches 20.. if score @s mana matches 5.. run scoreboard players remove @s mana 5
 execute if entity @s[tag=mag_flying_true] if score @s mag_fly_tick matches 20.. if score @s mana matches 5.. run scoreboard players set @s mag_fly_tick 0
 execute if entity @s[tag=mag_flying_true] if score @s mag_fly_tick matches 20.. if score @s mana matches ..4 run function my_pvp:roles/magician/land
 execute if entity @s[tag=mag_flying_true] if score @s mag_fly_tick matches 20.. if score @s mana matches ..4 run scoreboard players set @s mag_fly_tick 0

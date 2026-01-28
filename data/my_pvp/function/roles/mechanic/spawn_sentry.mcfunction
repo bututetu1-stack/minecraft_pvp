@@ -1,6 +1,9 @@
-# コスト消費 (8 -> 7)
-scoreboard players remove @s scrap 7
-scoreboard players set @s cd_turret 100
+# コスト消費 (14)
+execute unless entity @s[tag=rush_mode] run scoreboard players remove @s scrap 14
+# CT設定
+execute unless entity @s[tag=rush_mode] run scoreboard players set @s cd_turret 100
+execute if entity @s[tag=rush_mode] run scoreboard players set @s cd_turret 0
+execute if entity @s[tag=rush_mode] run item replace entity @s container.0 with minecraft:redstone_torch[custom_name='{"text":"マイクロタレット","italic":false,"color":"gold"}',lore=['{"text":"Cost: 14 SCRAP","color":"gray"}','{"text":"CT: 5s","color":"aqua"}'],custom_data={is_gadget:1b,gadget_type:1b}] 1
 
 # ... (以降変更なし)
 # --- 設置上限チェック (Max 5) ---
@@ -23,7 +26,7 @@ kill @e[tag=sentry_to_delete]
 
 # --- 以下、召喚処理 ---
 # 1. 本体（見た目）
-summon armor_stand ~ ~ ~ {Tags:["gadget","sentry","gadget_visual"],Invulnerable:1b,ShowArms:1b,HandItems:[{id:"minecraft:crossbow",count:1},{}],Pose:{RightArm:[350f,0f,0f]},CustomName:'{"text":"Micro Sentry","color":"gold"}',attributes:[{id:"minecraft:generic.knockback_resistance",base:1.0f}],DisabledSlots:4144959}
+summon armor_stand ~ ~ ~ {Tags:["gadget","sentry","gadget_visual"],Invulnerable:1b,ShowArms:1b,HandItems:[{id:"minecraft:crossbow",count:1},{}],Pose:{RightArm:[350f,0f,0f]},CustomName:'{"text":"Micro Sentry","color":"gold"}',attributes:[{id:"minecraft:knockback_resistance",base:1.0f}],DisabledSlots:4144959}
 # 2. 当たり判定
 summon interaction ~ ~ ~ {Tags:["gadget_hitbox","sentry_hitbox"],width:0.8f,height:2.0f,response:1b}
 # 3. ID設定 & HP初期化

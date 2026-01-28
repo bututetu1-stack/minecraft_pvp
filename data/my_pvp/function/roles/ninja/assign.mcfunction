@@ -1,5 +1,6 @@
 # 1. 役職タグ設定
 tag @s add ninja
+scoreboard players set @s role_id 2
 tag @s add role_assigned
 
 # 2. チャットで通知

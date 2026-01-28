@@ -1,27 +1,41 @@
-# --- 1. オーナー特定と追従 ---
+# --- 1. オーナー特定 (Owner ID Calculation) ---
 scoreboard players operation #OWNER_ID temp = @s player_id
 tag @a remove current_aa_owner
 execute as @a if score @s player_id = #OWNER_ID temp run tag @s add current_aa_owner
 
-# 【修正】 エフェクトをオーナーの「足元」に追従させる (~1.5 を削除)
-execute at @p[tag=current_aa_owner,limit=1] run tp @s ~ ~ ~
+# --- 移動 (Movement - Follow) ---
+# 凍結チェック: 凍結中は追従しない (その場に留まる)
+# 【修正】 エフェクトをオーナーの「足元」に追従させる
+execute unless entity @s[tag=is_frozen] at @p[tag=current_aa_owner,limit=1] run tp @s ~ ~ ~
 
-# --- 2. 艦種ごとの防御効果 ---
+# --- 2. ビジュアル (Visuals - Always Run) ---
 
-# === A. 秋月: 「鉄壁防空」 ===
+# === A. 秋月 ===
 # 緑のダスト（足元）
 execute if entity @s[tag=type_akizuki] at @s run particle dust{color:[0.2,1.0,0.2],scale:1.0} ~ ~0.1 ~ 0.6 0 0.6 1 5 normal
 
-# === B. 摩耶: 「対空噴進弾」 ===
+# === B. 摩耶 ===
 # 赤のダスト（足元）
 execute if entity @s[tag=type_maya] at @s run particle dust{color:[1.0,0.0,0.0],scale:1.0} ~ ~0.1 ~ 0.6 0 0.6 1 5 normal
+
+# === C. Johnston ===
+# 青のダスト（足元）
+execute if entity @s[tag=type_johnston] at @s run particle dust{color:[0.0,0.5,1.0],scale:1.0} ~ ~0.1 ~ 0.6 0 0.6 1 5 normal
+
+
+# --- 3. 凍結チェック (Frozen Logic Check) ---
+# これ以降のロジック（効果・タイマー）は凍結中スキップ
+execute if entity @s[tag=is_frozen] run return 0
+
+
+# --- 4. 効果 (Effects & Logic) ---
+
+# === B. 摩耶 Effects ===
 # 効果: ウィザーII + 鈍足
 execute if entity @s[tag=type_maya] at @s as @a[distance=..4,tag=!current_aa_owner,gamemode=!spectator] run effect give @s minecraft:wither 2 1 true
 execute if entity @s[tag=type_maya] at @s as @a[distance=..4,tag=!current_aa_owner,gamemode=!spectator] run effect give @s minecraft:slowness 1 1 true
 
-# === C. Johnston: 「高速回避」 ===
-# 青のダスト（足元）
-execute if entity @s[tag=type_johnston] at @s run particle dust{color:[0.0,0.5,1.0],scale:1.0} ~ ~0.1 ~ 0.6 0 0.6 1 5 normal
+# === C. Johnston Effects ===
 # 効果: 移動速度上昇 II
 execute if entity @s[tag=type_johnston] run effect give @p[tag=current_aa_owner] minecraft:speed 1 1 true
 
@@ -35,6 +49,6 @@ execute if entity @s[tag=type_johnston] at @s run kill @e[tag=mag_fireball,dista
 execute if entity @s[tag=type_johnston] at @s run kill @e[type=small_fireball,distance=..5]
 execute if entity @s[tag=type_johnston] at @s run kill @e[type=fireball,distance=..5]
 
-# --- 3. タイマー処理 ---
+# --- 5. タイマー処理 ---
 scoreboard players remove @s timer 1
 execute if score @s timer matches ..0 run kill @s

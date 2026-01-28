@@ -2,10 +2,6 @@
 # @s = sculpture_hitbox
 # 実行者(@a[tag=current_raycaster])に対して処理を行う
 
-# --- 0. 自分自身の彫刻なら無視 ---
-scoreboard players operation #TEMP_OWNER temp = @s player_id
-execute as @a[tag=current_raycaster] if score @s player_id = #TEMP_OWNER temp run return 0
-
 # --- 1. 視線判定の可視化 & キル判定用記録 ---
 
 # ID記録 (キル判定用)

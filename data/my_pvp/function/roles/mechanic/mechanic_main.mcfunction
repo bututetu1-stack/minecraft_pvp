@@ -23,21 +23,29 @@ execute if score @s scrap matches 101.. run scoreboard players set @s scrap 100
 execute as @s[scores={cd_turret=1}] run item replace entity @s container.0 with minecraft:redstone_torch[custom_name='{"text":"マイクロタレット","italic":false,"color":"gold"}',lore=['{"text":"Cost: 14 SCRAP","color":"gray"}','{"text":"CT: 5s","color":"aqua"}'],custom_data={is_gadget:1b,gadget_type:1b}] 1
 execute as @s[scores={cd_turret=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 2
 scoreboard players remove @s[scores={cd_turret=1..}] cd_turret 1
+# Rush Mode Safety
+execute as @s[tag=rush_mode,scores={cd_turret=0}] unless entity @s[nbt={Inventory:[{Slot:0b,id:"minecraft:redstone_torch"}]}] run item replace entity @s container.0 with minecraft:redstone_torch[custom_name='{"text":"マイクロタレット","italic":false,"color":"gold"}',lore=['{"text":"Cost: 14 SCRAP","color":"gray"}','{"text":"CT: 5s","color":"aqua"}'],custom_data={is_gadget:1b,gadget_type:1b}] 1
 
 # 地雷 (Slot 1)
 execute as @s[scores={cd_mine=1}] run item replace entity @s container.1 with minecraft:iron_trapdoor[custom_name='{"text":"地雷","italic":false,"color":"gray"}',lore=['{"text":"Cost: 8 SCRAP","color":"gray"}','{"text":"CT: 3s","color":"aqua"}'],custom_data={is_gadget:1b,gadget_type:2b}] 1
 execute as @s[scores={cd_mine=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 2
 scoreboard players remove @s[scores={cd_mine=1..}] cd_mine 1
+# Rush Mode Safety
+execute as @s[tag=rush_mode,scores={cd_mine=0}] unless entity @s[nbt={Inventory:[{Slot:1b,id:"minecraft:iron_trapdoor"}]}] run item replace entity @s container.1 with minecraft:iron_trapdoor[custom_name='{"text":"地雷","italic":false,"color":"gray"}',lore=['{"text":"Cost: 8 SCRAP","color":"gray"}','{"text":"CT: 3s","color":"aqua"}'],custom_data={is_gadget:1b,gadget_type:2b}] 1
 
 # ランチャー (Slot 2)
 execute as @s[scores={cd_launcher=1}] run item replace entity @s container.2 with minecraft:piston[custom_name='{"text":"インパクト・ランチャー","italic":false,"color":"gray"}',lore=['{"text":"Cost: 10 SCRAP","color":"gray"}','{"text":"CT: 5s","color":"aqua"}'],custom_data={is_gadget:1b,gadget_type:3b}] 1
 execute as @s[scores={cd_launcher=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 2
 scoreboard players remove @s[scores={cd_launcher=1..}] cd_launcher 1
+# Rush Mode Safety
+execute as @s[tag=rush_mode,scores={cd_launcher=0}] unless entity @s[nbt={Inventory:[{Slot:2b,id:"minecraft:piston"}]}] run item replace entity @s container.2 with minecraft:piston[custom_name='{"text":"インパクト・ランチャー","italic":false,"color":"gray"}',lore=['{"text":"Cost: 10 SCRAP","color":"gray"}','{"text":"CT: 5s","color":"aqua"}'],custom_data={is_gadget:1b,gadget_type:3b}] 1
 
 # スネア (Slot 3)
 execute as @s[scores={cd_snare=1}] run item replace entity @s container.3 with minecraft:compass[custom_name='{"text":"重力スネア","italic":false,"color":"light_purple"}',lore=['{"text":"Cost: 16 SCRAP","color":"gray"}','{"text":"CT: 15s","color":"aqua"}'],custom_data={is_gadget:1b,gadget_type:4b}] 1
 execute as @s[scores={cd_snare=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 2
 scoreboard players remove @s[scores={cd_snare=1..}] cd_snare 1
+# Rush Mode Safety
+execute as @s[tag=rush_mode,scores={cd_snare=0}] unless entity @s[nbt={Inventory:[{Slot:3b,id:"minecraft:compass"}]}] run item replace entity @s container.3 with minecraft:compass[custom_name='{"text":"重力スネア","italic":false,"color":"light_purple"}',lore=['{"text":"Cost: 16 SCRAP","color":"gray"}','{"text":"CT: 15s","color":"aqua"}'],custom_data={is_gadget:1b,gadget_type:4b}] 1
 
 # 4. レンチ操作検知
 execute as @e[tag=gadget_hitbox,distance=..4] if data entity @s interaction run function my_pvp:roles/mechanic/wrench_click

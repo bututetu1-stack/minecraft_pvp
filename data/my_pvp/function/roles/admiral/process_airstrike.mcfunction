@@ -5,9 +5,11 @@ execute if entity @s[tag=is_frozen] run return 0
 tp @s ~ ~ ~ ~4 ~
 
 # ファントム公転
-execute at @s run tp @e[tag=plane_1] ^ ^15 ^10 facing ^-10 ^15 ^10
-execute at @s run tp @e[tag=plane_2] ^10 ^18 ^-5 facing ^15 ^18 ^5
-execute at @s run tp @e[tag=plane_3] ^-10 ^18 ^-5 facing ^-5 ^18 ^-15
+# ファントム公転 (ID一致のみ)
+scoreboard players operation #MY_ID temp = @s player_id
+execute at @s as @e[tag=plane_1] if score @s player_id = #MY_ID temp run tp @s ^ ^15 ^10 facing ^-10 ^15 ^10
+execute at @s as @e[tag=plane_2] if score @s player_id = #MY_ID temp run tp @s ^10 ^18 ^-5 facing ^15 ^18 ^5
+execute at @s as @e[tag=plane_3] if score @s player_id = #MY_ID temp run tp @s ^-10 ^18 ^-5 facing ^-5 ^18 ^-15
 
 # --- 2. 共通処理 & 範囲警告 ---
 particle minecraft:campfire_signal_smoke ~ ~0.5 ~ 0 0.5 0 0.1 5 force
@@ -83,5 +85,15 @@ scoreboard players remove @s ammo 2
 scoreboard players set @s timer 5
 
 # 終了判定
-execute unless score @s ammo matches 1.. run kill @e[tag=adm_plane]
+# 1. ID一致ファントム処理
+execute unless score @s ammo matches 1.. as @e[tag=adm_plane] if score @s player_id = #MY_ID temp run data modify entity @s Invulnerable set value 0b
+execute unless score @s ammo matches 1.. as @e[tag=adm_plane] if score @s player_id = #MY_ID temp run tp @s ~ -100 ~
+execute unless score @s ammo matches 1.. as @e[tag=adm_plane] if score @s player_id = #MY_ID temp run kill @s
+
+# 2. 残留ファントム処理 (範囲)
+execute unless score @s ammo matches 1.. as @e[tag=adm_plane,distance=..300] run data modify entity @s Invulnerable set value 0b
+execute unless score @s ammo matches 1.. as @e[tag=adm_plane,distance=..300] run tp @s ~ -100 ~
+execute unless score @s ammo matches 1.. run kill @e[tag=adm_plane,distance=..300]
+
+# 3. 自身(Center)の削除
 execute unless score @s ammo matches 1.. run kill @s

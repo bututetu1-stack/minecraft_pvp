@@ -1,6 +1,23 @@
 # 1. 試合開始フラグON
 scoreboard players set #GLOBAL match_state 1
 scoreboard players set #GLOBAL match_timer 0
+scoreboard players set @a sneak_time 0
+
+# 【追加】ゲーム中心点の設定 (game_startで設置済みだが念のため維持or削除)
+# ここでは削除せず、既存のマーカーを使用
+# kill @e[tag=game_center]
+# summon marker ~ ~ ~ {Tags:["game_center"]}
+
+# 【修正】全プレイヤーをランダム転送 (共通関数呼び出し)
+execute as @a run function my_pvp:system/random_spawn
+
+# 【追加】物理挙動の調整 (Gravity:0.105, Jump:0.6, Speed:1.1倍)
+execute as @a run attribute @s minecraft:jump_strength base set 0.6
+execute as @a run attribute @s minecraft:gravity base set 0.105
+execute as @a run attribute @s minecraft:movement_speed base set 0.11
+
+# 【修正】ノックバック力の異常対策 (初期値に戻す)
+execute as @a run attribute @s minecraft:attack_knockback base set 0
 
 # 2. 開始アナウンス
 title @a title {"text":"GAME START!","color":"red","bold":true}

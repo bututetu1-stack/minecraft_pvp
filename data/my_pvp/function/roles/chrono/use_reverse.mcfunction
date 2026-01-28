@@ -25,7 +25,13 @@ execute as @e[tag=my_past_point] run tp @a[tag=reverse_user] @s
 kill @e[tag=my_past_point]
 
 # 5. 回復 & 演出
-effect give @s minecraft:instant_health 1 1 true
+# マーカーからHPを取得して適応
+execute store result storage my_pvp:macro reverse.hp int 1 run scoreboard players get @s hp_snapshot
+# Debug
+# tellraw @a [{"text":"[Debug] Restore HP to: ","color":"gray"},{"score":{"name":"@s","objective":"hp_snapshot"},"color":"green"}]
+function my_pvp:roles/chrono/restore_hp with storage my_pvp:macro reverse
+
+# effect give @s minecraft:instant_health 1 1 true
 playsound minecraft:item.chorus_fruit.teleport master @a ~ ~ ~ 1 0.5
 particle minecraft:reverse_portal ~ ~1 ~ 0.5 0.5 0.5 0.1 50 force
 tellraw @s [{"text":"<< Time Reverse (5s)","color":"aqua","bold":true}]

@@ -2,7 +2,7 @@ execute if score @s coins matches ..-1 run tellraw @s {"text":"[System] 借金�
 execute if score @s coins matches ..-1 run item replace entity @s hotbar.1 with minecraft:iron_ingot[custom_name='{"text":"ブラックジャック","color":"gold","italic":false}',lore=['{"text":"[Q]キーでドロップして開始 (30 Coins)","color":"gray"}']]
 execute if score @s coins matches ..-1 run return 0
 
-scoreboard players remove @s coins 30
+execute unless entity @s[tag=rush_mode] run scoreboard players remove @s coins 30
 tellraw @s {"text":"[BJ] ブラックジャックを開始します (-30 Coins)","color":"gold"}
 
 scoreboard players set @s bj_state 1

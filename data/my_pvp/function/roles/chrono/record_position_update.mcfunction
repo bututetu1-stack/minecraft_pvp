@@ -27,8 +27,16 @@ tag @e[tag=my_marker,tag=chrono_2s] remove chrono_1s
 # summonだけだと向きが南(0,0)固定になってしまう
 summon area_effect_cloud ~ ~ ~ {Tags:["chrono_marker","chrono_1s"],Duration:200}
 
-# 6. 新規マーカーの設定 (ID付与 & 向きの同期)
+# 6. 新規マーカーの設定 (ID付与 & 向きの同期 & HP記録)
 execute as @e[type=area_effect_cloud,tag=chrono_1s,distance=..0.1,limit=1,sort=nearest] run scoreboard players operation @s player_id = #ID temp
+execute as @e[type=area_effect_cloud,tag=chrono_1s,distance=..0.1,limit=1,sort=nearest] run scoreboard players operation @s hp_snapshot = @p[tag=chrono_user,limit=1,distance=..0.1] health
+# ※ @s(marker) から @p(player) のスコアを取るため、呼び出し元で @s=player であることを利用するか、距離で特定する
+# ここでは呼び出し元がプレイヤー(@s)なので、単純に operation @marker hp = @s health としたいが、
+# execute as marker run ... なので @s は marker になる。
+# よって、呼び出し元のプレイヤーを参照するために事前にタグをつけるか、operationを工夫する
+
+# 修正案: マーカーに対して operation @s hp_snapshot = #ID temp (間違い) -> @p health
+# 呼び出し元で自分にタグがついていると楽。
 
 # 【重要】実行コンテキスト(プレイヤーの場所・向き)に合わせてマーカーの向きを回転させる
 # ~ ~ ~ ~ ~ は「位置を変えずに、向きだけ現在の実行環境に合わせる」という意味

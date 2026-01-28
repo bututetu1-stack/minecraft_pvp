@@ -49,5 +49,7 @@ execute if entity @s[tag=fate_coin_process] as @p[tag=gambler,distance=..3,limit
 execute if entity @s[tag=fate_coin_process] run kill @s
 
 # 6. 戦争 (赤色の染料) -> ★アイテム返却のみ (発動しない)
-execute if items entity @s contents minecraft:red_dye as @p[tag=gambler,distance=..3] run item replace entity @s hotbar.5 with minecraft:red_dye[minecraft:custom_name='{"text":"宣戦布告","color":"dark_red","italic":false}',minecraft:lore=['{"text":"攻撃して発動 (50 Coins)","color":"gray"}']]
-execute if items entity @s contents minecraft:red_dye run kill @s
+# 6. 戦争 (赤色の染料) -> ★アイテム返却のみ (発動しない)
+# Fix: Prevent stealing Berserker's Blood Crystal (berserker_raid:1b)
+execute if items entity @s contents minecraft:red_dye unless items entity @s contents *[minecraft:custom_data~{berserker_raid:1b}] as @p[tag=gambler,distance=..3] run item replace entity @s hotbar.5 with minecraft:red_dye[minecraft:custom_name='{"text":"宣戦布告","color":"dark_red","italic":false}',minecraft:lore=['{"text":"攻撃して発動 (50 Coins)","color":"gray"}']]
+execute if items entity @s contents minecraft:red_dye unless items entity @s contents *[minecraft:custom_data~{berserker_raid:1b}] run kill @s

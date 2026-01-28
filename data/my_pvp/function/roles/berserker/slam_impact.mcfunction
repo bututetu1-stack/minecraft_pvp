@@ -1,7 +1,8 @@
-# 0. 自傷ダメージ (Cost: 4HP)
-damage @s 4 minecraft:magic
+# 0. 自傷ダメージ (Cost: 4HP) (ラッシュモード中は無効)
+execute unless score #GLOBAL event_type matches 5 run damage @s 4 minecraft:magic
 
 # 1. 演出
+
 playsound minecraft:entity.generic.explode master @a ~ ~ ~ 1 0.8
 particle minecraft:explosion_emitter ~ ~ ~ 1 0 1 0 1
 # 衝撃波エフェクト

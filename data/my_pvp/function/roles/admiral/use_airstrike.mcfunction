@@ -62,7 +62,12 @@ execute as @e[tag=airstrike_center,sort=nearest,limit=1] if score @s temp matche
 
 
 # --- ファントム召喚 ---
-execute at @e[tag=airstrike_center,sort=nearest,limit=1] run summon phantom ~ ~15 ~10 {Tags:["adm_plane","plane_1"],NoAI:1b,Size:5,Invulnerable:1b}
-execute at @e[tag=airstrike_center,sort=nearest,limit=1] run summon phantom ~10 ~18 ~-5 {Tags:["adm_plane","plane_2"],NoAI:1b,Size:3,Invulnerable:1b}
-execute at @e[tag=airstrike_center,sort=nearest,limit=1] run summon phantom ~-10 ~18 ~-5 {Tags:["adm_plane","plane_3"],NoAI:1b,Size:3,Invulnerable:1b}
+execute at @e[tag=airstrike_center,sort=nearest,limit=1] run summon phantom ~ ~15 ~10 {Tags:["adm_plane","plane_1","new_plane"],NoAI:1b,Size:5,Invulnerable:1b}
+execute at @e[tag=airstrike_center,sort=nearest,limit=1] run summon phantom ~10 ~18 ~-5 {Tags:["adm_plane","plane_2","new_plane"],NoAI:1b,Size:3,Invulnerable:1b}
+execute at @e[tag=airstrike_center,sort=nearest,limit=1] run summon phantom ~-10 ~18 ~-5 {Tags:["adm_plane","plane_3","new_plane"],NoAI:1b,Size:3,Invulnerable:1b}
 execute at @e[tag=airstrike_center,sort=nearest,limit=1] run playsound minecraft:entity.phantom.swoop master @a ~ ~ ~ 5 0.5
+
+# ID共有 (センターからコピー)
+scoreboard players operation #OWNER_ID temp = @e[tag=airstrike_center,limit=1,sort=nearest] player_id
+execute as @e[tag=new_plane] run scoreboard players operation @s player_id = #OWNER_ID temp
+tag @e[tag=new_plane] remove new_plane

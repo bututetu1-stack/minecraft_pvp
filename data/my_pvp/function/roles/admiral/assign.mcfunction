@@ -1,5 +1,6 @@
 # 1. タグ付け
 tag @s add admiral
+scoreboard players set @s role_id 8
 tag @s add role_assigned
 
 # 2. 通知

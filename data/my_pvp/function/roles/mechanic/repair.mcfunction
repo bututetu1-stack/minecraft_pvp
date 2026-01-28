@@ -7,7 +7,7 @@ execute unless score @p[tag=owner_temp] scrap matches 1.. run playsound minecraf
 execute unless score @p[tag=owner_temp] scrap matches 1.. run return 0
 
 # 2. コスト消費
-scoreboard players remove @p[tag=owner_temp] scrap 1
+execute unless entity @p[tag=owner_temp,tag=rush_mode] run scoreboard players remove @p[tag=owner_temp] scrap 1
 
 # 3. 回復処理
 # 【修正】HPを全快(5)にする (元: 10)

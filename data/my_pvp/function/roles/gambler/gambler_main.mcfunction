@@ -1,4 +1,8 @@
 # 1. コインタイマー (オートリチャージ 1 coin / 1s)
+
+# --- 共通スキル (大ジャンプ) ---
+execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
+execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_super_jump
 # 20 ticks = 1 second
 scoreboard players add @s coins_timer 1
 execute if score @s coins_timer matches 20.. run scoreboard players add @s coins 1
@@ -44,6 +48,10 @@ execute if score @s damage_dealt > @s last_damage_dealt if entity @s[nbt={Select
 
 # 汎用ダメージブースト判定 (War以外で攻撃した場合)
 execute if score @s damage_dealt > @s last_damage_dealt if score @s damage_boost matches 1 run function my_pvp:roles/gambler/skills/apply_damage_boost
+
+# 【追加】攻撃ヒット時にコインを10枚付与
+execute if score @s damage_dealt > @s last_damage_dealt run scoreboard players add @s coins 5
+execute if score @s damage_dealt > @s last_damage_dealt run tellraw @s {"text":"[+] 5 Coins","color":"gold"}
 
 # ステータス同期
 scoreboard players operation @s last_damage_dealt = @s damage_dealt

@@ -1,7 +1,7 @@
 # 離陸処理 (Levitationによる飛行開始)
 
 # 1. マナ消費
-scoreboard players remove @s mana 5
+execute unless entity @s[tag=rush_mode] run scoreboard players remove @s mana 5
 
 # 2. 飛行タグ付与
 tag @s add mag_flying_true

@@ -1,7 +1,7 @@
 clear @s
 
 # Slot 0: 剣
-item replace entity @s hotbar.0 with minecraft:iron_sword[minecraft:custom_name='{"text":"ギャンブラーの剣","color":"gray","italic":false}']
+item replace entity @s hotbar.0 with minecraft:iron_sword[minecraft:unbreakable={},minecraft:custom_name='{"text":"ギャンブラーの剣","color":"gray","italic":false}']
 
 # Slot 1: ブラックジャック (鉄インゴット)
 item replace entity @s hotbar.1 with minecraft:iron_ingot[minecraft:custom_name='{"text":"ブラックジャック","color":"gold","italic":false}',minecraft:lore=['{"text":"[Q]キーでドロップして開始 (30 Coins)","color":"gray"}']]

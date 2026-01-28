@@ -10,7 +10,7 @@ tag @s remove end_processing
 tag @s remove current_dasher
 
 # Reset Knockback
-attribute @s minecraft:generic.attack_knockback base set 0.0
+attribute @s minecraft:attack_knockback base set 0.0
 
 # Clear Hit Tags
 tag @a remove bashed_temp

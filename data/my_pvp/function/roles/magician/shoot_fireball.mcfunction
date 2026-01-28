@@ -1,12 +1,12 @@
 # 炎玉発射処理
 
 # 1. マナ消費
-scoreboard players remove @s mana 5
+execute unless entity @s[tag=rush_mode] run scoreboard players remove @s mana 5
 
 # 2. 炎玉をプレイヤー基準でスポーン（視線方向に発射）
 # armor_stand 弾として召喚する（移動は fireball_tick が担当）
 # 召喚位置を目線（+1.62）にし、プレイヤーの向きをコピーして正しく前方へ進ませる
-execute as @s at @s run summon armor_stand ^ ^1.62 ^0.7 {Tags:["mag_fireball","gadget"],NoGravity:1b,Marker:1b,Invisible:1b,Invulnerable:1b}
+execute as @s at @s run summon armor_stand ^ ^1.62 ^1.3 {Tags:["mag_fireball","gadget"],NoGravity:1b,Marker:1b,Invisible:1b,Invulnerable:1b}
 execute as @s at @s run data modify entity @e[type=armor_stand,tag=mag_fireball,limit=1,sort=nearest] Rotation set from entity @s Rotation
 
 # 3. 発射した炎玉に所有者IDを記録（プレイヤー基準で nearest を取得）

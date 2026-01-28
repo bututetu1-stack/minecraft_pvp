@@ -24,7 +24,10 @@ execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_ninja_
 
 # B. OK (CTなし) -> 発動
 # CT設定 (3秒 = 60tick)
-execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_ninja_mark=0}] run scoreboard players set @s cd_ninja_mark 60
+# CT設定 (3秒 = 60tick)
+# CT設定 (3秒 = 60tick)
+scoreboard players set @p[tag=current_caster] cd_ninja_mark 60
+execute if entity @p[tag=current_caster,distance=..300,tag=rush_mode] run item replace entity @p[tag=current_caster,distance=..300] container.4 with minecraft:black_dye[custom_name='{"text":"影縫い (設置)","color":"dark_purple"}',lore=['{"text":"Q: 投げて身代わりを設置 (1->2->3)","color":"gray"}','{"text":"CT: 3s","color":"aqua"}']] 1
 
 # 発動ロジック
 execute if entity @s[tag=can_process] if entity @p[tag=current_caster,scores={cd_ninja_mark=60}] at @e[tag=can_process,limit=1] run function my_pvp:roles/ninja/trigger_mark_success

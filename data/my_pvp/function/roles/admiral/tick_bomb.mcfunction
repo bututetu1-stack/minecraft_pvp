@@ -1,14 +1,36 @@
-# 【追加】凍結中は処理を停止
+# --- 0. 凍結チェック (Frozen Check - Absolute Priority) ---
 execute if entity @s[tag=is_frozen] run return 0
 
-# --- 1. 位置調整 ---
+# --- 1. 落下制御 (Falling Logic) ---
 # 空中にいる場合は地面に落とす
-execute if entity @s[tag=bomb_falling] if block ~ ~-0.1 ~ minecraft:air run tp @s ~ ~-1 ~
-execute if entity @s[tag=bomb_falling] unless block ~ ~-0.1 ~ minecraft:air run tag @s remove bomb_falling
+# 通過可能か判定 (タグファイル不具合回避のため直書き)
+tag @s remove can_pass
+execute if block ~ ~-0.1 ~ minecraft:air run tag @s add can_pass
+execute if block ~ ~-0.1 ~ minecraft:void_air run tag @s add can_pass
+execute if block ~ ~-0.1 ~ minecraft:cave_air run tag @s add can_pass
+execute if block ~ ~-0.1 ~ minecraft:short_grass run tag @s add can_pass
+execute if block ~ ~-0.1 ~ minecraft:tall_grass run tag @s add can_pass
+execute if block ~ ~-0.1 ~ minecraft:fern run tag @s add can_pass
+execute if block ~ ~-0.1 ~ minecraft:large_fern run tag @s add can_pass
+execute if block ~ ~-0.1 ~ minecraft:vine run tag @s add can_pass
+execute if block ~ ~-0.1 ~ minecraft:tripwire run tag @s add can_pass
+execute if block ~ ~-0.1 ~ minecraft:water run tag @s add can_pass
+execute if block ~ ~-0.1 ~ minecraft:lava run tag @s add can_pass
+execute if block ~ ~-0.1 ~ minecraft:light run tag @s add can_pass
+execute if block ~ ~-0.1 ~ minecraft:light run tag @s add can_pass
+execute if block ~ ~-0.1 ~ minecraft:structure_void run tag @s add can_pass
+# バリアも通過させる (天井バリア対策)
+execute if block ~ ~-0.1 ~ minecraft:barrier run tag @s add can_pass
 
-# --- 2. 範囲表示リング (Visual) ---
-# 自身を回転させて、前方/後方/右/左にパーティクルを出すことで円を描く
-tp @s ~ ~ ~ ~25 ~
+execute if entity @s[tag=bomb_falling,tag=can_pass] run tp @s ~ ~-1 ~
+execute if entity @s[tag=bomb_falling,tag=!can_pass] run tag @s remove bomb_falling
+
+# 落下中はタイマーを維持して処理を中断 (非表示)
+execute if entity @s[tag=bomb_falling] run scoreboard players set @s temp 40
+execute if entity @s[tag=bomb_falling] run return 0
+
+
+# --- 1. ビジュアル (Visuals) ---
 
 # === A. 彗星 (半径5m, 赤) ===
 execute if entity @s[tag=type_suisei] run particle dust{color:[1.0,0.0,0.0],scale:1.5} ^ ^0.2 ^5 0 0 0 0 1 force
@@ -38,11 +60,19 @@ execute if entity @s[tag=type_ryusei] run particle dust{color:[0.0,0.0,1.0],scal
 execute if entity @s[tag=type_ryusei] run particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
 execute if entity @s[tag=type_ryusei] run particle falling_dust{block_state:"minecraft:blue_concrete"} ~ ~5 ~ 0.1 2 0.1 0 2 force
 
+# --- 2. 凍結チェック (Frozen Check) ---
+execute if entity @s[tag=is_frozen] run return 0
 
-# --- 3. 音 ---
+# --- 3. ロジック (Logic) ---
+
+# --- 回転 (Rotation) ---
+# 自身を回転させて、前方/後方/右/左にパーティクルを出すことで円を描く
+tp @s ~ ~ ~ ~25 ~
+
+# --- 音 ---
 execute if score @s temp matches 20 run playsound minecraft:entity.phantom.flap master @a[distance=..10] ~ ~ ~ 1 2
 execute if score @s temp matches 10 run playsound minecraft:entity.firework_rocket.launch master @a[distance=..10] ~ ~ ~ 1 0.5
 
-# --- 4. カウントダウン & 起爆 ---
+# --- カウントダウン & 起爆 ---
 scoreboard players remove @s temp 1
 execute if score @s temp matches ..0 run function my_pvp:roles/admiral/process_bomb_explode

@@ -11,7 +11,7 @@ execute unless entity @a[tag=item_recipient] run tellraw @a [{"text":"[Debug] ",
 
 # 3. アイテム返却
 # 【修正】Amount:3 -> 5 (合計攻撃力 4 -> 6)
-execute as @a[tag=item_recipient] unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{scout_sword:1b}}}]}] run give @s minecraft:iron_sword[minecraft:custom_data={scout_sword:1b},minecraft:unbreakable={},minecraft:enchantments={levels:{"minecraft:knockback":1}},minecraft:attribute_modifiers={modifiers:[{type:"generic.attack_damage",amount:5.0,operation:"add_value",slot:"mainhand",id:"my_pvp:scout_sword_damage"}],show_in_tooltip:false},minecraft:custom_name='{"text":"リパルサーブレード","color":"white"}',minecraft:lore=['{"text":"攻撃力: 6 (固定)","color":"gray"}']] 1
+execute as @a[tag=item_recipient] unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{scout_sword:1b}}}]}] run give @s minecraft:iron_sword[minecraft:custom_data={scout_sword:1b},minecraft:unbreakable={},minecraft:enchantments={levels:{"minecraft:knockback":1}},minecraft:attribute_modifiers={modifiers:[{type:"attack_damage",amount:5.0,operation:"add_value",slot:"mainhand",id:"my_pvp:scout_sword_damage"}],show_in_tooltip:false},minecraft:custom_name='{"text":"リパルサーブレード","color":"white"}',minecraft:lore=['{"text":"攻撃力: 6 (固定)","color":"gray"}']] 1
 
 # 4. アイテム消去
 kill @s

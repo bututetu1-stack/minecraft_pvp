@@ -8,7 +8,4 @@
 tellraw @a [{"text":"[DEBUG] Hit!","color":"red"}]
 function my_pvp:roles/sculptor/raycast/apply_effect
 
-# ヒットしたのでループ終了フラグを立てる (自分の彫刻だった場合は貫通させる？いや、自分の彫刻も視界を遮るべきか？)
-# 仕様: 自分のが邪魔で奥のが見えない、はありうるので、自分のでもヒットしたら終了でOK。
-# ただし「自分のには効かない」だけ。
 scoreboard players set #RAY_DIST temp 100

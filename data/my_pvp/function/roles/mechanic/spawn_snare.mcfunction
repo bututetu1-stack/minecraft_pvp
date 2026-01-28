@@ -1,5 +1,13 @@
-# スクラップを8消費 (9 -> 8)
-scoreboard players remove @s scrap 8
+# スクラップを16消費
+execute unless entity @s[tag=rush_mode] run scoreboard players remove @s scrap 16
+
+# CT設定 (15s = 300ticks)
+execute unless entity @s[tag=rush_mode] run scoreboard players set @s cd_snare 300
+execute if entity @s[tag=rush_mode] run scoreboard players set @s cd_snare 0
+execute if entity @s[tag=rush_mode] run item replace entity @s container.3 with minecraft:compass[custom_name='{"text":"重力スネア","italic":false,"color":"light_purple"}',lore=['{"text":"Cost: 16 SCRAP","color":"gray"}','{"text":"CT: 15s","color":"aqua"}'],custom_data={is_gadget:1b,gadget_type:4b}] 1
+
+
+
 
 # 1. 中心点の召喚
 summon marker ~ ~ ~ {Tags:["gadget","snare"]}

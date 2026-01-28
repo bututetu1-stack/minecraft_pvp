@@ -24,7 +24,10 @@ execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_ninja_
 
 # B. OK -> 発動
 # CT設定 (15秒後に ninja_main で返却されます)
-execute if entity @s[tag=can_process] as @p[tag=current_caster,scores={cd_ninja_smoke=0}] run scoreboard players set @s cd_ninja_smoke 300
+# CT設定 (15秒後に ninja_main で返却されます)
+# CT設定 (15秒後に ninja_main で返却されます)
+scoreboard players set @p[tag=current_caster] cd_ninja_smoke 300
+execute if entity @p[tag=current_caster,distance=..300,tag=rush_mode] run item replace entity @p[tag=current_caster,distance=..300] container.5 with minecraft:charcoal[custom_name='{"text":"煙玉 (目眩まし)","color":"gray"}',lore=['{"text":"Q: 投げて範囲盲目","color":"gray"}','{"text":"CT: 15s","color":"aqua"}']] 1
 
 # 発動ロジック
 execute if entity @s[tag=can_process] if entity @p[tag=current_caster,scores={cd_ninja_smoke=300}] at @e[tag=can_process,limit=1] run function my_pvp:roles/ninja/trigger_smoke_logic

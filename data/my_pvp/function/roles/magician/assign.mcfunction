@@ -1,12 +1,13 @@
 # 1. タグ付け
 tag @s add magician
 tag @s add role_assigned
+scoreboard players set @s role_id 6
 
 # 2. チャットで通知
 tellraw @s [{"text":"[System] ","color":"gray"},{"text":"あなたは ","color":"white"},{"text":"『魔術師』","color":"light_purple","bold":true},{"text":" です！","color":"white"}]
 
 # 3. ステータス設定
-attribute @s minecraft:generic.attack_damage base set 1
+attribute @s minecraft:attack_damage base set 1
 
 # 4. マナ初期化
 scoreboard players set @s mana 50

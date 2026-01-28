@@ -15,6 +15,7 @@ execute if score @s cd_shield_bash matches 1 run playsound minecraft:block.note_
 
 # 4. スキル発動検知
 # アースクラッシュ
+# アースクラッシュ
 execute if score @s click_tank matches 1.. run function my_pvp:roles/tank/use_crash
 scoreboard players set @s click_tank 0
 

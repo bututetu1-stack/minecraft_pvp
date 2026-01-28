@@ -19,7 +19,7 @@ execute as @a[tag=victim] run damage @s 0 minecraft:magic by @p[tag=attacker]
 # ユーザー要望: 無敵時間(I-frame)を無視してダメージを与える
 # HurtTimeの変更はプレイヤーには適用できないため削除 (エラー回避)
 # execute as @a[tag=victim] run data modify entity @s HurtTime set value 0s
-execute as @a[tag=victim] run damage @s 7 minecraft:generic
+execute as @a[tag=victim] run damage @s 7 minecraft:generic by @p[tag=attacker]
 
 # 5. フラグ消費 & 後処理
 scoreboard players set @s damage_boost 0

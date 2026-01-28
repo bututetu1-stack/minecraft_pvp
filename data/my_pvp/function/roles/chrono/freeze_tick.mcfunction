@@ -14,3 +14,7 @@ tag @s remove tp_target
 # 5. 演出 (アクションバーとパーティクル)
 title @s actionbar {"text":"|| 時間停止中 ||","color":"aqua"}
 particle minecraft:snowflake ~ ~1 ~ 0.5 1 0.5 0.05 5 force
+
+# 6. 攻撃・採掘制限 (Weakness & Mining Fatigue)
+effect give @s minecraft:weakness 1 255 true
+effect give @s minecraft:mining_fatigue 1 255 true

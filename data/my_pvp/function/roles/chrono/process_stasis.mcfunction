@@ -4,7 +4,7 @@ execute as @p[distance=..3,tag=chrono] run tag @s add skill_user
 
 # 2. CTチェック (cd_chrono_stasis)
 execute as @a[tag=skill_user] if score @s cd_chrono_stasis matches 1.. run tag @s add ct_error
-execute as @a[tag=skill_user] unless score @s cd_chrono_stasis matches 1.. run function my_pvp:roles/chrono/use_stasis
+execute as @a[tag=skill_user] unless score @s cd_chrono_stasis matches 1.. at @s run function my_pvp:roles/chrono/use_stasis
 
 # 3. エラー表示 (CT中の場合)
 execute as @a[tag=skill_user,tag=ct_error] run title @s actionbar {"text":"Stasis Not Ready!","color":"red"}

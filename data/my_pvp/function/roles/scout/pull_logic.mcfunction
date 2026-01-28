@@ -32,7 +32,7 @@ execute as @a[distance=..2.0,gamemode=!spectator] unless score @s player_id = #T
 
 # 6ダメージ（ハート3個分）を与える
 # 【修正】攻撃元を @p[tag=scout_attacker_now] にすることで確実に自分を指定
-execute as @a[tag=scout_contact_victim] run damage @s 6 minecraft:player_attack by @p[tag=scout_attacker_now,limit=1]
+execute as @a[tag=scout_contact_victim] run damage @s 4 minecraft:player_attack by @p[tag=scout_attacker_now,limit=1]
 
 # ヒット演出
 execute if entity @a[tag=scout_contact_victim] run particle minecraft:crit ~ ~1 ~ 0.3 0.3 0.3 0.1 5

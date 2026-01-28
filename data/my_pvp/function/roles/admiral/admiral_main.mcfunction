@@ -6,6 +6,10 @@ execute if score @s cd_adm_aa matches 1.. run scoreboard players remove @s cd_ad
 # 【復活】 陣形変更の連打防止用クールダウン消化
 execute if score @s cd_formation matches 1.. run scoreboard players remove @s cd_formation 1
 
+# 共通スキル (大ジャンプ)
+execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
+execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_super_jump
+
 # --- CT完了通知 (音) ---
 execute if score @s cd_adm_artillery matches 1 run playsound minecraft:block.note_block.hat master @s ~ ~ ~ 1 2
 execute if score @s cd_adm_torpedo matches 1 run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 2
@@ -39,10 +43,12 @@ scoreboard players set @s click_skill 0
 tag @s remove using_skill
 
 # --- エンティティ制御 (Tick処理) ---
-execute as @e[tag=artillery_marker] at @s run function my_pvp:roles/admiral/tick_artillery
-execute as @e[tag=adm_torpedo] at @s run function my_pvp:roles/admiral/tick_torpedo
-execute as @e[tag=airstrike_center] at @s run function my_pvp:roles/admiral/process_airstrike
-execute as @e[tag=adm_bomb] at @s run function my_pvp:roles/admiral/tick_bomb
+# --- エンティティ制御 (Tick処理) ---
+# game_logic.mcfunction で一括管理するように変更
+# execute as @e[tag=artillery_marker] at @s run function my_pvp:roles/admiral/tick_artillery
+# execute as @e[tag=adm_torpedo] at @s run function my_pvp:roles/admiral/tick_torpedo
+# execute as @e[tag=airstrike_center] at @s run function my_pvp:roles/admiral/process_airstrike
+# execute as @e[tag=adm_bomb] at @s run function my_pvp:roles/admiral/tick_bomb
 
 # アイテムスキャン
 function my_pvp:roles/admiral/scan_items
@@ -54,6 +60,12 @@ execute as @e[type=area_effect_cloud,tag=aa_center] at @s run function my_pvp:ro
 # 1. 常時効果適用
 execute as @s run function my_pvp:roles/admiral/tick_formation
 
+# 【不具合対策】 コマンド/環境ダメージでの反撃発動 (Advancement失敗時の保険)
+execute if score @s adm_formation matches 2 if score @s damage_taken matches 1.. run function my_pvp:roles/admiral/trigger_penalty_v2
+
 # 2. 右クリック検知 (羅針盤)
 execute if score @s click_formation matches 1.. run function my_pvp:roles/admiral/change_formation
 scoreboard players set @s click_formation 0
+
+# --- Tick処理完了 ---
+# tag @s remove processing_penalty (不要)

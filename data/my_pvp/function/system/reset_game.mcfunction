@@ -3,7 +3,9 @@
 # サーバーにいないプレイヤーの記録も消します
 scoreboard players reset * kills
 scoreboard players reset * deaths
+scoreboard players reset * total_deaths
 scoreboard players reset * points
+scoreboard players reset * bonus_points
 scoreboard players reset * scrap
 
 # クールダウン系リセット
@@ -17,6 +19,8 @@ scoreboard players reset * cd_ninja_swap
 scoreboard players reset * cd_ninja_smoke
 # タンク用リセット
 scoreboard players reset * cd_tank_crash
+scoreboard players reset * cd_shield_bash
+scoreboard players reset * shield_dash_timer
 
 # 【追加】バーサーカー用CTリセット
 scoreboard players reset * cd_ber_raid
@@ -61,11 +65,12 @@ scoreboard players set @a cd_sculptor_create 0
 scoreboard players set @a sculpture_cycle 1
 
 # 【修正】全員の基礎HPを 20 -> 40 に変更
-execute as @a run attribute @s minecraft:generic.max_health base set 40
-execute as @a run attribute @s minecraft:generic.knockback_resistance base set 0
+execute as @a run attribute @s minecraft:max_health base set 40
+execute as @a run attribute @s minecraft:knockback_resistance base set 0
 
 # システム用IDなどもリセット
 scoreboard players reset * player_id
+scoreboard players reset * role_id
 scoreboard players reset * temp
 
 # インベントリクリア (@a: オンラインのみ)
@@ -75,8 +80,9 @@ clear @a
 effect clear @a
 
 # 試合開始の瞬間にHPと満腹度をMAXにする
-effect give @a minecraft:instant_health 1 100 true
+effect give @a minecraft:instant_health 1 200 true
 effect give @a minecraft:saturation 1 255 true
+effect give @a minecraft:regeneration 1 200 true
 
 # 役職タグリセット
 tag @a remove role_assigned
@@ -94,6 +100,19 @@ tag @a remove chrono
 tag @a remove is_frozen
 tag @a remove sculptor
 
+# 【追加】 旧役職・開発中役職のタグも念のため削除
+tag @a remove samurai
+tag @a remove alchemist
+tag @a remove puppeteer
+tag @a remove guardian
+tag @a remove ghost
+tag @a remove architect
+tag @a remove esper
+tag @a remove vampire
+tag @a remove infector
+tag @a remove cursed_pirate
+tag @a remove pirate
+
 # --- 計算用の一時タグを全消去 ---
 tag @a remove owner_temp
 tag @a remove stepping_enemy
@@ -107,6 +126,7 @@ tag @a remove item_recipient
 # 【追加】提督用一時タグ
 tag @a remove attacker_temp
 tag @a remove using_skill
+tag @a remove current_dasher
 
 tag @a remove is_ready
 tag @a remove on_cd
@@ -116,7 +136,7 @@ tag @a remove my_target
 tag @a remove is_my_target
 
 # 攻撃力を標準(1.0)に戻す
-execute as @a run attribute @s minecraft:generic.attack_damage base set 1
+execute as @a run attribute @s minecraft:attack_damage base set 1
 
 # --- ドロップ防止処理 ---
 execute as @e[tag=gadget_visual] run data merge entity @s {HandItems:[{},{}],ArmorItems:[{},{},{},{}]}
@@ -146,6 +166,8 @@ kill @e[tag=new_torp]
 # 航空支援
 kill @e[tag=airstrike_center]
 kill @e[tag=adm_plane]
+execute as @e[type=phantom] run data modify entity @s Invulnerable set value 0b
+kill @e[type=phantom]
 kill @e[tag=temp_air_marker]
 # 爆弾
 kill @e[tag=adm_bomb]
@@ -161,6 +183,7 @@ kill @e[tag=stasis_center]
 execute as @e[tag=sculpture] run data merge entity @s {HandItems:[{},{}],ArmorItems:[{},{},{},{}]}
 kill @e[tag=sculpture]
 kill @e[tag=sculpture_hitbox]
+kill @e[tag=bash_guide]
 
 # 【追加】 ギャンブラー用リセット
 scoreboard players reset * coins
@@ -187,6 +210,13 @@ kill @e[tag=roulette_marker]
 
 # 残留アイテムの完全消去
 kill @e[type=item]
+
+# ランダムイベントリセット
+title @a times 10 70 20
+scoreboard players set #GLOBAL event_duration 0
+scoreboard players set #GLOBAL event_type 0
+tag @a remove rush_mode
+tag @a remove bounty_target
 
 # タイマーリセット
 scoreboard players set #GLOBAL match_timer 0

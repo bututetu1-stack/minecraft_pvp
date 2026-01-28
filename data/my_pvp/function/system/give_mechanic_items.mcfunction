@@ -13,7 +13,7 @@ item replace entity @s container.3 with minecraft:compass[minecraft:custom_data=
 
 # --- エンジニアレンチ (Slot 4) ---
 # スロット4（ホットバー5番目）に固定配布
-item replace entity @s container.4 with minecraft:iron_axe[minecraft:custom_data={is_wrench:1b},minecraft:unbreakable={},minecraft:attribute_modifiers={modifiers:[{type:"generic.attack_damage",amount:-100.0,operation:"add_value",slot:"mainhand",id:"my_pvp:no_damage"}],show_in_tooltip:false},minecraft:custom_name='{"text":"エンジニアレンチ","italic":false,"color":"white"}',minecraft:lore=['{"text":"右クリック: 修理 (Cost: 1)","color":"gray"}','{"text":"左クリック: 解体 (Return: 2)","color":"gray"}']] 1
+item replace entity @s container.4 with minecraft:iron_axe[minecraft:custom_data={is_wrench:1b},minecraft:unbreakable={},minecraft:attribute_modifiers={modifiers:[{type:"attack_damage",amount:-100.0,operation:"add_value",slot:"mainhand",id:"my_pvp:no_damage"}],show_in_tooltip:false},minecraft:custom_name='{"text":"エンジニアレンチ","italic":false,"color":"white"}',minecraft:lore=['{"text":"右クリック: 修理 (Cost: 1)","color":"gray"}','{"text":"左クリック: 解体 (Return: 2)","color":"gray"}']] 1
 
 # 初期スクラップ (30 -> 50)
 scoreboard players set @s scrap 50

@@ -1,6 +1,7 @@
 # --- 1. 離陸検知 (Takeoff Check) ---
 # 準備中(ber_ready) かつ 空中に浮いた(OnGround:0b) なら、落下待ちモード(ber_falling)に移行
 # これにより、ジャンプ直後の誤作動を防ぐ
+
 execute if entity @s[tag=ber_ready] unless entity @s[nbt={OnGround:1b}] run tag @s add ber_falling
 execute if entity @s[tag=ber_falling] run tag @s remove ber_ready
 

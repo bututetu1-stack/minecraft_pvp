@@ -27,4 +27,4 @@ playsound minecraft:item.shield.block master @a ~ ~ ~ 1 0.5
 playsound minecraft:entity.ender_dragon.flap master @a ~ ~ ~ 1 1.5
 
 # Knockback Buff (For Tick Damage)
-attribute @s minecraft:generic.attack_knockback base set 5.0
+attribute @s minecraft:attack_knockback base set 5.0

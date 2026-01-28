@@ -1,5 +1,6 @@
 # 1. タグ付け
 tag @s add tank
+scoreboard players set @s role_id 4
 tag @s add role_assigned
 
 # 2. 通知

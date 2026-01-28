@@ -1,0 +1,21 @@
+{
+    "criteria": {
+        "hurt": {
+            "trigger": "minecraft:player_hurt_entity",
+            "conditions": {
+                "player": [
+                    {
+                        "condition": "minecraft:entity_properties",
+                        "entity": "this",
+                        "predicate": {
+                            "nbt": "{Tags:[\"stalker\"]}"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "function": "my_pvp:roles/stalker/trigger_attack"
+    }
+}

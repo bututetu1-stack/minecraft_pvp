@@ -1,5 +1,5 @@
 # 最大体力を40に設定
-attribute @s minecraft:generic.max_health base set 40
+attribute @s minecraft:max_health base set 40
 
 # 全回復
 effect give @s minecraft:instant_health 1 100 true

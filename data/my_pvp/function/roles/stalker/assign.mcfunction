@@ -1,5 +1,6 @@
 # 1. タグ付け
 tag @s add stalker
+scoreboard players set @s role_id 7
 tag @s add role_assigned
 
 # 2. チャット通知

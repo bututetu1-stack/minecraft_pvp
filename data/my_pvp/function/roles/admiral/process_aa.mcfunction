@@ -8,7 +8,7 @@ execute as @a[tag=admiral] if score @s player_id = #TEMP player_id run tag @s ad
 
 # 3. アイテム返却 (Slot 3)
 # Tag: adm_aa, CMD: 4
-execute as @a[tag=item_recipient] unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{adm_aa:1b}}}]}] run item replace entity @s container.3 with minecraft:carrot_on_a_stick[minecraft:custom_data={adm_aa:1b},minecraft:custom_model_data=4,minecraft:custom_name='{"text":"【対空カットイン】","color":"green","bold":true}',minecraft:lore=['{"text":"[右クリック] 周囲弾き飛ばし＆無効化","color":"yellow"}','{"text":"CT: 15秒","color":"gray"}'],minecraft:unbreakable={}] 1
+execute as @a[tag=item_recipient] unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{adm_aa:1b}}}]}] run item replace entity @s container.3 with minecraft:carrot_on_a_stick[minecraft:custom_data={adm_aa:1b},minecraft:custom_model_data={floats:[4.0]},minecraft:custom_name='{"text":"【対空カットイン】","color":"green","bold":true}',minecraft:lore=['{"text":"[右クリック] 周囲弾き飛ばし＆無効化","color":"yellow"}','{"text":"CT: 15秒","color":"gray"}'],minecraft:unbreakable={}] 1
 
 # 4. アイテム消去
 kill @s

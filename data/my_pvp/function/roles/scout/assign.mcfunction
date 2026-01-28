@@ -1,5 +1,6 @@
 # 1. タグ付け
 tag @s add scout
+scoreboard players set @s role_id 3
 tag @s add role_assigned
 
 # 2. 通知

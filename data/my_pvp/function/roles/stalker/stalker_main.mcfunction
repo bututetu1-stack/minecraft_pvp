@@ -5,6 +5,27 @@ execute as @a[gamemode=!spectator] if score @s player_id = #TEMP player_id run t
 
 execute if entity @a[tag=my_target] run function my_pvp:roles/stalker/update_compass
 
+# --- 0. 攻撃力無効化 (Weakness 255) ---
+# マクロ攻撃システムのため、物理攻撃力を0にする
+effect give @s minecraft:weakness 2 255 true
+
+# --- 追加機能: ターゲット追跡 ---
+# 1. ターゲットに足跡を残させる
+execute as @a[tag=my_target] at @s run function my_pvp:roles/stalker/leave_trail
+
+# 2. 足跡を表示 (自分にだけ見えるように)
+# 準備: ターゲットIDをTEMPに格納 & 自分にタグ付け
+scoreboard players operation #TEMP player_id = @s target_id
+tag @s add current_stalker
+# 全トレイルを処理
+execute as @e[tag=stalker_trail] run function my_pvp:roles/stalker/trail_tick
+tag @s remove current_stalker
+
+# 3. 視線デバフ (Raycast)
+# 距離20m (0.5 * 40)
+scoreboard players set #ray_dist temp 40
+execute anchored eyes positioned ^ ^ ^ run function my_pvp:roles/stalker/raycast
+
 # 2. ターゲット生存確認 & 再抽選
 execute unless entity @a[tag=my_target] run scoreboard players add @s target_check_timer 1
 execute if score @s target_check_timer matches 20.. run function my_pvp:roles/stalker/assign_target

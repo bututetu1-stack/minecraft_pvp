@@ -9,7 +9,8 @@ tag @a remove no_money
 # 【修正】コスト判定 8 -> 16
 execute if entity @s[tag=can_process] as @p[tag=mechanic,distance=..300,limit=1,sort=nearest,scores={cd_snare=1..}] run tag @s add on_cd
 execute if entity @s[tag=can_process] as @p[tag=mechanic,distance=..300,limit=1,sort=nearest,scores={cd_snare=0,scrap=16..}] run tag @s add is_ready
-execute if entity @s[tag=can_process] as @p[tag=mechanic,distance=..300,limit=1,sort=nearest,scores={cd_snare=0,scrap=..15}] run tag @s add no_money
+execute if entity @s[tag=can_process] as @p[tag=mechanic,distance=..300,limit=1,sort=nearest,scores={cd_snare=0},tag=rush_mode] run tag @s add is_ready
+execute if entity @s[tag=can_process] as @p[tag=mechanic,distance=..300,limit=1,sort=nearest,scores={cd_snare=0,scrap=..15},tag=!rush_mode] run tag @s add no_money
 
 # --- 分岐実行 ---
 # 成功時
