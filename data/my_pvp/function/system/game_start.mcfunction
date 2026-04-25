@@ -33,20 +33,7 @@ execute as @a run function my_pvp:system/assign_new_id
 
 # 3. 役職抽選
 function my_pvp:system/init_role_deck
-
-# 【一時デバッグ】 init_role_deck 実行後の role_card 数を出力
-execute store result score #DEBUG_CARDS temp if entity @e[tag=role_card]
-tellraw @a [{"text":"[Debug] role_card count: ","color":"yellow"},{"score":{"name":"#DEBUG_CARDS","objective":"temp"},"color":"aqua"}]
-
-# 【一時デバッグ】 役職未割当プレイヤー数を出力
-execute store result score #DEBUG_PLAYERS temp if entity @a[tag=!role_assigned]
-tellraw @a [{"text":"[Debug] unassigned players: ","color":"yellow"},{"score":{"name":"#DEBUG_PLAYERS","objective":"temp"},"color":"aqua"}]
-
 function my_pvp:system/distribute_loop
-
-# 【一時デバッグ】 distribute_loop 実行後の未割当プレイヤー数
-execute store result score #DEBUG_PLAYERS temp if entity @a[tag=!role_assigned]
-tellraw @a [{"text":"[Debug] after distribute, unassigned: ","color":"yellow"},{"score":{"name":"#DEBUG_PLAYERS","objective":"temp"},"color":"aqua"}]
 
 # --- ボスバー初期化 ---
 bossbar set my_pvp:timer players @a

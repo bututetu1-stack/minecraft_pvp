@@ -13,5 +13,14 @@ attribute @s minecraft:attack_damage base set 0
 # 【削除】Weaknessをかけると地雷等のダメージコマンドまで0になるため削除
 # effect give @s minecraft:weakness infinite 255 true
 
+# 4. クールダウン初期化
+scoreboard players set @s cd_turret 0
+scoreboard players set @s cd_mine 0
+scoreboard players set @s cd_launcher 0
+scoreboard players set @s cd_snare 0
+scoreboard players set @s cooldown 0
+scoreboard players set @s cd_super_jump 0
+scoreboard players set @s sneak_time 0
+
 # 5. 効果音
 execute at @s run playsound minecraft:block.anvil.use master @s ~ ~ ~ 1 1

@@ -2,9 +2,9 @@
 tag @e[type=item,tag=!id_set] remove target_item
 
 # 対象アイテムをマーク
-execute as @e[type=item,tag=!id_set,nbt={Item:{components:{"minecraft:custom_data":{Tags:["scout_bow"]}}}}] run tag @s add target_item
-execute as @e[type=item,tag=!id_set,nbt={Item:{components:{"minecraft:custom_data":{scout_sword:1b}}}}] run tag @s add target_item
-execute as @e[type=item,tag=!id_set,nbt={Item:{components:{"minecraft:custom_data":{scout_arrow:1b}}}}] run tag @s add target_item
+execute as @e[type=item,tag=!id_set] if items entity @s contents *[minecraft:custom_data~{Tags:["scout_bow"]}] run tag @s add target_item
+execute as @e[type=item,tag=!id_set] if items entity @s contents *[minecraft:custom_data~{scout_sword:1b}] run tag @s add target_item
+execute as @e[type=item,tag=!id_set] if items entity @s contents *[minecraft:custom_data~{scout_arrow:1b}] run tag @s add target_item
 
 # マークされたアイテムに対してのみ、近くのスカウトのIDを付与
 execute as @e[tag=target_item] at @s if entity @p[tag=scout,distance=..15] run scoreboard players operation @s player_id = @p[tag=scout,limit=1,sort=nearest] player_id
@@ -17,6 +17,6 @@ tag @e[tag=target_item] remove target_item
 
 
 # 2. アイテム処理
-execute as @e[type=item,nbt={Item:{components:{"minecraft:custom_data":{Tags:["scout_bow"]}}}}] at @s run function my_pvp:roles/scout/process_bow
-execute as @e[type=item,nbt={Item:{components:{"minecraft:custom_data":{scout_sword:1b}}}}] at @s run function my_pvp:roles/scout/process_sword
-execute as @e[type=item,nbt={Item:{components:{"minecraft:custom_data":{scout_arrow:1b}}}}] at @s run function my_pvp:roles/scout/process_arrow
+execute as @e[type=item,tag=id_set] if items entity @s contents *[minecraft:custom_data~{Tags:["scout_bow"]}] at @s run function my_pvp:roles/scout/process_bow
+execute as @e[type=item,tag=id_set] if items entity @s contents *[minecraft:custom_data~{scout_sword:1b}] at @s run function my_pvp:roles/scout/process_sword
+execute as @e[type=item,tag=id_set] if items entity @s contents *[minecraft:custom_data~{scout_arrow:1b}] at @s run function my_pvp:roles/scout/process_arrow

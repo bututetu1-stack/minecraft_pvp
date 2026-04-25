@@ -9,6 +9,8 @@ tellraw @s [{"text":"[System] ","color":"gray"},{"text":"あなたは ","color":
 
 # 3. 初期化
 scoreboard players set @s cd_wire 0
+scoreboard players set @s cd_super_jump 0
+scoreboard players set @s sneak_time 0
 tag @s remove is_grappling
 
 # 4. 音

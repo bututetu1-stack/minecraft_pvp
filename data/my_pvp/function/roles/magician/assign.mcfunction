@@ -18,6 +18,9 @@ scoreboard players set @s last_kills 0
 # 5. クールダウン初期化
 scoreboard players set @s cd_mag_broom 0
 scoreboard players set @s cd_mag_book 0
+scoreboard players set @s mag_fly_tick 0
+scoreboard players set @s cd_super_jump 0
+scoreboard players set @s sneak_time 0
 
 # 6. 飛行状態初期化
 tag @s remove mag_flying_true
