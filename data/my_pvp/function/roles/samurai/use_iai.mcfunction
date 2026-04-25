@@ -13,7 +13,27 @@ scoreboard players set @s sam_iai_active 8
 effect give @s minecraft:resistance 1 2 true
 effect give @s minecraft:speed 2 4 true
 
-# 演出
-particle minecraft:sweep_attack ~ ~1 ~ 0 0 0 0 3
-playsound minecraft:item.trident.throw master @a ~ ~ ~ 1 1.5
-tellraw @s [{"text":"[居合] ","color":"red","bold":true},{"text":"抜刀！","color":"yellow"}]
+# --- 演出 (大幅強化) ---
+# タイトル: 大きく 「居合」「抜刀！」
+title @s times 0 14 6
+title @s subtitle [{"text":"抜刀！","color":"yellow","bold":true}]
+title @s title [{"text":"⚔ 居合","color":"dark_blue","bold":true}]
+
+# パーティクル: 抜刀の閃光
+particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
+# 衝撃波 (足元の鈍色ダスト)
+particle minecraft:dust{color:[0.6,0.7,0.85],scale:1.5} ~ ~0.2 ~ 1.5 0.1 1.5 0 30 force
+# 抜刀斬撃
+particle minecraft:sweep_attack ~ ~1 ~ 0.3 0.3 0.3 0 8 force
+# 視線方向への斬撃軌跡
+execute at @s anchored eyes positioned ^ ^ ^1 run particle minecraft:dust{color:[1.0,1.0,1.0],scale:0.8} ~ ~ ~ 0.2 0.2 0.2 0.2 25 force
+execute at @s anchored eyes positioned ^ ^ ^2 run particle minecraft:enchanted_hit ~ ~ ~ 0.2 0.2 0.2 0 10 force
+
+# 効果音層 (抜刀音 + 風切り音 + 鋭い金属音)
+playsound minecraft:item.trident.throw master @a ~ ~ ~ 1.5 1.8
+playsound minecraft:entity.player.attack.sweep master @a ~ ~ ~ 1.8 2.0
+playsound minecraft:item.armor.equip_iron master @a ~ ~ ~ 1 0.5
+playsound minecraft:entity.arrow.shoot master @a ~ ~ ~ 1.2 1.3
+
+# チャット通知
+tellraw @s [{"text":"[居合] ","color":"dark_blue","bold":true},{"text":"抜刀！","color":"yellow"}]
