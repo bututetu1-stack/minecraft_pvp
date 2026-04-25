@@ -27,6 +27,9 @@ scoreboard players set @s click_tank 0
 # バッシュ進行
 execute if score @s shield_dash_timer matches 1.. run function my_pvp:roles/tank/shield_bash/tick
 
+# アイテムスキャン (ドロップ感知)
+function my_pvp:roles/tank/scan_items
+
 # 共通スキル (大ジャンプ)
 execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
 execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_super_jump
