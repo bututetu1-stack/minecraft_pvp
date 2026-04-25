@@ -9,6 +9,7 @@ clear @s
 scoreboard players set @s sculpture_cycle 1
 scoreboard players set @s sculpture_count 0
 scoreboard players set @s cd_sculptor_create 0
+scoreboard players set @s cd_sculptor_beam 0
 scoreboard players set @s sculpture_hp 0
 scoreboard players set @s cd_super_jump 0
 scoreboard players set @s sneak_time 0

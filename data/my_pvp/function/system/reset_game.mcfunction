@@ -37,6 +37,13 @@ scoreboard players reset * cd_chrono_jump
 scoreboard players reset * cd_sculptor_pillar
 scoreboard players reset * cd_gambler_jump
 
+# 【追加】ストーカー 狩りの時間リセット
+scoreboard players reset * hunting_stacks
+scoreboard players reset * hunting_decay_timer
+
+# 【追加】彫刻家 石化光線CTリセット
+scoreboard players reset * cd_sculptor_beam
+
 # 【追加】魔術師用リセット
 scoreboard players reset * mana
 scoreboard players reset * cd_mag_broom

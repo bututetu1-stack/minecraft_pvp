@@ -14,16 +14,6 @@ effect give @s minecraft:strength 4 0 true
 effect give @s minecraft:resistance 2 1 true
 
 # --- 反撃成功演出 (大幅強化) ---
-# 大型タイトル: 「反撃成功！」
-title @s times 0 14 6
-title @s subtitle [{"text":"反撃成功！","color":"yellow","bold":true}]
-title @s title [{"text":"⚔ 残心","color":"dark_blue","bold":true}]
-
-# 攻撃者にも効果通知
-execute if entity @p[tag=current_attacker] run title @p[tag=current_attacker,limit=1] times 0 14 6
-execute if entity @p[tag=current_attacker] run title @p[tag=current_attacker,limit=1] subtitle [{"text":"反撃を受けた！","color":"red","bold":true}]
-execute if entity @p[tag=current_attacker] run title @p[tag=current_attacker,limit=1] title [{"text":"☠ 残心","color":"dark_red","bold":true}]
-
 # パリィ瞬間のフラッシュ
 particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
 

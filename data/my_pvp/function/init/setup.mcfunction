@@ -208,6 +208,13 @@ scoreboard objectives add cd_chrono_jump dummy "時空跳躍CT"
 scoreboard objectives add cd_sculptor_pillar dummy "石柱噴出CT"
 scoreboard objectives add cd_gambler_jump dummy "コイン跳躍CT"
 
+# --- ストーカー 狩りの時間 ---
+scoreboard objectives add hunting_stacks dummy "狩りスタック"
+scoreboard objectives add hunting_decay_timer dummy "狩り減衰タイマー"
+
+# --- 彫刻家 石化光線 ---
+scoreboard objectives add cd_sculptor_beam dummy "石化光線CT"
+
 # --- 侍 (Samurai) 用 ---
 scoreboard objectives add cd_sam_zanshin dummy "残心CT"
 scoreboard objectives add cd_sam_iai dummy "居合CT"

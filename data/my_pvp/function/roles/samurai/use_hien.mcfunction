@@ -18,11 +18,6 @@ execute at @s as @a[distance=..3.5,gamemode=!spectator] unless score @s player_i
 execute as @a[tag=sam_hien_hit] run damage @s 8 minecraft:magic by @p[tag=samurai,distance=..4,limit=1]
 
 # --- 演出 (大幅強化) ---
-# タイトル: 「飛燕」表示
-title @s times 0 16 6
-title @s subtitle [{"text":"舞う斬撃！","color":"yellow","bold":true}]
-title @s title [{"text":"✦ 飛燕","color":"dark_blue","bold":true}]
-
 # 発動瞬間のフラッシュ
 particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
 

@@ -24,7 +24,12 @@ tag @s remove current_stalker
 # 3. 視線デバフ (Raycast)
 # 距離20m (0.5 * 40)
 scoreboard players set #ray_dist temp 40
+# 狩りの時間用フラグ初期化 (raycast がヒット時に 1 をセット)
+scoreboard players set #GAZE_HIT temp 0
 execute anchored eyes positioned ^ ^ ^ run function my_pvp:roles/stalker/raycast
+
+# --- 【新スキル】 狩りの時間 (Hunting Hour): 視線継続でスタック蓄積バフ ---
+function my_pvp:roles/stalker/hunting_hour
 
 # 2. ターゲット生存確認 & 再抽選
 execute unless entity @a[tag=my_target] run scoreboard players add @s target_check_timer 1

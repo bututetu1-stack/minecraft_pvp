@@ -14,11 +14,6 @@ effect give @s minecraft:resistance 1 2 true
 effect give @s minecraft:speed 2 4 true
 
 # --- 演出 (大幅強化) ---
-# タイトル: 大きく 「居合」「抜刀！」
-title @s times 0 14 6
-title @s subtitle [{"text":"抜刀！","color":"yellow","bold":true}]
-title @s title [{"text":"⚔ 居合","color":"dark_blue","bold":true}]
-
 # パーティクル: 抜刀の閃光
 particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
 # 衝撃波 (足元の鈍色ダスト)

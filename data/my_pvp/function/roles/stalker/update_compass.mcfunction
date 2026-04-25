@@ -31,5 +31,11 @@ execute if data entity @s Inventory[{Slot:-106b}].components."minecraft:custom_d
 execute if data entity @s Inventory[{Slot:-106b}].components."minecraft:custom_data".is_tracking_compass run data modify entity @s Inventory[{Slot:-106b}].components."minecraft:lodestone_tracker".target.pos[1] set from storage my_pvp:temp target_y
 execute if data entity @s Inventory[{Slot:-106b}].components."minecraft:custom_data".is_tracking_compass run data modify entity @s Inventory[{Slot:-106b}].components."minecraft:lodestone_tracker".target.pos[2] set from storage my_pvp:temp target_z
 
-# 6. アクションバー表示
-title @s actionbar [{"text":"Target: ","color":"gray"},{"selector":"@a[tag=my_target,limit=1]","color":"red"}]
+# 6. アクションバー表示 (狩りスタックも併記)
+title @s actionbar [{"text":"Target: ","color":"gray"},{"selector":"@a[tag=my_target,limit=1]","color":"red"},{"text":" | 狩 ","color":"dark_red"},{"score":{"name":"@s","objective":"hunting_stacks"},"color":"yellow"},{"text":"/3","color":"dark_red"}]
+
+# 7. ターゲット位置の追跡パーティクル (10tickごと、ストーカーにだけ見える紫粒子)
+scoreboard players add @s trail_timer 1
+execute if score @s trail_timer matches 10.. at @a[tag=my_target,limit=1] run particle minecraft:dust_color_transition{from_color:[0.4,0.0,0.6],to_color:[1.0,0.0,0.5],scale:1.0} ~ ~1 ~ 0.4 0.5 0.4 0 5 force @s
+execute if score @s trail_timer matches 10.. at @a[tag=my_target,limit=1] run particle minecraft:soul_fire_flame ~ ~1 ~ 0.2 0.3 0.2 0 2 force @s
+execute if score @s trail_timer matches 10.. run scoreboard players set @s trail_timer 0
