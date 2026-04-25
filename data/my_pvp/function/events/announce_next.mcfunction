@@ -1,15 +1,11 @@
 # 次のイベントを抽選して告知 (10秒前)
+# 【修正】 1試合内で同じイベントが起きないように使用済みフラグでフィルタ
 
-# ランダム値を生成 (1-7)
-summon marker ~ ~ ~ {Tags:["random_seed"]}
-execute store result score #EVENT_RNG temp run data get entity @e[tag=random_seed,limit=1] UUID[0]
-scoreboard players set #CONST_8 temp 8
-scoreboard players operation #EVENT_RNG temp %= #CONST_8 temp
-scoreboard players add #EVENT_RNG temp 1
-kill @e[tag=random_seed]
+# リトライカウンタ初期化 (無限ループ防止)
+scoreboard players set #ROLL_RETRY temp 0
 
-# 次のイベントタイプを一時保存
-scoreboard players operation #NEXT_EVENT_TYPE temp = #EVENT_RNG temp
+# 抽選ループ呼び出し
+function my_pvp:events/roll_next_event
 
 # 告知
 title @a title {"text":"Next Event...","color":"gray"}

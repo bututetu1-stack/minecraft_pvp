@@ -6,6 +6,10 @@ tag @a[tag=pending_heal] remove pending_heal
 # --- リスポーン検知 (Death Logic) ---
 execute as @a[scores={deaths=1..}] run function my_pvp:system/respawn
 
+# --- スポーン保護タイマー (システム起因の死亡を救済) ---
+execute as @a[tag=spawn_grace,scores={spawn_grace_timer=1..}] run scoreboard players remove @s spawn_grace_timer 1
+execute as @a[tag=spawn_grace,scores={spawn_grace_timer=..0}] run tag @s remove spawn_grace
+
 # at @s を入れて、自身の位置を基準にする
 execute as @a[tag=mechanic,tag=!is_frozen] at @s run function my_pvp:roles/mechanic/mechanic_main
 execute as @a[tag=ninja,tag=!is_frozen] at @s run function my_pvp:roles/ninja/ninja_main
@@ -13,8 +17,6 @@ execute as @a[tag=scout,tag=!is_frozen] at @s run function my_pvp:roles/scout/sc
 execute as @a[tag=tank,tag=!is_frozen] at @s run function my_pvp:roles/tank/tank_main
 execute as @a[tag=berserker,tag=!is_frozen] at @s run function my_pvp:roles/berserker/berserker_main
 execute as @a[tag=stalker,tag=!is_frozen] at @s run function my_pvp:roles/stalker/stalker_main
-# ストーカー追撃(遅延処理) - Victimで実行
-execute as @a[tag=sk_attack_target] run function my_pvp:roles/stalker/tick_attack_delay
 execute as @a[tag=admiral,tag=!is_frozen] at @s run function my_pvp:roles/admiral/admiral_main
 execute as @a[tag=chrono,tag=!is_frozen] at @s run function my_pvp:roles/chrono/chrono_main
 execute as @a[tag=sculptor,tag=!is_frozen] at @s run function my_pvp:roles/sculptor/sculptor_main
@@ -81,9 +83,6 @@ execute as @e[tag=artillery_marker] at @s run function my_pvp:roles/admiral/tick
 execute as @e[tag=adm_torpedo] at @s run function my_pvp:roles/admiral/tick_torpedo
 execute as @e[tag=airstrike_center] at @s run function my_pvp:roles/admiral/process_airstrike
 execute as @e[tag=adm_bomb] at @s run function my_pvp:roles/admiral/tick_bomb
-# 提督ペナルティ(遅延処理)
-execute as @a[tag=adm_penalty_target] run function my_pvp:roles/admiral/tick_penalty_delay
-
 # 安全装置: 迷子ファントム処理
 execute as @e[tag=adm_plane] at @s run function my_pvp:roles/admiral/tick_plane_safety
 

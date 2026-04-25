@@ -1,11 +1,20 @@
 # --- ランダムリスポーン処理 ---
 
-# 1. 共通ランダムスポーン処理を実行
-function my_pvp:system/random_spawn
+# 0. システム起因の死亡判定
+# 【追加】 spawn_grace中に死亡 → システム起因 → デスカウントを免除
+execute if entity @s[tag=spawn_grace] run tellraw @s [{"text":"[System] ","color":"gray"},{"text":"システム起因の死亡を検知。ペナルティを免除します","color":"green"}]
 
 # 2. 死亡スコアをリセット (これをしないと無限にループします)
-scoreboard players add @s total_deaths 1
+# spawn_grace中の死亡はtotal_deathsを増やさない
+execute unless entity @s[tag=spawn_grace] run scoreboard players add @s total_deaths 1
 scoreboard players set @s deaths 0
+
+# spawn_grace解除 (リスポーン処理に入った時点で前回の保護は終了)
+tag @s remove spawn_grace
+scoreboard players set @s spawn_grace_timer 0
+
+# 1. 共通ランダムスポーン処理を実行 (ここで新しい spawn_grace が付く)
+function my_pvp:system/random_spawn
 
 # 3. メッセージと演出
 tellraw @s [{"text":"[System] ","color":"gray"},{"text":"戦場へ復帰しました！","color":"yellow"}]

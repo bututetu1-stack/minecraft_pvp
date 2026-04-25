@@ -31,9 +31,9 @@ execute unless entity @a[tag=my_target] run scoreboard players add @s target_che
 execute if score @s target_check_timer matches 20.. run function my_pvp:roles/stalker/assign_target
 execute if score @s target_check_timer matches 20.. run scoreboard players set @s target_check_timer 0
 
-# 3. 攻撃判定 (追加ダメージ)
-execute unless score @s last_damage_dealt = @s damage_dealt run function my_pvp:roles/stalker/check_attack
-execute unless score @s last_damage_dealt = @s damage_dealt run scoreboard players operation @s last_damage_dealt = @s damage_dealt
+# 3. 攻撃判定: Advancement (player_hurt_entity) で trigger_attack が呼ばれる
+# 与ダメージスコアの追従更新 (他処理で参照されるため維持)
+scoreboard players operation @s last_damage_dealt = @s damage_dealt
 
 # 4. アイテム補充
 function my_pvp:roles/stalker/scan_items

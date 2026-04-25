@@ -1,21 +1,17 @@
-# ランダムイベント選択
+# ランダムイベント選択 (即時発動版)
 # 既存イベントがあれば終了
 execute if score #GLOBAL event_type matches 1.. run function my_pvp:events/end_event
 
 scoreboard players set #GLOBAL event_timer 0
 
-# ランダム値を生成 (1-7)
-summon marker ~ ~ ~ {Tags:["random_seed"]}
-execute store result score #EVENT_RNG temp run data get entity @e[tag=random_seed,limit=1] UUID[0]
-scoreboard players set #CONST_8 temp 8
-scoreboard players operation #EVENT_RNG temp %= #CONST_8 temp
-scoreboard players add #EVENT_RNG temp 1
-kill @e[tag=random_seed]
+# 重複なし抽選
+scoreboard players set #ROLL_RETRY temp 0
+function my_pvp:events/roll_next_event
 
 # イベントタイプ設定
-scoreboard players operation #GLOBAL event_type = #EVENT_RNG temp
+scoreboard players operation #GLOBAL event_type = #NEXT_EVENT_TYPE temp
 
-# 継続時間設定 (20秒? = 800tick)
+# 継続時間設定 (40秒 = 800tick)
 scoreboard players set #GLOBAL event_duration 800
 
 # 各イベント開始処理

@@ -16,6 +16,11 @@ scoreboard objectives add temp dummy
 scoreboard objectives add scrap dummy "スクラップ"
 scoreboard objectives add regen_timer dummy "回復タイマー"
 
+# 【追加】 リスポーンチェック用
+scoreboard objectives add retry_count dummy "Spawn Retry"
+# 【追加】 スポーン保護タイマー (システム起因の死亡を救済)
+scoreboard objectives add spawn_grace_timer dummy "Spawn Grace"
+
 scoreboard objectives add timer dummy
 scoreboard objectives add coins_timer dummy
 scoreboard objectives add bj_debuff_timer dummy
@@ -219,6 +224,16 @@ scoreboard objectives add event_timer dummy "イベントタイマー"
 scoreboard objectives add event_duration dummy "イベント持続時間"
 scoreboard objectives add event_type dummy "イベントタイプ"
 scoreboard objectives add bounty_target dummy "賞金首ID"
+
+# 【追加】 イベント使用済みフラグ (1試合内で同じイベントを再抽選しない)
+scoreboard objectives add event_used_1 dummy "Event Used 1"
+scoreboard objectives add event_used_2 dummy "Event Used 2"
+scoreboard objectives add event_used_3 dummy "Event Used 3"
+scoreboard objectives add event_used_4 dummy "Event Used 4"
+scoreboard objectives add event_used_5 dummy "Event Used 5"
+scoreboard objectives add event_used_6 dummy "Event Used 6"
+scoreboard objectives add event_used_7 dummy "Event Used 7"
+scoreboard objectives add event_used_8 dummy "Event Used 8"
 
 # ルーレット用
 scoreboard objectives add sector_offset dummy "セクターオフセット"

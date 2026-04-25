@@ -116,6 +116,11 @@ tag @a remove infector
 tag @a remove cursed_pirate
 tag @a remove pirate
 
+# 【追加】 スポーン保護タイマー リセット
+scoreboard players reset * spawn_grace_timer
+scoreboard players reset * retry_count
+tag @a remove spawn_grace
+
 # --- 計算用の一時タグを全消去 ---
 tag @a remove owner_temp
 tag @a remove stepping_enemy
@@ -231,6 +236,16 @@ scoreboard players set #GLOBAL event_duration 0
 scoreboard players set #GLOBAL event_type 0
 tag @a remove rush_mode
 tag @a remove bounty_target
+
+# 【追加】 イベント使用済みフラグもリセット
+scoreboard players set #GLOBAL event_used_1 0
+scoreboard players set #GLOBAL event_used_2 0
+scoreboard players set #GLOBAL event_used_3 0
+scoreboard players set #GLOBAL event_used_4 0
+scoreboard players set #GLOBAL event_used_5 0
+scoreboard players set #GLOBAL event_used_6 0
+scoreboard players set #GLOBAL event_used_7 0
+scoreboard players set #GLOBAL event_used_8 0
 
 # タイマーリセット
 scoreboard players set #GLOBAL match_timer 0
