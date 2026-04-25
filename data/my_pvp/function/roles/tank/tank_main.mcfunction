@@ -22,4 +22,12 @@ scoreboard players set @s click_tank 0
 # シールドバッシュ (アイテムドロップ検知は scan_items で処理)
 # バッシュ進行
 execute if score @s shield_dash_timer matches 1.. run function my_pvp:roles/tank/shield_bash/tick
-execute if score @s shield_dash_timer matches 1.. run function my_pvp:roles/tank/shield_bash/tick
+
+# 共通スキル (大ジャンプ)
+execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
+execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_super_jump
+
+# --- 【新能力】 不屈の意志: HP25以下で耐性Lv2 + 再生 ---
+execute store result score #HP temp run data get entity @s Health
+execute if score #HP temp matches ..25 run effect give @s minecraft:resistance 1 1 true
+execute if score #HP temp matches ..25 run effect give @s minecraft:regeneration 1 0 true

@@ -42,3 +42,11 @@ scoreboard players remove @s[scores={cd_mag_broom=1..}] cd_mag_broom 1
 execute as @s[scores={cd_mag_book=1}] run item replace entity @s container.1 with minecraft:book[custom_name='{"text":"魔術本","italic":false,"color":"gold","bold":true}',lore=['{"text":"[Q]キー: 炎玉発射","color":"yellow"}','{"text":"Cost: 5 MANA","color":"gray"}','{"text":"ダメージ: ハート3個分","color":"red"}','{"text":"CT: 0s","color":"aqua"}'],custom_data={magician_book:1b}] 1
 execute as @s[scores={cd_mag_book=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 2
 scoreboard players remove @s[scores={cd_mag_book=1..}] cd_mag_book 1
+
+# 共通スキル (大ジャンプ)
+execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
+execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_super_jump
+
+# --- 【新能力】 マナの恵み: マナ満タン時パッシブ強化 ---
+execute if score @s mana matches 100.. run effect give @s minecraft:speed 1 0 true
+execute if score @s mana matches 100.. run effect give @s minecraft:regeneration 1 0 true

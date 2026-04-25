@@ -27,6 +27,10 @@ scoreboard players reset * cd_ber_raid
 scoreboard players reset * cd_ber_jump
 scoreboard players reset * last_kills
 
+# 【追加】共通スキル(大ジャンプ)CTリセット
+scoreboard players reset * cd_super_jump
+scoreboard players reset * sneak_time
+
 # 【追加】魔術師用リセット
 scoreboard players reset * mana
 scoreboard players reset * cd_mag_broom
@@ -101,7 +105,6 @@ tag @a remove is_frozen
 tag @a remove sculptor
 
 # 【追加】 旧役職・開発中役職のタグも念のため削除
-tag @a remove samurai
 tag @a remove alchemist
 tag @a remove puppeteer
 tag @a remove guardian
@@ -204,6 +207,17 @@ scoreboard players reset * damage_boost
 
 tag @a remove gambler
 tag @a remove bj_debuff
+
+# 【追加】 侍用リセット
+scoreboard players reset * cd_sam_zanshin
+scoreboard players reset * cd_sam_iai
+scoreboard players reset * cd_sam_hien
+scoreboard players reset * sam_zanshin_active
+scoreboard players reset * sam_iai_active
+tag @a remove samurai
+tag @a remove sam_zanshin_guard
+tag @a remove sam_iai_dashing
+tag @a remove sam_iai_hit_this_dash
 
 kill @e[tag=roulette_marker]
 

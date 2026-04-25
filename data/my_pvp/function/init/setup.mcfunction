@@ -202,6 +202,13 @@ scoreboard objectives add drop_red_dye dropped:red_dye "戦争起動"
 scoreboard objectives add sneak_time minecraft.custom:minecraft.sneak_time "スニーク時間"
 scoreboard objectives add cd_super_jump dummy "大ジャンプCT"
 
+# --- 侍 (Samurai) 用 ---
+scoreboard objectives add cd_sam_zanshin dummy "残心CT"
+scoreboard objectives add cd_sam_iai dummy "居合CT"
+scoreboard objectives add cd_sam_hien dummy "飛燕CT"
+scoreboard objectives add sam_zanshin_active dummy "残心構え時間"
+scoreboard objectives add sam_iai_active dummy "居合突進時間"
+
 # --- タイマー用ボスバーの作成 ---
 bossbar add my_pvp:timer {"text":"残り時間","color":"yellow","bold":true}
 bossbar set my_pvp:timer style progress

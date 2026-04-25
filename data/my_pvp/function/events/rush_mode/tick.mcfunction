@@ -27,6 +27,9 @@ scoreboard players set @a cd_chrono_clockup 0
 scoreboard players set @a cd_sculptor_create 0
 scoreboard players set @a cd_stalker_float 0
 scoreboard players set @a cd_super_jump 0
+scoreboard players set @a cd_sam_zanshin 0
+scoreboard players set @a cd_sam_iai 0
+scoreboard players set @a cd_sam_hien 0
 
 # マナを最大に
 scoreboard players set @a[tag=magician] mana 100

@@ -10,9 +10,6 @@ advancement revoke @s only my_pvp:roles/admiral_hurt
 tag @a remove current_attacker
 execute as @a[distance=..64] unless score @s damage_dealt = @s last_damage_dealt run tag @s add current_attacker
 
-# 1. 実行マーカー
-tellraw @a {"text":"[Debug] trigger_penalty V2 CALLED! (BRUTE FORCE)","color":"light_purple"}
-
 # 2. ダメージ量の計算 (元のダメージの 25%)
 scoreboard players operation #CALC temp = @s damage_taken
 

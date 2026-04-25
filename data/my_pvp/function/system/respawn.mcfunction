@@ -49,12 +49,20 @@ execute if score @s role_id matches 8 run tag @s add admiral
 execute if score @s role_id matches 9 run tag @s add chrono
 execute if score @s role_id matches 10 run tag @s add sculptor
 execute if score @s role_id matches 11 run tag @s add gambler
+execute if score @s role_id matches 12 run tag @s add samurai
 
 # (オプション) もしリスポーン時に特定のアイテムを再配布したい場合はここに記述
 # リスポーン時のアイテム・コスト補充 (魔術師, 機械工, ギャンブラー)
 execute if entity @s[tag=magician] run function my_pvp:system/give_magician_items
 execute if entity @s[tag=mechanic] run function my_pvp:system/give_mechanic_items
 execute if entity @s[tag=gambler] run function my_pvp:system/give_gambler_items
+execute if entity @s[tag=samurai] run function my_pvp:system/give_samurai_items
+execute if entity @s[tag=samurai] run scoreboard players set @s cd_sam_zanshin 0
+execute if entity @s[tag=samurai] run scoreboard players set @s cd_sam_iai 0
+execute if entity @s[tag=samurai] run scoreboard players set @s cd_sam_hien 0
+execute if entity @s[tag=samurai] run tag @s remove sam_zanshin_guard
+execute if entity @s[tag=samurai] run tag @s remove sam_iai_dashing
+execute if entity @s[tag=samurai] run tag @s remove sam_iai_hit_this_dash
 
 # ギャンブラーのコイン管理 (借金死 or オールイン死なら0, それ以外なら50)
 execute if entity @s[tag=gambler,tag=penalty_death] run scoreboard players set @s coins 0
