@@ -30,3 +30,6 @@ summon marker ~ ~ ~ {Tags:["role_card","card_sculptor"]}
 
 # 【追加】 ギャンブラーのくじ
 summon marker ~ ~ ~ {Tags:["role_card","card_gambler"]}
+
+# 【追加】 侍のくじ
+summon marker ~ ~ ~ {Tags:["role_card","card_samurai"]}

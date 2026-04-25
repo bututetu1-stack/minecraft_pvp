@@ -38,6 +38,19 @@ execute unless score @s last_damage_dealt = @s damage_dealt run scoreboard playe
 # 4. アイテム補充
 function my_pvp:roles/stalker/scan_items
 
+# 共通スキル (大ジャンプ)
+execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
+execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_super_jump
+
+# --- 【新能力】 ハンターズトランス: ターゲット撃破時の強化 ---
+# ターゲットID保持中に、自身のkillsが増えていれば撃破成功
+execute unless score @s last_kills = @s kills run effect give @s minecraft:strength 6 0 true
+execute unless score @s last_kills = @s kills run effect give @s minecraft:speed 6 1 true
+execute unless score @s last_kills = @s kills run effect give @s minecraft:instant_health 1 4 true
+execute unless score @s last_kills = @s kills run playsound minecraft:entity.wither.spawn master @s ~ ~ ~ 0.6 1.5
+execute unless score @s last_kills = @s kills run tellraw @s [{"text":"[ハンターズトランス] ","color":"dark_red","bold":true},{"text":"獲物を喰らった","color":"red"}]
+execute unless score @s last_kills = @s kills run scoreboard players operation @s last_kills = @s kills
+
 # 5. UI表示 (クールダウン表示)
 title @s actionbar [{"text":"Float: ","color":"light_purple"},{"score":{"name":"@s","objective":"cd_stalker_float"},"color":"white"}]
 

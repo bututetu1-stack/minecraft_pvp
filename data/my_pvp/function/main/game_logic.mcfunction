@@ -20,6 +20,7 @@ execute as @a[tag=chrono,tag=!is_frozen] at @s run function my_pvp:roles/chrono/
 execute as @a[tag=sculptor,tag=!is_frozen] at @s run function my_pvp:roles/sculptor/sculptor_main
 execute as @a[tag=magician,tag=!is_frozen] at @s run function my_pvp:roles/magician/magician_main
 execute as @a[tag=gambler,tag=!is_frozen] at @s run function my_pvp:roles/gambler/gambler_main
+execute as @a[tag=samurai,tag=!is_frozen] at @s run function my_pvp:roles/samurai/samurai_main
 
 # --- 時空跳躍者のグローバル処理 (フィールド・凍結制御) ---
 # プレイヤーに関係なくサーバー全体で処理するため、as @a は付けずに呼び出す
@@ -54,6 +55,9 @@ execute as @e[type=item] at @s run function my_pvp:roles/berserker/scan_items
 
 # 忍者のアイテムスキャン (追加 - 必要なら)
 execute as @e[type=item] at @s run function my_pvp:roles/ninja/scan_items
+
+# 侍のアイテムスキャン
+execute as @e[type=item] at @s run function my_pvp:roles/samurai/scan_items
 
 # --- 3. ガジェットの処理 ---
 
@@ -142,8 +146,8 @@ execute if score #GLOBAL match_state matches 1 if score #GLOBAL match_timer matc
 # --- 5. リスポーン時のステータス復旧 ---
 # 死ぬと属性(Attribute)がリセットされ、最大HPが20に戻る仕様を利用してリスポーンを検知
 
-# タンク (HP 80)
-execute as @a[tag=tank,tag=!ignore_status_check] unless score #GLOBAL event_type matches 4 unless entity @s[nbt={attributes:[{id:"minecraft:max_health",base:80.0d}]}] run function my_pvp:roles/tank/apply_status
+# タンク (HP 70)
+execute as @a[tag=tank,tag=!ignore_status_check] unless score #GLOBAL event_type matches 4 unless entity @s[nbt={attributes:[{id:"minecraft:max_health",base:70.0d}]}] run function my_pvp:roles/tank/apply_status
 
 # バーサーカー (HP 60)
 execute as @a[tag=berserker,tag=!ignore_status_check] unless score #GLOBAL event_type matches 4 unless entity @s[nbt={attributes:[{id:"minecraft:max_health",base:60.0d}]}] run function my_pvp:roles/berserker/apply_status
@@ -174,6 +178,9 @@ execute as @a[tag=sculptor,tag=!ignore_status_check] unless score #GLOBAL event_
 
 # ギャンブラー (HP 40)
 execute as @a[tag=gambler,tag=!ignore_status_check] unless score #GLOBAL event_type matches 4 unless entity @s[nbt={attributes:[{id:"minecraft:max_health",base:40.0d}]}] run function my_pvp:roles/gambler/apply_status
+
+# 侍 (HP 50)
+execute as @a[tag=samurai,tag=!ignore_status_check] unless score #GLOBAL event_type matches 4 unless entity @s[nbt={attributes:[{id:"minecraft:max_health",base:50.0d}]}] run function my_pvp:roles/samurai/apply_status
 
 # (既存のゲーム進行処理の後に追記)
 

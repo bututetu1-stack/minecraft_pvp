@@ -9,7 +9,6 @@ tag @e[type=item,tag=!id_set] remove target_item
 # 対象アイテムをマーク
 execute as @e[type=item,tag=!id_set] if items entity @s contents *[minecraft:custom_data~{berserker_axe:1b}] run tag @s add target_item
 execute as @e[type=item,tag=!id_set] if items entity @s contents *[minecraft:custom_data~{berserker_raid:1b}] run tag @s add target_item
-execute as @e[type=item,tag=!id_set] if items entity @s contents *[minecraft:custom_data~{berserker_raid:1b}] run tellraw @a {"text":"[Debug] Blood Crystal Detected","color":"red"}
 execute as @e[type=item,tag=!id_set] if items entity @s contents *[minecraft:custom_data~{berserker_jump:1b}] run tag @s add target_item
 
 # マークされたアイテムに対してのみ、近くのバーサーカーのIDを付与
