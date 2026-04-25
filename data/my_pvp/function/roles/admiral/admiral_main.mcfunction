@@ -6,9 +6,9 @@ execute if score @s cd_adm_aa matches 1.. run scoreboard players remove @s cd_ad
 # 【復活】 陣形変更の連打防止用クールダウン消化
 execute if score @s cd_formation matches 1.. run scoreboard players remove @s cd_formation 1
 
-# 共通スキル (大ジャンプ)
-execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
-execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_super_jump
+# 役職固有 上昇スキル: 対空射出
+execute if score @s cd_adm_jump matches 1.. run scoreboard players remove @s cd_adm_jump 1
+execute if score @s sneak_time matches 1.. run function my_pvp:roles/admiral/use_jump
 
 # --- CT完了通知 (音) ---
 execute if score @s cd_adm_artillery matches 1 run playsound minecraft:block.note_block.hat master @s ~ ~ ~ 1 2

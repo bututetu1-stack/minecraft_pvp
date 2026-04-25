@@ -12,6 +12,7 @@ scoreboard players set @s cd_sculptor_create 0
 scoreboard players set @s sculpture_hp 0
 scoreboard players set @s cd_super_jump 0
 scoreboard players set @s sneak_time 0
+scoreboard players set @s cd_sculptor_pillar 0
 attribute @s minecraft:max_health base set 40.0
 effect clear @s
 effect give @s minecraft:instant_health 1 255 true

@@ -202,6 +202,12 @@ scoreboard objectives add drop_red_dye dropped:red_dye "戦争起動"
 scoreboard objectives add sneak_time minecraft.custom:minecraft.sneak_time "スニーク時間"
 scoreboard objectives add cd_super_jump dummy "大ジャンプCT"
 
+# --- 役職別 上昇スキル CT (admiral / chrono / sculptor / gambler) ---
+scoreboard objectives add cd_adm_jump dummy "対空射出CT"
+scoreboard objectives add cd_chrono_jump dummy "時空跳躍CT"
+scoreboard objectives add cd_sculptor_pillar dummy "石柱噴出CT"
+scoreboard objectives add cd_gambler_jump dummy "コイン跳躍CT"
+
 # --- 侍 (Samurai) 用 ---
 scoreboard objectives add cd_sam_zanshin dummy "残心CT"
 scoreboard objectives add cd_sam_iai dummy "居合CT"

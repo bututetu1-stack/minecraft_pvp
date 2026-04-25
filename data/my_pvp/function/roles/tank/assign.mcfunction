@@ -13,8 +13,6 @@ function my_pvp:roles/tank/apply_status
 scoreboard players set @s cd_tank_crash 0
 scoreboard players set @s cd_shield_bash 0
 scoreboard players set @s shield_dash_timer 0
-scoreboard players set @s cd_super_jump 0
-scoreboard players set @s sneak_time 0
 
 # 5. 音
 execute at @s run playsound minecraft:entity.iron_golem.repair master @s ~ ~ ~ 1 1

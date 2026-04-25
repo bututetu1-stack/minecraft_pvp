@@ -15,8 +15,6 @@ scoreboard players set @s cd_sam_iai 0
 scoreboard players set @s cd_sam_hien 0
 scoreboard players set @s sam_zanshin_active 0
 scoreboard players set @s sam_iai_active 0
-scoreboard players set @s cd_super_jump 0
-scoreboard players set @s sneak_time 0
 
 # 5. 音
 execute at @s run playsound minecraft:item.trident.return master @s ~ ~ ~ 1 1.5

@@ -22,9 +22,9 @@ execute if score @s cd_chrono_reverse matches 1.. run scoreboard players remove 
 execute if score @s cd_chrono_stasis matches 1.. run scoreboard players remove @s cd_chrono_stasis 1
 execute if score @s cd_chrono_clockup matches 1.. run scoreboard players remove @s cd_chrono_clockup 1
 
-# 共通スキル (大ジャンプ)
-execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
-execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_super_jump
+# 役職固有 上昇スキル: 時空跳躍
+execute if score @s cd_chrono_jump matches 1.. run scoreboard players remove @s cd_chrono_jump 1
+execute if score @s sneak_time matches 1.. run function my_pvp:roles/chrono/use_jump
 
 # --- アクションバー (常時表示) ---
 # 条件分岐を削除し、CTが0の状態でも常に表示するように変更

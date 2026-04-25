@@ -14,8 +14,6 @@ scoreboard players set @s slot_cycle 1
 scoreboard players set @s cd_ninja_mark 0
 scoreboard players set @s cd_ninja_swap 0
 scoreboard players set @s cd_ninja_smoke 0
-scoreboard players set @s cd_super_jump 0
-scoreboard players set @s sneak_time 0
 
 # 5. アイテム配布
 # 【削除】試合開始時に配るため、ここでは実行しません

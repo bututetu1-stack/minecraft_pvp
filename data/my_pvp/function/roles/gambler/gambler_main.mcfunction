@@ -1,8 +1,8 @@
 # 1. コインタイマー (オートリチャージ 1 coin / 1s)
 
-# --- 共通スキル (大ジャンプ) ---
-execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
-execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_super_jump
+# --- 役職固有 上昇スキル: コイン跳躍 ---
+execute if score @s cd_gambler_jump matches 1.. run scoreboard players remove @s cd_gambler_jump 1
+execute if score @s sneak_time matches 1.. run function my_pvp:roles/gambler/use_jump
 # 20 ticks = 1 second
 scoreboard players add @s coins_timer 1
 execute if score @s coins_timer matches 20.. run scoreboard players add @s coins 1

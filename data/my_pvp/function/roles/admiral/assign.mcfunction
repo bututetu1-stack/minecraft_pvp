@@ -21,6 +21,7 @@ scoreboard players set @s penalty_timer 0
 scoreboard players set @s penalty_dmg 0
 scoreboard players set @s cd_super_jump 0
 scoreboard players set @s sneak_time 0
+scoreboard players set @s cd_adm_jump 0
 
 # 4. 音
 execute at @s run playsound minecraft:entity.experience_orb.pickup master @s ~ ~ ~ 1 0.5

@@ -31,7 +31,3 @@ execute unless score @s last_kills = @s kills run scoreboard players operation @
 # --- 5. ジャンプ・着地監視 ---
 execute if entity @s[tag=ber_ready] run function my_pvp:roles/berserker/check_slam
 execute if entity @s[tag=ber_falling] run function my_pvp:roles/berserker/check_slam
-
-# 共通スキル (大ジャンプ)
-execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
-execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_super_jump

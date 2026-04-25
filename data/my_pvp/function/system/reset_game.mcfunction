@@ -31,6 +31,12 @@ scoreboard players reset * last_kills
 scoreboard players reset * cd_super_jump
 scoreboard players reset * sneak_time
 
+# 【追加】役職別 上昇スキル CTリセット
+scoreboard players reset * cd_adm_jump
+scoreboard players reset * cd_chrono_jump
+scoreboard players reset * cd_sculptor_pillar
+scoreboard players reset * cd_gambler_jump
+
 # 【追加】魔術師用リセット
 scoreboard players reset * mana
 scoreboard players reset * cd_mag_broom

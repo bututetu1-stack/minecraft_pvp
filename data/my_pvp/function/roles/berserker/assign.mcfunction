@@ -17,8 +17,6 @@ scoreboard players set @s last_kills 0
 # リスポーン処理から分離したため、ここで初期化しても大丈夫です
 scoreboard players set @s cd_ber_raid 0
 scoreboard players set @s cd_ber_jump 0
-scoreboard players set @s cd_super_jump 0
-scoreboard players set @s sneak_time 0
 # ▲▲▲▲▲▲
 
 # 5. 音
