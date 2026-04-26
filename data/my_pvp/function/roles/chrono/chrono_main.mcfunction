@@ -17,6 +17,11 @@ execute as @s[scores={cd_chrono_stasis=1}] run playsound minecraft:block.note_bl
 execute as @s[scores={cd_chrono_clockup=1}] run item replace entity @s container.3 with minecraft:red_dye[minecraft:custom_data={chrono_clockup:1b},minecraft:custom_name='{"text":">> クロック・アップ","color":"red","italic":false}',minecraft:lore=['{"text":"[Qキー] 10秒間、超高速移動","color":"yellow"}','{"text":"CT: 30秒","color":"gray"}']] 1
 execute as @s[scores={cd_chrono_clockup=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 0.8
 
+# Rush Mode Safety (ラッシュ中にCT0なのにアイテム無い場合は即時再配布)
+execute as @s[tag=rush_mode,scores={cd_chrono_reverse=0}] unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{chrono_reverse:1b}}}]}] run item replace entity @s container.1 with minecraft:light_blue_dye[minecraft:custom_data={chrono_reverse:1b},minecraft:custom_name='{"text":"<< タイム・リバース","color":"aqua","italic":false}',minecraft:lore=['{"text":"[Qキー] 5秒前の位置とHPに戻る","color":"yellow"}','{"text":"CT: 20秒","color":"gray"}']] 1
+execute as @s[tag=rush_mode,scores={cd_chrono_stasis=0}] unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{chrono_stasis:1b}}}]}] run item replace entity @s container.2 with minecraft:yellow_dye[minecraft:custom_data={chrono_stasis:1b},minecraft:custom_name='{"text":"|| 時空の静止","color":"yellow","italic":false}',minecraft:lore=['{"text":"[Qキー] 10秒間、敵と物体を停止させる","color":"yellow"}','{"text":"CT: 30秒","color":"gray"}']] 1
+execute as @s[tag=rush_mode,scores={cd_chrono_clockup=0}] unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{chrono_clockup:1b}}}]}] run item replace entity @s container.3 with minecraft:red_dye[minecraft:custom_data={chrono_clockup:1b},minecraft:custom_name='{"text":">> クロック・アップ","color":"red","italic":false}',minecraft:lore=['{"text":"[Qキー] 10秒間、超高速移動","color":"yellow"}','{"text":"CT: 30秒","color":"gray"}']] 1
+
 # --- クールダウン消化 ---
 execute if score @s cd_chrono_reverse matches 1.. run scoreboard players remove @s cd_chrono_reverse 1
 execute if score @s cd_chrono_stasis matches 1.. run scoreboard players remove @s cd_chrono_stasis 1

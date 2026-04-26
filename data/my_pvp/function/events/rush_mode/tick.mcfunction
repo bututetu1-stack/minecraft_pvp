@@ -30,6 +30,13 @@ scoreboard players set @a cd_super_jump 0
 scoreboard players set @a cd_sam_zanshin 0
 scoreboard players set @a cd_sam_iai 0
 scoreboard players set @a cd_sam_hien 0
+# 【追加】 役職別 上昇スキルCT
+scoreboard players set @a cd_adm_jump 0
+scoreboard players set @a cd_chrono_jump 0
+scoreboard players set @a cd_sculptor_pillar 0
+scoreboard players set @a cd_gambler_jump 0
+# 【追加】 彫刻家 石化光線CT
+scoreboard players set @a cd_sculptor_beam 0
 
 # マナを最大に
 scoreboard players set @a[tag=magician] mana 100

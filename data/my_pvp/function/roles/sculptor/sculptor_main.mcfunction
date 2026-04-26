@@ -10,6 +10,9 @@ execute as @s[scores={cd_sculptor_beam=1}] run item replace entity @s container.
 execute as @s[scores={cd_sculptor_beam=1}] run playsound minecraft:block.amethyst_block.chime master @s ~ ~ ~ 1 1.5
 scoreboard players remove @s[scores={cd_sculptor_beam=1..}] cd_sculptor_beam 1
 
+# Rush Mode Safety
+execute as @s[tag=rush_mode,scores={cd_sculptor_beam=0}] unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{sculptor_beam:1b}}}]}] run item replace entity @s container.1 with minecraft:amethyst_shard[minecraft:custom_data={sculptor_beam:1b},minecraft:custom_name='{"text":"石化光線","color":"blue","bold":true,"italic":false}',minecraft:lore=['{"text":"[Q]キー(捨てる): 石化光線発射","color":"yellow"}','{"text":"視線方向12m先まで貫通、命中で6ダメ + 鈍足IV","color":"gray"}','{"text":"CT: 10s","color":"aqua"}']] 1
+
 # 4. 役職固有 上昇スキル: 石柱噴出
 execute if score @s cd_sculptor_pillar matches 1.. run scoreboard players remove @s cd_sculptor_pillar 1
 execute if score @s sneak_time matches 1.. run function my_pvp:roles/sculptor/use_pillar

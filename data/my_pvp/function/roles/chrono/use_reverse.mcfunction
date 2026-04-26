@@ -20,21 +20,21 @@ execute unless entity @e[tag=my_past_point] run return 0
 # 成功が確定してからセットする
 scoreboard players set @s cd_chrono_reverse 400
 
-# 4. 移動処理
+# 4. マーカーから HP を回収 (kill する前に temp に保存)
+scoreboard players operation #PAST_HP temp = @e[tag=my_past_point,limit=1] hp_snapshot
+
+# 5. 移動処理
 execute as @e[tag=my_past_point] run tp @a[tag=reverse_user] @s
 kill @e[tag=my_past_point]
 
-# 5. 回復 & 演出
-# マーカーからHPを取得して適応
-execute store result storage my_pvp:macro reverse.hp int 1 run scoreboard players get @s hp_snapshot
-# Debug
-# tellraw @a [{"text":"[Debug] Restore HP to: ","color":"gray"},{"score":{"name":"@s","objective":"hp_snapshot"},"color":"green"}]
+# 6. HP復元 (5秒前のHPに戻す)
+execute store result storage my_pvp:macro reverse.hp int 1 run scoreboard players get #PAST_HP temp
 function my_pvp:roles/chrono/restore_hp with storage my_pvp:macro reverse
 
-# effect give @s minecraft:instant_health 1 1 true
+# 7. 演出
 playsound minecraft:item.chorus_fruit.teleport master @a ~ ~ ~ 1 0.5
 particle minecraft:reverse_portal ~ ~1 ~ 0.5 0.5 0.5 0.1 50 force
 tellraw @s [{"text":"<< Time Reverse (5s)","color":"aqua","bold":true}]
 
-# 6. タグ掃除
+# 8. タグ掃除
 tag @s remove reverse_user

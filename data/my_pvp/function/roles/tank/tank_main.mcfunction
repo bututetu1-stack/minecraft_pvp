@@ -12,6 +12,9 @@ title @s actionbar [{"text":"Crash: ","color":"dark_green"},{"score":{"name":"@s
 execute as @s[scores={cd_shield_bash=1}] run item replace entity @s container.2 with minecraft:paper[minecraft:custom_model_data={floats:[1.0]},minecraft:custom_data={tank_shield:1b},minecraft:custom_name='{"text":"シールドバッシュ","color":"blue","bold":true}',minecraft:lore=['{"text":"[Q]キーでドロップして突進 (2s)","color":"gray"}','{"text":"CT: 10s","color":"aqua"}'],minecraft:unbreakable={},minecraft:item_model=shield] 1
 execute as @s[scores={cd_shield_bash=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 2
 
+# Rush Mode Safety (ラッシュ中にCT0なのにアイテム無い場合は即時再配布)
+execute as @s[tag=rush_mode,scores={cd_shield_bash=0}] unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{tank_shield:1b}}}]}] run item replace entity @s container.2 with minecraft:paper[minecraft:custom_model_data={floats:[1.0]},minecraft:custom_data={tank_shield:1b},minecraft:custom_name='{"text":"シールドバッシュ","color":"blue","bold":true}',minecraft:lore=['{"text":"[Q]キーでドロップして突進 (2s)","color":"gray"}','{"text":"CT: 10s","color":"aqua"}'],minecraft:unbreakable={},minecraft:item_model=shield] 1
+
 # CT減少
 scoreboard players remove @s[scores={cd_tank_crash=1..}] cd_tank_crash 1
 scoreboard players remove @s[scores={cd_shield_bash=1..}] cd_shield_bash 1
