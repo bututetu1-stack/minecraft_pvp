@@ -116,6 +116,7 @@ scoreboard objectives add cd_chrono_stasis dummy
 scoreboard objectives add cd_chrono_clockup dummy
 scoreboard objectives add freeze_timer dummy
 scoreboard objectives add stasis_timer dummy "時間停止タイマー"
+scoreboard objectives add clockup_active dummy "クロックアップ残像タイマー"
 
 # --- 彫刻家 (Sculptor) 用 ---
 scoreboard objectives add sculpture_count dummy "彫刻設置数"

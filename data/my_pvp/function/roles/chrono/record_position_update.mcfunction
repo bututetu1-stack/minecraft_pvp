@@ -27,10 +27,20 @@ tag @e[tag=my_marker,tag=chrono_2s] remove chrono_1s
 # summonだけだと向きが南(0,0)固定になってしまう
 summon area_effect_cloud ~ ~ ~ {Tags:["chrono_marker","chrono_1s"],Duration:200}
 
-# 6. 新規マーカーの設定 (ID付与 & 向きの同期 & HP記録)
+# 6. 新規マーカーの設定 (ID付与 & 向きの同期 & HP記録 & CTスナップショット)
 execute as @e[type=area_effect_cloud,tag=chrono_1s,distance=..0.1,limit=1,sort=nearest] run scoreboard players operation @s player_id = #ID temp
-# 【修正】 直近のchronoプレイヤー(=自分) からHPを取得
-execute as @e[type=area_effect_cloud,tag=chrono_1s,distance=..0.1,limit=1,sort=nearest] run scoreboard players operation @s hp_snapshot = @p[tag=chrono,limit=1,distance=..1] health
+
+# 【修正】 chronoプレイヤー(=@s, 呼び出し元)の生HPをNBTから取得 (health objective は HP×10 のため使えない)
+execute store result score #PLAYER_HP temp run data get entity @s Health
+execute as @e[type=area_effect_cloud,tag=chrono_1s,distance=..0.1,limit=1,sort=nearest] run scoreboard players operation @s hp_snapshot = #PLAYER_HP temp
+
+# 【追加】 CTスナップショット (5秒前のCT状態を保存) - リバース時にCT巻き戻しで使用
+scoreboard players operation #SS_STASIS temp = @s cd_chrono_stasis
+scoreboard players operation #SS_CLOCKUP temp = @s cd_chrono_clockup
+scoreboard players operation #SS_JUMP temp = @s cd_chrono_jump
+execute as @e[type=area_effect_cloud,tag=chrono_1s,distance=..0.1,limit=1,sort=nearest] run scoreboard players operation @s cd_chrono_stasis = #SS_STASIS temp
+execute as @e[type=area_effect_cloud,tag=chrono_1s,distance=..0.1,limit=1,sort=nearest] run scoreboard players operation @s cd_chrono_clockup = #SS_CLOCKUP temp
+execute as @e[type=area_effect_cloud,tag=chrono_1s,distance=..0.1,limit=1,sort=nearest] run scoreboard players operation @s cd_chrono_jump = #SS_JUMP temp
 
 # 【重要】実行コンテキスト(プレイヤーの場所・向き)に合わせてマーカーの向きを回転させる
 # ~ ~ ~ ~ ~ は「位置を変えずに、向きだけ現在の実行環境に合わせる」という意味

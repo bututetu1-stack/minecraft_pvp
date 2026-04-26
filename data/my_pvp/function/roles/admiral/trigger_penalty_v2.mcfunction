@@ -10,11 +10,12 @@ advancement revoke @s only my_pvp:roles/admiral_hurt
 tag @a remove current_attacker
 execute as @a[distance=..64] unless score @s damage_dealt = @s last_damage_dealt run tag @s add current_attacker
 
-# 2. ダメージ量の計算 (元のダメージの 25%)
+# 2. ダメージ量の計算 (元のダメージの 50%, 合計1.5倍化)
 scoreboard players operation #CALC temp = @s damage_taken
 
-# 25%計算 (DamageScore / 40 -> DamageAmount / 4)
-scoreboard players operation #CALC temp /= #CONST_40 temp
+# 50%計算 (DamageScore / 20 -> DamageAmount / 2)
+scoreboard players set #CONST_20 temp 20
+scoreboard players operation #CALC temp /= #CONST_20 temp
 
 # 3. ダメージ実行予約 (Delay to bypass i-frames)
 

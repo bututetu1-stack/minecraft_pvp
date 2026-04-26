@@ -74,6 +74,7 @@ scoreboard players set @a cd_chrono_clockup 0
 scoreboard players set @a freeze_timer 0
 scoreboard players set @a timer 0
 scoreboard players set @a stasis_timer 0
+scoreboard players set @a clockup_active 0
 tag @a remove stasis_caster
 
 # 彫刻家用リセット

@@ -17,6 +17,7 @@ scoreboard players set @s cd_chrono_stasis 0
 scoreboard players set @s cd_chrono_clockup 0
 scoreboard players set @s freeze_timer 0
 scoreboard players set @s stasis_timer 0
+scoreboard players set @s clockup_active 0
 scoreboard players set @s cd_super_jump 0
 scoreboard players set @s sneak_time 0
 scoreboard players set @s cd_chrono_jump 0

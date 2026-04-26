@@ -31,6 +31,17 @@ execute if score @s cd_chrono_clockup matches 1.. run scoreboard players remove 
 execute if score @s cd_chrono_jump matches 1.. run scoreboard players remove @s cd_chrono_jump 1
 execute if score @s sneak_time matches 1.. run function my_pvp:roles/chrono/use_jump
 
+# --- 【追加】 クロックアップ アクティブ中の効果 ---
+execute if score @s clockup_active matches 1.. run scoreboard players remove @s clockup_active 1
+# 残像演出 (赤いダスト + end_rod を毎tick足元にスポーン)
+execute if score @s clockup_active matches 1.. at @s run particle minecraft:dust{color:[1.0,0.4,0.4],scale:0.9} ~ ~1 ~ 0.3 0.5 0.3 0 5 force
+execute if score @s clockup_active matches 1.. at @s run particle minecraft:end_rod ~ ~0.5 ~ 0.2 0.3 0.2 0.05 2 force
+# CT回復速度2倍 (リバース/ステイシス/上昇 のCTを毎tick追加で1減算 = 合計2倍速)
+# クロックアップ自身のCTは加速対象外 (永続クロックアップ防止)
+execute if score @s clockup_active matches 1.. if score @s cd_chrono_reverse matches 1.. run scoreboard players remove @s cd_chrono_reverse 1
+execute if score @s clockup_active matches 1.. if score @s cd_chrono_stasis matches 1.. run scoreboard players remove @s cd_chrono_stasis 1
+execute if score @s clockup_active matches 1.. if score @s cd_chrono_jump matches 1.. run scoreboard players remove @s cd_chrono_jump 1
+
 # --- アクションバー (常時表示) ---
 # 条件分岐を削除し、CTが0の状態でも常に表示するように変更
 title @s actionbar [{"text":"Rev:","color":"aqua"},{"score":{"name":"@s","objective":"cd_chrono_reverse"},"color":"white"},{"text":" | ","color":"gray"},{"text":"Sts:","color":"yellow"},{"score":{"name":"@s","objective":"cd_chrono_stasis"},"color":"white"},{"text":" | ","color":"gray"},{"text":"Clk:","color":"red"},{"score":{"name":"@s","objective":"cd_chrono_clockup"},"color":"white"}]
