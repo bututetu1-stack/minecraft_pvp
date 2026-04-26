@@ -6,8 +6,8 @@ scoreboard players set @s cd_beast_wolf 240
 # 自分のIDをTEMPに保存
 scoreboard players operation #TEMP player_id = @s player_id
 
-# 狼マーカー (armor_stand) 召喚 - 投げ禁止防止: invulnerable=1b, NoGravity:0b で重力あり
-summon armor_stand ~ ~ ~ {Tags:["beast_wolf","new_wolf"],Invulnerable:1b,NoGravity:0b,Marker:0b,Small:0b,Invisible:1b,ShowArms:0b,NoBasePlate:1b,CustomName:'{"text":"狼","color":"gray","italic":false}',CustomNameVisible:1b,ArmorItems:[{},{},{},{id:"minecraft:wolf_head",count:1}]}
+# 狼を召喚 (本物のwolfエンティティ、AIは無効化して自前制御)
+summon wolf ~ ~ ~ {Tags:["beast_wolf","new_wolf"],NoAI:1b,Invulnerable:1b,CollarColor:7b,CustomName:'{"text":"狼","color":"gray","italic":false}',CustomNameVisible:1b,PersistenceRequired:1b,Silent:0b}
 
 # IDと寿命/タイマー設定
 execute as @e[tag=new_wolf,limit=1] run scoreboard players operation @s player_id = #TEMP player_id

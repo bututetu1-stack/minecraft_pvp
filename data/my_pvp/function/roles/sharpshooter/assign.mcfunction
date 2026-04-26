@@ -12,6 +12,7 @@ function my_pvp:roles/sharpshooter/apply_status
 # 4. クールダウン初期化
 scoreboard players set @s cd_sharp_snipe 0
 scoreboard players set @s cd_sharp_smoke 0
+scoreboard players set @s sharp_autofire_timer 0
 scoreboard players set @s cd_super_jump 0
 scoreboard players set @s sneak_time 0
 

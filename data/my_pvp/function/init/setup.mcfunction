@@ -121,6 +121,7 @@ scoreboard objectives add clockup_active dummy "クロックアップ残像タ�
 # --- 狙撃手 (Sharpshooter) 用 ---
 scoreboard objectives add cd_sharp_snipe dummy "狙撃弾CT"
 scoreboard objectives add cd_sharp_smoke dummy "煙幕弾CT"
+scoreboard objectives add sharp_autofire_timer dummy "魔導弾連射タイマー"
 
 # --- 獣使い (Beastmaster) 用 ---
 scoreboard objectives add cd_beast_wolf dummy "狼召喚CT"

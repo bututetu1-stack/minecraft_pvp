@@ -18,7 +18,7 @@ execute as @s[tag=rush_mode,scores={cd_sharp_smoke=0}] unless entity @s[nbt={Inv
 execute if score @s cd_sharp_snipe matches 1.. run scoreboard players remove @s cd_sharp_snipe 1
 execute if score @s cd_sharp_smoke matches 1.. run scoreboard players remove @s cd_sharp_smoke 1
 
-# --- 集中状態の検知と効果適用 (slot1のスコープを右クリ保持中) ---
+# --- 集中状態の検知 (slot0のスコープを右クリ保持中 = is_using_item) ---
 tag @s remove sharp_focused
 execute if entity @s[nbt={SelectedItem:{components:{"minecraft:custom_data":{sharpshooter_focus:1b}}}},predicate=my_pvp:is_using_item] run tag @s add sharp_focused
 
@@ -31,15 +31,14 @@ execute if entity @s[tag=sharp_focused] at @s as @a[gamemode=!spectator,distance
 # 集中演出パーティクル
 execute if entity @s[tag=sharp_focused] at @s anchored eyes run particle minecraft:enchant ^ ^ ^2 0 0 0 0.5 3 force
 
-# --- 集中中の矢: NBTのdamage を 2.0 → 3.0 (1.5倍) に強化 ---
-# 自分の近く(3m)に新しい矢が出現したら処理
-# 集中中の矢: ダメージ強化 + タグ付け
-execute as @s[tag=sharp_focused] at @s as @e[type=arrow,tag=!sharp_arrow_processed,distance=..3] run data merge entity @s {damage:3.0d}
-execute as @s[tag=sharp_focused] at @s as @e[type=arrow,tag=!sharp_arrow_processed,distance=..3] at @s run particle minecraft:enchanted_hit ~ ~ ~ 0 0 0 0 1 force
-execute as @s[tag=sharp_focused] at @s as @e[type=arrow,tag=!sharp_arrow_processed,distance=..3] run tag @s add sharp_focused_arrow
-execute as @s[tag=sharp_focused] at @s as @e[type=arrow,tag=!sharp_arrow_processed,distance=..3] run tag @s add sharp_arrow_processed
-# 集中外で発射した矢: 処理スキップ用タグのみ
-execute as @s[tag=!sharp_focused] at @s as @e[type=arrow,tag=!sharp_arrow_processed,distance=..3] run tag @s add sharp_arrow_processed
+# --- 自動連射 (集中中のみ、12tick = 0.6秒ごとに魔導弾発射) ---
+# 集中中はタイマー加算
+execute if entity @s[tag=sharp_focused] run scoreboard players add @s sharp_autofire_timer 1
+# タイマー満了 → 発射
+execute if entity @s[tag=sharp_focused] if score @s sharp_autofire_timer matches 12.. run function my_pvp:roles/sharpshooter/fire_magic_shot
+execute if entity @s[tag=sharp_focused] if score @s sharp_autofire_timer matches 12.. run scoreboard players set @s sharp_autofire_timer 0
+# 集中していないときはタイマーリセット
+execute unless entity @s[tag=sharp_focused] run scoreboard players set @s sharp_autofire_timer 0
 
 # --- 役職固有 上昇スキル (sneak短) ---
 execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
