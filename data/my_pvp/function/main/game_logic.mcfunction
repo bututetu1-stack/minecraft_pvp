@@ -21,6 +21,10 @@ execute as @a[tag=sculptor,tag=!is_frozen] at @s run function my_pvp:roles/sculp
 execute as @a[tag=magician,tag=!is_frozen] at @s run function my_pvp:roles/magician/magician_main
 execute as @a[tag=gambler,tag=!is_frozen] at @s run function my_pvp:roles/gambler/gambler_main
 execute as @a[tag=samurai,tag=!is_frozen] at @s run function my_pvp:roles/samurai/samurai_main
+execute as @a[tag=sharpshooter,tag=!is_frozen] at @s run function my_pvp:roles/sharpshooter/sharpshooter_main
+execute as @a[tag=beastmaster,tag=!is_frozen] at @s run function my_pvp:roles/beastmaster/beastmaster_main
+# 獣使いの召喚狼の毎tick処理
+execute as @e[tag=beast_wolf] at @s run function my_pvp:roles/beastmaster/wolf_tick
 
 # --- 時空跳躍者のグローバル処理 (フィールド・凍結制御) ---
 # プレイヤーに関係なくサーバー全体で処理するため、as @a は付けずに呼び出す
@@ -58,6 +62,12 @@ execute as @e[type=item] at @s run function my_pvp:roles/ninja/scan_items
 
 # 侍のアイテムスキャン
 execute as @e[type=item] at @s run function my_pvp:roles/samurai/scan_items
+
+# 狙撃手のアイテムスキャン
+execute as @e[type=item] at @s run function my_pvp:roles/sharpshooter/scan_items
+
+# 獣使いのアイテムスキャン
+execute as @e[type=item] at @s run function my_pvp:roles/beastmaster/scan_items
 
 # --- 3. ガジェットの処理 ---
 
@@ -181,6 +191,12 @@ execute as @a[tag=gambler,tag=!ignore_status_check] unless score #GLOBAL event_t
 
 # 侍 (HP 50)
 execute as @a[tag=samurai,tag=!ignore_status_check] unless score #GLOBAL event_type matches 4 unless entity @s[nbt={attributes:[{id:"minecraft:max_health",base:50.0d}]}] run function my_pvp:roles/samurai/apply_status
+
+# 狙撃手 (HP 30)
+execute as @a[tag=sharpshooter,tag=!ignore_status_check] unless score #GLOBAL event_type matches 4 unless entity @s[nbt={attributes:[{id:"minecraft:max_health",base:30.0d}]}] run function my_pvp:roles/sharpshooter/apply_status
+
+# 獣使い (HP 45)
+execute as @a[tag=beastmaster,tag=!ignore_status_check] unless score #GLOBAL event_type matches 4 unless entity @s[nbt={attributes:[{id:"minecraft:max_health",base:45.0d}]}] run function my_pvp:roles/beastmaster/apply_status
 
 # (既存のゲーム進行処理の後に追記)
 

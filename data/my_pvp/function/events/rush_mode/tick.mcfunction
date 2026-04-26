@@ -37,6 +37,12 @@ scoreboard players set @a cd_sculptor_pillar 0
 scoreboard players set @a cd_gambler_jump 0
 # 【追加】 彫刻家 石化光線CT
 scoreboard players set @a cd_sculptor_beam 0
+# 【追加】 狙撃手 / 獣使い CT
+scoreboard players set @a cd_sharp_snipe 0
+scoreboard players set @a cd_sharp_smoke 0
+scoreboard players set @a cd_beast_wolf 0
+scoreboard players set @a cd_beast_roar 0
+scoreboard players set @a cd_beast_unleash 0
 
 # マナを最大に
 scoreboard players set @a[tag=magician] mana 100

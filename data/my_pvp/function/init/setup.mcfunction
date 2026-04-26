@@ -118,6 +118,17 @@ scoreboard objectives add freeze_timer dummy
 scoreboard objectives add stasis_timer dummy "時間停止タイマー"
 scoreboard objectives add clockup_active dummy "クロックアップ残像タイマー"
 
+# --- 狙撃手 (Sharpshooter) 用 ---
+scoreboard objectives add cd_sharp_snipe dummy "狙撃弾CT"
+scoreboard objectives add cd_sharp_smoke dummy "煙幕弾CT"
+
+# --- 獣使い (Beastmaster) 用 ---
+scoreboard objectives add cd_beast_wolf dummy "狼召喚CT"
+scoreboard objectives add cd_beast_roar dummy "獣の咆哮CT"
+scoreboard objectives add cd_beast_unleash dummy "解き放つCT"
+scoreboard objectives add wolf_count dummy "召喚狼数"
+scoreboard objectives add wolf_attack_timer dummy "狼攻撃タイマー"
+
 # --- 彫刻家 (Sculptor) 用 ---
 scoreboard objectives add sculpture_count dummy "彫刻設置数"
 scoreboard objectives add cd_sculptor_create dummy "彫刻生成CT"

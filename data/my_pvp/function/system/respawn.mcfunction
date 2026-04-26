@@ -50,6 +50,8 @@ execute if score @s role_id matches 9 run tag @s add chrono
 execute if score @s role_id matches 10 run tag @s add sculptor
 execute if score @s role_id matches 11 run tag @s add gambler
 execute if score @s role_id matches 12 run tag @s add samurai
+execute if score @s role_id matches 13 run tag @s add sharpshooter
+execute if score @s role_id matches 14 run tag @s add beastmaster
 
 # (オプション) もしリスポーン時に特定のアイテムを再配布したい場合はここに記述
 # リスポーン時のアイテム・コスト補充 (魔術師, 機械工, ギャンブラー)
@@ -63,6 +65,18 @@ execute if entity @s[tag=samurai] run scoreboard players set @s cd_sam_hien 0
 execute if entity @s[tag=samurai] run tag @s remove sam_zanshin_guard
 execute if entity @s[tag=samurai] run tag @s remove sam_iai_dashing
 execute if entity @s[tag=samurai] run tag @s remove sam_iai_hit_this_dash
+
+# 狙撃手 リスポーン時アイテム再配布 + CTリセット
+execute if entity @s[tag=sharpshooter] run function my_pvp:system/give_sharpshooter_items
+execute if entity @s[tag=sharpshooter] run scoreboard players set @s cd_sharp_snipe 0
+execute if entity @s[tag=sharpshooter] run scoreboard players set @s cd_sharp_smoke 0
+execute if entity @s[tag=sharpshooter] run tag @s remove sharp_focused
+
+# 獣使い リスポーン時アイテム再配布 + CTリセット
+execute if entity @s[tag=beastmaster] run function my_pvp:system/give_beastmaster_items
+execute if entity @s[tag=beastmaster] run scoreboard players set @s cd_beast_wolf 0
+execute if entity @s[tag=beastmaster] run scoreboard players set @s cd_beast_roar 0
+execute if entity @s[tag=beastmaster] run scoreboard players set @s cd_beast_unleash 0
 
 # ギャンブラーのコイン管理 (借金死 or オールイン死なら0, それ以外なら50)
 execute if entity @s[tag=gambler,tag=penalty_death] run scoreboard players set @s coins 0
