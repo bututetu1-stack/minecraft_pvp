@@ -1,9 +1,9 @@
 # 狙撃手装備
-# slot 0: 集中スコープ (主武器、右クリ保持で自動連射)
-item replace entity @s container.0 with minecraft:spyglass[minecraft:custom_data={sharpshooter_focus:1b},minecraft:unbreakable={},minecraft:custom_name='{"text":"集中スコープ","color":"aqua","bold":true,"italic":false}',minecraft:lore=['{"text":"右クリ保持: 集中状態 + 魔導弾連射","color":"yellow"}','{"text":"  狙い安定 (鈍足II)","color":"gray"}','{"text":"  半径15内の敵に発光","color":"gray"}','{"text":"  0.6秒ごとに視線方向に魔導弾発射 (damage 4)","color":"gray"}']] 1
+# slot 0: 集中スコープ (主武器、右クリ集中 + ドロップで通常弾発射)
+item replace entity @s container.0 with minecraft:spyglass[minecraft:custom_data={sharpshooter_focus:1b},minecraft:unbreakable={},minecraft:custom_name='{"text":"集中スコープ","color":"aqua","bold":true,"italic":false}',minecraft:lore=['{"text":"右クリ保持: 集中状態 (鈍足II + 半径15敵発光)","color":"yellow"}','{"text":"[Q]キー(捨てる): 通常弾発射 (1弾)","color":"yellow"}','{"text":"距離20m貫通, ダメージ6","color":"gray"}']] 1
 
-# slot 2: 狙撃弾
-item replace entity @s container.2 with minecraft:red_dye[minecraft:custom_data={sharpshooter_snipe:1b},minecraft:custom_name='{"text":"狙撃弾","color":"red","bold":true,"italic":false}',minecraft:lore=['{"text":"[Q]キー(捨てる): 視線方向に貫通弾","color":"yellow"}','{"text":"距離30m, ダメージ8","color":"gray"}','{"text":"CT: 14s","color":"aqua"}']] 1
+# slot 2: 強撃弾 (red_dye)
+item replace entity @s container.2 with minecraft:red_dye[minecraft:custom_data={sharpshooter_pierce:1b},minecraft:custom_name='{"text":"強撃弾","color":"red","bold":true,"italic":false}',minecraft:lore=['{"text":"[Q]キー(捨てる): 強撃弾発射 (3弾)","color":"yellow"}','{"text":"距離35m貫通, ダメージ14, 防御無視","color":"gray"}']] 1
 
-# slot 3: 煙幕弾
-item replace entity @s container.3 with minecraft:charcoal[minecraft:custom_data={sharpshooter_smoke:1b},minecraft:custom_name='{"text":"煙幕弾","color":"gray","bold":true,"italic":false}',minecraft:lore=['{"text":"[Q]キー(捨てる): 自分に煙幕展開","color":"yellow"}','{"text":"自分: invisibility 4s","color":"gray"}','{"text":"周囲: blindness 3s","color":"gray"}','{"text":"CT: 22s","color":"aqua"}']] 1
+# slot 3: マーキング弾 (charcoal)
+item replace entity @s container.3 with minecraft:charcoal[minecraft:custom_data={sharpshooter_mark:1b},minecraft:custom_name='{"text":"マーキング弾","color":"yellow","bold":true,"italic":false}',minecraft:lore=['{"text":"[Q]キー(捨てる): マーキング弾発射 (2弾)","color":"yellow"}','{"text":"距離25m貫通, 命中で5秒 発光+鈍足II + ダメ3","color":"gray"}']] 1

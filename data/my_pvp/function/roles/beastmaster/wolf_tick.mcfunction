@@ -1,13 +1,7 @@
-# 狼マーカー 毎tick処理 (@s = wolf armor_stand, at @s)
+# 狼 毎tick処理 (@s = wolf entity, at @s)
+# 寿命管理は廃止、Invulnerable で永続。reset_game で kill される。
 
-# 1. 寿命減算 → 0で消滅
-scoreboard players remove @s gadget_life 1
-execute if score @s gadget_life matches ..0 at @s run particle minecraft:cloud ~ ~ ~ 0.4 0.3 0.4 0.05 15 force
-execute if score @s gadget_life matches ..0 at @s run playsound minecraft:entity.wolf.death master @a ~ ~ ~ 1 1.2
-execute if score @s gadget_life matches ..0 run kill @s
-execute if score @s gadget_life matches ..0 run return 0
-
-# 2. ターゲット選定 (自分以外のプレイヤー、半径15)
+# 1. ターゲット選定 (自分以外のプレイヤー、半径15)
 scoreboard players operation #WOLF_OWNER temp = @s player_id
 tag @a remove wolf_target_candidate
 execute at @s as @a[gamemode=!spectator,distance=..15] unless score @s player_id = #WOLF_OWNER temp run tag @s add wolf_target_candidate

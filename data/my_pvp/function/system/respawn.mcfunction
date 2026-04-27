@@ -66,10 +66,10 @@ execute if entity @s[tag=samurai] run tag @s remove sam_zanshin_guard
 execute if entity @s[tag=samurai] run tag @s remove sam_iai_dashing
 execute if entity @s[tag=samurai] run tag @s remove sam_iai_hit_this_dash
 
-# 狙撃手 リスポーン時アイテム再配布 + CTリセット
+# 狙撃手 リスポーン時アイテム再配布 + 残弾満タン
 execute if entity @s[tag=sharpshooter] run function my_pvp:system/give_sharpshooter_items
-execute if entity @s[tag=sharpshooter] run scoreboard players set @s cd_sharp_snipe 0
-execute if entity @s[tag=sharpshooter] run scoreboard players set @s cd_sharp_smoke 0
+execute if entity @s[tag=sharpshooter] run scoreboard players set @s sharp_ammo 10
+execute if entity @s[tag=sharpshooter] run scoreboard players set @s sharp_ammo_timer 0
 execute if entity @s[tag=sharpshooter] run tag @s remove sharp_focused
 
 # 獣使い リスポーン時アイテム再配布 + CTリセット

@@ -9,14 +9,14 @@ tellraw @s [{"text":"[System] ","color":"gray"},{"text":"あなたは ","color":
 # 3. ステータス設定
 function my_pvp:roles/sharpshooter/apply_status
 
-# 4. クールダウン初期化
-scoreboard players set @s cd_sharp_snipe 0
-scoreboard players set @s cd_sharp_smoke 0
-scoreboard players set @s sharp_autofire_timer 0
+# 4. 残弾数 / タイマー初期化
+scoreboard players set @s sharp_ammo 10
+scoreboard players set @s sharp_ammo_timer 0
+scoreboard players set @s last_kills 0
 scoreboard players set @s cd_super_jump 0
 scoreboard players set @s sneak_time 0
 
-# 5. 攻撃力初期化 (素手は弱い、弓に依存)
+# 5. 攻撃力初期化 (素手は弱い、スコープに依存)
 attribute @s minecraft:attack_damage base set 1
 
 # 6. 音

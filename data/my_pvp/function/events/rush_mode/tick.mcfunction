@@ -37,9 +37,9 @@ scoreboard players set @a cd_sculptor_pillar 0
 scoreboard players set @a cd_gambler_jump 0
 # 【追加】 彫刻家 石化光線CT
 scoreboard players set @a cd_sculptor_beam 0
-# 【追加】 狙撃手 / 獣使い CT
-scoreboard players set @a cd_sharp_snipe 0
-scoreboard players set @a cd_sharp_smoke 0
+# 【追加】 狙撃手 残弾 (常時満タン = 弾無限)
+scoreboard players set @a[tag=sharpshooter] sharp_ammo 10
+# 【追加】 獣使い CT
 scoreboard players set @a cd_beast_wolf 0
 scoreboard players set @a cd_beast_roar 0
 scoreboard players set @a cd_beast_unleash 0

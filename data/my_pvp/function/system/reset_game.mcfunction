@@ -234,11 +234,11 @@ tag @a remove sam_iai_dashing
 tag @a remove sam_iai_hit_this_dash
 
 # 【追加】 狙撃手用リセット
-scoreboard players reset * cd_sharp_snipe
-scoreboard players reset * cd_sharp_smoke
-scoreboard players reset * sharp_autofire_timer
+scoreboard players reset * sharp_ammo
+scoreboard players reset * sharp_ammo_timer
 tag @a remove sharpshooter
 tag @a remove sharp_focused
+tag @a remove sharp_fired_now
 
 # 【追加】 獣使い用リセット
 scoreboard players reset * cd_beast_wolf
