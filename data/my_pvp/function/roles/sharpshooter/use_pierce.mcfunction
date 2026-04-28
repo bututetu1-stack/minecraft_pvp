@@ -5,12 +5,15 @@ scoreboard players operation #TEMP player_id = @s player_id
 # 命中フラグ初期化
 scoreboard players set #PIERCE_HIT temp 0
 
-# 発射音 + 演出 (重い大砲音)
-playsound minecraft:item.crossbow.shoot master @a ~ ~ ~ 2 0.5
-playsound minecraft:entity.firework_rocket.launch master @a ~ ~ ~ 1.5 0.5
-playsound minecraft:item.trident.thunder master @a[distance=..30] ~ ~ ~ 1 1.5
-particle minecraft:flash ~ ~1.5 ~ 0 0 0 0 1 force
-particle minecraft:dust{color:[1.0,0.2,0.2],scale:1.5} ~ ~1.5 ~ 0.3 0.3 0.3 0 25 force
+# 発射音 (スナイパーライフル: 重いドガァァン + 残響)
+playsound minecraft:entity.generic.explode master @a ~ ~ ~ 1.2 1.8
+playsound minecraft:entity.firework_rocket.large_blast_far master @a ~ ~ ~ 1.5 1.4
+playsound minecraft:entity.lightning_bolt.impact master @a[distance=..50] ~ ~ ~ 0.6 1.6
+playsound minecraft:block.netherite_block.break master @a[distance=..30] ~ ~ ~ 0.7 0.6
+# マズルフラッシュ + 反動煙
+particle minecraft:flash ~ ~1.5 ~ 0 0 0 0 2 force
+particle minecraft:large_smoke ~ ~1.5 ~ 0.3 0.3 0.3 0.02 8 force
+particle minecraft:dust{color:[1.0,0.4,0.2],scale:1.5} ~ ~1.5 ~ 0.4 0.4 0.4 0 20 force
 
 # レイキャスト発射 (距離35m = 0.5m * 70 steps)
 scoreboard players set #pierce_dist temp 70

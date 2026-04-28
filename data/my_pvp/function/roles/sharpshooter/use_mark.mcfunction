@@ -5,9 +5,13 @@ scoreboard players operation #TEMP player_id = @s player_id
 # 命中フラグ初期化
 scoreboard players set #MARK_HIT temp 0
 
-# 発射音 + 演出 (黄色のマーキング)
-playsound minecraft:entity.experience_orb.pickup master @a ~ ~ ~ 1 1.6
-playsound minecraft:block.note_block.bell master @a[distance=..15] ~ ~ ~ 0.7 1.2
+# 発射音 (信号銃: 軽いパンッ + ピューン)
+playsound minecraft:entity.firework_rocket.blast master @a[distance=..40] ~ ~ ~ 0.9 1.7
+playsound minecraft:block.dispenser.dispense master @a[distance=..20] ~ ~ ~ 1.2 1.0
+playsound minecraft:block.note_block.pling master @a[distance=..20] ~ ~ ~ 1 2.0
+# マズルフラッシュ (黄色)
+particle minecraft:flash ~ ~1.5 ~ 0 0 0 0 1 force
+particle minecraft:smoke ~ ~1.5 ~ 0.1 0.1 0.1 0.02 4 force
 particle minecraft:dust{color:[1.0,1.0,0.3],scale:1.0} ~ ~1.5 ~ 0.2 0.2 0.2 0 10 force
 
 # レイキャスト発射 (距離25m = 0.5m * 50 steps)
