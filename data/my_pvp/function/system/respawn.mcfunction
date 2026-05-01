@@ -72,6 +72,12 @@ execute if entity @s[tag=sharpshooter] run scoreboard players set @s sharp_ammo 
 execute if entity @s[tag=sharpshooter] run scoreboard players set @s sharp_ammo_timer 0
 execute if entity @s[tag=sharpshooter] run tag @s remove sharp_focused
 
+# ストーカー リスポーン時アイテム再配布 + コンパス変化検知リセット
+execute if entity @s[tag=stalker] run function my_pvp:system/give_stalker_items
+execute if entity @s[tag=stalker] run scoreboard players set @s last_compass_x 999999
+execute if entity @s[tag=stalker] run scoreboard players set @s last_compass_z 999999
+execute if entity @s[tag=stalker] run scoreboard players set @s compass_force_timer 0
+
 # 獣使い リスポーン時アイテム再配布 + CTリセット
 execute if entity @s[tag=beastmaster] run function my_pvp:system/give_beastmaster_items
 execute if entity @s[tag=beastmaster] run scoreboard players set @s cd_beast_wolf 0

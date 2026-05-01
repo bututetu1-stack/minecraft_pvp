@@ -16,6 +16,9 @@ scoreboard players set @s last_kills 0
 scoreboard players set @s hunting_stacks 0
 scoreboard players set @s hunting_decay_timer 0
 scoreboard players set @s trail_timer 0
+scoreboard players set @s last_compass_x 999999
+scoreboard players set @s last_compass_z 999999
+scoreboard players set @s compass_force_timer 0
 
 # 5. 音 (変更)
 # ウォーデンの心音（ドクン…）で緊張感を演出

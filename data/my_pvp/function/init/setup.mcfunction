@@ -88,6 +88,11 @@ scoreboard objectives add cd_stalker_float dummy
 scoreboard objectives add target_id dummy "ターゲットID"
 scoreboard objectives add target_check_timer dummy "ターゲット確認タイマー"
 scoreboard objectives add trail_timer dummy "痕跡タイマー"
+# 【追加】コンパス更新最適化用
+scoreboard objectives add last_compass_x dummy "前回コンパスX"
+scoreboard objectives add last_compass_z dummy "前回コンパスZ"
+scoreboard objectives add compass_force_timer dummy "コンパス強制更新タイマー"
+scoreboard objectives add _compass_changed dummy "コンパス変化フラグ"
 
 # 【追加】攻撃判定用 (ダメージを与えたかを検知)
 scoreboard objectives add damage_dealt minecraft.custom:minecraft.damage_dealt "与ダメージ"

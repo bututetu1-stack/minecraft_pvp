@@ -54,6 +54,12 @@ scoreboard players reset * mag_fly_tick
 scoreboard players reset * cd_stalker_float
 scoreboard players reset * target_check_timer
 scoreboard players reset * target_id
+scoreboard players reset * last_compass_x
+scoreboard players reset * last_compass_z
+scoreboard players reset * compass_force_timer
+data remove storage my_pvp:stalker_macro x
+data remove storage my_pvp:stalker_macro y
+data remove storage my_pvp:stalker_macro z
 
 # ▼▼▼ 追加: 提督用CTリセット ▼▼▼
 scoreboard players reset * cd_adm_artillery
