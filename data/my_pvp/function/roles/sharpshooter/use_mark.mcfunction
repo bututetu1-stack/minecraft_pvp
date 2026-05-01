@@ -18,6 +18,8 @@ particle minecraft:dust{color:[1.0,1.0,0.3],scale:1.0} ~ ~1.5 ~ 0.2 0.2 0.2 0 10
 scoreboard players set #mark_dist temp 2000
 execute anchored eyes positioned ^ ^ ^ run function my_pvp:roles/sharpshooter/mark_raycast
 
-# 命中時のメッセージ
-execute if score #MARK_HIT temp matches 1 run tellraw @s [{"text":"[マーキング弾] ","color":"yellow","bold":true},{"text":"標的捕捉","color":"gold"}]
+# 命中時のメッセージ + 弾1発回復
+execute if score #MARK_HIT temp matches 1 run tellraw @s [{"text":"[マーキング弾] ","color":"yellow","bold":true},{"text":"標的捕捉 (+1 Ammo)","color":"gold"}]
+execute if score #MARK_HIT temp matches 1 run scoreboard players add @s sharp_ammo 1
+execute if score @s sharp_ammo matches 11.. run scoreboard players set @s sharp_ammo 10
 execute if score #MARK_HIT temp matches 0 run tellraw @s [{"text":"[マーキング弾] ","color":"yellow","bold":true},{"text":"発射 (命中なし)","color":"gray"}]

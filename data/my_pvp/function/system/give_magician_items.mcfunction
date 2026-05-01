@@ -4,7 +4,7 @@
 item replace entity @s container.0 with minecraft:stick[minecraft:custom_data={magician_broom:1b},minecraft:custom_name='{"text":"魔術箒","italic":false,"color":"light_purple","bold":true}',minecraft:lore=['{"text":"[Q]キー: 飛行開始/終了","color":"yellow"}','{"text":"Cost: 5 MANA + 5/秒","color":"gray"}','{"text":"CT: 0s","color":"aqua"}']] 1
 
 # 2. 魔術本 (Slot 1)
-item replace entity @s container.1 with minecraft:book[minecraft:custom_data={magician_book:1b},minecraft:custom_name='{"text":"魔術本","italic":false,"color":"gold","bold":true}',minecraft:lore=['{"text":"[Q]キー: 炎玉発射","color":"yellow"}','{"text":"Cost: 5 MANA","color":"gray"}','{"text":"ダメージ: ハート3個分","color":"red"}','{"text":"CT: 0s","color":"aqua"}']] 1
+item replace entity @s container.1 with minecraft:book[minecraft:custom_data={magician_book:1b},minecraft:custom_name='{"text":"魔術本","italic":false,"color":"gold","bold":true}',minecraft:lore=['{"text":"[Q]キー: 炎玉発射","color":"yellow"}','{"text":"Cost: 5 MANA","color":"gray"}','{"text":"ダメージ: ハート2個分","color":"red"}','{"text":"CT: 0s","color":"aqua"}']] 1
 
 # 3. 衝撃符 (Slot 2) — 近接衝撃波
 item replace entity @s container.2 with minecraft:white_dye[minecraft:custom_data={magician_shockwave:1b},minecraft:custom_name='{"text":"衝撃符","italic":false,"color":"aqua","bold":true}',minecraft:lore=['{"text":"[Q]キー: 自分中心 半径4m に衝撃波","color":"yellow"}','{"text":"Cost: 15 MANA","color":"gray"}','{"text":"damage 8 + 強ノックバック + 鈍足II 2秒","color":"red"}','{"text":"CT: 5s","color":"aqua"}']] 1

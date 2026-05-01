@@ -1,6 +1,6 @@
 # 炎玉ヒット処理
 
-# 1. ダメージを与える (ハート3個分 = 6HP)
+# 1. ダメージを与える (ハート2個分 = 4HP)
 # 対象プレイヤーをマーク (検知範囲と一致 3.0m)
 execute at @s run tag @a[distance=..3.0,limit=1,sort=nearest] add mag_victim
 
@@ -10,7 +10,7 @@ scoreboard players operation #TEMP player_id = @s player_id
 execute as @a[tag=magician] if score @s player_id = #TEMP player_id run tag @s add owner_temp
 
 # ダメージ実行 (攻撃者指定はしていないが、キル判定は下で実施)
-execute at @s run damage @a[distance=..3.0,limit=1,sort=nearest] 6 minecraft:magic
+execute at @s run damage @a[distance=..3.0,limit=1,sort=nearest] 4 minecraft:magic
 
 # 2. ヒットエフェクト
 particle minecraft:flame ~ ~1 ~ 0.3 0.3 0.3 0.1 20

@@ -19,6 +19,8 @@ particle minecraft:dust{color:[1.0,0.4,0.2],scale:1.5} ~ ~1.5 ~ 0.4 0.4 0.4 0 20
 scoreboard players set #pierce_dist temp 2000
 execute anchored eyes positioned ^ ^ ^ run function my_pvp:roles/sharpshooter/pierce_raycast
 
-# 命中時のメッセージ
-execute if score #PIERCE_HIT temp matches 1 run tellraw @s [{"text":"[強撃弾] ","color":"red","bold":true},{"text":"命中！","color":"yellow"}]
+# 命中時のメッセージ + 弾1発回復
+execute if score #PIERCE_HIT temp matches 1 run tellraw @s [{"text":"[強撃弾] ","color":"red","bold":true},{"text":"命中！ (+1 Ammo)","color":"yellow"}]
+execute if score #PIERCE_HIT temp matches 1 run scoreboard players add @s sharp_ammo 1
+execute if score @s sharp_ammo matches 11.. run scoreboard players set @s sharp_ammo 10
 execute if score #PIERCE_HIT temp matches 0 run tellraw @s [{"text":"[強撃弾] ","color":"red","bold":true},{"text":"発射 (命中なし)","color":"gray"}]

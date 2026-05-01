@@ -3,7 +3,7 @@ title @s actionbar [{"text":"Wolf: ","color":"gray"},{"score":{"name":"@s","obje
 
 # --- CT終了時のアイテム自動返却 (バーサーカーパターン) ---
 # 狼の召喚 (slot 1)
-execute as @s[scores={cd_beast_wolf=1}] run item replace entity @s container.1 with minecraft:bone[minecraft:custom_data={beast_wolf:1b},minecraft:custom_name='{"text":"狼の呼び声","color":"gray","bold":true,"italic":false}',minecraft:lore=['{"text":"[Q]キー(捨てる): 狼を召喚 (最大5匹)","color":"yellow"}','{"text":"接触で damage 2/sec, 永続","color":"gray"}','{"text":"CT: 12s","color":"aqua"}']] 1
+execute as @s[scores={cd_beast_wolf=1}] run item replace entity @s container.1 with minecraft:bone[minecraft:custom_data={beast_wolf:1b},minecraft:custom_name='{"text":"狼の呼び声","color":"gray","bold":true,"italic":false}',minecraft:lore=['{"text":"[Q]キー(捨てる): 狼を召喚 (最大5匹)","color":"yellow"}','{"text":"接触damage 2/sec, HP25 (5発で死亡)","color":"gray"}','{"text":"CT: 12s","color":"aqua"}']] 1
 execute as @s[scores={cd_beast_wolf=1}] run playsound minecraft:entity.wolf.ambient master @s ~ ~ ~ 0.6 1.5
 
 # 獣の咆哮 (slot 2)
@@ -15,7 +15,7 @@ execute as @s[scores={cd_beast_unleash=1}] run item replace entity @s container.
 execute as @s[scores={cd_beast_unleash=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 0.8
 
 # Rush Mode Safety
-execute as @s[tag=rush_mode,scores={cd_beast_wolf=0}] unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{beast_wolf:1b}}}]}] run item replace entity @s container.1 with minecraft:bone[minecraft:custom_data={beast_wolf:1b},minecraft:custom_name='{"text":"狼の呼び声","color":"gray","bold":true,"italic":false}',minecraft:lore=['{"text":"[Q]キー(捨てる): 狼を召喚 (最大5匹)","color":"yellow"}','{"text":"接触で damage 2/sec, 永続","color":"gray"}','{"text":"CT: 12s","color":"aqua"}']] 1
+execute as @s[tag=rush_mode,scores={cd_beast_wolf=0}] unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{beast_wolf:1b}}}]}] run item replace entity @s container.1 with minecraft:bone[minecraft:custom_data={beast_wolf:1b},minecraft:custom_name='{"text":"狼の呼び声","color":"gray","bold":true,"italic":false}',minecraft:lore=['{"text":"[Q]キー(捨てる): 狼を召喚 (最大5匹)","color":"yellow"}','{"text":"接触damage 2/sec, HP25 (5発で死亡)","color":"gray"}','{"text":"CT: 12s","color":"aqua"}']] 1
 execute as @s[tag=rush_mode,scores={cd_beast_roar=0}] unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{beast_roar:1b}}}]}] run item replace entity @s container.2 with minecraft:ghast_tear[minecraft:custom_data={beast_roar:1b},minecraft:custom_name='{"text":"獣の咆哮","color":"yellow","bold":true,"italic":false}',minecraft:lore=['{"text":"[Q]キー(捨てる): 自分+召喚獣に強化 5秒","color":"yellow"}','{"text":"strength I + speed I","color":"gray"}','{"text":"CT: 18s","color":"aqua"}']] 1
 execute as @s[tag=rush_mode,scores={cd_beast_unleash=0}] unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{beast_unleash:1b}}}]}] run item replace entity @s container.3 with minecraft:redstone[minecraft:custom_data={beast_unleash:1b},minecraft:custom_name='{"text":"解き放つ","color":"red","bold":true,"italic":false}',minecraft:lore=['{"text":"[Q]キー(捨てる): 全召喚獣を即時自爆","color":"yellow"}','{"text":"各位置で半径3 damage 5 + KB","color":"gray"}','{"text":"CT: 20s","color":"aqua"}']] 1
 

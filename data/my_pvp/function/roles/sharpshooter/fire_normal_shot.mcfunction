@@ -17,5 +17,7 @@ particle minecraft:smoke ~ ~1.5 ~ 0.1 0.1 0.1 0.02 4 force
 scoreboard players set #shot_dist temp 2000
 execute anchored eyes positioned ^ ^ ^ run function my_pvp:roles/sharpshooter/normal_raycast
 
-# 命中時のメッセージ
-execute if score #SHOT_HIT temp matches 1 run tellraw @s [{"text":"[通常弾] ","color":"aqua"},{"text":"命中","color":"yellow"}]
+# 命中時のメッセージ + 弾1発回復
+execute if score #SHOT_HIT temp matches 1 run tellraw @s [{"text":"[通常弾] ","color":"aqua"},{"text":"命中 (+1 Ammo)","color":"yellow"}]
+execute if score #SHOT_HIT temp matches 1 run scoreboard players add @s sharp_ammo 1
+execute if score @s sharp_ammo matches 11.. run scoreboard players set @s sharp_ammo 10
