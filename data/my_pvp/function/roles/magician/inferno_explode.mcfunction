@@ -8,15 +8,15 @@ playsound minecraft:entity.lightning_bolt.impact master @a[distance=..40] ~ ~ ~ 
 particle minecraft:explosion_emitter ~ ~ ~ 0 0 0 1 1 force
 particle minecraft:flash ~ ~ ~ 0 0 0 0 2 force
 
-# === 演出: 半径5m の炎リング ===
-particle minecraft:lava ^ ~0.5 ^5 0.3 0.5 0.3 0 8 force
-particle minecraft:lava ^ ~0.5 ^-5 0.3 0.5 0.3 0 8 force
-particle minecraft:lava ^5 ~0.5 ^ 0.3 0.5 0.3 0 8 force
-particle minecraft:lava ^-5 ~0.5 ^ 0.3 0.5 0.3 0 8 force
-particle minecraft:lava ^3.5 ~0.5 ^3.5 0.3 0.5 0.3 0 8 force
-particle minecraft:lava ^-3.5 ~0.5 ^3.5 0.3 0.5 0.3 0 8 force
-particle minecraft:lava ^3.5 ~0.5 ^-3.5 0.3 0.5 0.3 0 8 force
-particle minecraft:lava ^-3.5 ~0.5 ^-3.5 0.3 0.5 0.3 0 8 force
+# === 演出: 半径5m の炎リング (omnidirectional, ワールド軸基準) ===
+particle minecraft:lava ~ ~0.5 ~5 0.3 0.5 0.3 0 8 force
+particle minecraft:lava ~ ~0.5 ~-5 0.3 0.5 0.3 0 8 force
+particle minecraft:lava ~5 ~0.5 ~ 0.3 0.5 0.3 0 8 force
+particle minecraft:lava ~-5 ~0.5 ~ 0.3 0.5 0.3 0 8 force
+particle minecraft:lava ~3.5 ~0.5 ~3.5 0.3 0.5 0.3 0 8 force
+particle minecraft:lava ~-3.5 ~0.5 ~3.5 0.3 0.5 0.3 0 8 force
+particle minecraft:lava ~3.5 ~0.5 ~-3.5 0.3 0.5 0.3 0 8 force
+particle minecraft:lava ~-3.5 ~0.5 ~-3.5 0.3 0.5 0.3 0 8 force
 
 # === 演出: 火柱 (中心から空に20m) ===
 particle minecraft:flame ~ ~5 ~ 1 4 1 0.1 80 force

@@ -56,6 +56,12 @@ execute if score @s role_id matches 14 run tag @s add beastmaster
 # (オプション) もしリスポーン時に特定のアイテムを再配布したい場合はここに記述
 # リスポーン時のアイテム・コスト補充 (魔術師, 機械工, ギャンブラー)
 execute if entity @s[tag=magician] run function my_pvp:system/give_magician_items
+
+# 提督 リスポーン時に被ダメ delta スナップショットを更新 (リスポーン直後の偽トリガー防止)
+execute if entity @s[tag=admiral] run scoreboard players operation @s last_admiral_damage_taken = @s damage_taken
+execute if entity @s[tag=admiral] run scoreboard players set @s penalty_timer 0
+execute if entity @s[tag=admiral] run scoreboard players set @s penalty_dmg 0
+execute if entity @s[tag=admiral] run tag @s remove adm_penalty_target
 execute if entity @s[tag=magician] run scoreboard players set @s cd_mag_shockwave 0
 execute if entity @s[tag=magician] run scoreboard players set @s cd_mag_inferno 0
 execute if entity @s[tag=mechanic] run function my_pvp:system/give_mechanic_items

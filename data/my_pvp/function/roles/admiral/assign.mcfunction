@@ -19,6 +19,8 @@ scoreboard players set @s adm_formation 0
 scoreboard players set @s ammo 0
 scoreboard players set @s penalty_timer 0
 scoreboard players set @s penalty_dmg 0
+# 警戒陣 被ダメ delta 検知用 (現在の累積 damage_taken にスナップして edge-trigger を防ぐ)
+scoreboard players operation @s last_admiral_damage_taken = @s damage_taken
 scoreboard players set @s cd_super_jump 0
 scoreboard players set @s sneak_time 0
 scoreboard players set @s cd_adm_jump 0

@@ -24,19 +24,19 @@ playsound minecraft:entity.player.attack.sweep master @a[distance=..15] ~ ~ ~ 1 
 particle minecraft:explosion ~ ~1 ~ 0 0 0 0 1 force
 particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
 particle minecraft:sonic_boom ~ ~1 ~ 0 0 0 0 1 force
-# リング (4m 円周, 8方向)
-particle minecraft:dust{color:[0.7,0.9,1.0],scale:1.5} ^ ~1 ^4 0 0 0 0 1 force
-particle minecraft:dust{color:[0.7,0.9,1.0],scale:1.5} ^ ~1 ^-4 0 0 0 0 1 force
-particle minecraft:dust{color:[0.7,0.9,1.0],scale:1.5} ^4 ~1 ^ 0 0 0 0 1 force
-particle minecraft:dust{color:[0.7,0.9,1.0],scale:1.5} ^-4 ~1 ^ 0 0 0 0 1 force
-particle minecraft:dust{color:[0.7,0.9,1.0],scale:1.5} ^2.8 ~1 ^2.8 0 0 0 0 1 force
-particle minecraft:dust{color:[0.7,0.9,1.0],scale:1.5} ^-2.8 ~1 ^2.8 0 0 0 0 1 force
-particle minecraft:dust{color:[0.7,0.9,1.0],scale:1.5} ^2.8 ~1 ^-2.8 0 0 0 0 1 force
-particle minecraft:dust{color:[0.7,0.9,1.0],scale:1.5} ^-2.8 ~1 ^-2.8 0 0 0 0 1 force
-particle minecraft:sweep_attack ^ ~1 ^2 0 0 0 0 1 force
-particle minecraft:sweep_attack ^ ~1 ^-2 0 0 0 0 1 force
-particle minecraft:sweep_attack ^2 ~1 ^ 0 0 0 0 1 force
-particle minecraft:sweep_attack ^-2 ~1 ^ 0 0 0 0 1 force
+# リング (4m 円周, 8方向, ワールド軸基準=tilde, omnidirectional)
+particle minecraft:dust{color:[0.7,0.9,1.0],scale:1.5} ~ ~1 ~4 0 0 0 0 1 force
+particle minecraft:dust{color:[0.7,0.9,1.0],scale:1.5} ~ ~1 ~-4 0 0 0 0 1 force
+particle minecraft:dust{color:[0.7,0.9,1.0],scale:1.5} ~4 ~1 ~ 0 0 0 0 1 force
+particle minecraft:dust{color:[0.7,0.9,1.0],scale:1.5} ~-4 ~1 ~ 0 0 0 0 1 force
+particle minecraft:dust{color:[0.7,0.9,1.0],scale:1.5} ~2.8 ~1 ~2.8 0 0 0 0 1 force
+particle minecraft:dust{color:[0.7,0.9,1.0],scale:1.5} ~-2.8 ~1 ~2.8 0 0 0 0 1 force
+particle minecraft:dust{color:[0.7,0.9,1.0],scale:1.5} ~2.8 ~1 ~-2.8 0 0 0 0 1 force
+particle minecraft:dust{color:[0.7,0.9,1.0],scale:1.5} ~-2.8 ~1 ~-2.8 0 0 0 0 1 force
+particle minecraft:sweep_attack ~ ~1 ~2 0 0 0 0 1 force
+particle minecraft:sweep_attack ~ ~1 ~-2 0 0 0 0 1 force
+particle minecraft:sweep_attack ~2 ~1 ~ 0 0 0 0 1 force
+particle minecraft:sweep_attack ~-2 ~1 ~ 0 0 0 0 1 force
 
 # === 攻撃判定 ===
 # 半径4m の他プレイヤーに damage + slowness II

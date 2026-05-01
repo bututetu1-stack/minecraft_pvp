@@ -115,6 +115,8 @@ scoreboard objectives add damage_taken minecraft.custom:minecraft.damage_taken
 # 警戒陣ペナルティ用
 scoreboard objectives add penalty_timer dummy
 scoreboard objectives add penalty_dmg dummy
+# 警戒陣 被ダメ delta 検知用 (累積 damage_taken から差分を検出)
+scoreboard objectives add last_admiral_damage_taken dummy "前回提督被ダメ"
 
 # --- 時空跳躍者 (Chronomancer) 用 ---
 # 【追加】 個別CT用スコア

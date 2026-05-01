@@ -72,8 +72,12 @@ scoreboard players reset * ammo
 scoreboard players reset * timer
 # --- 提督 & 汎用システムのスコアリセット ---
 scoreboard players reset @a damage_taken
+scoreboard players reset @a last_admiral_damage_taken
+scoreboard players reset @a penalty_timer
+scoreboard players reset @a penalty_dmg
 scoreboard players reset @a adm_formation
 scoreboard players reset @a cd_formation
+tag @a remove adm_penalty_target
 
 # 時空跳躍者用リセット
 scoreboard players set @a cd_chrono_reverse 0
