@@ -13,8 +13,8 @@ playsound minecraft:entity.zombie_villager.cure master @a[distance=..15] ~ ~ ~ 0
 particle minecraft:flash ~ ~1.5 ~ 0 0 0 0 1 force
 particle minecraft:smoke ~ ~1.5 ~ 0.1 0.1 0.1 0.02 4 force
 
-# レイキャスト発射 (距離20m = 0.5m * 40 steps)
-scoreboard players set #shot_dist temp 40
+# レイキャスト発射 (距離無制限 = 1000m / ブロック衝突 or 命中まで貫通)
+scoreboard players set #shot_dist temp 2000
 execute anchored eyes positioned ^ ^ ^ run function my_pvp:roles/sharpshooter/normal_raycast
 
 # 命中時のメッセージ

@@ -15,8 +15,8 @@ particle minecraft:flash ~ ~1.5 ~ 0 0 0 0 2 force
 particle minecraft:large_smoke ~ ~1.5 ~ 0.3 0.3 0.3 0.02 8 force
 particle minecraft:dust{color:[1.0,0.4,0.2],scale:1.5} ~ ~1.5 ~ 0.4 0.4 0.4 0 20 force
 
-# レイキャスト発射 (距離35m = 0.5m * 70 steps)
-scoreboard players set #pierce_dist temp 70
+# レイキャスト発射 (距離無制限 = 1000m / ブロック衝突 or 命中まで貫通)
+scoreboard players set #pierce_dist temp 2000
 execute anchored eyes positioned ^ ^ ^ run function my_pvp:roles/sharpshooter/pierce_raycast
 
 # 命中時のメッセージ

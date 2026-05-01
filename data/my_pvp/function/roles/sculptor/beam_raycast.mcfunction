@@ -14,9 +14,9 @@ particle minecraft:dust{color:[0.55,0.4,0.7],scale:0.8} ~ ~ ~ 0.05 0.05 0.05 0 1
 tag @a remove beam_hit
 execute as @a[distance=..1.5,gamemode=!spectator] unless score @s player_id = #TEMP player_id run tag @s add beam_hit
 
-# 命中時: ダメージ 6 + 鈍足IV 4秒 + glowing 4秒
+# 命中時: ダメージ 6 + 鈍足VII (実質停止) 4秒 + glowing 4秒
 execute as @a[tag=beam_hit] run damage @s 6 minecraft:magic by @p[tag=sculptor,distance=..30,limit=1]
-execute as @a[tag=beam_hit] run effect give @s minecraft:slowness 4 3 true
+execute as @a[tag=beam_hit] run effect give @s minecraft:slowness 4 6 true
 execute as @a[tag=beam_hit] run effect give @s minecraft:glowing 4 0 true
 # 命中エフェクト
 execute if entity @a[tag=beam_hit] run scoreboard players set #BEAM_HIT temp 1

@@ -14,8 +14,8 @@ particle minecraft:flash ~ ~1.5 ~ 0 0 0 0 1 force
 particle minecraft:smoke ~ ~1.5 ~ 0.1 0.1 0.1 0.02 4 force
 particle minecraft:dust{color:[1.0,1.0,0.3],scale:1.0} ~ ~1.5 ~ 0.2 0.2 0.2 0 10 force
 
-# レイキャスト発射 (距離25m = 0.5m * 50 steps)
-scoreboard players set #mark_dist temp 50
+# レイキャスト発射 (距離無制限 = 1000m / ブロック衝突 or 命中まで貫通)
+scoreboard players set #mark_dist temp 2000
 execute anchored eyes positioned ^ ^ ^ run function my_pvp:roles/sharpshooter/mark_raycast
 
 # 命中時のメッセージ

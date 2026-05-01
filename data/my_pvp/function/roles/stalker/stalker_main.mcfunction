@@ -5,9 +5,9 @@ execute as @a[gamemode=!spectator] if score @s player_id = #TEMP player_id run t
 
 execute if entity @a[tag=my_target] run function my_pvp:roles/stalker/update_compass
 
-# --- 0. 攻撃力無効化 (Weakness 255) ---
-# マクロ攻撃システムのため、物理攻撃力を0にする
-effect give @s minecraft:weakness 2 255 true
+# --- 0. 物理攻撃 ---
+# 暗殺者の短剣 (4ダメ) で攻撃判定 → check_attack 内で
+# ターゲットなら +6 (合計10)、非ターゲットならそのまま 4
 
 # --- 追加機能: ターゲット追跡 ---
 # 1. ターゲットに足跡を残させる
