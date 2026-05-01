@@ -59,7 +59,9 @@ scoreboard objectives add click_ber_jump minecraft.used:minecraft.feather "ジ�
 # 魔術師用クールダウン
 scoreboard objectives add mana dummy "マナ"
 scoreboard objectives add cd_mag_broom dummy "魔術箻CT"
-scoreboard objectives add cd_mag_book dummy "魔術本CT"
+scoreboard objectives add cd_mag_book dummy
+scoreboard objectives add cd_mag_shockwave dummy
+scoreboard objectives add cd_mag_inferno dummy "魔術本CT"
 scoreboard objectives add mag_fly_tick dummy "飛行タイマー"
 
 # 魔術師用スキル検知

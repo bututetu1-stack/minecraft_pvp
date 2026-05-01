@@ -85,6 +85,7 @@ execute as @e[tag=turret_shot] at @s run function my_pvp:roles/mechanic/turret_s
 # --- 6. 魔術師の炎玉処理 ---
 # armor_stand 弾を毎tick処理
 execute as @e[type=armor_stand,tag=mag_fireball] at @s run function my_pvp:roles/magician/fireball_tick
+execute as @e[type=armor_stand,tag=mag_inferno] at @s run function my_pvp:roles/magician/inferno_tick
 
 # --- 7. 提督の攻撃処理 (Global) ---
 execute as @e[tag=artillery_marker] at @s run function my_pvp:roles/admiral/tick_artillery

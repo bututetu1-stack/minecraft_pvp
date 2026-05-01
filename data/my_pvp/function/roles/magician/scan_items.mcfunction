@@ -11,3 +11,9 @@ execute as @e[type=item,tag=id_set] if items entity @s contents *[minecraft:cust
 
 # 魔術本 (ドロップ -> 炎玉発射)
 execute as @e[type=item,tag=id_set] if items entity @s contents *[minecraft:custom_data~{magician_book:1b}] at @s run function my_pvp:roles/magician/process_book_drop
+
+# 衝撃符 (ドロップ -> 衝撃波)
+execute as @e[type=item,tag=id_set] if items entity @s contents *[minecraft:custom_data~{magician_shockwave:1b}] at @s run function my_pvp:roles/magician/process_shockwave_drop
+
+# 業火符 (ドロップ -> 業火爆裂)
+execute as @e[type=item,tag=id_set] if items entity @s contents *[minecraft:custom_data~{magician_inferno:1b}] at @s run function my_pvp:roles/magician/process_inferno_drop

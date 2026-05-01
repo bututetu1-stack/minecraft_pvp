@@ -56,6 +56,8 @@ execute if score @s role_id matches 14 run tag @s add beastmaster
 # (オプション) もしリスポーン時に特定のアイテムを再配布したい場合はここに記述
 # リスポーン時のアイテム・コスト補充 (魔術師, 機械工, ギャンブラー)
 execute if entity @s[tag=magician] run function my_pvp:system/give_magician_items
+execute if entity @s[tag=magician] run scoreboard players set @s cd_mag_shockwave 0
+execute if entity @s[tag=magician] run scoreboard players set @s cd_mag_inferno 0
 execute if entity @s[tag=mechanic] run function my_pvp:system/give_mechanic_items
 execute if entity @s[tag=gambler] run function my_pvp:system/give_gambler_items
 execute if entity @s[tag=samurai] run function my_pvp:system/give_samurai_items

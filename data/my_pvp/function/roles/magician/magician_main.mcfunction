@@ -43,6 +43,20 @@ execute as @s[scores={cd_mag_book=1}] run item replace entity @s container.1 wit
 execute as @s[scores={cd_mag_book=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 2
 scoreboard players remove @s[scores={cd_mag_book=1..}] cd_mag_book 1
 
+# 衝撃符 (Slot 2)
+execute as @s[scores={cd_mag_shockwave=1}] run item replace entity @s container.2 with minecraft:white_dye[minecraft:custom_data={magician_shockwave:1b},minecraft:custom_name='{"text":"衝撃符","italic":false,"color":"aqua","bold":true}',minecraft:lore=['{"text":"[Q]キー: 自分中心 半径4m に衝撃波","color":"yellow"}','{"text":"Cost: 15 MANA","color":"gray"}','{"text":"damage 8 + 強ノックバック + 鈍足II 2秒","color":"red"}','{"text":"CT: 5s","color":"aqua"}']] 1
+execute as @s[scores={cd_mag_shockwave=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 1.6
+scoreboard players remove @s[scores={cd_mag_shockwave=1..}] cd_mag_shockwave 1
+
+# 業火符 (Slot 3)
+execute as @s[scores={cd_mag_inferno=1}] run item replace entity @s container.3 with minecraft:fire_charge[minecraft:custom_data={magician_inferno:1b},minecraft:custom_name='{"text":"業火符","italic":false,"color":"red","bold":true}',minecraft:lore=['{"text":"[Q]キー: 視線方向に魔法弾、着弾点半径5m爆発","color":"yellow"}','{"text":"Cost: 25 MANA","color":"gray"}','{"text":"damage 12 + 3秒燃焼","color":"red"}','{"text":"CT: 10s","color":"aqua"}']] 1
+execute as @s[scores={cd_mag_inferno=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 1.2
+scoreboard players remove @s[scores={cd_mag_inferno=1..}] cd_mag_inferno 1
+
+# Rush Mode Safety (CT0+不所持時の補充)
+execute as @s[tag=rush_mode,scores={cd_mag_shockwave=0}] unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{magician_shockwave:1b}}}]}] run item replace entity @s container.2 with minecraft:white_dye[minecraft:custom_data={magician_shockwave:1b},minecraft:custom_name='{"text":"衝撃符","italic":false,"color":"aqua","bold":true}',minecraft:lore=['{"text":"[Q]キー: 自分中心 半径4m に衝撃波","color":"yellow"}','{"text":"Cost: 15 MANA","color":"gray"}','{"text":"damage 8 + 強ノックバック + 鈍足II 2秒","color":"red"}','{"text":"CT: 5s","color":"aqua"}']] 1
+execute as @s[tag=rush_mode,scores={cd_mag_inferno=0}] unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{magician_inferno:1b}}}]}] run item replace entity @s container.3 with minecraft:fire_charge[minecraft:custom_data={magician_inferno:1b},minecraft:custom_name='{"text":"業火符","italic":false,"color":"red","bold":true}',minecraft:lore=['{"text":"[Q]キー: 視線方向に魔法弾、着弾点半径5m爆発","color":"yellow"}','{"text":"Cost: 25 MANA","color":"gray"}','{"text":"damage 12 + 3秒燃焼","color":"red"}','{"text":"CT: 10s","color":"aqua"}']] 1
+
 # --- 【新能力】 マナの恵み: マナ満タン時パッシブ強化 ---
 execute if score @s mana matches 100.. run effect give @s minecraft:speed 1 0 true
 execute if score @s mana matches 100.. run effect give @s minecraft:regeneration 1 0 true

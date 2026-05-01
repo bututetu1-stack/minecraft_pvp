@@ -48,6 +48,8 @@ scoreboard players reset * cd_sculptor_beam
 scoreboard players reset * mana
 scoreboard players reset * cd_mag_broom
 scoreboard players reset * cd_mag_book
+scoreboard players reset * cd_mag_shockwave
+scoreboard players reset * cd_mag_inferno
 scoreboard players reset * mag_fly_tick
 
 # 【追加】ストーカー用CT・変数リセット
@@ -175,6 +177,7 @@ kill @e[tag=shadow_hitbox]
 
 # 魔術師の炎玉を消去
 kill @e[type=armor_stand,tag=mag_fireball]
+kill @e[type=armor_stand,tag=mag_inferno]
 
 # ダメージ判定用プロキシを消去
 kill @e[tag=dmg_proxy]

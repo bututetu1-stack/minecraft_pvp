@@ -16,6 +16,8 @@ scoreboard players set @a cd_ber_raid 0
 scoreboard players set @a cd_ber_jump 0
 scoreboard players set @a cd_mag_broom 0
 scoreboard players set @a cd_mag_book 0
+scoreboard players set @a cd_mag_shockwave 0
+scoreboard players set @a cd_mag_inferno 0
 scoreboard players set @a cd_adm_artillery 0
 scoreboard players set @a cd_adm_torpedo 0
 scoreboard players set @a cd_adm_air 0
