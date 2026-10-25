@@ -7,7 +7,8 @@ scoreboard players operation #TEMP_OWNER temp = @s player_id
 # Hitboxの位置同期 (ズレ防止)
 # 自分のスロットIDを持つHitboxを自分にTPさせる
 scoreboard players operation #TEMP_SLOT temp = @s sculpture_slot
-execute as @e[tag=sculpture_hitbox,limit=1,distance=..5] if score @s player_id = #TEMP_OWNER temp if score @s sculpture_slot = #TEMP_SLOT temp run tp @s ~ ~ ~
+# ※ limit=1 を付けると ID 照合より先に「任意の1体」に絞られ、近くに彫刻が複数あると同期されなかった
+execute as @e[tag=sculpture_hitbox,distance=..8] if score @s player_id = #TEMP_OWNER temp if score @s sculpture_slot = #TEMP_SLOT temp run tp @s ~ ~ ~
 
 # --- パーティクル演出 (20tickごと) ---
 execute if score #GLOBAL match_timer matches 1.. store result score #TICK_CHECK temp run scoreboard players get #GLOBAL match_timer

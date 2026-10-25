@@ -44,7 +44,14 @@ tp @s @e[tag=pos_shadow,limit=1]
 execute as @e[tag=target_shadow,limit=1] run tp @s @e[tag=pos_player,limit=1]
 
 # 身代わり(判定) -> 身代わり(見た目)へ集合
-execute as @e[tag=target_shadow,limit=1] at @s run tp @e[tag=shadow_hitbox,distance=..50,limit=1] @s
+# 同じスロット・同じ持ち主の当たり判定だけを動かす (以前は50m以内の任意の1体を動かしており、
+# 身代わりが2体以上あると別の当たり判定が動いて、入れ替えた身代わりの判定が元の位置に残っていた)
+scoreboard players operation #SWAP_ID temp = @s player_id
+execute if entity @e[tag=target_shadow,tag=shadow_slot_1] as @e[tag=shadow_hitbox,tag=shadow_slot_1] if score @s player_id = #SWAP_ID temp run tag @s add target_shadow_hitbox
+execute if entity @e[tag=target_shadow,tag=shadow_slot_2] as @e[tag=shadow_hitbox,tag=shadow_slot_2] if score @s player_id = #SWAP_ID temp run tag @s add target_shadow_hitbox
+execute if entity @e[tag=target_shadow,tag=shadow_slot_3] as @e[tag=shadow_hitbox,tag=shadow_slot_3] if score @s player_id = #SWAP_ID temp run tag @s add target_shadow_hitbox
+execute as @e[tag=target_shadow_hitbox] run tp @s @e[tag=target_shadow,limit=1]
+tag @e remove target_shadow_hitbox
 
 # D. 後始末
 kill @e[tag=pos_temp]

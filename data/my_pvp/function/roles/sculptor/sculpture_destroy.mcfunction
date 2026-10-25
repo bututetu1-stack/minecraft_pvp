@@ -32,9 +32,10 @@ execute if score @s sculpture_hp matches 1.. run return 0
 
 # --- 以下、HPが0になった場合の破壊処理 ---
 
-# 5. 近くの彫刻本体を探して削除
-# 同じplayer_idを持ち、最も近い彫刻を対象
-execute at @s as @e[tag=sculpture,distance=..1,limit=1,sort=nearest] run function my_pvp:roles/sculptor/sculpture_destroy_effect
+# 5. 対応する彫刻本体を探して削除
+# 同じ player_id と sculpture_slot を持つ彫刻を対象 (以前は ID を見ずに「1m以内で最も近い1体」だった)
+scoreboard players operation #TEMP_SLOT temp = @s sculpture_slot
+execute as @e[tag=sculpture] if score @s player_id = #TEMP_OWNER temp if score @s sculpture_slot = #TEMP_SLOT temp at @s run function my_pvp:roles/sculptor/sculpture_destroy_effect
 
 # 6. 所有者のカウント減少
 execute as @a if score @s player_id = #TEMP_OWNER temp run scoreboard players remove @s sculpture_count 1
