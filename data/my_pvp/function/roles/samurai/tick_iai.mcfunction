@@ -6,9 +6,16 @@ scoreboard players remove @s sam_iai_active 1
 # 自分のIDをTEMPに保存
 scoreboard players operation #TEMP player_id = @s player_id
 
-# 前方へ加速移動 (視線方向に瞬時に1.5マス進む)
-execute at @s positioned ^ ^ ^1.5 unless block ~ ~ ~ #my_pvp:transparent run return 0
-execute at @s run tp @s ^ ^ ^1.2
+# 前方へ加速移動 (水平方向に毎tick 1.2マス進む)
+# ※ rotated ~ 0: 上下の視線で判定すると、少し下を向いただけで地面を壁と判定して止まっていた
+# 前方 1.5マス (足元・頭の高さ) に壁があれば突進終了 (草・花・水などは通過できる)
+tag @s remove sam_iai_blocked
+execute at @s rotated ~ 0 positioned ^ ^ ^1.5 unless block ~ ~ ~ #my_pvp:dash_passable run tag @s add sam_iai_blocked
+execute at @s rotated ~ 0 positioned ^ ^1 ^1.5 unless block ~ ~ ~ #my_pvp:dash_passable run tag @s add sam_iai_blocked
+# 壁に当たった場合も、下の終了処理まで進める (以前は return して突進状態が残っていた)
+execute if entity @s[tag=sam_iai_blocked] run scoreboard players set @s sam_iai_active 0
+execute unless entity @s[tag=sam_iai_blocked] at @s rotated ~ 0 run tp @s ^ ^ ^1.2
+tag @s remove sam_iai_blocked
 
 # 範囲内の敵をスラッシュ (半径2.5)
 tag @a remove sam_iai_hit

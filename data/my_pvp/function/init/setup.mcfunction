@@ -215,6 +215,8 @@ scoreboard objectives add sam_zanshin_active dummy "残心構え時間"
 scoreboard objectives add sam_iai_active dummy "居合突進時間"
 # 残心の構え検知 (samurai_blocking 進捗が構え中の毎tick 1 にする)
 scoreboard objectives add sam_blocking dummy "残心構え検知"
+# 残心: 盾で防いだダメージ (正面ガードでの反撃判定)
+scoreboard objectives add sam_shield_block minecraft.custom:minecraft.damage_blocked_by_shield "盾で防いだダメージ"
 
 # --- タイマー用ボスバーの作成 ---
 bossbar add my_pvp:timer {"text":"残り時間","color":"yellow","bold":true}
