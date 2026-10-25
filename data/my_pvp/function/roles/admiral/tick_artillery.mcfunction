@@ -3,7 +3,7 @@
 # 地面へのめり込みを防ぐため、'positioned ~ ~1.0 ~' を挟んで
 # 描画起点を1.3ブロック上にずらしています。
 
-# === A. 戦艦大和 (半径15m) ===
+# === A. 戦艦大和 (半径15m, 赤・地獄テーマ) ===
 # 層: 15m, 11m, 7m, 3m
 execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle dust{color:[1.0,0.0,0.0],scale:2.0} ^ ^ ^15 0 0 0 0 1 force
 execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle dust{color:[1.0,0.0,0.0],scale:2.0} ^ ^ ^11 0 0 0 0 1 force
@@ -15,25 +15,35 @@ execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle dust{colo
 execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle dust{color:[1.0,0.0,0.0],scale:2.0} ^ ^ ^-7 0 0 0 0 1 force
 execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle dust{color:[1.0,0.0,0.0],scale:2.0} ^ ^ ^-3 0 0 0 0 1 force
 
-# 斜め方向補完
 execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle dust{color:[1.0,0.0,0.0],scale:2.0} ^15 ^ ^ 0 0 0 0 1 force
 execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle dust{color:[1.0,0.0,0.0],scale:2.0} ^11 ^ ^ 0 0 0 0 1 force
 execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle dust{color:[1.0,0.0,0.0],scale:2.0} ^-15 ^ ^ 0 0 0 0 1 force
 execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle dust{color:[1.0,0.0,0.0],scale:2.0} ^-11 ^ ^ 0 0 0 0 1 force
 
-# 炎(Flame)
+# 炎(Flame) リング
 execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle minecraft:flame ^ ^ ^15 0 0 0 0 1 force
 execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle minecraft:flame ^-15 ^ ^ 0 0 0 0 1 force
 execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle minecraft:flame ^ ^ ^-15 0 0 0 0 1 force
 execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle minecraft:flame ^15 ^ ^ 0 0 0 0 1 force
 
+# 【追加】 標的レーザー柱 (空から地表まで赤い光柱、毎tick)
+execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle minecraft:dust{color:[1.0,0.0,0.0],scale:1.5} ~ ~3 ~ 0 1 0 0 5 force
+execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle minecraft:dust{color:[1.0,0.3,0.0],scale:1.0} ~ ~6 ~ 0.1 2 0.1 0 6 force
+execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle minecraft:flame ~ ~ ~ 0 0.6 0 0.05 3 force
+# 中心の脈動フラッシュ (パルス)
+execute if entity @s[tag=type_yamato,scores={temp=10..10}] positioned ~ ~1.0 ~ run particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
+execute if entity @s[tag=type_yamato,scores={temp=20..20}] positioned ~ ~1.0 ~ run particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
+execute if entity @s[tag=type_yamato,scores={temp=30..30}] positioned ~ ~1.0 ~ run particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
+execute if entity @s[tag=type_yamato,scores={temp=40..40}] positioned ~ ~1.0 ~ run particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
+# 落下する火の粉 (空から舞い降りる)
+execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle minecraft:falling_lava ~ ~10 ~ 6 1 6 0 4 force
+execute if entity @s[tag=type_yamato] positioned ~ ~1.0 ~ run particle minecraft:lava ~ ~ ~ 0.5 0.2 0.5 0 1 force
 
-# === B. 戦艦金剛 (半径8m) ===
+
+# === B. 戦艦金剛 (半径8m, 金・雷撃テーマ) ===
 # 層: 8m, 5m, 2m
 execute if entity @s[tag=type_kongo] positioned ~ ~1.0 ~ run particle dust{color:[1.0,0.8,0.0],scale:2.0} ^ ^ ^8 0 0 0 0 1 force
 execute if entity @s[tag=type_kongo] positioned ~ ~1.0 ~ run particle dust{color:[1.0,0.8,0.0],scale:2.0} ^ ^ ^5 0 0 0 0 1 force
-# 警告エフェクト: 落下点にパーティクル
-# オレンジのダスト
 execute at @s run particle dust{color:[1.0,0.6,0.0],scale:1.5} ~ ~1.0 ~ 0.5 0.5 0.5 1 5 normal
 execute if entity @s[tag=type_kongo] positioned ~ ~1.0 ~ run particle dust{color:[1.0,0.8,0.0],scale:2.0} ^ ^ ^2 0 0 0 0 1 force
 
@@ -52,8 +62,20 @@ execute if entity @s[tag=type_kongo] positioned ~ ~1.0 ~ run particle minecraft:
 execute if entity @s[tag=type_kongo] positioned ~ ~1.0 ~ run particle minecraft:electric_spark ^ ^ ^-8 0 0 0 0 1 force
 execute if entity @s[tag=type_kongo] positioned ~ ~1.0 ~ run particle minecraft:electric_spark ^-8 ^ ^ 0 0 0 0 1 force
 
+# 【追加】 標的レーザー柱 (黄色, end_rod混合)
+execute if entity @s[tag=type_kongo] positioned ~ ~1.0 ~ run particle minecraft:dust{color:[1.0,0.9,0.2],scale:1.5} ~ ~3 ~ 0 1 0 0 5 force
+execute if entity @s[tag=type_kongo] positioned ~ ~1.0 ~ run particle minecraft:end_rod ~ ~6 ~ 0.1 2 0.1 0 4 force
+execute if entity @s[tag=type_kongo] positioned ~ ~1.0 ~ run particle minecraft:firework ~ ~ ~ 0.3 0.5 0.3 0.05 3 force
+# パルスフラッシュ
+execute if entity @s[tag=type_kongo,scores={temp=10..10}] positioned ~ ~1.0 ~ run particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
+execute if entity @s[tag=type_kongo,scores={temp=20..20}] positioned ~ ~1.0 ~ run particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
+execute if entity @s[tag=type_kongo,scores={temp=30..30}] positioned ~ ~1.0 ~ run particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
+execute if entity @s[tag=type_kongo,scores={temp=40..40}] positioned ~ ~1.0 ~ run particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
+# 落下する電撃
+execute if entity @s[tag=type_kongo] positioned ~ ~1.0 ~ run particle minecraft:electric_spark ~ ~10 ~ 4 1 4 0 5 force
 
-# === C. 戦艦長門 (半径10m) ===
+
+# === C. 戦艦長門 (半径10m, 紫・闇テーマ) ===
 # 層: 10m, 7m, 4m, 1m
 execute if entity @s[tag=type_nagato] positioned ~ ~1.0 ~ run particle dust{color:[0.5,0.0,1.0],scale:2.0} ^ ^ ^10 0 0 0 0 1 force
 execute if entity @s[tag=type_nagato] positioned ~ ~1.0 ~ run particle dust{color:[0.5,0.0,1.0],scale:2.0} ^ ^ ^7 0 0 0 0 1 force
@@ -73,6 +95,18 @@ execute if entity @s[tag=type_nagato] positioned ~ ~1.0 ~ run particle minecraft
 execute if entity @s[tag=type_nagato] positioned ~ ~1.0 ~ run particle minecraft:large_smoke ^10 ^ ^ 0 0 0 0 1 force
 execute if entity @s[tag=type_nagato] positioned ~ ~1.0 ~ run particle minecraft:large_smoke ^ ^ ^-10 0 0 0 0 1 force
 execute if entity @s[tag=type_nagato] positioned ~ ~1.0 ~ run particle minecraft:large_smoke ^-10 ^ ^ 0 0 0 0 1 force
+
+# 【追加】 標的レーザー柱 (紫, soul_fire_flame混合)
+execute if entity @s[tag=type_nagato] positioned ~ ~1.0 ~ run particle minecraft:dust{color:[0.6,0.0,1.0],scale:1.5} ~ ~3 ~ 0 1 0 0 5 force
+execute if entity @s[tag=type_nagato] positioned ~ ~1.0 ~ run particle minecraft:soul_fire_flame ~ ~6 ~ 0.1 2 0.1 0.05 4 force
+execute if entity @s[tag=type_nagato] positioned ~ ~1.0 ~ run particle minecraft:portal ~ ~ ~ 0.5 0.3 0.5 0.5 5 force
+# パルスフラッシュ
+execute if entity @s[tag=type_nagato,scores={temp=10..10}] positioned ~ ~1.0 ~ run particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
+execute if entity @s[tag=type_nagato,scores={temp=20..20}] positioned ~ ~1.0 ~ run particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
+execute if entity @s[tag=type_nagato,scores={temp=30..30}] positioned ~ ~1.0 ~ run particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
+execute if entity @s[tag=type_nagato,scores={temp=40..40}] positioned ~ ~1.0 ~ run particle minecraft:flash ~ ~1 ~ 0 0 0 0 1 force
+# 落下する闇の煙
+execute if entity @s[tag=type_nagato] positioned ~ ~1.0 ~ run particle minecraft:large_smoke ~ ~10 ~ 5 1 5 0 4 force
 
 # --- 2. 凍結チェック (Frozen Check) ---
 # 凍結中は処理を停止 (パーティクル描画後に停止)

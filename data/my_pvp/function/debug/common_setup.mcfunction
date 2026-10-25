@@ -17,6 +17,9 @@ tag @s remove samurai
 tag @s remove sam_zanshin_guard
 tag @s remove sam_iai_dashing
 tag @s remove sam_iai_hit_this_dash
+tag @s remove sharpshooter
+tag @s remove sharp_focused
+tag @s remove beastmaster
 
 # IDがない場合は付与する（安全装置）
 execute unless score @s player_id matches 1.. run function my_pvp:system/assign_new_id

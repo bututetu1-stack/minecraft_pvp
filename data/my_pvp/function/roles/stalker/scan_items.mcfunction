@@ -16,5 +16,5 @@ tag @e[tag=target_item] remove target_item
 
 
 # 2. アイテム処理
-execute as @e[type=item,nbt={Item:{components:{"minecraft:custom_data":{is_stalker_weapon:1b}}}}] at @s run function my_pvp:roles/stalker/process_weapon
-execute as @e[type=item,nbt={Item:{components:{"minecraft:custom_data":{is_tracking_compass:1b}}}}] at @s run function my_pvp:roles/stalker/process_compass
+execute as @e[type=item,tag=id_set] if items entity @s contents *[minecraft:custom_data~{is_stalker_weapon:1b}] at @s run function my_pvp:roles/stalker/process_weapon
+execute as @e[type=item,tag=id_set] if items entity @s contents *[minecraft:custom_data~{is_tracking_compass:1b}] at @s run function my_pvp:roles/stalker/process_compass

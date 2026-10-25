@@ -20,33 +20,33 @@ execute as @e[tag=new_aa] if score @s temp matches ..-1 run scoreboard players a
 
 # --- 5. パラメータ & セリフ設定 ---
 
-# === A. 秋月 (temp=0) ===
-# 効果: 10秒 (200tick) - 耐性IV & 火炎耐性
+# === A. 秋月 (temp=0) - 防御型 防空陣 ===
+# 効果: 10秒 (200tick) - 飛び道具撃墜 + 自己耐性 + 空中の敵に slow_falling 剥がし & 軽ダメージ
 execute as @e[tag=new_aa] if score @s temp matches 0 run tag @s add type_akizuki
 execute as @e[tag=new_aa] if score @s temp matches 0 run scoreboard players set @s timer 200
 execute as @e[tag=new_aa] if score @s temp matches 0 at @s run tellraw @p[tag=admiral,limit=1,distance=..5] [{"text":"[秋月] ","color":"green","bold":true},{"text":"この秋月が健在な限り、やらせはしません！","color":"white","bold":false}]
-# 【追加】効果説明
-execute as @e[tag=new_aa] if score @s temp matches 0 at @s run tellraw @p[tag=admiral,limit=1,distance=..5] [{"text":"[効果] ","color":"gray"},{"text":"自身に耐性IV & 火炎耐性 (10秒)","color":"green"}]
+# 【更新】効果説明
+execute as @e[tag=new_aa] if score @s temp matches 0 at @s run tellraw @p[tag=admiral,limit=1,distance=..5] [{"text":"[効果] ","color":"gray"},{"text":"防空陣: 飛び道具撃墜 + 空中の敵に弾幕 (10秒)","color":"green"}]
 execute as @e[tag=new_aa] if score @s temp matches 0 at @s run playsound minecraft:entity.iron_golem.repair master @a ~ ~ ~ 1 1.5
 
-# === B. 摩耶 (temp=1) ===
-# 効果: 5秒 (100tick) - 周囲にウィザーII & 鈍足
+# === B. 摩耶 (temp=1) - 攻撃型 高角砲 ===
+# 効果: 5秒 (100tick) - 空中の敵に高威力ダメージ
 execute as @e[tag=new_aa] if score @s temp matches 1 run tag @s add type_maya
 # Duration更新
 execute as @e[tag=new_aa] if score @s temp matches 1 run data merge entity @s {Duration:100}
 execute as @e[tag=new_aa] if score @s temp matches 1 run scoreboard players set @s timer 100
 execute as @e[tag=new_aa] if score @s temp matches 1 at @s run tellraw @p[tag=admiral,limit=1,distance=..5] [{"text":"[摩耶] ","color":"red","bold":true},{"text":"摩耶様の攻撃、喰らえ～っ！","color":"white","bold":false}]
-# 【追加】効果説明
-execute as @e[tag=new_aa] if score @s temp matches 1 at @s run tellraw @p[tag=admiral,limit=1,distance=..5] [{"text":"[効果] ","color":"gray"},{"text":"周囲の敵にウィザーII & 鈍足 (5秒)","color":"red"}]
+# 【更新】効果説明
+execute as @e[tag=new_aa] if score @s temp matches 1 at @s run tellraw @p[tag=admiral,limit=1,distance=..5] [{"text":"[効果] ","color":"gray"},{"text":"高角砲: 空中の敵に高威力ダメージ (5秒)","color":"red"}]
 execute as @e[tag=new_aa] if score @s temp matches 1 at @s run playsound minecraft:entity.generic.explode master @a ~ ~ ~ 1 0.8
 
-# === C. Johnston (temp=2) ===
-# 効果: 10秒 (200tick) - 速度II & 飛び道具無効化
+# === C. Johnston (temp=2) - 撃墜型 急降下迎撃 ===
+# 効果: 8秒 (160tick) - 自己機動強化 + 空中の敵を撃墜・弱体化 + 近接飛び道具撃墜
 execute as @e[tag=new_aa] if score @s temp matches 2 run tag @s add type_johnston
-execute as @e[tag=new_aa] if score @s temp matches 2 run scoreboard players set @s timer 200
+execute as @e[tag=new_aa] if score @s temp matches 2 run scoreboard players set @s timer 160
 execute as @e[tag=new_aa] if score @s temp matches 2 at @s run tellraw @p[tag=admiral,limit=1,distance=..5] [{"text":"[Johnston] ","color":"blue","bold":true},{"text":"突撃よ！　Open fire！","color":"white","bold":false}]
-# 【追加】効果説明
-execute as @e[tag=new_aa] if score @s temp matches 2 at @s run tellraw @p[tag=admiral,limit=1,distance=..5] [{"text":"[効果] ","color":"gray"},{"text":"自身に速度II & 飛び道具無効 (10秒)","color":"aqua"}]
+# 【更新】効果説明
+execute as @e[tag=new_aa] if score @s temp matches 2 at @s run tellraw @p[tag=admiral,limit=1,distance=..5] [{"text":"[効果] ","color":"gray"},{"text":"急降下迎撃: 自己機動強化 + 空中の敵を撃墜・発光 (8秒)","color":"aqua"}]
 execute as @e[tag=new_aa] if score @s temp matches 2 at @s run playsound minecraft:entity.firework_rocket.blast master @a ~ ~ ~ 1 1.2
 
 # 後処理

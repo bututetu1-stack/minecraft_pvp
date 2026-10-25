@@ -39,5 +39,11 @@ execute if entity @e[tag=selected_card,tag=card_gambler] run function my_pvp:rol
 # 【追加】 侍のカードだった場合
 execute if entity @e[tag=selected_card,tag=card_samurai] run function my_pvp:roles/samurai/assign
 
+# 【追加】 狙撃手のカードだった場合
+execute if entity @e[tag=selected_card,tag=card_sharpshooter] run function my_pvp:roles/sharpshooter/assign
+
+# 【追加】 獣使いのカードだった場合
+execute if entity @e[tag=selected_card,tag=card_beastmaster] run function my_pvp:roles/beastmaster/assign
+
 # 3. 使用済みカードの破棄
 kill @e[tag=selected_card]
