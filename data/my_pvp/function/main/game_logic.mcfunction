@@ -122,7 +122,6 @@ execute if score #GLOBAL match_state matches 1 run scoreboard players add #GLOBA
 execute unless score #4_CONST temp matches 4 run scoreboard players set #4_CONST temp 4
 execute unless score #CONST_40 temp matches 40 run scoreboard players set #CONST_40 temp 40
 execute unless score #CONST_10 temp matches 10 run scoreboard players set #CONST_10 temp 10
-execute unless score #GLOBAL heal_timer matches 0.. run scoreboard players set #GLOBAL heal_timer 0
 
 # --- 【追加】ボスバー更新処理 ---
 # 1. 残り時間を計算用スコア(#CALC temp)に代入 (6000 - 現在経過時間)

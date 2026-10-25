@@ -15,6 +15,8 @@ scoreboard objectives add role_id dummy "RoleID"
 scoreboard objectives add temp dummy
 scoreboard objectives add scrap dummy "スクラップ"
 scoreboard objectives add regen_timer dummy "回復タイマー"
+# スポーン位置の再抽選回数 (system/random_spawn, check_spawn)
+scoreboard objectives add retry_count dummy "スポーン再抽選回数"
 
 scoreboard objectives add timer dummy
 scoreboard objectives add coins_timer dummy

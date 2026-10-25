@@ -10,5 +10,5 @@ attribute @s minecraft:knockback_resistance base set 0
 attribute @s minecraft:movement_speed base set 0.11
 
 # --- 全回復 ---
-effect give @s minecraft:instant_health 1 255 true
+effect give @s minecraft:instant_health 1 10 true
 effect give @s minecraft:saturation 1 255 true

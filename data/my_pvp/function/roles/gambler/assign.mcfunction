@@ -12,6 +12,6 @@ scoreboard players enable @s bj_action
 scoreboard players set @s bj_state 0
 attribute @s minecraft:max_health base set 40.0
 effect clear @s
-effect give @s minecraft:instant_health 1 255 true
+effect give @s minecraft:instant_health 1 10 true
 
 execute at @s run playsound minecraft:entity.player.levelup master @s ~ ~ ~ 1 1

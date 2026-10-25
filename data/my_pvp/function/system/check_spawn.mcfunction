@@ -12,7 +12,8 @@ execute if block ~ ~2 ~ #minecraft:air if block ~ ~3 ~ #minecraft:air if block ~
 # 2. 無効な場合 (invalid_spawnあり) はリトライ
 execute if entity @s[tag=invalid_spawn] run scoreboard players add @s retry_count 1
 execute if entity @s[tag=invalid_spawn] if score @s retry_count matches ..10 run tellraw @s [{"text":"[System] ","color":"gray"},{"text":"構造物内を検知しました。リスポーン位置を再抽選します...","color":"yellow"}]
-execute if entity @s[tag=invalid_spawn] if score @s retry_count matches ..10 run spreadplayers ~ ~ 30 150 under 45 false @s
+# random_spawn と同じく game_center を中心に半径50で再抽選 (ワールドボーダーは半径60)
+execute if entity @s[tag=invalid_spawn] if score @s retry_count matches ..10 at @e[tag=game_center,limit=1] run spreadplayers ~ ~ 10 50 under 45 false @s
 execute if entity @s[tag=invalid_spawn] if score @s retry_count matches ..10 at @s run function my_pvp:system/check_spawn
 
 # 3. 諦め (10回失敗) または 成功
