@@ -1,9 +1,10 @@
 # --- アクションバー ---
 title @s actionbar [{"text":"Ammo: ","color":"gold"},{"score":{"name":"@s","objective":"sharp_ammo"},"color":"yellow"},{"text":"/10","color":"gray"}]
 
-# --- 集中状態の検知 (slot0のスコープを右クリ保持中 = is_using_item) ---
+# --- 集中状態の検知 (slot0のスコープを右クリ保持中) ---
+# sharp_using は sharpshooter_focus 進捗 (using_item) が覗いている間の毎tick 1 にする
 tag @s remove sharp_focused
-execute if entity @s[nbt={SelectedItem:{components:{"minecraft:custom_data":{sharpshooter_focus:1b}}}},predicate=my_pvp:is_using_item] run tag @s add sharp_focused
+execute if score @s sharp_using matches 1.. run tag @s add sharp_focused
 
 # 集中中の効果
 # 狙い安定: slowness II
@@ -35,3 +36,6 @@ execute if score @s sneak_time matches 1.. run function my_pvp:roles/sharpshoote
 
 # --- アイテムスキャン ---
 function my_pvp:roles/sharpshooter/scan_items
+
+# 集中検知フラグのリセット (覗き続けていれば次のtickまでに進捗が再び 1 にする)
+scoreboard players set @s sharp_using 0

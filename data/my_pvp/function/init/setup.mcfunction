@@ -133,6 +133,10 @@ scoreboard objectives add clockup_active dummy "クロックアップ残像タ�
 # --- 狙撃手 (Sharpshooter) 用 ---
 scoreboard objectives add sharp_ammo dummy "狙撃手 残弾"
 scoreboard objectives add sharp_ammo_timer dummy "狙撃手 残弾回復タイマー"
+# 狙撃手: 集中スコープを覗いているか (sharpshooter_focus 進捗が毎tick 1 にする)
+scoreboard objectives add sharp_using dummy "狙撃手 集中検知"
+# 魔術師: 業火符の燃焼の残りtick
+scoreboard objectives add inferno_burn dummy "業火燃焼"
 
 # --- 獣使い (Beastmaster) 用 ---
 scoreboard objectives add cd_beast_wolf dummy "狼召喚CT"

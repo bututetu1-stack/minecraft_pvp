@@ -53,6 +53,7 @@ scoreboard players reset * cd_mag_broom
 scoreboard players reset * cd_mag_book
 scoreboard players reset * cd_mag_shockwave
 scoreboard players reset * cd_mag_inferno
+scoreboard players reset * inferno_burn
 scoreboard players reset * mag_fly_tick
 
 # 【追加】ストーカー用CT・変数リセット

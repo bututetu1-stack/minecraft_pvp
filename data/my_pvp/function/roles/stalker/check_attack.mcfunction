@@ -6,10 +6,13 @@ execute at @s as @a[distance=0.1..4,sort=nearest,limit=1,gamemode=!spectator] ru
 scoreboard players operation #TEMP player_id = @s target_id
 execute as @a[tag=attacked_victim] if score @s player_id = #TEMP player_id run tag @s add is_my_target
 
-# 3. ターゲットへの追加ダメージ (遅延予約)
+# 3. ターゲットへの追加ダメージ
 # 武器(4) + 追加(6) = 10 (ハート5個)
-execute as @a[tag=is_my_target] run scoreboard players set @s penalty_dmg 6
-execute as @a[tag=is_my_target] run scoreboard players set @s penalty_timer 12
+# ※ 以前は penalty_dmg/penalty_timer を設定するだけで、提督の遅延ダメージ処理 (adm_penalty_target のみ対象) が
+#    動かず +6 が入っていなかった。攻撃直後で相手は無敵時間中なので、無敵時間・防具を無視する my_pvp:penalty で即座に与える
+tag @s add stalker_attacker_now
+execute as @a[tag=is_my_target] run damage @s 6 my_pvp:penalty by @a[tag=stalker_attacker_now,limit=1]
+tag @s remove stalker_attacker_now
 
 # --- 演出 (強化) ---
 # 命中: 自分側

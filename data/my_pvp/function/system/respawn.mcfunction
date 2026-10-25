@@ -19,6 +19,8 @@ execute if entity @s[tag=all_in_suicide] run tag @s add penalty_death
 tag @s remove all_in_suicide
 
 tag @s remove ignore_status_check
+# 業火符の燃焼を消す
+scoreboard players set @s inferno_burn 0
 # バーサーカー: 空中で死んだ時のリープ/急降下状態 (残すとリスポーン後の着地でスラムが暴発する)
 tag @s remove ber_ready
 tag @s remove ber_falling

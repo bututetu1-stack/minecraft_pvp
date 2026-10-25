@@ -31,7 +31,8 @@ summon area_effect_cloud ~ ~ ~ {Tags:["inferno_proxy"],Duration:5,CustomName:'{"
 
 # 半径5m の他プレイヤーに damage 12 + 3秒燃焼
 execute as @a[distance=..5,gamemode=!spectator] unless score @s player_id = #INF_OWNER temp run damage @s 12 minecraft:player_explosion by @e[tag=inferno_proxy,limit=1,sort=nearest] from @e[tag=inferno_proxy,limit=1,sort=nearest]
-execute as @a[distance=..5,gamemode=!spectator] unless score @s player_id = #INF_OWNER temp run data merge entity @s {fire_ticks: 60s}
+# ※ プレイヤーの NBT (Fire) は data merge できないため、燃焼は inferno_burn_tick で再現する (3秒 = 60tick)
+execute as @a[distance=..5,gamemode=!spectator] unless score @s player_id = #INF_OWNER temp run scoreboard players set @s inferno_burn 60
 
 # AEC 後始末
 kill @e[tag=inferno_proxy,distance=..2]
