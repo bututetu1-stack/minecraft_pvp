@@ -84,7 +84,8 @@ execute as @e[type=armor_stand,tag=mag_fireball] at @s run function my_pvp:roles
 
 # --- 7. 提督の攻撃処理 (Global) ---
 execute as @e[tag=artillery_marker] at @s run function my_pvp:roles/admiral/tick_artillery
-execute as @e[tag=adm_torpedo] at @s run function my_pvp:roles/admiral/tick_torpedo
+# rotated ~ 0: 魚雷は水平に進む。発射時のピッチが実行コンテキストに残ると、移動と壁判定が地面に向いて即爆発する
+execute as @e[tag=adm_torpedo] at @s rotated ~ 0 run function my_pvp:roles/admiral/tick_torpedo
 execute as @e[tag=airstrike_center] at @s run function my_pvp:roles/admiral/process_airstrike
 execute as @e[tag=adm_bomb] at @s run function my_pvp:roles/admiral/tick_bomb
 # 提督ペナルティ(遅延処理)

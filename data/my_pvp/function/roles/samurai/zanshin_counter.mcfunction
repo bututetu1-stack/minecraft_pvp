@@ -2,9 +2,11 @@
 # 自分のIDをTEMPに保存
 scoreboard players operation #TEMP player_id = @s player_id
 
-# 攻撃者を特定 (このtickで与ダメージが増えたプレイヤー)
+# 攻撃者を特定 (直前に攻撃してきたプレイヤー / 10m以内)
+# ※ 以前の damage_dealt と last_damage_dealt の比較は、last_damage_dealt を更新する役職が限られるため
+#    10m以内の全員が攻撃者扱いになっていた
 tag @a remove current_attacker
-execute as @a[distance=..10,gamemode=!spectator] unless score @s player_id = #TEMP player_id unless score @s damage_dealt = @s last_damage_dealt run tag @s add current_attacker
+execute on attacker if entity @s[type=player,distance=..10,gamemode=!spectator] unless score @s player_id = #TEMP player_id run tag @s add current_attacker
 
 # 反撃ダメージ (10ダメージ)
 execute if entity @p[tag=current_attacker] run damage @p[tag=current_attacker,limit=1] 10 minecraft:magic by @s

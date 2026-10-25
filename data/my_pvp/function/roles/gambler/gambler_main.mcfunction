@@ -56,8 +56,7 @@ execute if score @s damage_dealt > @s last_damage_dealt run tellraw @s {"text":"
 # ステータス同期
 scoreboard players operation @s last_damage_dealt = @s damage_dealt
 
-# ルーレットのエフェクト進行
-execute as @e[tag=roulette_marker] at @s run function my_pvp:roles/gambler/skills/roulette_tick
+# ルーレットのエフェクト進行は game_logic で行う (ここでも呼ぶと2倍速になる)
 
 # 運命のコイン (Fate Coin) 進行
 execute if score @s fate_streak matches 1.. run function my_pvp:roles/gambler/skills/fate_coin/tick

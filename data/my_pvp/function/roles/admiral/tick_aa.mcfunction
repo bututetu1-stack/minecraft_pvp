@@ -30,6 +30,11 @@ execute if entity @s[tag=is_frozen] run return 0
 
 # --- 4. 効果 (Effects & Logic) ---
 
+# === A. 秋月 Effects ===
+# 効果: 耐性IV & 火炎耐性 (自身)
+execute if entity @s[tag=type_akizuki] run effect give @p[tag=current_aa_owner] minecraft:resistance 1 3 true
+execute if entity @s[tag=type_akizuki] run effect give @p[tag=current_aa_owner] minecraft:fire_resistance 1 0 true
+
 # === B. 摩耶 Effects ===
 # 効果: ウィザーII + 鈍足
 execute if entity @s[tag=type_maya] at @s as @a[distance=..4,tag=!current_aa_owner,gamemode=!spectator] run effect give @s minecraft:wither 2 1 true

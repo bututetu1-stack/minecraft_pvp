@@ -64,10 +64,16 @@ execute if entity @s[tag=samurai] run tag @s remove sam_zanshin_guard
 execute if entity @s[tag=samurai] run tag @s remove sam_iai_dashing
 execute if entity @s[tag=samurai] run tag @s remove sam_iai_hit_this_dash
 
-# ギャンブラーのコイン管理 (借金死 or オールイン死なら0, それ以外なら50)
+# ギャンブラーのコイン管理
+# - All-In 自滅 (penalty_death): 0
+# - 運命のコインで破産 (bankrupt_death): 10
+# - それ以外: 50
+# ※ コインはここでだけ決める (以前は apply_status でも 50 に上書きしており、ペナルティが効いていなかった)
+execute if entity @s[tag=gambler] run scoreboard players set @s coins 50
+execute if entity @s[tag=gambler,tag=bankrupt_death] run scoreboard players set @s coins 10
+execute if entity @s[tag=gambler,tag=bankrupt_death,tag=!penalty_death] run tellraw @s {"text":"[Fate] 破産ペナルティ... (所持金 10)","color":"red"}
 execute if entity @s[tag=gambler,tag=penalty_death] run scoreboard players set @s coins 0
-execute if entity @s[tag=gambler] if score @s coins matches ..-1 run scoreboard players set @s coins 0
-execute if entity @s[tag=gambler,tag=!penalty_death] if score @s coins matches 0.. run scoreboard players set @s coins 50
 
 # ペナルティタグ解除
 tag @s remove penalty_death
+tag @s remove bankrupt_death

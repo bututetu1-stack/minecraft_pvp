@@ -4,8 +4,14 @@ scoreboard players operation #CALC temp = @s penalty_dmg
 
 # Debug
 
+# 攻撃者 (trigger_penalty_v2 で記録した ID) を特定
+tag @a remove adm_penalty_attacker
+scoreboard players operation #ADM_ATTACKER temp = @s penalty_attacker
+execute if score #ADM_ATTACKER temp matches 1.. as @a if score @s player_id = #ADM_ATTACKER temp run tag @s add adm_penalty_attacker
+
 # Call Brute Force Function
 function my_pvp:roles/admiral/apply_penalty_brute
+tag @a remove adm_penalty_attacker
 
 # Reset Score
 scoreboard players set @s penalty_dmg 0

@@ -16,7 +16,8 @@ execute unless block ~ ~ ~ air unless block ~ ~ ~ light unless block ~ ~ ~ water
 
 # --- 4. ヒット判定 ---
 tag @a remove shot_hit
-execute as @a[gamemode=!spectator] at @s positioned ~ ~1 ~ if entity @e[tag=turret_shot,tag=!is_frozen,distance=..1.5,limit=1] run tag @s add shot_hit
+# この弾 (@s) の周囲だけを見る (以前は「どれか1発でも近くにある」で判定しており、全弾が命中扱いになっていた)
+execute at @s positioned ~ ~-1 ~ as @a[gamemode=!spectator,distance=..1.5] run tag @s add shot_hit
 
 # 所有者への誤射防止
 scoreboard players operation #TEMP player_id = @s player_id
