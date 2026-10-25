@@ -14,11 +14,16 @@ scoreboard players operation #TEMP player_id = @s player_id
 tag @s add current_attacker
 
 tag @a remove slam_target
-execute as @a[distance=..4,gamemode=!spectator] unless score @s player_id = #TEMP player_id run tag @s add slam_target
+# 通常: 半径4 / 急降下 (ber_slamming): 半径5
+execute unless entity @s[tag=ber_slamming] as @a[distance=..4,gamemode=!spectator] unless score @s player_id = #TEMP player_id run tag @s add slam_target
+execute if entity @s[tag=ber_slamming] as @a[distance=..5,gamemode=!spectator] unless score @s player_id = #TEMP player_id run tag @s add slam_target
 
 # 3. ダメージ付与 (修正版)
 # 【修正】by @p[tag=current_attacker] を使用
-execute as @a[tag=slam_target] run damage @s 8 minecraft:player_attack by @p[tag=current_attacker,limit=1]
+# 通常: 8 / 急降下: 12
+execute unless entity @s[tag=ber_slamming] as @a[tag=slam_target] run damage @s 8 minecraft:player_attack by @p[tag=current_attacker,limit=1]
+execute if entity @s[tag=ber_slamming] as @a[tag=slam_target] run damage @s 12 minecraft:player_attack by @p[tag=current_attacker,limit=1]
+execute if entity @s[tag=ber_slamming] at @s run particle minecraft:explosion ~ ~0.5 ~ 2 0.2 2 0 10
 
 
 # 5. 後始末

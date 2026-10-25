@@ -13,7 +13,7 @@ item replace entity @s hotbar.2 with minecraft:gold_nugget[minecraft:custom_name
 item replace entity @s hotbar.3 with minecraft:ghast_tear[minecraft:custom_name='{"text":"運命のルーレット","color":"light_purple","italic":false}',minecraft:lore=['{"text":"[Q]キーでドロップして開始 (25 Coins)","color":"gray"}']]
 
 # Slot 4: 運命のコイン (銅インゴット)
-item replace entity @s hotbar.4 with minecraft:copper_ingot[minecraft:custom_name='{"text":"運命のコイン","color":"aqua","italic":false}',minecraft:lore=['{"text":"[Q]キーでドロップして開始 (5 Coins)","color":"gray"}']]
+item replace entity @s hotbar.4 with minecraft:copper_ingot[minecraft:custom_name='{"text":"運命のコイン","color":"aqua","italic":false}',minecraft:lore=['{"text":"[Q]キーでドロップして開始 (5 Coins)","color":"gray"}','{"text":"利確すると次の攻撃ダメージ2倍","color":"aqua"}']]
 
 # Slot 5: 宣戦布告 (赤色の染料)
 # [重要] 攻撃して発動

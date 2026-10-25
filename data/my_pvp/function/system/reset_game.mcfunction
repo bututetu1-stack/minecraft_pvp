@@ -25,6 +25,9 @@ scoreboard players reset * shield_dash_timer
 # 【追加】バーサーカー用CTリセット
 scoreboard players reset * cd_ber_raid
 scoreboard players reset * cd_ber_jump
+tag @a remove ber_ready
+tag @a remove ber_falling
+tag @a remove ber_slamming
 scoreboard players reset * last_kills
 
 # 【追加】共通スキル(大ジャンプ)CTリセット

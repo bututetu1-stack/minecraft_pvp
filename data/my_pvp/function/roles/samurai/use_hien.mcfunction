@@ -1,4 +1,4 @@
-# 飛燕発動 (上昇しながら斬る)
+# 飛燕発動 (跳び上がると同時に周囲を斬る)
 # CTチェック
 execute if score @s cd_sam_hien matches 1.. run return 0
 

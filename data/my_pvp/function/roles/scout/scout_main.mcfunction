@@ -2,12 +2,8 @@
 # ワイヤー移動中は警告を表示
 execute if entity @s[tag=is_grappling] run title @s actionbar [{"text":">> GRAPPLING <<","color":"aqua","bold":true}]
 
-# 通常時はクールダウンを表示
-execute unless entity @s[tag=is_grappling] run title @s actionbar [{"text":"Wire: ","color":"aqua"},{"score":{"name":"@s","objective":"cd_wire"},"color":"white"}]
-
-# 2. クールダウン消化
-scoreboard players remove @s[scores={cd_wire=1..}] cd_wire 1
-execute if score @s cd_wire matches 1 run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 2
+# 通常時 (ワイヤーにCTは無い)
+execute unless entity @s[tag=is_grappling] run title @s actionbar [{"text":"Wire: ","color":"aqua"},{"text":"READY","color":"white"}]
 
 # --- 3. 矢の発射検知 ---
 scoreboard players operation #TEMP player_id = @s player_id

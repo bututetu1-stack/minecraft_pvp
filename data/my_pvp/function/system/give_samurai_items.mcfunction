@@ -9,5 +9,5 @@ item replace entity @s container.1 with minecraft:shield[minecraft:custom_data={
 # 3. 居合 (Iai) - 前方ダッシュ斬撃 [Q]
 item replace entity @s container.2 with minecraft:red_dye[minecraft:custom_data={samurai_iai:1b},minecraft:custom_name='{"text":"居合","color":"red","bold":true}',minecraft:lore=['{"text":"[Q]キー(捨てる): 居合斬り","color":"yellow"}','{"text":"前方へ突進し貫通ダメージ","color":"red"}','{"text":"CT: 10s","color":"aqua"}']] 1
 
-# 4. 飛燕 (Hien) - 三段ジャンプ斬撃 [Q]
-item replace entity @s container.3 with minecraft:feather[minecraft:custom_data={samurai_hien:1b},minecraft:custom_name='{"text":"飛燕","color":"light_purple","bold":true}',minecraft:lore=['{"text":"[Q]キー(捨てる): 三段ジャンプ斬撃","color":"yellow"}','{"text":"上昇しながら周囲を斬る","color":"red"}','{"text":"CT: 12s","color":"aqua"}']] 1
+# 4. 飛燕 (Hien) - 跳躍斬り [Q]
+item replace entity @s container.3 with minecraft:feather[minecraft:custom_data={samurai_hien:1b},minecraft:custom_name='{"text":"飛燕","color":"light_purple","bold":true}',minecraft:lore=['{"text":"[Q]キー(捨てる): 跳躍斬り","color":"yellow"}','{"text":"跳び上がると同時に周囲を斬る","color":"red"}','{"text":"CT: 12s","color":"aqua"}']] 1

@@ -23,7 +23,7 @@ execute as @p[tag=is_ready] run tag @s remove ber_falling
 # CT設定 (8秒 = 160tick)
 # CT設定 (8秒 = 160tick)
 scoreboard players set @p[tag=berserker,distance=..300,limit=1,sort=nearest] cd_ber_jump 160
-execute if entity @p[tag=berserker,distance=..300,tag=rush_mode] run item replace entity @p[tag=berserker,distance=..300,limit=1,sort=nearest] container.1 with minecraft:feather[custom_data={berserker_jump:1b},custom_name='{"text":"リープ・フェザー","color":"green","bold":true}',lore=['{"text":"[Q]キー(捨てる): 大ジャンプ","color":"yellow"}','{"text":"(Cost: 4HP)","color":"gray"}','{"text":"着地時に衝撃波","color":"red"}','{"text":"CT: 8s","color":"aqua"}']] 1
+execute if entity @p[tag=berserker,distance=..300,tag=rush_mode] run item replace entity @p[tag=berserker,distance=..300,limit=1,sort=nearest] container.1 with minecraft:feather[custom_data={berserker_jump:1b},custom_name='{"text":"リープ・フェザー","color":"green","bold":true}',lore=['{"text":"[Q]キー(捨てる): 大ジャンプ","color":"yellow"}','{"text":"(Cost: 4HP)","color":"gray"}','{"text":"着地時に衝撃波","color":"red"}','{"text":"空中[Shift]: 急降下 (衝撃波強化)","color":"red"}','{"text":"CT: 8s","color":"aqua"}']] 1
 
 # 自傷ダメージは着地時に移動済み
 
@@ -48,7 +48,7 @@ execute if entity @s[tag=can_process] as @p[tag=is_ready] at @s run particle blo
 execute if entity @s[tag=can_process] as @p[tag=on_cd] at @s run function my_pvp:roles/berserker/cd_error
 
 # CT中の返却アイテム
-execute if entity @s[tag=can_process] as @p[tag=on_cd] at @s run give @s minecraft:feather[custom_data={berserker_jump:1b},custom_name='{"text":"リープ・フェザー","color":"green","bold":true}',lore=['{"text":"[Q]キー(捨てる): 大ジャンプ","color":"yellow"}','{"text":"(Cost: 4HP)","color":"gray"}','{"text":"着地時に衝撃波","color":"red"}','{"text":"CT: 8s","color":"aqua"}']] 1
+execute if entity @s[tag=can_process] as @p[tag=on_cd] at @s run give @s minecraft:feather[custom_data={berserker_jump:1b},custom_name='{"text":"リープ・フェザー","color":"green","bold":true}',lore=['{"text":"[Q]キー(捨てる): 大ジャンプ","color":"yellow"}','{"text":"(Cost: 4HP)","color":"gray"}','{"text":"着地時に衝撃波","color":"red"}','{"text":"空中[Shift]: 急降下 (衝撃波強化)","color":"red"}','{"text":"CT: 8s","color":"aqua"}']] 1
 
 # アイテム消去
 execute if entity @s[tag=can_process] run kill @s

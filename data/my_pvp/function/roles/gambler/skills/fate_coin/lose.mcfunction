@@ -15,4 +15,4 @@ scoreboard players set @s fate_timer 0
 execute if score @s coins matches ..-41 run function my_pvp:roles/gambler/skills/fate_coin/bankruptcy
 
 # アイテム更新
-item replace entity @s hotbar.4 with minecraft:copper_ingot[custom_name='{"text":"運命のコイン","color":"aqua","italic":false}',lore=['{"text":"[Q]キーでドロップして開始 (5 Coins)","color":"gray"}']]
+item replace entity @s hotbar.4 with minecraft:copper_ingot[custom_name='{"text":"運命のコイン","color":"aqua","italic":false}',lore=['{"text":"[Q]キーでドロップして開始 (5 Coins)","color":"gray"}','{"text":"利確すると次の攻撃ダメージ2倍","color":"aqua"}']]

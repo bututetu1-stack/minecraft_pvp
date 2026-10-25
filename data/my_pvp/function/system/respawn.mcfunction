@@ -19,6 +19,10 @@ execute if entity @s[tag=all_in_suicide] run tag @s add penalty_death
 tag @s remove all_in_suicide
 
 tag @s remove ignore_status_check
+# バーサーカー: 空中で死んだ時のリープ/急降下状態 (残すとリスポーン後の着地でスラムが暴発する)
+tag @s remove ber_ready
+tag @s remove ber_falling
+tag @s remove ber_slamming
 tag @s remove bj_debuff
 tag @s remove bj_debuff
 scoreboard players set @s bj_debuff_timer 0
