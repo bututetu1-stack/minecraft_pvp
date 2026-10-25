@@ -22,14 +22,12 @@ scoreboard players set @s cd_chrono_reverse 400
 
 # 4. 移動処理
 execute as @e[tag=my_past_point] run tp @a[tag=reverse_user] @s
-kill @e[tag=my_past_point]
 
 # 5. 回復 & 演出
-# マーカーからHPを取得して適応
-execute store result storage my_pvp:macro reverse.hp int 1 run scoreboard players get @s hp_snapshot
-# Debug
-# tellraw @a [{"text":"[Debug] Restore HP to: ","color":"gray"},{"score":{"name":"@s","objective":"hp_snapshot"},"color":"green"}]
-function my_pvp:roles/chrono/restore_hp with storage my_pvp:macro reverse
+# マーカーからHPを取得して適応 (マーカーを消す前に読む / 記録が無い場合は HP を変更しない)
+execute store result storage my_pvp:macro reverse.hp int 1 run scoreboard players get @e[tag=my_past_point,limit=1] hp_snapshot
+execute if score @e[tag=my_past_point,limit=1] hp_snapshot matches 1.. run function my_pvp:roles/chrono/restore_hp with storage my_pvp:macro reverse
+kill @e[tag=my_past_point]
 
 # effect give @s minecraft:instant_health 1 1 true
 playsound minecraft:item.chorus_fruit.teleport master @a ~ ~ ~ 1 0.5
