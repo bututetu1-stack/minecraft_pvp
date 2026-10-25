@@ -3,6 +3,12 @@
 execute as @a[tag=pending_heal] run effect give @s minecraft:instant_health 1 100 true
 execute as @a[tag=pending_heal] run effect give @s minecraft:saturation 1 255 true
 tag @a[tag=pending_heal] remove pending_heal
+# --- 死亡時の判定 (respawn が deaths を 0 に戻す前に行うこと) ---
+# 賞金首キル判定
+execute if score #GLOBAL event_type matches 3 as @a[tag=bounty_target,scores={deaths=1..}] at @s run function my_pvp:events/bounty/kill_check
+# 彫刻関連のキル判定 (毒死など) ※ 賞金首判定より後 (last_attacker_id をここで消費するため)
+execute as @a[gamemode=!spectator] run function my_pvp:roles/sculptor/kill_check
+
 # --- リスポーン検知 (Death Logic) ---
 execute as @a[scores={deaths=1..}] run function my_pvp:system/respawn
 
@@ -100,8 +106,7 @@ execute as @e[tag=sculpture_hitbox] at @s run function my_pvp:roles/sculptor/scu
 # 全プレイヤーが視線を飛ばして判定 (20m, 壁判定あり, 視野角あり)
 execute as @a[gamemode=!spectator] at @s run function my_pvp:roles/sculptor/checker/main
 
-# 【追加】彫刻関連のキル判定 (毒死など)
-execute as @a[gamemode=!spectator] run function my_pvp:roles/sculptor/kill_check
+# ※ 彫刻関連のキル判定は respawn より前 (このファイルの冒頭) で行う
 
 # --- 7. スコアボード表示 ---
 

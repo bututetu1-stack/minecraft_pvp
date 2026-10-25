@@ -223,6 +223,8 @@ scoreboard objectives add event_timer dummy "イベントタイマー"
 scoreboard objectives add event_duration dummy "イベント持続時間"
 scoreboard objectives add event_type dummy "イベントタイプ"
 scoreboard objectives add bounty_target dummy "賞金首ID"
+# インフレーション: 開始時点のキル数
+scoreboard objectives add infl_kills dummy "インフレ開始時キル"
 
 # ルーレット用
 scoreboard objectives add sector_offset dummy "セクターオフセット"
