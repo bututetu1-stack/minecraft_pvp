@@ -10,5 +10,6 @@ execute as @e[type=item] if items entity @s contents *[minecraft:custom_data~{ch
 execute as @e[type=item] if items entity @s contents *[minecraft:custom_data~{chrono_clockup:1b}] at @s run function my_pvp:roles/chrono/process_clockup
 
 # 4. 刻の宝剣 (Iron Sword)
-execute as @e[type=item] if items entity @s contents minecraft:iron_sword at @s if entity @p[tag=chrono,distance=..3] run item replace entity @p[tag=chrono,distance=..3] hotbar.0 with minecraft:iron_sword[minecraft:custom_name='{"text":"刻の宝剣","color":"aqua","italic":false}']
-execute as @e[type=item] if items entity @s contents minecraft:iron_sword at @s if entity @p[tag=chrono,distance=..3] run kill @s
+# ※ 鉄の剣は他役職も使うため、必ず custom_data で自分の剣だけを判定する
+execute as @e[type=item] if items entity @s contents *[minecraft:custom_data~{chrono_sword:1b}] at @s if entity @p[tag=chrono,distance=..3] run item replace entity @p[tag=chrono,distance=..3] hotbar.0 with minecraft:iron_sword[minecraft:custom_data={chrono_sword:1b},minecraft:unbreakable={},minecraft:custom_name='{"text":"刻の宝剣","color":"yellow","italic":false}']
+execute as @e[type=item] if items entity @s contents *[minecraft:custom_data~{chrono_sword:1b}] at @s if entity @p[tag=chrono,distance=..3] run kill @s

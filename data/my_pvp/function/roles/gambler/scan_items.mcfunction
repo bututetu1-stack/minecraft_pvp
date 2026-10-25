@@ -1,8 +1,9 @@
 # --- ギャンブラー アイテムドロップ検知 ---
 
 # 1. 剣 (戻す)
-execute if items entity @s contents minecraft:iron_sword as @p[tag=gambler,distance=..3] run item replace entity @s hotbar.0 with minecraft:iron_sword[minecraft:custom_name='{"text":"ギャンブラーの剣","color":"gray","italic":false}']
-execute if items entity @s contents minecraft:iron_sword run kill @s
+# ※ 鉄の剣は他役職も使うため、必ず custom_data で自分の剣だけを判定する
+execute if items entity @s contents *[minecraft:custom_data~{gambler_sword:1b}] as @p[tag=gambler,distance=..3] run item replace entity @s hotbar.0 with minecraft:iron_sword[minecraft:custom_data={gambler_sword:1b},minecraft:unbreakable={},minecraft:custom_name='{"text":"ギャンブラーの剣","color":"gray","italic":false}']
+execute if items entity @s contents *[minecraft:custom_data~{gambler_sword:1b}] run kill @s
 
 # 2. ブラックジャック (鉄インゴット)
 # Start (State 0 or unset)
@@ -49,7 +50,6 @@ execute if entity @s[tag=fate_coin_process] as @p[tag=gambler,distance=..3,limit
 execute if entity @s[tag=fate_coin_process] run kill @s
 
 # 6. 戦争 (赤色の染料) -> ★アイテム返却のみ (発動しない)
-# 6. 戦争 (赤色の染料) -> ★アイテム返却のみ (発動しない)
-# Fix: Prevent stealing Berserker's Blood Crystal (berserker_raid:1b)
-execute if items entity @s contents minecraft:red_dye unless items entity @s contents *[minecraft:custom_data~{berserker_raid:1b}] as @p[tag=gambler,distance=..3] run item replace entity @s hotbar.5 with minecraft:red_dye[minecraft:custom_name='{"text":"宣戦布告","color":"dark_red","italic":false}',minecraft:lore=['{"text":"攻撃して発動 (50 Coins)","color":"gray"}']]
-execute if items entity @s contents minecraft:red_dye unless items entity @s contents *[minecraft:custom_data~{berserker_raid:1b}] run kill @s
+# ※ 赤色の染料はバーサーカー/時空跳躍者も使うため、custom_data で自分の染料だけを判定する
+execute if items entity @s contents *[minecraft:custom_data~{gambler_war:1b}] as @p[tag=gambler,distance=..3] run item replace entity @s hotbar.5 with minecraft:red_dye[minecraft:custom_data={gambler_war:1b},minecraft:custom_name='{"text":"宣戦布告","color":"dark_red","italic":false}',minecraft:lore=['{"text":"攻撃して発動 (50 Coins)","color":"gray"}']]
+execute if items entity @s contents *[minecraft:custom_data~{gambler_war:1b}] run kill @s
