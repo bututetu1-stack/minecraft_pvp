@@ -88,6 +88,8 @@ scoreboard objectives add cd_stalker_float dummy
 scoreboard objectives add target_id dummy "ターゲットID"
 scoreboard objectives add target_check_timer dummy "ターゲット確認タイマー"
 scoreboard objectives add trail_timer dummy "痕跡タイマー"
+# 遅延攻撃 (trigger_attack -> tick_attack_delay) 用
+scoreboard objectives add sk_attack_timer dummy "追撃タイマー"
 
 # 【追加】攻撃判定用 (ダメージを与えたかを検知)
 scoreboard objectives add damage_dealt minecraft.custom:minecraft.damage_dealt "与ダメージ"

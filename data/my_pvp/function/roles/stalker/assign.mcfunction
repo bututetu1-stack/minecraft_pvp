@@ -2,6 +2,8 @@
 tag @s add stalker
 scoreboard players set @s role_id 7
 tag @s add role_assigned
+# 攻撃検知用の進捗を未達成に戻す (達成済みのままだと二度と発火しない)
+advancement revoke @s only my_pvp:roles/stalker_attack
 
 # 2. チャット通知
 tellraw @s [{"text":"[System] ","color":"gray"},{"text":"あなたは ","color":"white"},{"text":"『ストーカー』","color":"dark_red","bold":true},{"text":" です！","color":"white"}]

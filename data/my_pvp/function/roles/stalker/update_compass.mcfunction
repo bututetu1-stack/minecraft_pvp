@@ -12,24 +12,11 @@ execute store result storage my_pvp:temp target_x int 1 run data get storage my_
 execute store result storage my_pvp:temp target_y int 1 run data get storage my_pvp:temp target_pos[1]
 execute store result storage my_pvp:temp target_z int 1 run data get storage my_pvp:temp target_pos[2]
 
-# 4. 【データ更新】インベントリ内にあるコンパスのデータを書き換える
-#    (これをやっておくと、持ち替えたときにも正しい座標が維持されます)
-execute run data modify entity @s Inventory[{components:{"minecraft:custom_data":{is_tracking_compass:1b}}}].components."minecraft:lodestone_tracker".target.pos[0] set from storage my_pvp:temp target_x
-execute run data modify entity @s Inventory[{components:{"minecraft:custom_data":{is_tracking_compass:1b}}}].components."minecraft:lodestone_tracker".target.pos[1] set from storage my_pvp:temp target_y
-execute run data modify entity @s Inventory[{components:{"minecraft:custom_data":{is_tracking_compass:1b}}}].components."minecraft:lodestone_tracker".target.pos[2] set from storage my_pvp:temp target_z
+# 4. 【描画更新】手に持っているコンパスの lodestone_tracker を書き換える
+#    プレイヤーのインベントリは data modify できないため、item modify (マクロ) で更新する
+#    コンパスは手に持った時だけ意味があるので、メイン/オフハンドのみ更新すれば十分
+execute if items entity @s weapon.mainhand *[minecraft:custom_data~{is_tracking_compass:1b}] run function my_pvp:roles/stalker/set_compass_target with storage my_pvp:temp
+execute unless items entity @s weapon.mainhand *[minecraft:custom_data~{is_tracking_compass:1b}] if items entity @s weapon.offhand *[minecraft:custom_data~{is_tracking_compass:1b}] run function my_pvp:roles/stalker/set_compass_target with storage my_pvp:temp
 
-# 5. 【描画更新】手に持っている場合、直接componentsを書き換える
-#    (LodestoneTrackerコンポーネントのtargetフィールドを更新)
-
-# メインハンドで持っている場合 (custom_data判定)
-execute if data entity @s SelectedItem.components."minecraft:custom_data".is_tracking_compass run data modify entity @s SelectedItem.components."minecraft:lodestone_tracker".target.pos[0] set from storage my_pvp:temp target_x
-execute if data entity @s SelectedItem.components."minecraft:custom_data".is_tracking_compass run data modify entity @s SelectedItem.components."minecraft:lodestone_tracker".target.pos[1] set from storage my_pvp:temp target_y
-execute if data entity @s SelectedItem.components."minecraft:custom_data".is_tracking_compass run data modify entity @s SelectedItem.components."minecraft:lodestone_tracker".target.pos[2] set from storage my_pvp:temp target_z
-
-# オフハンドで持っている場合
-execute if data entity @s Inventory[{Slot:-106b}].components."minecraft:custom_data".is_tracking_compass run data modify entity @s Inventory[{Slot:-106b}].components."minecraft:lodestone_tracker".target.pos[0] set from storage my_pvp:temp target_x
-execute if data entity @s Inventory[{Slot:-106b}].components."minecraft:custom_data".is_tracking_compass run data modify entity @s Inventory[{Slot:-106b}].components."minecraft:lodestone_tracker".target.pos[1] set from storage my_pvp:temp target_y
-execute if data entity @s Inventory[{Slot:-106b}].components."minecraft:custom_data".is_tracking_compass run data modify entity @s Inventory[{Slot:-106b}].components."minecraft:lodestone_tracker".target.pos[2] set from storage my_pvp:temp target_z
-
-# 6. アクションバー表示
+# 5. アクションバー表示
 title @s actionbar [{"text":"Target: ","color":"gray"},{"selector":"@a[tag=my_target,limit=1]","color":"red"}]

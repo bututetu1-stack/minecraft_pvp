@@ -41,6 +41,10 @@ scoreboard players reset * mag_fly_tick
 scoreboard players reset * cd_stalker_float
 scoreboard players reset * target_check_timer
 scoreboard players reset * target_id
+scoreboard players reset * sk_attack_timer
+tag @a remove sk_attack_target
+tag @a remove sk_critical
+advancement revoke @a only my_pvp:roles/stalker_attack
 
 # ▼▼▼ 追加: 提督用CTリセット ▼▼▼
 scoreboard players reset * cd_adm_artillery
