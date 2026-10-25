@@ -19,8 +19,10 @@ execute if score @s cd_shield_bash matches 1 run playsound minecraft:block.note_
 execute if score @s click_tank matches 1.. run function my_pvp:roles/tank/use_crash
 scoreboard players set @s click_tank 0
 
-# シールドバッシュ (アイテムドロップ検知は scan_items で処理)
-# バッシュ進行
+# アイテムのドロップ検知 (ハンマー・アースクラッシュの保護、シールドバッシュの発動)
+function my_pvp:roles/tank/scan_items
+
+# シールドバッシュ進行
 execute if score @s shield_dash_timer matches 1.. run function my_pvp:roles/tank/shield_bash/tick
 
 # 共通スキル (大ジャンプ)
