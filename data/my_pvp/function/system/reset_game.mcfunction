@@ -66,6 +66,8 @@ scoreboard players set @a freeze_timer 0
 scoreboard players set @a timer 0
 scoreboard players set @a stasis_timer 0
 tag @a remove stasis_caster
+tag @a remove chrono_restore_max
+tag @a remove ignore_status_check
 
 # 彫刻家用リセット
 scoreboard players set @a sculpture_count 0

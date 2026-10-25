@@ -1,3 +1,8 @@
+# --- タイム・リバース後の最大HP復帰 (restore_hp の次のtick) ---
+execute if entity @s[tag=chrono_restore_max] run tag @s remove ignore_status_check
+execute if entity @s[tag=chrono_restore_max] run attribute @s minecraft:max_health base set 40
+tag @s remove chrono_restore_max
+
 # --- 座標記録 ---
 function my_pvp:roles/chrono/record_position
 
