@@ -66,6 +66,13 @@ kill @e[tag=airstrike_center]
 kill @e[tag=adm_plane]
 kill @e[type=phantom]
 
+# 獣使いの召喚獣 (wolf)
+kill @e[tag=beast_wolf]
+
+# 魔術師の業火マーカー
+kill @e[tag=mag_inferno]
+kill @e[tag=mag_fireball]
+
 # その他システム用マーカー
 kill @e[tag=role_card]
 
@@ -84,8 +91,8 @@ effect give @a minecraft:saturation 1 255 true
 execute as @a run attribute @s minecraft:attack_damage base set 1
 
 # --- 6. 全員を中心（コマンドブロックの位置）に集合させる ---
-# arena_center は game_start 時に設置されたマーカーです
-tp @a @e[tag=arena_center,limit=1]
+# game_center は game_start 時に設置されたマーカーです
+tp @a @e[tag=game_center,limit=1]
 
 # 向きを揃えたい場合（オプション: 南向きなど）
 # execute as @a at @s run tp @s ~ ~ ~ 0 0

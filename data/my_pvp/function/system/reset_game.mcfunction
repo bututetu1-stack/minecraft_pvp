@@ -25,22 +25,47 @@ scoreboard players reset * shield_dash_timer
 # 【追加】バーサーカー用CTリセット
 scoreboard players reset * cd_ber_raid
 scoreboard players reset * cd_ber_jump
+tag @a remove ber_ready
+tag @a remove ber_falling
+tag @a remove ber_slamming
 scoreboard players reset * last_kills
 
 # 【追加】共通スキル(大ジャンプ)CTリセット
 scoreboard players reset * cd_super_jump
 scoreboard players reset * sneak_time
 
+# 【追加】役職別 上昇スキル CTリセット
+scoreboard players reset * cd_adm_jump
+scoreboard players reset * cd_chrono_jump
+scoreboard players reset * cd_sculptor_pillar
+scoreboard players reset * cd_gambler_jump
+
+# 【追加】ストーカー 狩りの時間リセット
+scoreboard players reset * hunting_stacks
+scoreboard players reset * hunting_decay_timer
+
+# 【追加】彫刻家 石化光線CTリセット
+scoreboard players reset * cd_sculptor_beam
+
 # 【追加】魔術師用リセット
 scoreboard players reset * mana
 scoreboard players reset * cd_mag_broom
 scoreboard players reset * cd_mag_book
+scoreboard players reset * cd_mag_shockwave
+scoreboard players reset * cd_mag_inferno
+scoreboard players reset * inferno_burn
 scoreboard players reset * mag_fly_tick
 
 # 【追加】ストーカー用CT・変数リセット
 scoreboard players reset * cd_stalker_float
 scoreboard players reset * target_check_timer
 scoreboard players reset * target_id
+scoreboard players reset * last_compass_x
+scoreboard players reset * last_compass_z
+scoreboard players reset * compass_force_timer
+data remove storage my_pvp:stalker_macro x
+data remove storage my_pvp:stalker_macro y
+data remove storage my_pvp:stalker_macro z
 
 # ▼▼▼ 追加: 提督用CTリセット ▼▼▼
 scoreboard players reset * cd_adm_artillery
@@ -51,8 +76,12 @@ scoreboard players reset * ammo
 scoreboard players reset * timer
 # --- 提督 & 汎用システムのスコアリセット ---
 scoreboard players reset @a damage_taken
+scoreboard players reset @a last_admiral_damage_taken
+scoreboard players reset @a penalty_timer
+scoreboard players reset @a penalty_dmg
 scoreboard players reset @a adm_formation
 scoreboard players reset @a cd_formation
+tag @a remove adm_penalty_target
 
 # 時空跳躍者用リセット
 scoreboard players set @a cd_chrono_reverse 0
@@ -61,7 +90,10 @@ scoreboard players set @a cd_chrono_clockup 0
 scoreboard players set @a freeze_timer 0
 scoreboard players set @a timer 0
 scoreboard players set @a stasis_timer 0
+scoreboard players set @a clockup_active 0
 tag @a remove stasis_caster
+tag @a remove chrono_restore_max
+tag @a remove ignore_status_check
 
 # 彫刻家用リセット
 scoreboard players set @a sculpture_count 0
@@ -155,6 +187,7 @@ kill @e[tag=shadow_hitbox]
 
 # 魔術師の炎玉を消去
 kill @e[type=armor_stand,tag=mag_fireball]
+kill @e[type=armor_stand,tag=mag_inferno]
 
 # ダメージ判定用プロキシを消去
 kill @e[tag=dmg_proxy]
@@ -218,6 +251,23 @@ tag @a remove samurai
 tag @a remove sam_zanshin_guard
 tag @a remove sam_iai_dashing
 tag @a remove sam_iai_hit_this_dash
+
+# 【追加】 狙撃手用リセット
+scoreboard players reset * sharp_ammo
+scoreboard players reset * sharp_ammo_timer
+tag @a remove sharpshooter
+tag @a remove sharp_focused
+tag @a remove sharp_fired_now
+
+# 【追加】 獣使い用リセット
+scoreboard players reset * cd_beast_wolf
+scoreboard players reset * cd_beast_roar
+scoreboard players reset * cd_beast_unleash
+scoreboard players reset * wolf_count
+scoreboard players reset * wolf_attack_timer
+tag @a remove beastmaster
+# 召喚獣のクリーンアップ
+kill @e[tag=beast_wolf]
 
 kill @e[tag=roulette_marker]
 

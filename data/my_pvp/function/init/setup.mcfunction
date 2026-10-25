@@ -15,6 +15,8 @@ scoreboard objectives add role_id dummy "RoleID"
 scoreboard objectives add temp dummy
 scoreboard objectives add scrap dummy "スクラップ"
 scoreboard objectives add regen_timer dummy "回復タイマー"
+# スポーン位置の再抽選回数 (system/random_spawn, check_spawn)
+scoreboard objectives add retry_count dummy "スポーン再抽選回数"
 
 scoreboard objectives add timer dummy
 scoreboard objectives add coins_timer dummy
@@ -59,7 +61,9 @@ scoreboard objectives add click_ber_jump minecraft.used:minecraft.feather "ジ�
 # 魔術師用クールダウン
 scoreboard objectives add mana dummy "マナ"
 scoreboard objectives add cd_mag_broom dummy "魔術箻CT"
-scoreboard objectives add cd_mag_book dummy "魔術本CT"
+scoreboard objectives add cd_mag_book dummy
+scoreboard objectives add cd_mag_shockwave dummy
+scoreboard objectives add cd_mag_inferno dummy "魔術本CT"
 scoreboard objectives add mag_fly_tick dummy "飛行タイマー"
 
 # 魔術師用スキル検知
@@ -88,6 +92,11 @@ scoreboard objectives add cd_stalker_float dummy
 scoreboard objectives add target_id dummy "ターゲットID"
 scoreboard objectives add target_check_timer dummy "ターゲット確認タイマー"
 scoreboard objectives add trail_timer dummy "痕跡タイマー"
+# 【追加】コンパス更新最適化用
+scoreboard objectives add last_compass_x dummy "前回コンパスX"
+scoreboard objectives add last_compass_z dummy "前回コンパスZ"
+scoreboard objectives add compass_force_timer dummy "コンパス強制更新タイマー"
+scoreboard objectives add _compass_changed dummy "コンパス変化フラグ"
 
 # 【追加】攻撃判定用 (ダメージを与えたかを検知)
 scoreboard objectives add damage_dealt minecraft.custom:minecraft.damage_dealt "与ダメージ"
@@ -108,6 +117,9 @@ scoreboard objectives add damage_taken minecraft.custom:minecraft.damage_taken
 # 警戒陣ペナルティ用
 scoreboard objectives add penalty_timer dummy
 scoreboard objectives add penalty_dmg dummy
+scoreboard objectives add penalty_attacker dummy
+# 警戒陣 被ダメ delta 検知用 (累積 damage_taken から差分を検出)
+scoreboard objectives add last_admiral_damage_taken dummy "前回提督被ダメ"
 
 # --- 時空跳躍者 (Chronomancer) 用 ---
 # 【追加】 個別CT用スコア
@@ -116,6 +128,22 @@ scoreboard objectives add cd_chrono_stasis dummy
 scoreboard objectives add cd_chrono_clockup dummy
 scoreboard objectives add freeze_timer dummy
 scoreboard objectives add stasis_timer dummy "時間停止タイマー"
+scoreboard objectives add clockup_active dummy "クロックアップ残像タイマー"
+
+# --- 狙撃手 (Sharpshooter) 用 ---
+scoreboard objectives add sharp_ammo dummy "狙撃手 残弾"
+scoreboard objectives add sharp_ammo_timer dummy "狙撃手 残弾回復タイマー"
+# 狙撃手: 集中スコープを覗いているか (sharpshooter_focus 進捗が毎tick 1 にする)
+scoreboard objectives add sharp_using dummy "狙撃手 集中検知"
+# 魔術師: 業火符の燃焼の残りtick
+scoreboard objectives add inferno_burn dummy "業火燃焼"
+
+# --- 獣使い (Beastmaster) 用 ---
+scoreboard objectives add cd_beast_wolf dummy "狼召喚CT"
+scoreboard objectives add cd_beast_roar dummy "獣の咆哮CT"
+scoreboard objectives add cd_beast_unleash dummy "解き放つCT"
+scoreboard objectives add wolf_count dummy "召喚狼数"
+scoreboard objectives add wolf_attack_timer dummy "狼攻撃タイマー"
 
 # --- 彫刻家 (Sculptor) 用 ---
 scoreboard objectives add sculpture_count dummy "彫刻設置数"
@@ -202,12 +230,29 @@ scoreboard objectives add drop_red_dye dropped:red_dye "戦争起動"
 scoreboard objectives add sneak_time minecraft.custom:minecraft.sneak_time "スニーク時間"
 scoreboard objectives add cd_super_jump dummy "大ジャンプCT"
 
+# --- 役職別 上昇スキル CT (admiral / chrono / sculptor / gambler) ---
+scoreboard objectives add cd_adm_jump dummy "対空射出CT"
+scoreboard objectives add cd_chrono_jump dummy "時空跳躍CT"
+scoreboard objectives add cd_sculptor_pillar dummy "石柱噴出CT"
+scoreboard objectives add cd_gambler_jump dummy "コイン跳躍CT"
+
+# --- ストーカー 狩りの時間 ---
+scoreboard objectives add hunting_stacks dummy "狩りスタック"
+scoreboard objectives add hunting_decay_timer dummy "狩り減衰タイマー"
+
+# --- 彫刻家 石化光線 ---
+scoreboard objectives add cd_sculptor_beam dummy "石化光線CT"
+
 # --- 侍 (Samurai) 用 ---
 scoreboard objectives add cd_sam_zanshin dummy "残心CT"
 scoreboard objectives add cd_sam_iai dummy "居合CT"
 scoreboard objectives add cd_sam_hien dummy "飛燕CT"
 scoreboard objectives add sam_zanshin_active dummy "残心構え時間"
 scoreboard objectives add sam_iai_active dummy "居合突進時間"
+# 残心の構え検知 (samurai_blocking 進捗が構え中の毎tick 1 にする)
+scoreboard objectives add sam_blocking dummy "残心構え検知"
+# 残心: 盾で防いだダメージ (正面ガードでの反撃判定)
+scoreboard objectives add sam_shield_block minecraft.custom:minecraft.damage_blocked_by_shield "盾で防いだダメージ"
 
 # --- タイマー用ボスバーの作成 ---
 bossbar add my_pvp:timer {"text":"残り時間","color":"yellow","bold":true}
@@ -219,6 +264,8 @@ scoreboard objectives add event_timer dummy "イベントタイマー"
 scoreboard objectives add event_duration dummy "イベント持続時間"
 scoreboard objectives add event_type dummy "イベントタイプ"
 scoreboard objectives add bounty_target dummy "賞金首ID"
+# インフレーション: 開始時点のキル数
+scoreboard objectives add infl_kills dummy "インフレ開始時キル"
 
 # ルーレット用
 scoreboard objectives add sector_offset dummy "セクターオフセット"

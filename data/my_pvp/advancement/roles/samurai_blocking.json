@@ -1,0 +1,18 @@
+{
+    "criteria": {
+        "blocking": {
+            "trigger": "minecraft:using_item",
+            "conditions": {
+                "item": {
+                    "items": "minecraft:shield",
+                    "predicates": {
+                        "minecraft:custom_data": "{samurai_zanshin:1b}"
+                    }
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "my_pvp:roles/samurai/on_blocking"
+    }
+}

@@ -2,8 +2,8 @@
     "condition": "minecraft:entity_properties",
     "entity": "this",
     "predicate": {
-        "flags": {
-            "is_blocking": true
+        "effects": {
+            "minecraft:levitation": {}
         }
     }
 }

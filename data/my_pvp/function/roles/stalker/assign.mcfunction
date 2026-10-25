@@ -9,7 +9,18 @@ tellraw @s [{"text":"[System] ","color":"gray"},{"text":"あなたは ","color":
 # 3. ステータス設定
 function my_pvp:roles/stalker/apply_status
 
-# 4. 音 (変更)
+# 4. クールダウン初期化
+scoreboard players set @s cd_stalker_float 0
+scoreboard players set @s target_check_timer 0
+scoreboard players set @s last_kills 0
+scoreboard players set @s hunting_stacks 0
+scoreboard players set @s hunting_decay_timer 0
+scoreboard players set @s trail_timer 0
+scoreboard players set @s last_compass_x 999999
+scoreboard players set @s last_compass_z 999999
+scoreboard players set @s compass_force_timer 0
+
+# 5. 音 (変更)
 # ウォーデンの心音（ドクン…）で緊張感を演出
 execute at @s run playsound minecraft:entity.warden.heartbeat master @s ~ ~ ~ 2 0.8
 

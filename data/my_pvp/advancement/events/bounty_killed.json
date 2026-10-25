@@ -1,14 +1,14 @@
 {
     "criteria": {
-        "hurt": {
-            "trigger": "minecraft:player_hurt_entity",
+        "killed": {
+            "trigger": "minecraft:player_killed_entity",
             "conditions": {
-                "player": [
+                "entity": [
                     {
                         "condition": "minecraft:entity_properties",
                         "entity": "this",
                         "predicate": {
-                            "nbt": "{Tags:[\"stalker\"]}"
+                            "nbt": "{Tags:[\"bounty_target\"]}"
                         }
                     }
                 ]
@@ -16,6 +16,6 @@
         }
     },
     "rewards": {
-        "function": "my_pvp:roles/stalker/trigger_attack"
+        "function": "my_pvp:events/bounty/award_killer"
     }
 }

@@ -9,8 +9,10 @@ execute store result score #CENTER_ROT temp run data get entity @e[tag=my_center
 # 2. Identify Player Angle relative to Center
 # Summon temp marker at center
 summon marker ~ ~ ~ {Tags:["temp_angle_marker"]}
-# Face player
-execute as @e[tag=temp_angle_marker] at @s facing entity @p[tag=!temp_angle_marker,distance=0..] feet run tp @s ~ ~ ~ ~ ~
+# Face player (判定中のプレイヤー @s を向く。マーカー基準の @p だと中心に一番近い人を全員分使ってしまう)
+tag @s add roulette_calc_target
+execute as @e[tag=temp_angle_marker] at @s facing entity @a[tag=roulette_calc_target,limit=1] feet run tp @s ~ ~ ~ ~ ~
+tag @s remove roulette_calc_target
 # Get rotation
 execute as @e[tag=temp_angle_marker] store result score #PLAYER_ANGLE temp run data get entity @s Rotation[0]
 kill @e[tag=temp_angle_marker]

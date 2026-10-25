@@ -11,7 +11,9 @@ execute if score @s coins matches ..39 run tellraw @s {"text":"[System] All-In�
 execute if score @s coins matches ..39 run item replace entity @s hotbar.2 with minecraft:gold_nugget[custom_name='{"text":"オール・イン","color":"yellow","italic":false}',lore=['{"text":"[Q]キーでドロップして開始 (All Coins)","color":"gray"}']]
 execute if score @s coins matches ..39 run return 0
 
-# 3. 全消費 & ダメージ計算 (Coins * 0.5)
+# 3. 全消費 & ダメージ計算 (Coins / 4)
+# ※ #2 temp は reset_game の reset * temp で消えるため、ここで毎回設定する (未設定だとゼロ除算で失敗し、全額ダメージになっていた)
+scoreboard players set #2 temp 2
 scoreboard players operation #dmg temp = @s coins
 scoreboard players operation #dmg temp /= #2 temp
 scoreboard players operation #dmg temp /= #2 temp

@@ -10,7 +10,7 @@ execute if entity @s[tag=fate_running] run return 0
 
 # 2. 借金チェック
 execute if score @s coins matches ..-1 run tellraw @s [{"text":"[System] ","color":"gray"},{"text":"借金中はギャンブルを行えません","color":"red"}]
-execute if score @s coins matches ..-1 run item replace entity @s hotbar.4 with minecraft:copper_ingot[custom_name='{"text":"運命のコイン","color":"aqua","italic":false}',lore=['{"text":"[Q]キーでドロップして開始 (5 Coins)","color":"gray"}']]
+execute if score @s coins matches ..-1 run item replace entity @s hotbar.4 with minecraft:copper_ingot[custom_name='{"text":"運命のコイン","color":"aqua","italic":false}',lore=['{"text":"[Q]キーでドロップして開始 (5 Coins)","color":"gray"}','{"text":"利確すると次の攻撃ダメージ2倍","color":"aqua"}']]
 execute if score @s coins matches ..-1 run return 0
 
 # 3. 開始処理

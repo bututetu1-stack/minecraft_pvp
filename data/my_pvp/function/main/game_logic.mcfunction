@@ -3,6 +3,12 @@
 execute as @a[tag=pending_heal] run effect give @s minecraft:instant_health 1 100 true
 execute as @a[tag=pending_heal] run effect give @s minecraft:saturation 1 255 true
 tag @a[tag=pending_heal] remove pending_heal
+# --- 死亡時の判定 (respawn が deaths を 0 に戻す前に行うこと) ---
+# 賞金首が死んだらタグを外す (+50pt は advancement の bounty_killed で付与済み)
+execute as @a[tag=bounty_target,scores={deaths=1..}] run tag @s remove bounty_target
+# 彫刻関連のキル判定 (毒死など)
+execute as @a[gamemode=!spectator] run function my_pvp:roles/sculptor/kill_check
+
 # --- リスポーン検知 (Death Logic) ---
 execute as @a[scores={deaths=1..}] run function my_pvp:system/respawn
 
@@ -13,14 +19,16 @@ execute as @a[tag=scout,tag=!is_frozen] at @s run function my_pvp:roles/scout/sc
 execute as @a[tag=tank,tag=!is_frozen] at @s run function my_pvp:roles/tank/tank_main
 execute as @a[tag=berserker,tag=!is_frozen] at @s run function my_pvp:roles/berserker/berserker_main
 execute as @a[tag=stalker,tag=!is_frozen] at @s run function my_pvp:roles/stalker/stalker_main
-# ストーカー追撃(遅延処理) - Victimで実行
-execute as @a[tag=sk_attack_target] run function my_pvp:roles/stalker/tick_attack_delay
 execute as @a[tag=admiral,tag=!is_frozen] at @s run function my_pvp:roles/admiral/admiral_main
 execute as @a[tag=chrono,tag=!is_frozen] at @s run function my_pvp:roles/chrono/chrono_main
 execute as @a[tag=sculptor,tag=!is_frozen] at @s run function my_pvp:roles/sculptor/sculptor_main
 execute as @a[tag=magician,tag=!is_frozen] at @s run function my_pvp:roles/magician/magician_main
 execute as @a[tag=gambler,tag=!is_frozen] at @s run function my_pvp:roles/gambler/gambler_main
 execute as @a[tag=samurai,tag=!is_frozen] at @s run function my_pvp:roles/samurai/samurai_main
+execute as @a[tag=sharpshooter,tag=!is_frozen] at @s run function my_pvp:roles/sharpshooter/sharpshooter_main
+execute as @a[tag=beastmaster,tag=!is_frozen] at @s run function my_pvp:roles/beastmaster/beastmaster_main
+# 獣使いの召喚狼の毎tick処理
+execute as @e[tag=beast_wolf] at @s run function my_pvp:roles/beastmaster/wolf_tick
 
 # --- 時空跳躍者のグローバル処理 (フィールド・凍結制御) ---
 # プレイヤーに関係なくサーバー全体で処理するため、as @a は付けずに呼び出す
@@ -59,6 +67,12 @@ execute as @e[type=item] at @s run function my_pvp:roles/ninja/scan_items
 # 侍のアイテムスキャン
 execute as @e[type=item] at @s run function my_pvp:roles/samurai/scan_items
 
+# 狙撃手のアイテムスキャン
+execute as @e[type=item] at @s run function my_pvp:roles/sharpshooter/scan_items
+
+# 獣使いのアイテムスキャン
+execute as @e[type=item] at @s run function my_pvp:roles/beastmaster/scan_items
+
 # --- 3. ガジェットの処理 ---
 
 # --- 3. ガジェット・エンティティ処理 ---
@@ -75,10 +89,14 @@ execute as @e[tag=turret_shot] at @s run function my_pvp:roles/mechanic/turret_s
 # --- 6. 魔術師の炎玉処理 ---
 # armor_stand 弾を毎tick処理
 execute as @e[type=armor_stand,tag=mag_fireball] at @s run function my_pvp:roles/magician/fireball_tick
+execute as @e[type=armor_stand,tag=mag_inferno] at @s run function my_pvp:roles/magician/inferno_tick
+# 業火符の燃焼
+execute as @a[scores={inferno_burn=1..}] at @s run function my_pvp:roles/magician/inferno_burn_tick
 
 # --- 7. 提督の攻撃処理 (Global) ---
 execute as @e[tag=artillery_marker] at @s run function my_pvp:roles/admiral/tick_artillery
-execute as @e[tag=adm_torpedo] at @s run function my_pvp:roles/admiral/tick_torpedo
+# rotated ~ 0: 魚雷は水平に進む。発射時のピッチが実行コンテキストに残ると、移動と壁判定が地面に向いて即爆発する
+execute as @e[tag=adm_torpedo] at @s rotated ~ 0 run function my_pvp:roles/admiral/tick_torpedo
 execute as @e[tag=airstrike_center] at @s run function my_pvp:roles/admiral/process_airstrike
 execute as @e[tag=adm_bomb] at @s run function my_pvp:roles/admiral/tick_bomb
 # 提督ペナルティ(遅延処理)
@@ -100,8 +118,7 @@ execute as @e[tag=sculpture_hitbox] at @s run function my_pvp:roles/sculptor/scu
 # 全プレイヤーが視線を飛ばして判定 (20m, 壁判定あり, 視野角あり)
 execute as @a[gamemode=!spectator] at @s run function my_pvp:roles/sculptor/checker/main
 
-# 【追加】彫刻関連のキル判定 (毒死など)
-execute as @a[gamemode=!spectator] run function my_pvp:roles/sculptor/kill_check
+# ※ 彫刻関連のキル判定は respawn より前 (このファイルの冒頭) で行う
 
 # --- 7. スコアボード表示 ---
 
@@ -117,7 +134,6 @@ execute if score #GLOBAL match_state matches 1 run scoreboard players add #GLOBA
 execute unless score #4_CONST temp matches 4 run scoreboard players set #4_CONST temp 4
 execute unless score #CONST_40 temp matches 40 run scoreboard players set #CONST_40 temp 40
 execute unless score #CONST_10 temp matches 10 run scoreboard players set #CONST_10 temp 10
-execute unless score #GLOBAL heal_timer matches 0.. run scoreboard players set #GLOBAL heal_timer 0
 
 # --- 【追加】ボスバー更新処理 ---
 # 1. 残り時間を計算用スコア(#CALC temp)に代入 (6000 - 現在経過時間)
@@ -181,6 +197,12 @@ execute as @a[tag=gambler,tag=!ignore_status_check] unless score #GLOBAL event_t
 
 # 侍 (HP 50)
 execute as @a[tag=samurai,tag=!ignore_status_check] unless score #GLOBAL event_type matches 4 unless entity @s[nbt={attributes:[{id:"minecraft:max_health",base:50.0d}]}] run function my_pvp:roles/samurai/apply_status
+
+# 狙撃手 (HP 30)
+execute as @a[tag=sharpshooter,tag=!ignore_status_check] unless score #GLOBAL event_type matches 4 unless entity @s[nbt={attributes:[{id:"minecraft:max_health",base:30.0d}]}] run function my_pvp:roles/sharpshooter/apply_status
+
+# 獣使い (HP 45)
+execute as @a[tag=beastmaster,tag=!ignore_status_check] unless score #GLOBAL event_type matches 4 unless entity @s[nbt={attributes:[{id:"minecraft:max_health",base:45.0d}]}] run function my_pvp:roles/beastmaster/apply_status
 
 # (既存のゲーム進行処理の後に追記)
 

@@ -20,4 +20,4 @@ item replace entity @s container.3 with minecraft:carrot_on_a_stick[minecraft:cu
 
 # 5. [陣形指示用の羅針盤] -> Slot 4
 # 統一: item replaceを使用
-item replace entity @s container.4 with minecraft:recovery_compass[minecraft:custom_data={admiral_compass:1b},minecraft:custom_name='{"text":"妖精の羅針盤","color":"gold","bold":true}',minecraft:lore=['{"text":"右クリックで陣形変更","color":"gray"}'],minecraft:attribute_modifiers={modifiers:[{type:"minecraft:attack_damage",amount:4.0,operation:"add_value",slot:"mainhand",id:"my_pvp:admiral_compass_damage"}],show_in_tooltip:true},minecraft:unbreakable={}] 1
+item replace entity @s container.4 with minecraft:recovery_compass[minecraft:custom_data={admiral_compass:1b},minecraft:custom_name='{"text":"妖精の羅針盤","color":"gold","bold":true}',minecraft:lore=['{"text":"Qキー(ドロップ)で陣形変更","color":"gray"}'],minecraft:attribute_modifiers={modifiers:[{type:"minecraft:attack_damage",amount:4.0,operation:"add_value",slot:"mainhand",id:"my_pvp:admiral_compass_damage"}],show_in_tooltip:true},minecraft:unbreakable={}] 1

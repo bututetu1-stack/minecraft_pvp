@@ -1,0 +1,18 @@
+{
+    "criteria": {
+        "focus": {
+            "trigger": "minecraft:using_item",
+            "conditions": {
+                "item": {
+                    "items": "minecraft:spyglass",
+                    "predicates": {
+                        "minecraft:custom_data": "{sharpshooter_focus:1b}"
+                    }
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "my_pvp:roles/sharpshooter/on_focus"
+    }
+}

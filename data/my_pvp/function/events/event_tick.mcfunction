@@ -24,6 +24,7 @@ execute if score #GLOBAL event_type matches 4 run function my_pvp:events/sudden_
 execute if score #GLOBAL event_type matches 5 run function my_pvp:events/rush_mode/tick
 execute if score #GLOBAL event_type matches 6 run function my_pvp:events/night_battle/tick
 execute if score #GLOBAL event_type matches 7 run function my_pvp:events/roulette/tick
+execute if score #GLOBAL event_type matches 8 run function my_pvp:events/inflation/tick
 
 # イベント終了判定
 execute if score #GLOBAL event_type matches 1.. run scoreboard players remove #GLOBAL event_duration 1

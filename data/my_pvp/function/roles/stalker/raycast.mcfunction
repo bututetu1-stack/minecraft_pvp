@@ -9,7 +9,8 @@ execute unless block ~ ~ ~ #minecraft:air run return 0
 # 半径1.5m以内にターゲットがいればヒット
 execute as @a[tag=my_target,distance=..2] run effect give @s minecraft:glowing 1 0 true
 execute as @a[tag=my_target,distance=..2] run effect give @s minecraft:slowness 1 2 true
-# ヒットしたら終了
+# ヒットしたら #GAZE_HIT フラグを立てて終了 (狩りの時間用)
+execute if entity @a[tag=my_target,distance=..2] run scoreboard players set #GAZE_HIT temp 1
 execute if entity @a[tag=my_target,distance=..2] run return 1
 
 # 3. 再帰 (距離制限)

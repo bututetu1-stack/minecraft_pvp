@@ -5,12 +5,16 @@
 scoreboard players set @s damage_taken 0
 
 # 2. 追加ダメージ処理
-# 無敵時間をリセットして確実にダメージを通す (被ダメ増の実装)
-data modify entity @s HurtTime set value 0s
+# 被弾直後は無敵時間中なので、通常のダメージは通らない (プレイヤーの HurtTime は data modify できない)
+# my_pvp:penalty は #minecraft:bypasses_cooldown (無敵時間無視) と #minecraft:bypasses_armor (防具無視) に入れてある
 
-# 3ダメージ (1.5ハート) の追加魔法ダメージ
+# 3ダメージ (1.5ハート) の追加ダメージ。直前に攻撃してきたプレイヤーがいればその人の攻撃扱いにする
 # これにより、実質的に「防御力が下がっている」ような痛さを演出
-damage @s 3 minecraft:magic
+tag @a remove bj_penalty_attacker
+execute on attacker if entity @s[type=player] run tag @s add bj_penalty_attacker
+execute if entity @a[tag=bj_penalty_attacker] run damage @s 3 my_pvp:penalty by @a[tag=bj_penalty_attacker,limit=1]
+execute unless entity @a[tag=bj_penalty_attacker] run damage @s 3 my_pvp:penalty
+tag @a remove bj_penalty_attacker
 # tellraw @s {"text":"[!] 防御崩壊 (追加ダメージ)","color":"red"}
 
 # 3. クールダウン設定 (連続ヒットによる瞬殺防止 & ループ防止)

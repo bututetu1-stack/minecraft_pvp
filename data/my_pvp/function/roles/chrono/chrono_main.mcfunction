@@ -1,18 +1,52 @@
+# --- タイム・リバース後の最大HP復帰 (restore_hp の次のtick) ---
+execute if entity @s[tag=chrono_restore_max] run tag @s remove ignore_status_check
+execute if entity @s[tag=chrono_restore_max] run attribute @s minecraft:max_health base set 40
+tag @s remove chrono_restore_max
+
 # --- 座標記録 ---
 function my_pvp:roles/chrono/record_position
 
 # --- ドロップ検知 ---
 function my_pvp:roles/chrono/scan_items
 
+# --- CT終了直前 (cd=1) のアイテム自動返却 + 音 (通常CT消化) ---
+# タイム・リバース (slot 1)
+execute as @s[scores={cd_chrono_reverse=1}] run item replace entity @s container.1 with minecraft:light_blue_dye[minecraft:custom_data={chrono_reverse:1b},minecraft:custom_name='{"text":"<< タイム・リバース","color":"aqua","italic":false}',minecraft:lore=['{"text":"[Qキー] 5秒前の位置とHPに戻る","color":"yellow"}','{"text":"CT: 20秒","color":"gray"}']] 1
+execute as @s[scores={cd_chrono_reverse=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 1.5
+
+# 時空の静止 (slot 2)
+execute as @s[scores={cd_chrono_stasis=1}] run item replace entity @s container.2 with minecraft:yellow_dye[minecraft:custom_data={chrono_stasis:1b},minecraft:custom_name='{"text":"|| 時空の静止","color":"yellow","italic":false}',minecraft:lore=['{"text":"[Qキー] 10秒間、敵と物体を停止させる","color":"yellow"}','{"text":"CT: 30秒","color":"gray"}']] 1
+execute as @s[scores={cd_chrono_stasis=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 2
+
+# クロック・アップ (slot 3)
+execute as @s[scores={cd_chrono_clockup=1}] run item replace entity @s container.3 with minecraft:red_dye[minecraft:custom_data={chrono_clockup:1b},minecraft:custom_name='{"text":">> クロック・アップ","color":"red","italic":false}',minecraft:lore=['{"text":"[Qキー] 10秒間、超高速移動","color":"yellow"}','{"text":"CT: 30秒","color":"gray"}']] 1
+execute as @s[scores={cd_chrono_clockup=1}] run playsound minecraft:block.note_block.chime master @s ~ ~ ~ 1 0.8
+
 # --- クールダウン消化 ---
 execute if score @s cd_chrono_reverse matches 1.. run scoreboard players remove @s cd_chrono_reverse 1
 execute if score @s cd_chrono_stasis matches 1.. run scoreboard players remove @s cd_chrono_stasis 1
 execute if score @s cd_chrono_clockup matches 1.. run scoreboard players remove @s cd_chrono_clockup 1
 
-# 共通スキル (大ジャンプ)
-execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
-execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_super_jump
+# 役職固有 上昇スキル: 時空跳躍
+execute if score @s cd_chrono_jump matches 1.. run scoreboard players remove @s cd_chrono_jump 1
+execute if score @s sneak_time matches 1.. run function my_pvp:roles/chrono/use_jump
+
+# --- 【追加】 クロックアップ アクティブ中の効果 ---
+execute if score @s clockup_active matches 1.. run scoreboard players remove @s clockup_active 1
+# 残像演出 (赤いダスト + end_rod を毎tick足元にスポーン)
+execute if score @s clockup_active matches 1.. at @s run particle minecraft:dust{color:[1.0,0.4,0.4],scale:0.9} ~ ~1 ~ 0.3 0.5 0.3 0 5 force
+execute if score @s clockup_active matches 1.. at @s run particle minecraft:end_rod ~ ~0.5 ~ 0.2 0.3 0.2 0.05 2 force
+# CT回復速度2倍 (リバース/ステイシス/上昇 のCTを毎tick追加で1減算 = 合計2倍速)
+# クロックアップ自身のCTは加速対象外 (永続クロックアップ防止)
+execute if score @s clockup_active matches 1.. if score @s cd_chrono_reverse matches 1.. run scoreboard players remove @s cd_chrono_reverse 1
+execute if score @s clockup_active matches 1.. if score @s cd_chrono_stasis matches 1.. run scoreboard players remove @s cd_chrono_stasis 1
+execute if score @s clockup_active matches 1.. if score @s cd_chrono_jump matches 1.. run scoreboard players remove @s cd_chrono_jump 1
+
+# --- 汎用安全網: cd=0 + アイテム不所持 → 即時補充 ---
+# Rush Mode / Clockup 加速 で cd=1 をスキップした場合に対応 (音は鳴らない、cd=1の音つき返却が通常)
+execute if score @s cd_chrono_reverse matches ..0 unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{chrono_reverse:1b}}}]}] run item replace entity @s container.1 with minecraft:light_blue_dye[minecraft:custom_data={chrono_reverse:1b},minecraft:custom_name='{"text":"<< タイム・リバース","color":"aqua","italic":false}',minecraft:lore=['{"text":"[Qキー] 5秒前の位置とHPに戻る","color":"yellow"}','{"text":"CT: 20秒","color":"gray"}']] 1
+execute if score @s cd_chrono_stasis matches ..0 unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{chrono_stasis:1b}}}]}] run item replace entity @s container.2 with minecraft:yellow_dye[minecraft:custom_data={chrono_stasis:1b},minecraft:custom_name='{"text":"|| 時空の静止","color":"yellow","italic":false}',minecraft:lore=['{"text":"[Qキー] 10秒間、敵と物体を停止させる","color":"yellow"}','{"text":"CT: 30秒","color":"gray"}']] 1
+execute if score @s cd_chrono_clockup matches ..0 unless entity @s[nbt={Inventory:[{components:{"minecraft:custom_data":{chrono_clockup:1b}}}]}] run item replace entity @s container.3 with minecraft:red_dye[minecraft:custom_data={chrono_clockup:1b},minecraft:custom_name='{"text":">> クロック・アップ","color":"red","italic":false}',minecraft:lore=['{"text":"[Qキー] 10秒間、超高速移動","color":"yellow"}','{"text":"CT: 30秒","color":"gray"}']] 1
 
 # --- アクションバー (常時表示) ---
-# 条件分岐を削除し、CTが0の状態でも常に表示するように変更
 title @s actionbar [{"text":"Rev:","color":"aqua"},{"score":{"name":"@s","objective":"cd_chrono_reverse"},"color":"white"},{"text":" | ","color":"gray"},{"text":"Sts:","color":"yellow"},{"score":{"name":"@s","objective":"cd_chrono_stasis"},"color":"white"},{"text":" | ","color":"gray"},{"text":"Clk:","color":"red"},{"score":{"name":"@s","objective":"cd_chrono_clockup"},"color":"white"}]

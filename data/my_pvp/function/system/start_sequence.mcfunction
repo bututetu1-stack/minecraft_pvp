@@ -34,7 +34,9 @@ execute as @a[tag=magician] run title @s subtitle {"text":"魔力を操り、空
 execute as @a[tag=chrono] run title @s subtitle {"text":"時を操り、戦場の運命を改変せよ","color":"yellow"}
 execute as @a[tag=sculptor] run title @s subtitle {"text":"生命を吹き込み、戦場を創造せよ","color":"blue"}
 execute as @a[tag=gambler] run title @s subtitle {"text":"運命を賭け、全てを手に入れろ","color":"green"}
-execute as @a[tag=samurai] run title @s subtitle {"text":"一刀のもとに、全てを断て","color":"red"}
+execute as @a[tag=samurai] run title @s subtitle {"text":"一刀のもとに、全てを断て","color":"dark_blue"}
+execute as @a[tag=sharpshooter] run title @s subtitle {"text":"風を読み、必殺の一射を放て","color":"dark_gray"}
+execute as @a[tag=beastmaster] run title @s subtitle {"text":"獣を従え、群れと共に戦場を駆け抜けよ","color":"gray"}
 
 # 音とログ
 # 【修正】音量を10000にして距離減衰を無視させる（グローバル音化）
@@ -54,3 +56,5 @@ execute as @a[tag=chrono] run function my_pvp:system/give_chrono_items
 execute as @a[tag=sculptor] run function my_pvp:system/give_sculptor_items
 execute as @a[tag=gambler] run function my_pvp:system/give_gambler_items
 execute as @a[tag=samurai] run function my_pvp:system/give_samurai_items
+execute as @a[tag=sharpshooter] run function my_pvp:system/give_sharpshooter_items
+execute as @a[tag=beastmaster] run function my_pvp:system/give_beastmaster_items

@@ -19,6 +19,12 @@ execute if entity @s[tag=all_in_suicide] run tag @s add penalty_death
 tag @s remove all_in_suicide
 
 tag @s remove ignore_status_check
+# 業火符の燃焼を消す
+scoreboard players set @s inferno_burn 0
+# バーサーカー: 空中で死んだ時のリープ/急降下状態 (残すとリスポーン後の着地でスラムが暴発する)
+tag @s remove ber_ready
+tag @s remove ber_falling
+tag @s remove ber_slamming
 tag @s remove bj_debuff
 tag @s remove bj_debuff
 scoreboard players set @s bj_debuff_timer 0
@@ -50,10 +56,20 @@ execute if score @s role_id matches 9 run tag @s add chrono
 execute if score @s role_id matches 10 run tag @s add sculptor
 execute if score @s role_id matches 11 run tag @s add gambler
 execute if score @s role_id matches 12 run tag @s add samurai
+execute if score @s role_id matches 13 run tag @s add sharpshooter
+execute if score @s role_id matches 14 run tag @s add beastmaster
 
 # (オプション) もしリスポーン時に特定のアイテムを再配布したい場合はここに記述
 # リスポーン時のアイテム・コスト補充 (魔術師, 機械工, ギャンブラー)
 execute if entity @s[tag=magician] run function my_pvp:system/give_magician_items
+
+# 提督 リスポーン時に被ダメ delta スナップショットを更新 (リスポーン直後の偽トリガー防止)
+execute if entity @s[tag=admiral] run scoreboard players operation @s last_admiral_damage_taken = @s damage_taken
+execute if entity @s[tag=admiral] run scoreboard players set @s penalty_timer 0
+execute if entity @s[tag=admiral] run scoreboard players set @s penalty_dmg 0
+execute if entity @s[tag=admiral] run tag @s remove adm_penalty_target
+execute if entity @s[tag=magician] run scoreboard players set @s cd_mag_shockwave 0
+execute if entity @s[tag=magician] run scoreboard players set @s cd_mag_inferno 0
 execute if entity @s[tag=mechanic] run function my_pvp:system/give_mechanic_items
 execute if entity @s[tag=gambler] run function my_pvp:system/give_gambler_items
 execute if entity @s[tag=samurai] run function my_pvp:system/give_samurai_items
@@ -64,10 +80,34 @@ execute if entity @s[tag=samurai] run tag @s remove sam_zanshin_guard
 execute if entity @s[tag=samurai] run tag @s remove sam_iai_dashing
 execute if entity @s[tag=samurai] run tag @s remove sam_iai_hit_this_dash
 
-# ギャンブラーのコイン管理 (借金死 or オールイン死なら0, それ以外なら50)
+# 狙撃手 リスポーン時アイテム再配布 + 残弾満タン
+execute if entity @s[tag=sharpshooter] run function my_pvp:system/give_sharpshooter_items
+execute if entity @s[tag=sharpshooter] run scoreboard players set @s sharp_ammo 10
+execute if entity @s[tag=sharpshooter] run scoreboard players set @s sharp_ammo_timer 0
+execute if entity @s[tag=sharpshooter] run tag @s remove sharp_focused
+
+# ストーカー リスポーン時アイテム再配布 + コンパス変化検知リセット
+execute if entity @s[tag=stalker] run function my_pvp:system/give_stalker_items
+execute if entity @s[tag=stalker] run scoreboard players set @s last_compass_x 999999
+execute if entity @s[tag=stalker] run scoreboard players set @s last_compass_z 999999
+execute if entity @s[tag=stalker] run scoreboard players set @s compass_force_timer 0
+
+# 獣使い リスポーン時アイテム再配布 + CTリセット
+execute if entity @s[tag=beastmaster] run function my_pvp:system/give_beastmaster_items
+execute if entity @s[tag=beastmaster] run scoreboard players set @s cd_beast_wolf 0
+execute if entity @s[tag=beastmaster] run scoreboard players set @s cd_beast_roar 0
+execute if entity @s[tag=beastmaster] run scoreboard players set @s cd_beast_unleash 0
+
+# ギャンブラーのコイン管理
+# - All-In 自滅 (penalty_death): 0
+# - 運命のコインで破産 (bankrupt_death): 10
+# - それ以外: 50
+# ※ コインはここでだけ決める (以前は apply_status でも 50 に上書きしており、ペナルティが効いていなかった)
+execute if entity @s[tag=gambler] run scoreboard players set @s coins 50
+execute if entity @s[tag=gambler,tag=bankrupt_death] run scoreboard players set @s coins 10
+execute if entity @s[tag=gambler,tag=bankrupt_death,tag=!penalty_death] run tellraw @s {"text":"[Fate] 破産ペナルティ... (所持金 10)","color":"red"}
 execute if entity @s[tag=gambler,tag=penalty_death] run scoreboard players set @s coins 0
-execute if entity @s[tag=gambler] if score @s coins matches ..-1 run scoreboard players set @s coins 0
-execute if entity @s[tag=gambler,tag=!penalty_death] if score @s coins matches 0.. run scoreboard players set @s coins 50
 
 # ペナルティタグ解除
 tag @s remove penalty_death
+tag @s remove bankrupt_death

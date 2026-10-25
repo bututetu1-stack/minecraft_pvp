@@ -8,4 +8,5 @@ tellraw @a [{"text":"時よ、止まれ！ (Time Stop: 10s)","color":"yellow","b
 # --- 時空の静止フィールド(マーカー)の設置 ---
 # 寿命200tick (10秒) のエリアエフェクトクラウドを設置
 # 発動地点に固定
-summon area_effect_cloud ~ ~ ~ {Tags:["stasis_center"],Duration:200,Particle:"block air"}
+# ※ 1.20.5 以降は Particle を {type:..} の形式で書く必要がある (文字列だと無視されて既定のパーティクルが出ていた)
+summon area_effect_cloud ~ ~ ~ {Tags:["stasis_center"],Duration:200,Particle:{type:"minecraft:block",block_state:{Name:"minecraft:air"}}}

@@ -1,7 +1,7 @@
 clear @s
 
 # 1. メイン武器
-item replace entity @s container.0 with minecraft:iron_sword[minecraft:unbreakable={},minecraft:custom_name='{"text":"刻の宝剣","color":"yellow","italic":false}']
+item replace entity @s container.0 with minecraft:iron_sword[minecraft:custom_data={chrono_sword:1b},minecraft:unbreakable={},minecraft:custom_name='{"text":"刻の宝剣","color":"yellow","italic":false}']
 
 # 2. タイム・リバース (5秒前)
 item replace entity @s container.1 with minecraft:light_blue_dye[minecraft:custom_data={chrono_reverse:1b},minecraft:custom_name='{"text":"<< タイム・リバース","color":"aqua","italic":false}',minecraft:lore=['{"text":"[Qキー] 5秒前の位置とHPに戻る","color":"yellow"}','{"text":"CT: 20秒","color":"gray"}']] 1

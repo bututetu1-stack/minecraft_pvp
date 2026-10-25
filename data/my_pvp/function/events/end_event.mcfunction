@@ -17,7 +17,6 @@ tag @a remove rush_mode
 execute if score #GLOBAL event_type matches 4 run execute as @a run attribute @s minecraft:max_health base set 40
 execute if score #GLOBAL event_type matches 4 run effect give @a minecraft:instant_health 1 200 true
 execute if score #GLOBAL event_type matches 7 run function my_pvp:events/roulette/cleanup
-execute if score #GLOBAL event_type matches 8 run scoreboard players set #POINT_KILL temp 10
 
 # イベントタイプをリセット
 scoreboard players set #GLOBAL event_type 0
