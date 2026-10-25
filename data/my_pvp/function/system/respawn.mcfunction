@@ -54,10 +54,20 @@ execute if score @s role_id matches 9 run tag @s add chrono
 execute if score @s role_id matches 10 run tag @s add sculptor
 execute if score @s role_id matches 11 run tag @s add gambler
 execute if score @s role_id matches 12 run tag @s add samurai
+execute if score @s role_id matches 13 run tag @s add sharpshooter
+execute if score @s role_id matches 14 run tag @s add beastmaster
 
 # (オプション) もしリスポーン時に特定のアイテムを再配布したい場合はここに記述
 # リスポーン時のアイテム・コスト補充 (魔術師, 機械工, ギャンブラー)
 execute if entity @s[tag=magician] run function my_pvp:system/give_magician_items
+
+# 提督 リスポーン時に被ダメ delta スナップショットを更新 (リスポーン直後の偽トリガー防止)
+execute if entity @s[tag=admiral] run scoreboard players operation @s last_admiral_damage_taken = @s damage_taken
+execute if entity @s[tag=admiral] run scoreboard players set @s penalty_timer 0
+execute if entity @s[tag=admiral] run scoreboard players set @s penalty_dmg 0
+execute if entity @s[tag=admiral] run tag @s remove adm_penalty_target
+execute if entity @s[tag=magician] run scoreboard players set @s cd_mag_shockwave 0
+execute if entity @s[tag=magician] run scoreboard players set @s cd_mag_inferno 0
 execute if entity @s[tag=mechanic] run function my_pvp:system/give_mechanic_items
 execute if entity @s[tag=gambler] run function my_pvp:system/give_gambler_items
 execute if entity @s[tag=samurai] run function my_pvp:system/give_samurai_items
@@ -67,6 +77,24 @@ execute if entity @s[tag=samurai] run scoreboard players set @s cd_sam_hien 0
 execute if entity @s[tag=samurai] run tag @s remove sam_zanshin_guard
 execute if entity @s[tag=samurai] run tag @s remove sam_iai_dashing
 execute if entity @s[tag=samurai] run tag @s remove sam_iai_hit_this_dash
+
+# 狙撃手 リスポーン時アイテム再配布 + 残弾満タン
+execute if entity @s[tag=sharpshooter] run function my_pvp:system/give_sharpshooter_items
+execute if entity @s[tag=sharpshooter] run scoreboard players set @s sharp_ammo 10
+execute if entity @s[tag=sharpshooter] run scoreboard players set @s sharp_ammo_timer 0
+execute if entity @s[tag=sharpshooter] run tag @s remove sharp_focused
+
+# ストーカー リスポーン時アイテム再配布 + コンパス変化検知リセット
+execute if entity @s[tag=stalker] run function my_pvp:system/give_stalker_items
+execute if entity @s[tag=stalker] run scoreboard players set @s last_compass_x 999999
+execute if entity @s[tag=stalker] run scoreboard players set @s last_compass_z 999999
+execute if entity @s[tag=stalker] run scoreboard players set @s compass_force_timer 0
+
+# 獣使い リスポーン時アイテム再配布 + CTリセット
+execute if entity @s[tag=beastmaster] run function my_pvp:system/give_beastmaster_items
+execute if entity @s[tag=beastmaster] run scoreboard players set @s cd_beast_wolf 0
+execute if entity @s[tag=beastmaster] run scoreboard players set @s cd_beast_roar 0
+execute if entity @s[tag=beastmaster] run scoreboard players set @s cd_beast_unleash 0
 
 # ギャンブラーのコイン管理
 # - All-In 自滅 (penalty_death): 0

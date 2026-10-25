@@ -4,9 +4,9 @@ execute as @a[tag=pending_heal] run effect give @s minecraft:instant_health 1 10
 execute as @a[tag=pending_heal] run effect give @s minecraft:saturation 1 255 true
 tag @a[tag=pending_heal] remove pending_heal
 # --- 死亡時の判定 (respawn が deaths を 0 に戻す前に行うこと) ---
-# 賞金首キル判定
-execute if score #GLOBAL event_type matches 3 as @a[tag=bounty_target,scores={deaths=1..}] at @s run function my_pvp:events/bounty/kill_check
-# 彫刻関連のキル判定 (毒死など) ※ 賞金首判定より後 (last_attacker_id をここで消費するため)
+# 賞金首が死んだらタグを外す (+50pt は advancement の bounty_killed で付与済み)
+execute as @a[tag=bounty_target,scores={deaths=1..}] run tag @s remove bounty_target
+# 彫刻関連のキル判定 (毒死など)
 execute as @a[gamemode=!spectator] run function my_pvp:roles/sculptor/kill_check
 
 # --- リスポーン検知 (Death Logic) ---
@@ -27,6 +27,10 @@ execute as @a[tag=sculptor,tag=!is_frozen] at @s run function my_pvp:roles/sculp
 execute as @a[tag=magician,tag=!is_frozen] at @s run function my_pvp:roles/magician/magician_main
 execute as @a[tag=gambler,tag=!is_frozen] at @s run function my_pvp:roles/gambler/gambler_main
 execute as @a[tag=samurai,tag=!is_frozen] at @s run function my_pvp:roles/samurai/samurai_main
+execute as @a[tag=sharpshooter,tag=!is_frozen] at @s run function my_pvp:roles/sharpshooter/sharpshooter_main
+execute as @a[tag=beastmaster,tag=!is_frozen] at @s run function my_pvp:roles/beastmaster/beastmaster_main
+# 獣使いの召喚狼の毎tick処理
+execute as @e[tag=beast_wolf] at @s run function my_pvp:roles/beastmaster/wolf_tick
 
 # --- 時空跳躍者のグローバル処理 (フィールド・凍結制御) ---
 # プレイヤーに関係なくサーバー全体で処理するため、as @a は付けずに呼び出す
@@ -65,6 +69,12 @@ execute as @e[type=item] at @s run function my_pvp:roles/ninja/scan_items
 # 侍のアイテムスキャン
 execute as @e[type=item] at @s run function my_pvp:roles/samurai/scan_items
 
+# 狙撃手のアイテムスキャン
+execute as @e[type=item] at @s run function my_pvp:roles/sharpshooter/scan_items
+
+# 獣使いのアイテムスキャン
+execute as @e[type=item] at @s run function my_pvp:roles/beastmaster/scan_items
+
 # --- 3. ガジェットの処理 ---
 
 # --- 3. ガジェット・エンティティ処理 ---
@@ -81,6 +91,7 @@ execute as @e[tag=turret_shot] at @s run function my_pvp:roles/mechanic/turret_s
 # --- 6. 魔術師の炎玉処理 ---
 # armor_stand 弾を毎tick処理
 execute as @e[type=armor_stand,tag=mag_fireball] at @s run function my_pvp:roles/magician/fireball_tick
+execute as @e[type=armor_stand,tag=mag_inferno] at @s run function my_pvp:roles/magician/inferno_tick
 
 # --- 7. 提督の攻撃処理 (Global) ---
 execute as @e[tag=artillery_marker] at @s run function my_pvp:roles/admiral/tick_artillery
@@ -186,6 +197,12 @@ execute as @a[tag=gambler,tag=!ignore_status_check] unless score #GLOBAL event_t
 
 # 侍 (HP 50)
 execute as @a[tag=samurai,tag=!ignore_status_check] unless score #GLOBAL event_type matches 4 unless entity @s[nbt={attributes:[{id:"minecraft:max_health",base:50.0d}]}] run function my_pvp:roles/samurai/apply_status
+
+# 狙撃手 (HP 30)
+execute as @a[tag=sharpshooter,tag=!ignore_status_check] unless score #GLOBAL event_type matches 4 unless entity @s[nbt={attributes:[{id:"minecraft:max_health",base:30.0d}]}] run function my_pvp:roles/sharpshooter/apply_status
+
+# 獣使い (HP 45)
+execute as @a[tag=beastmaster,tag=!ignore_status_check] unless score #GLOBAL event_type matches 4 unless entity @s[nbt={attributes:[{id:"minecraft:max_health",base:45.0d}]}] run function my_pvp:roles/beastmaster/apply_status
 
 # (既存のゲーム進行処理の後に追記)
 

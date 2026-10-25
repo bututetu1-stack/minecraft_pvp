@@ -5,8 +5,9 @@ execute as @a[gamemode=!spectator] if score @s player_id = #TEMP player_id run t
 
 execute if entity @a[tag=my_target] run function my_pvp:roles/stalker/update_compass
 
-# ※ 物理攻撃力は短剣側で 0.01 に抑えている (give_stalker_items)
-#    攻撃力が完全に0だと命中自体が発生せず、stalker_attack 進捗が発火しないため Weakness は使わない
+# --- 0. 物理攻撃 ---
+# 暗殺者の短剣 (4ダメ) で攻撃判定 → check_attack 内で
+# ターゲットなら +6 (合計10)、非ターゲットならそのまま 4
 
 # --- 追加機能: ターゲット追跡 ---
 # 1. ターゲットに足跡を残させる
@@ -23,22 +24,24 @@ tag @s remove current_stalker
 # 3. 視線デバフ (Raycast)
 # 距離20m (0.5 * 40)
 scoreboard players set #ray_dist temp 40
+# 狩りの時間用フラグ初期化 (raycast がヒット時に 1 をセット)
+scoreboard players set #GAZE_HIT temp 0
 execute anchored eyes positioned ^ ^ ^ run function my_pvp:roles/stalker/raycast
+
+# --- 【新スキル】 狩りの時間 (Hunting Hour): 視線継続でスタック蓄積バフ ---
+function my_pvp:roles/stalker/hunting_hour
 
 # 2. ターゲット生存確認 & 再抽選
 execute unless entity @a[tag=my_target] run scoreboard players add @s target_check_timer 1
 execute if score @s target_check_timer matches 20.. run function my_pvp:roles/stalker/assign_target
 execute if score @s target_check_timer matches 20.. run scoreboard players set @s target_check_timer 0
 
-# 3. 攻撃判定は stalker_attack 進捗 -> trigger_attack で行う
+# 3. 攻撃判定 (追加ダメージ)
+execute unless score @s last_damage_dealt = @s damage_dealt run function my_pvp:roles/stalker/check_attack
 execute unless score @s last_damage_dealt = @s damage_dealt run scoreboard players operation @s last_damage_dealt = @s damage_dealt
 
 # 4. アイテム補充
 function my_pvp:roles/stalker/scan_items
-
-# 共通スキル (大ジャンプ)
-execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
-execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_super_jump
 
 # --- 【新能力】 ハンターズトランス: ターゲット撃破時の強化 ---
 # ターゲットID保持中に、自身のkillsが増えていれば撃破成功

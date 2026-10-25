@@ -34,9 +34,3 @@ execute if entity @s[tag=ber_falling,tag=!ber_slamming] if score @s sneak_time m
 execute if entity @s[tag=ber_slamming] at @s run function my_pvp:roles/berserker/dive_tick
 execute if entity @s[tag=ber_ready] run function my_pvp:roles/berserker/check_slam
 execute if entity @s[tag=ber_falling] run function my_pvp:roles/berserker/check_slam
-
-# 共通スキル (大ジャンプ)
-# リープ中の Shift は急降下に使うので、大ジャンプは発動させない
-execute if entity @s[tag=ber_falling] run scoreboard players set @s sneak_time 0
-execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
-execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_super_jump

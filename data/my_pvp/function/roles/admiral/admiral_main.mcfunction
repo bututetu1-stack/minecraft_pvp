@@ -6,9 +6,9 @@ execute if score @s cd_adm_aa matches 1.. run scoreboard players remove @s cd_ad
 # 【復活】 陣形変更の連打防止用クールダウン消化
 execute if score @s cd_formation matches 1.. run scoreboard players remove @s cd_formation 1
 
-# 共通スキル (大ジャンプ)
-execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
-execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_super_jump
+# 役職固有 上昇スキル: 対空射出
+execute if score @s cd_adm_jump matches 1.. run scoreboard players remove @s cd_adm_jump 1
+execute if score @s sneak_time matches 1.. run function my_pvp:roles/admiral/use_jump
 
 # --- CT完了通知 (音) ---
 execute if score @s cd_adm_artillery matches 1 run playsound minecraft:block.note_block.hat master @s ~ ~ ~ 1 2
@@ -61,7 +61,11 @@ execute as @e[type=area_effect_cloud,tag=aa_center] at @s run function my_pvp:ro
 execute as @s run function my_pvp:roles/admiral/tick_formation
 
 # 【不具合対策】 コマンド/環境ダメージでの反撃発動 (Advancement失敗時の保険)
-execute if score @s adm_formation matches 2 if score @s damage_taken matches 1.. run function my_pvp:roles/admiral/trigger_penalty_v2
+# 累積値 damage_taken の差分を検出 (新たに被弾したかを edge-trigger で判定)
+# 警戒陣 (formation=2) 中、かつ damage_taken が前回値より増加したときのみ発動
+execute if score @s adm_formation matches 2 unless score @s last_admiral_damage_taken = @s damage_taken run function my_pvp:roles/admiral/trigger_penalty_v2
+# 陣形に関わらず last_admiral_damage_taken を更新 (累積値が増加するまで再発動を防ぐ)
+scoreboard players operation @s last_admiral_damage_taken = @s damage_taken
 
 # 2. 右クリック検知 (羅針盤)
 execute if score @s click_formation matches 1.. run function my_pvp:roles/admiral/change_formation

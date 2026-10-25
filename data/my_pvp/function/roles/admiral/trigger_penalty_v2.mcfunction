@@ -12,11 +12,12 @@ advancement revoke @s only my_pvp:roles/admiral_hurt
 scoreboard players set #ADM_ATTACKER temp 0
 execute on attacker if entity @s[type=player] run scoreboard players operation #ADM_ATTACKER temp = @s player_id
 
-# 2. ダメージ量の計算 (元のダメージの 25%)
+# 2. ダメージ量の計算 (元のダメージの 50%, 合計1.5倍化)
 scoreboard players operation #CALC temp = @s damage_taken
 
-# 25%計算 (DamageScore / 40 -> DamageAmount / 4)
-scoreboard players operation #CALC temp /= #CONST_40 temp
+# 50%計算 (DamageScore / 20 -> DamageAmount / 2)
+scoreboard players set #CONST_20 temp 20
+scoreboard players operation #CALC temp /= #CONST_20 temp
 
 # 3. ダメージ実行予約 (Delay to bypass i-frames)
 

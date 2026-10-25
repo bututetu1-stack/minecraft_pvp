@@ -33,3 +33,9 @@ summon marker ~ ~ ~ {Tags:["role_card","card_gambler"]}
 
 # 【追加】 侍のくじ
 summon marker ~ ~ ~ {Tags:["role_card","card_samurai"]}
+
+# 【追加】 狙撃手のくじ
+summon marker ~ ~ ~ {Tags:["role_card","card_sharpshooter"]}
+
+# 【追加】 獣使いのくじ
+summon marker ~ ~ ~ {Tags:["role_card","card_beastmaster"]}

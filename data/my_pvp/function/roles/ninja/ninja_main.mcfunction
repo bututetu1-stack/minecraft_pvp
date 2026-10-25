@@ -29,7 +29,3 @@ execute as @s[tag=rush_mode,scores={cd_ninja_smoke=0}] unless entity @s[nbt={Inv
 # 4. 変わり身（右クリック）検知
 execute if score @s click_skill matches 1.. at @s run function my_pvp:roles/ninja/use_swap
 scoreboard players set @s click_skill 0
-
-# 共通スキル (大ジャンプ)
-execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
-execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_super_jump

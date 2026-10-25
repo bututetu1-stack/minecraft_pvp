@@ -17,7 +17,3 @@ execute if entity @s[tag=is_grappling] run function my_pvp:roles/scout/pull_logi
 
 # --- 6. アイテム保護・返却 (弓・剣・矢のドロップ) ---
 function my_pvp:roles/scout/scan_items
-
-# 共通スキル (大ジャンプ)
-execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
-execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_super_jump

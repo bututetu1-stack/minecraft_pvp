@@ -2,10 +2,6 @@
 tag @s add stalker
 scoreboard players set @s role_id 7
 tag @s add role_assigned
-# 攻撃検知用の進捗を未達成に戻す (達成済みのままだと二度と発火しない)
-advancement revoke @s only my_pvp:roles/stalker_attack
-# ハンターズトランスの判定用 (未設定だと試合開始直後に1回誤発動する)
-scoreboard players set @s last_kills 0
 
 # 2. チャット通知
 tellraw @s [{"text":"[System] ","color":"gray"},{"text":"あなたは ","color":"white"},{"text":"『ストーカー』","color":"dark_red","bold":true},{"text":" です！","color":"white"}]
@@ -13,7 +9,18 @@ tellraw @s [{"text":"[System] ","color":"gray"},{"text":"あなたは ","color":
 # 3. ステータス設定
 function my_pvp:roles/stalker/apply_status
 
-# 4. 音 (変更)
+# 4. クールダウン初期化
+scoreboard players set @s cd_stalker_float 0
+scoreboard players set @s target_check_timer 0
+scoreboard players set @s last_kills 0
+scoreboard players set @s hunting_stacks 0
+scoreboard players set @s hunting_decay_timer 0
+scoreboard players set @s trail_timer 0
+scoreboard players set @s last_compass_x 999999
+scoreboard players set @s last_compass_z 999999
+scoreboard players set @s compass_force_timer 0
+
+# 5. 音 (変更)
 # ウォーデンの心音（ドクン…）で緊張感を演出
 execute at @s run playsound minecraft:entity.warden.heartbeat master @s ~ ~ ~ 2 0.8
 

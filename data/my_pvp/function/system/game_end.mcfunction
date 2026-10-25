@@ -66,6 +66,13 @@ kill @e[tag=airstrike_center]
 kill @e[tag=adm_plane]
 kill @e[type=phantom]
 
+# 獣使いの召喚獣 (wolf)
+kill @e[tag=beast_wolf]
+
+# 魔術師の業火マーカー
+kill @e[tag=mag_inferno]
+kill @e[tag=mag_fireball]
+
 # その他システム用マーカー
 kill @e[tag=role_card]
 

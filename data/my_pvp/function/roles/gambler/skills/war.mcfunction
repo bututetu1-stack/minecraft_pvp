@@ -3,8 +3,8 @@ execute if score @s coins matches ..-1 run return 0
 
 # コイン消費
 # コイン消費
-execute unless entity @s[tag=rush_mode] run scoreboard players remove @s coins 15
-tellraw @s {"text":"[War] 戦争を発動しました! (-15 Coins)","color":"red","bold":true}
+execute unless entity @s[tag=rush_mode] run scoreboard players remove @s coins 50
+tellraw @s {"text":"[War] 戦争を発動しました! (-50 Coins)","color":"red","bold":true}
 
 # ★アイテム返却は不要 (攻撃発動なのでアイテムは消費されない)
 
@@ -45,7 +45,7 @@ execute if score #MY_CARD temp < #ENEMY_CARD temp as @a[tag=current_attacker] ru
 
 # Draw (My = Enemy)
 execute if score #MY_CARD temp = #ENEMY_CARD temp run tellraw @a[tag=current_attacker] {"text":"[War] DRAW (コイン返還)","color":"gray"}
-execute if score #MY_CARD temp = #ENEMY_CARD temp run scoreboard players add @a[tag=current_attacker] coins 15
+execute if score #MY_CARD temp = #ENEMY_CARD temp run scoreboard players add @a[tag=current_attacker] coins 50
 
 # ダメージ2倍フラグ処理 (運命のコイン)
 # ダメージ2倍フラグ処理 (運命のコイン)

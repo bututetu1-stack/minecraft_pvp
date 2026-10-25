@@ -1,8 +1,8 @@
 # 1. コインタイマー (オートリチャージ 1 coin / 1s)
 
-# --- 共通スキル (大ジャンプ) ---
-execute if score @s cd_super_jump matches 1.. run scoreboard players remove @s cd_super_jump 1
-execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_super_jump
+# --- 役職固有 上昇スキル: コイン跳躍 ---
+execute if score @s cd_gambler_jump matches 1.. run scoreboard players remove @s cd_gambler_jump 1
+execute if score @s sneak_time matches 1.. run function my_pvp:roles/gambler/use_jump
 # 20 ticks = 1 second
 scoreboard players add @s coins_timer 1
 execute if score @s coins_timer matches 20.. run scoreboard players add @s coins 1
@@ -44,7 +44,7 @@ execute if score @s damage_taken matches 1.. run scoreboard players set @s damag
 # 5. 戦争 (War) 発動判定 (攻撃時)
 # メインハンドに赤色の染料を持ち、かつ攻撃を与えた瞬間に発動
 # (Warが発動した場合はWar内でdamage_boostが消費されるため、下の汎用判定は不発になる)
-execute if score @s damage_dealt > @s last_damage_dealt if entity @s[nbt={SelectedItem:{id:"minecraft:red_dye"}}] run function my_pvp:roles/gambler/skills/war
+execute if score @s damage_dealt > @s last_damage_dealt if items entity @s weapon.mainhand minecraft:red_dye run function my_pvp:roles/gambler/skills/war
 
 # 汎用ダメージブースト判定 (War以外で攻撃した場合)
 execute if score @s damage_dealt > @s last_damage_dealt if score @s damage_boost matches 1 run function my_pvp:roles/gambler/skills/apply_damage_boost

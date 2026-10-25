@@ -61,7 +61,9 @@ scoreboard objectives add click_ber_jump minecraft.used:minecraft.feather "ジ�
 # 魔術師用クールダウン
 scoreboard objectives add mana dummy "マナ"
 scoreboard objectives add cd_mag_broom dummy "魔術箻CT"
-scoreboard objectives add cd_mag_book dummy "魔術本CT"
+scoreboard objectives add cd_mag_book dummy
+scoreboard objectives add cd_mag_shockwave dummy
+scoreboard objectives add cd_mag_inferno dummy "魔術本CT"
 scoreboard objectives add mag_fly_tick dummy "飛行タイマー"
 
 # 魔術師用スキル検知
@@ -90,8 +92,11 @@ scoreboard objectives add cd_stalker_float dummy
 scoreboard objectives add target_id dummy "ターゲットID"
 scoreboard objectives add target_check_timer dummy "ターゲット確認タイマー"
 scoreboard objectives add trail_timer dummy "痕跡タイマー"
-# 遅延攻撃 (trigger_attack -> tick_attack_delay) 用
-scoreboard objectives add sk_attack_timer dummy "追撃タイマー"
+# 【追加】コンパス更新最適化用
+scoreboard objectives add last_compass_x dummy "前回コンパスX"
+scoreboard objectives add last_compass_z dummy "前回コンパスZ"
+scoreboard objectives add compass_force_timer dummy "コンパス強制更新タイマー"
+scoreboard objectives add _compass_changed dummy "コンパス変化フラグ"
 
 # 【追加】攻撃判定用 (ダメージを与えたかを検知)
 scoreboard objectives add damage_dealt minecraft.custom:minecraft.damage_dealt "与ダメージ"
@@ -113,6 +118,8 @@ scoreboard objectives add damage_taken minecraft.custom:minecraft.damage_taken
 scoreboard objectives add penalty_timer dummy
 scoreboard objectives add penalty_dmg dummy
 scoreboard objectives add penalty_attacker dummy
+# 警戒陣 被ダメ delta 検知用 (累積 damage_taken から差分を検出)
+scoreboard objectives add last_admiral_damage_taken dummy "前回提督被ダメ"
 
 # --- 時空跳躍者 (Chronomancer) 用 ---
 # 【追加】 個別CT用スコア
@@ -121,6 +128,18 @@ scoreboard objectives add cd_chrono_stasis dummy
 scoreboard objectives add cd_chrono_clockup dummy
 scoreboard objectives add freeze_timer dummy
 scoreboard objectives add stasis_timer dummy "時間停止タイマー"
+scoreboard objectives add clockup_active dummy "クロックアップ残像タイマー"
+
+# --- 狙撃手 (Sharpshooter) 用 ---
+scoreboard objectives add sharp_ammo dummy "狙撃手 残弾"
+scoreboard objectives add sharp_ammo_timer dummy "狙撃手 残弾回復タイマー"
+
+# --- 獣使い (Beastmaster) 用 ---
+scoreboard objectives add cd_beast_wolf dummy "狼召喚CT"
+scoreboard objectives add cd_beast_roar dummy "獣の咆哮CT"
+scoreboard objectives add cd_beast_unleash dummy "解き放つCT"
+scoreboard objectives add wolf_count dummy "召喚狼数"
+scoreboard objectives add wolf_attack_timer dummy "狼攻撃タイマー"
 
 # --- 彫刻家 (Sculptor) 用 ---
 scoreboard objectives add sculpture_count dummy "彫刻設置数"
@@ -206,6 +225,19 @@ scoreboard objectives add drop_red_dye dropped:red_dye "戦争起動"
 # --- 共有スキル (Super Jump) 用 ---
 scoreboard objectives add sneak_time minecraft.custom:minecraft.sneak_time "スニーク時間"
 scoreboard objectives add cd_super_jump dummy "大ジャンプCT"
+
+# --- 役職別 上昇スキル CT (admiral / chrono / sculptor / gambler) ---
+scoreboard objectives add cd_adm_jump dummy "対空射出CT"
+scoreboard objectives add cd_chrono_jump dummy "時空跳躍CT"
+scoreboard objectives add cd_sculptor_pillar dummy "石柱噴出CT"
+scoreboard objectives add cd_gambler_jump dummy "コイン跳躍CT"
+
+# --- ストーカー 狩りの時間 ---
+scoreboard objectives add hunting_stacks dummy "狩りスタック"
+scoreboard objectives add hunting_decay_timer dummy "狩り減衰タイマー"
+
+# --- 彫刻家 石化光線 ---
+scoreboard objectives add cd_sculptor_beam dummy "石化光線CT"
 
 # --- 侍 (Samurai) 用 ---
 scoreboard objectives add cd_sam_zanshin dummy "残心CT"
