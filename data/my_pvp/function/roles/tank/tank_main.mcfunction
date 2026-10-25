@@ -32,4 +32,6 @@ execute if score @s sneak_time matches 1.. run function my_pvp:roles/common/try_
 # --- 【新能力】 不屈の意志: HP25以下で耐性Lv2 + 再生 ---
 execute store result score #HP temp run data get entity @s Health
 execute if score #HP temp matches ..25 run effect give @s minecraft:resistance 1 1 true
-execute if score #HP temp matches ..25 run effect give @s minecraft:regeneration 1 0 true
+# ※ 再生は「残り時間 % 間隔 == 0」の tick に回復するため、毎tick 1秒で付け直すと一度も回復しない。
+#    効果が切れている時だけ5秒付与する (再生I = 2.5秒ごとに1回復)
+execute if score #HP temp matches ..25 unless predicate my_pvp:has_regeneration run effect give @s minecraft:regeneration 5 0 true
