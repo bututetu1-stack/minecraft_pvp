@@ -27,7 +27,8 @@ execute if entity @s[tag=hitting_target] at @a[tag=victim_candidate,limit=1] run
 execute unless entity @s[tag=hitting_target] as @a[tag=victim_candidate,limit=1] run tag @s remove sk_critical
 execute unless entity @s[tag=hitting_target] at @s run playsound minecraft:block.note_block.bass master @s ~ ~ ~ 1 0.5
 
+# 既に追撃待ちの相手にはタイマーを戻さない (戻すと連打している間ずっと追撃が先送りされる)
+execute as @a[tag=victim_candidate,tag=!sk_attack_target,limit=1] run scoreboard players set @s sk_attack_timer 12
 execute as @a[tag=victim_candidate,limit=1] run tag @s add sk_attack_target
-execute as @a[tag=victim_candidate,limit=1] run scoreboard players set @s sk_attack_timer 12
 
 tag @a remove victim_candidate
