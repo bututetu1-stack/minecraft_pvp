@@ -8,12 +8,16 @@
                         "condition": "minecraft:entity_properties",
                         "entity": "this",
                         "predicate": {
-                            "nbt": "{Tags:[\"admiral\"]}",
-                            "scores": {
-                                "adm_formation": {
-                                    "min": 2,
-                                    "max": 2
-                                }
+                            "nbt": "{Tags:[\"admiral\"]}"
+                        }
+                    },
+                    {
+                        "condition": "minecraft:entity_scores",
+                        "entity": "this",
+                        "scores": {
+                            "adm_formation": {
+                                "min": 2,
+                                "max": 2
                             }
                         }
                     }

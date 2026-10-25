@@ -24,7 +24,8 @@ title @s actionbar [{"text":"残心: ","color":"aqua"},{"score":{"name":"@s","ob
 
 # --- 残心(パリィ)処理 ---
 # 構え中（盾を持って右クリック中）の検知 → タグ付与
-execute if entity @s[nbt={SelectedItem:{components:{"minecraft:custom_data":{samurai_zanshin:1b}}}},predicate=my_pvp:is_blocking] if score @s cd_sam_zanshin matches ..0 run function my_pvp:roles/samurai/start_zanshin
+# sam_blocking は samurai_blocking 進捗 (using_item) が構え中の毎tick 1 にする
+execute if score @s sam_blocking matches 1.. unless entity @s[tag=sam_zanshin_guard] if score @s cd_sam_zanshin matches ..0 run function my_pvp:roles/samurai/start_zanshin
 
 # 構え中タグ付き → 反撃判定
 execute if entity @s[tag=sam_zanshin_guard] run function my_pvp:roles/samurai/tick_zanshin
@@ -34,3 +35,6 @@ execute if entity @s[tag=sam_iai_dashing] run function my_pvp:roles/samurai/tick
 
 # --- アイテムスキャン ---
 function my_pvp:roles/samurai/scan_items
+
+# 構え検知フラグのリセット (構え続けていれば次のtickまでに進捗が再び 1 にする)
+scoreboard players set @s sam_blocking 0

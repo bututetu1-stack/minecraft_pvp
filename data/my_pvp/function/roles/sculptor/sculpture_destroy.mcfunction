@@ -5,12 +5,12 @@
 # 1. 攻撃を受けたか確認 (attack data が存在するか)
 execute unless data entity @s attack run return 0
 
-# 攻撃データをクリアして連続検知を防ぐ (Interactionは自動でクリアされない場合があるが、response:1bなら消える？念のため)
-# (interactionはプレイヤーが殴ると attack nbtがつく)
-
 # 2. 攻撃者を特定
 tag @a remove current_attacker
 execute on attacker run tag @s add current_attacker
+
+# 攻撃データをクリアして連続検知を防ぐ (残したままだと毎tick HP が減り、1回殴っただけで壊れる)
+data remove entity @s attack
 
 # 3. 所有者のIDを取得
 scoreboard players operation #TEMP_OWNER temp = @s player_id
